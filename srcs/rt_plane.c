@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:43:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/04 15:02:06 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 14:25:01 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 t_plane_xy	*new_plane_xy(const double x0, const double x1, double const y0, \
 	double const y1, double const k)

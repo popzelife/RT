@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:37:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/04 15:03:32 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 14:24:02 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 t_imgparam		*new_imgparam(char* name)
 {

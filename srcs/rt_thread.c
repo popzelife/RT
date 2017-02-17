@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/07 21:29:46 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 17:48:21 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 /*
   Need sufficient malloc on each pthread #pthread_attr_getstack()
@@ -22,7 +22,7 @@ void		set_thread(t_thread *t, t_rt *rt, int *i, int *j, int *s)
 	int		ret;
 
 	t->arg.rt = rt;
-	t->arg.scene = rt->scene;
+	t->arg.scene = rt->this_scene;
 	t->arg.i = i;
 	t->arg.j = j;
 	t->arg.tab = rt->tab;
@@ -67,37 +67,6 @@ void		destroy_thread_attr(t_thread *t)
 	}
 }
 
-/*static void	render2(t_rt *rt, t_thread *th_curs)
-{
-	int			i;*/
-
-	/*
-	  Join all threads
-	*/
-
-	/*i = 0;
-	th_curs = rt->t;
-	while (i < rt->m_thread)
-	{
-		join_thread(th_curs);
-		th_curs = th_curs->next;
-		++i;
-	}*/
-
-	/*
-	  Destroy all threads
-	*/
-
-	/*i = 0;
-	th_curs = rt->t;
-	while (i < rt->m_thread)
-	{
-		destroy_thread_attr(th_curs);
-		th_curs = th_curs->next;
-		++i;
-	}
-}*/
-
 void		render(t_rt *rt)
 {
 	t_thread	*th_curs;
@@ -105,38 +74,31 @@ void		render(t_rt *rt)
 	int			i;
 
 	esdl_clear_surface(rt->s_process, NULL_RECT, 0x00000000, NULL);
-	//while (y < rt->r_view->h)
-	//{
-		//printf("y = %4d\n", y);
-		i = 0;
-		th_curs = rt->t;
-		it_curs = rt->iter;
-		while (i < rt->m_thread)
-		{
-			set_thread(th_curs, rt, &(it_curs->x), &(it_curs->y), &(it_curs->s));
-			th_curs = th_curs->next;
-			it_curs = it_curs->next;
-			++i;
-		}
-
-		i = 0;
-		th_curs = rt->t;
-		while (i < rt->m_thread)
-		{
-			join_thread(th_curs);
-			th_curs = th_curs->next;
-			++i;
-		}
-
-		i = 0;
-		th_curs = rt->t;
-		while (i < rt->m_thread)
-		{
-			destroy_thread_attr(th_curs);
-			th_curs = th_curs->next;
-			++i;
-		}
-	//}
-
+	i = 0;
+	th_curs = rt->t;
+	it_curs = rt->iter;
+	while (i < rt->m_thread)
+	{
+		set_thread(th_curs, rt, &(it_curs->x), &(it_curs->y), &(it_curs->s));
+		th_curs = th_curs->next;
+		it_curs = it_curs->next;
+		++i;
+	}
+	i = 0;
+	th_curs = rt->t;
+	while (i < rt->m_thread)
+	{
+		join_thread(th_curs);
+		th_curs = th_curs->next;
+		++i;
+	}
+	i = 0;
+	th_curs = rt->t;
+	while (i < rt->m_thread)
+	{
+		destroy_thread_attr(th_curs);
+		th_curs = th_curs->next;
+		++i;
+	}
 	ft_printf("Render pass # %3d/%3d %20s\r", rt->iter->s - 1, ALIASING, "");
 }

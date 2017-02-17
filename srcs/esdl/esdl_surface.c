@@ -6,14 +6,14 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 12:55:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/06 12:31:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 13:51:54 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 static void		esdl_mask_byteorder(Uint32 *rmask, Uint32 *gmask, \
-	Uint32 *bmask, Uint32 *amask)
+				Uint32 *bmask, Uint32 *amask)
 {
 	if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 	{
@@ -93,7 +93,7 @@ SDL_Surface		*esdl_scale_surface(SDL_Surface *surf, int width, int height)
 }
 
 void			esdl_clear_surface(SDL_Surface *surf, \
-	const SDL_Rect rect, const int color, void *param)
+				const SDL_Rect *rect, const int color, void *param)
 {
 	register int		x;
 	register int		y;

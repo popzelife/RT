@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:57:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/06 12:31:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 18:55:21 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static SDL_Surface	*create_fallback_texture(SDL_Surface *surf)
 	rect.w = 32;
 	rect.h = 32;
 	surf = esdl_create_surface(32, 32);
-	esdl_draw_filled_square(surf, rect, 0xff69b4ff, NULL);
+	esdl_draw_filled_square(surf, &rect, 0xff69b4ff, NULL);
 	return (surf);
 }
 

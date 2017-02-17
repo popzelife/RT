@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:38:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2016/12/16 16:38:29 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 14:23:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		lst_set_surface(t_surface **surface, t_surfparam param, \
 	SDL_Renderer *render, void (f)(SDL_Surface*, const SDL_Rect, const int, \

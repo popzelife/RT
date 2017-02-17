@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popzelife <popzelife@student.42.fr>        +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/15 17:56:34 by popzelife        ###   ########.fr       */
+/*   Updated: 2017/02/17 16:03:25 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int			main(int ac, char **av)
 {
 	(void)			av;
 	(void)			ac;
+	t_rt			p_rt;
 	t_rt			*rt;
-
-	rt = (t_rt*)malloc(sizeof(t_rt));
 
 	kernel_isopencl();
 
@@ -30,8 +29,9 @@ int			main(int ac, char **av)
 	  Init RT and scene while displaying loading
 	*/
 
+	rt = &p_rt;
 	init_rt(rt);
-	loader(rt);
+	loading(rt);
 	init_screen_buffer(rt);
 	init_multithread(rt);
 
@@ -39,12 +39,12 @@ int			main(int ac, char **av)
 	  Start first render while loading panel is still on screen
 	*/
 
-	//render(rt);
+	render(rt);
 
 	SDL_SetWindowSize(rt->esdl->eng.win, WIN_RX, WIN_RY);
 	SDL_SetWindowMinimumSize(rt->esdl->eng.win, WIN_RX - 400, WIN_RY - 300);
-	SDL_SetWindowPosition(rt->esdl->eng.win, SDL_WINDOWPOS_CENTERED, \
-		SDL_WINDOWPOS_CENTERED);
+	SDL_SetWindowPosition(rt->esdl->eng.win, SDL_WINDOWPOS_CENTERED,
+	SDL_WINDOWPOS_CENTERED);
 	SDL_SetWindowBordered(rt->esdl->eng.win, TRUE);
 
 	SDL_Delay(100);

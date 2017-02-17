@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 13:56:11 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/07 21:29:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 14:24:35 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		render_loop(t_rt *rt)
 {

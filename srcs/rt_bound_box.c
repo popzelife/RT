@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:56:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/04 20:55:12 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 14:24:19 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double		f_min(double const a, double const b)
 {

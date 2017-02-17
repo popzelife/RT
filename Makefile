@@ -67,7 +67,32 @@ SRC = \
 			esdl/esdl_rect.c\
 			esdl/esdl_exit.c\
 			kernel/kernel_isopencl.c\
-			main.c\
+			rt_init.c\
+			rt_skybox.c\
+			rt_menu.c\
+			rt_view.c\
+			rt_3dview.c\
+			rt_scene.c\
+			rt_camera.c\
+			rt_material.c\
+			rt_light.c\
+			rt_bound_box.c\
+			rt_object.c\
+			rt_sphere.c\
+			rt_plane.c\
+			rt_ray.c\
+			rt_thread.c\
+			rt_hook.c\
+			rt_button.c\
+			rt_render.c\
+			rt_events.c\
+			rt_random.c\
+			rt_quit.c\
+			ft_list.c\
+			ft_list2.c\
+			ft_utils.c\
+			ft_utils2.c\
+			main.c
 
 OBJ =		$(SRC:.c=.o)
 

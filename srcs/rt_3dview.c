@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rt_3dview.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popzelife <popzelife@student.42.fr>        +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:01:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 11:38:48 by popzelife        ###   ########.fr       */
+/*   Updated: 2017/02/17 14:24:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect, \
 	const int color, void *param)

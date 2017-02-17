@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:14:03 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/06 12:34:38 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 13:56:12 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ SDL_Rect	esdl_rect(const int x, const int y, const int w, const int h);
 SDL_Rect	esdl_fuse_rect(const SDL_Rect dst, const SDL_Rect src);
 
 void		esdl_draw_filled_square(SDL_Surface *surf, \
-	const SDL_Rect rect, const int color, void *param);
+	const SDL_Rect *rect, const int color, void *param);
 void		esdl_clear_surface(SDL_Surface *surf, \
-	const SDL_Rect rect, const int color, void *param);
+	const SDL_Rect *rect, const int color, void *param);
 
 SDL_Texture	*esdl_load_texture(SDL_Renderer *render, \
 	const char *path, int *w, int *h);

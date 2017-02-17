@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/07 21:29:30 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 16:07:36 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		init_rt(t_rt *rt)
 {
@@ -33,13 +33,16 @@ void		init_rt(t_rt *rt)
 	free(r_load);
 }
 
-void		loader(t_rt *rt)
+void		loading(t_rt *rt)
 {
 	rt->win_temp = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, \
 		SDL_WINDOWPOS_UNDEFINED, WIN_RX, WIN_RY, \
 		SDL_WINDOW_HIDDEN | SDL_WINDOW_ALLOW_HIGHDPI);
 	draw_view(rt);
-	rt->scene = init_scene(rt);
+	rt->sizeof_scn = 1;
+	rt->scene = (t_scene*)malloc(rt->sizeof_scn * sizeof(t_scene));
+	rt->scene[0] = init_scene(rt);
+	rt->this_scene = &rt->scene[0];
 	draw_menu(rt);
 	SDL_DestroyWindow(rt->win_temp);
 }
@@ -49,17 +52,17 @@ void		init_screen_buffer(t_rt *rt)
 	int			i;
 	int			j;
 
-	rt->tab = (t_vec3***)malloc(rt->r_view->w * MULTISAMP * \
-		sizeof(t_vec3**));
+	rt->tab = (t_vec3**)malloc(rt->r_view->w * MULTISAMP * \
+		sizeof(t_vec3*));
 	i = 0;
 	while (i < rt->r_view->w * MULTISAMP)
 	{
-		rt->tab[i] = (t_vec3**)malloc(rt->r_view->h * MULTISAMP * \
-			sizeof(t_vec3*));
+		rt->tab[i] = (t_vec3*)malloc(rt->r_view->h * MULTISAMP * \
+			sizeof(t_vec3));
 		j = 0;
 		while (j < rt->r_view->h * MULTISAMP)
 		{
-			rt->tab[i][j] = v3_new_vec(0.0, 0.0, 0.0);
+			rt->tab[i][j] = v3_(0.0, 0.0, 0.0);
 			++j;
 		}
 		++i;

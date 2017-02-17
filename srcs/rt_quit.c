@@ -6,11 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:04:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2016/12/16 14:05:02 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/17 14:25:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		quit_rt(t_rt *rt)
 {

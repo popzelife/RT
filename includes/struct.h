@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popzelife <popzelife@student.42.fr>        +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 11:36:44 by popzelife        ###   ########.fr       */
+/*   Updated: 2017/02/17 18:58:47 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define _STRUCT_H
 
 /*
-  Ray
+** Ray
 */
 
 typedef struct	s_ray
@@ -24,7 +24,7 @@ typedef struct	s_ray
 }				t_ray;
 
 /*
-  Param link object and material for rendering
+** Param link object and material for rendering
 */
 
 typedef struct s_hit
@@ -39,7 +39,7 @@ typedef struct s_hit
 }				t_hit;
 
 /*
-  Materials
+** Materials
 */
 
 typedef struct s_mat
@@ -48,11 +48,11 @@ typedef struct s_mat
 	t_vec3			albedo;
 	t_vec3			emitted;
 	double			t;
-	BOOL			(*scatter)(const t_ray*, const t_hit, t_vec3*, t_ray*);
+	BOOL			(*scatter)(const t_ray, const t_hit, t_vec3*, t_ray*);
 }				t_mat;
 
 /*
-  Bounding box
+** Bounding box
 */
 
 typedef struct	s_bound_box
@@ -62,7 +62,7 @@ typedef struct	s_bound_box
 }				t_bound_box;
 
 /*
-  Objects
+** Objects
 */
 
 typedef struct	s_plane_xy
@@ -82,69 +82,71 @@ typedef struct	s_sphere
 }				t_sphere;
 
 /*
-  Scene holder
+** Scene holder
 */
 
 typedef struct s_obj
 {
 	UCHAR			type_obj;
 	void			*p_obj;
-	BOOL			(*hit)(void*, const t_ray*, const double, const double, \
-		t_hit*);
+	BOOL			(*hit)(void*, const t_ray, const double[2], t_hit*);
 	BOOL			(*bound_box)(void*, t_bound_box*, const double, const double);
 	t_mat			*p_mat;
 	char			*name;
-	int				nb;
-	float			visible;
-	int				active;
+	BOOL			active;
+	double			visible;
 }				t_obj;
+
+typedef struct s_camparam
+{
+	t_vec3			look_from;
+	t_vec3			look_at;
+	t_vec3			v_up;
+	double			vfov;
+	double			aspect;
+	double			aperture;
+	double			focus;
+}				t_camparam;
 
 typedef struct	s_cam
 {
+	t_camparam		param;
 	t_vec3			low_left_corner;
 	t_vec3			horizontal;
 	t_vec3			vertical;
-	t_vec3			orig;
 	t_vec3			u;
 	t_vec3			v;
 	t_vec3			w;
 	double			lens_radius;
 	double			half_width;
 	double			half_height;
-	t_vec3			look_from;
-	t_vec3			look_at;
-	t_vec3			v_up;
 	char			*name;
-	int				nb;
-	float			visible;
-	int				active;
 }				t_cam;
 
 typedef struct	s_skybox
 {
 	t_vec3			color1;
 	t_vec3			color2;
-	BOOL			(*hit)(const struct s_skybox*, const t_ray*);
+	BOOL			(*hit)(const struct s_skybox*, const t_ray);
 	char			*name;
-	int				nb;
-	int				active;
 }				t_skybox;
 
 typedef struct	s_scene
 {
-	t_cam			**cam;
-	t_obj			**obj;
-	t_skybox		**skybox;
+	t_cam			*cam;
+	t_obj			*obj;
+	t_skybox		*skybox;
 	int				ambiance;
-	int				obj_nb;
-	int				cam_nb;
-	int				skb_nb;
-	char			lgt_flag;
-	int				selected;
+	int				sizeof_obj;
+	int				sizeof_cam;
+	int				sizeof_skb;
+	t_obj			*this_obj;
+	t_cam			*this_cam;
+	t_skybox		*this_skb;
 }				t_scene;
 
 /*
-  Param for menu with lists rendering
+** Param for menu with lists rendering
 */
 
 typedef struct	s_surface
@@ -165,8 +167,8 @@ typedef struct	s_string
 typedef struct	s_surfparam
 {
 	SDL_Rect		*rect;
-	int				color;
 	void			*param;
+	int				color;
 	int				i_lst;
 }				t_surfparam;
 
@@ -179,7 +181,7 @@ typedef struct	s_strparam
 }				t_strparam;
 
 /*
-  Button event and action
+** Button event and action
 */
 
 typedef struct	s_button
@@ -208,7 +210,7 @@ typedef struct	s_action
 }				t_action;
 
 /*
-  Mini 3D view rendering for menu
+** Mini 3D view rendering for menu
 */
 
 typedef struct	s_viewparam
@@ -230,7 +232,7 @@ typedef struct	s_imgparam
 }				t_imgparam;
 
 /*
-  Menu view
+** Menu view
 */
 
 typedef struct	s_panel
@@ -249,7 +251,7 @@ typedef struct	s_panel
 }				t_panel;
 
 /*
-  Param for rendering
+** Param for rendering
 */
 
 typedef struct	s_iter
@@ -261,13 +263,16 @@ typedef struct	s_iter
 }				t_iter;
 
 /*
-  Raytracer main
+** Raytracer main
 */
 
 typedef struct	s_rt
 {
 	t_esdl			*esdl;
+
 	t_scene			*scene;
+	int				sizeof_scn;
+	t_scene			*this_scene;
 
 	SDL_Window		*win_temp;
 	SDL_Texture		*t_load;
@@ -288,7 +293,7 @@ typedef struct	s_rt
 	BOOL			render;
 	BOOL			suspend;
 
-	t_vec3			***tab;
+	t_vec3			**tab;
 	t_iter			*iter;
 	void			*stack;
 	int				m_thread;
@@ -300,7 +305,7 @@ typedef struct	s_rt
 }				t_rt;
 
 /*
-  Multithreading
+** Multithreading
 */
 
 typedef struct	s_tharg
@@ -312,7 +317,7 @@ typedef struct	s_tharg
 	int			*j;
 	int			*s;
 
-	t_vec3		***tab;
+	t_vec3		**tab;
 }				t_tharg;
 
 typedef struct	s_thread

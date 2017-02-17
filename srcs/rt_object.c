@@ -10,35 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
-
-static void	*select_copied_obj(const UCHAR t, void *p_obj)
-{
-	t_sphere	*sphere;
-	void		*o;
-
-	if (t == OBJ_SPHERE)
-	{
-		sphere = (t_sphere*)p_obj;
-		o = (void*)new_sphere(sphere->center, sphere->radius);
-	}
-	else
-		o = NULL;
-	return (o);
-}
-
-static void	*select_obj(t_vec3 *p, const double f, const UCHAR t)
-{
-	void	*o;
-
-	if (t == OBJ_SPHERE)
-		o = (void*)new_sphere(p, f);
-	else if (t == OBJ_PLANE_XY)
-		o = (void*)new_plane_xy(1, 2, 1, 1, 1);
-	else
-		o = NULL;
-	return (o);
-}
+#include "rt.h"
 
 static void	*select_hit(const UCHAR t)
 {
@@ -70,22 +42,55 @@ static void	*select_scatter(const UCHAR t)
 	return (s);
 }
 
-t_obj		*new_object(void *obj, const UCHAR type_obj, t_mat *mat, \
+t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat, \
 	const UCHAR type_mat)
 {
-	t_obj	*o;
+	t_obj	o;
 
-	o = malloc(sizeof(t_obj));
-	o->type_obj = type_obj;
-	o->p_obj = obj;
-	o->hit = select_hit(o->type_obj);
-	o->p_mat = mat;
-	o->p_mat->type_mat = type_mat;
-	o->p_mat->scatter = select_scatter(o->type_obj);
+	o.type_obj = type_obj;
+	o.p_obj = obj;
+	o.hit = select_hit(o->type_obj);
+	o.p_mat = mat;
+	o.p_mat->type_mat = type_mat;
+	o.p_mat->scatter = select_scatter(o.type_obj);
 	if (type_mat == MAT_DIFF_LIGHT)
-		o->p_mat->emitted = o->p_mat->albedo;
+		o.p_mat->emitted = o.p_mat->albedo;
 	else
-		o->p_mat->emitted = v3_new_vec(0.0, 0.0, 0.0);
+		o.p_mat->emitted = v3_(0., 0., 0.);
+	o.active = TRUE;
+	o.visible = 1.;
+	return (o);
+}
+
+/*
+** Some alternativ functions
+*/
+
+static void	*select_copied_obj(const UCHAR t, void *p_obj)
+{
+	t_sphere	*sphere;
+	void		*o;
+
+	if (t == OBJ_SPHERE)
+	{
+		sphere = (t_sphere*)p_obj;
+		o = (void*)new_sphere(sphere->center, sphere->radius);
+	}
+	else
+		o = NULL;
+	return (o);
+}
+
+static void	*select_obj(t_vec3 *p, const double f, const UCHAR t)
+{
+	void	*o;
+
+	if (t == OBJ_SPHERE)
+		o = (void*)new_sphere(p, f);
+	else if (t == OBJ_PLANE_XY)
+		o = (void*)new_plane_xy(1, 2, 1, 1, 1);
+	else
+		o = NULL;
 	return (o);
 }
 
