@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 18:52:33 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:46:47 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ BOOL			hit_list(t_scene *scene, const t_ray ray, const double t[2],
 	hit_anything = FALSE;
 	closest_so_far[0] = t[0];
 	closest_so_far[1] = t[1];
-	while (i < scene->obj_nb)
+	while (i < scene->sizeof_obj)
 	{
-		if (scene->obj[i]->active && (scene->obj[i]->hit(scene->obj[i]->p_obj,
+		if (scene->obj[i].active && (scene->obj[i].hit(scene->obj[i].p_obj,
 		ray, closest_so_far, param)))
 		{
 			hit_anything = TRUE;
 			closest_so_far[1] = param->t;
-			param->material = scene->obj[i]->p_mat;
+			param->material = scene->obj[i].p_mat;
 			param->i_lst = i;
 		}
 		++i;
@@ -63,28 +63,28 @@ BOOL			hit_list(t_scene *scene, const t_ray ray, const double t[2],
 t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 {
 	t_hit		param;
-	t_vec3		emission;
 	t_ray		scattered;
 	t_vec3		attenuation;
-	t_vec3		reflected;
 	double		t[2];
 
 	param.pos = v3_(0., 0., 0.);
 	param.normal = v3_(0., 0., 0.);
-	t[0] = 0.001;
+	t[0] = .001;
 	t[1] = FLT_MAX;
 	if (hit_list(scene, ray, t, &param))
 	{
 		if ((depth < max_depth) && (param.material->scatter(ray, param,
-		&attenuation, &scattered)))
+			&attenuation, &scattered)))
+		{
 			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_
 			(attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
+		}
 		else
-			return (param.material->emitted);
+			return (v3_(0., 0., 0.));//param.material->emitted);
 	}
 	else
-		return (scene->this_skybox->hit(scene->this_skybox, ray));
-	return (V3_(0., 0., 0.));
+		return (scene->this_skb->hit(scene->this_skb, ray));
+	return (v3_(0., 0., 0.));
 }
 
 void			thread_render(t_tharg *arg)
@@ -109,8 +109,7 @@ void			thread_render(t_tharg *arg)
 				f_random())) / (double)arg->rt->r_view->h / MULTISAMP;
 				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
 				0, (*(arg->s) == -NO_ALIASING ? 1 : MAX_DEPTH));
-				arg->tab[x][y] = v3_(temp->x + arg->tab[x][y]->x,
-				temp->y + arg->tab[x][y]->y, temp->z + arg->tab[x][y]->z);
+				arg->tab[x][y] = v3_add_vec_(temp, arg->tab[x][y]);
 			}
 			else
 			{
@@ -135,11 +134,10 @@ void			thread_render(t_tharg *arg)
 		{
 			if (x % MULTISAMP != 0 && y % MULTISAMP != 0)
 			{
-				temp = v3_multisampling_x2(*(arg->tab[x][y]),
-				*(arg->tab[x - 1][y]), *(arg->tab[x][y - 1]),
-				*(arg->tab[x - 1][y - 1]));
-				temp = v3_(sqrt(temp->x / *(arg->s)), sqrt(temp->y / *(arg->s)),
-				sqrt(temp->z / *(arg->s)));
+				temp = v3_multisampling_x2(arg->tab[x][y], arg->tab[x - 1][y],
+				arg->tab[x][y - 1], arg->tab[x - 1][y - 1]);
+				temp = v3_(sqrt(temp.x / *(arg->s)), sqrt(temp.y / *(arg->s)),
+				sqrt(temp.z / *(arg->s)));
 				esdl_put_pixel(arg->rt->s_view, x / 2, y / 2, esdl_color_to_int
 				(vec3_to_sdlcolor(temp)));
 			}

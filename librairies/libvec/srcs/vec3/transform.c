@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 20:15:30 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/02/01 17:13:17 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:02:17 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void		v3_negative(t_vec3 *v)
 {
-	v->x *= -1;
-	v->y *= -1;
-	v->z *= -1;
+	v->x *= -1.;
+	v->y *= -1.;
+	v->z *= -1.;
 }
 
 void		v3_normalize(t_vec3 *v)

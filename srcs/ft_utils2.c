@@ -6,18 +6,17 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:37:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 14:24:02 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 19:46:17 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_imgparam		*new_imgparam(char* name)
+t_imgparam		new_imgparam(char* name)
 {
-	t_imgparam		*p;
+	t_imgparam		p;
 
-	p = (t_imgparam*)malloc(sizeof(t_imgparam));
-	p->path = name;
+	p.path = name;
 	return (p);
 }
 
@@ -26,50 +25,50 @@ void			set_imgparam(t_imgparam *param, char* name)
 	param->path = name;
 }
 
-t_viewparam		*new_viewparam(t_scene *scene)
+t_viewparam		new_viewparam(t_scene *scene)
 {
-	t_viewparam		*p;
-	t_obj			**obj;
-	t_skybox		*skybox;
-	t_cam			*cam;
+	t_viewparam		p;
 
-	cam = init_camera(v3_new_vec(-0.6, 0.0, -0.6), v3_new_vec(0.0, 0.0, 0.0), \
-		v3_new_vec(0.0, -1.0, 0.0), 60.0, 1.0, 0.0, 0.5);
-	obj = (t_obj**)malloc(2 * sizeof(t_obj*));
-	obj[0] = copy_object(scene->obj[0]);
-	obj[1] = new_object((void*)new_sphere(v3_new_vec(0.0, 1.5, 0.0), 0.5), \
-		OBJ_SPHERE, new_material(v3_new_vec(1.0, 1.0, 1.0), NULL_PARAM), \
-		MAT_DIFF_LIGHT);
-	skybox = new_skybox(v3_new_vec(0.4, 0.4, 0.4), \
-		v3_new_vec(0.9, 0.9, 0.9), SKYBX_GRADIENT);
-	p = (t_viewparam*)malloc(sizeof(t_viewparam));
-	p->scene = new_scene(cam, obj, skybox);
-	p->scene->obj_nb = 2;
-	p->obj = scene->obj[0];
+	p.scene.sizeof_cam = 1;
+	p.scene.cam = (t_cam*)malloc(p.scene.sizeof_cam * sizeof(t_cam));
+	p.scene.cam[0] = set_camera(v3_(-.6, .0, -.6), v3_(0., 0., 0.),
+	v3_(0., -1., 0.), camparam(60., 1., 0., .5));
+	p.scene.this_cam = &p.scene.cam[0];
+	p.scene.sizeof_obj = 2;
+	p.scene.obj = (t_obj*)malloc(p.scene.sizeof_obj * sizeof(t_obj));
+	p.scene.obj[0] = copy_object(&scene->obj[0]);
+	p.scene.obj[1] = new_object((void*)new_sphere(v3_(0., 1.5, 0.), .5),
+	OBJ_SPHERE, new_material(v3_(1., 1., 1.), NULL_PARAM),
+	MAT_DIFF_LIGHT);
+	p.scene.this_obj = &p.scene.obj[0];
+	p.scene.sizeof_skb = 1;
+	p.scene.skybox = (t_skybox*)malloc(p.scene.sizeof_skb * sizeof(t_skybox));
+	p.scene.skybox[0] = new_skybox(v3_(.4, .4, .4), v3_(.9, .9, .9),
+	SKYBX_GRADIENT);
+	p.scene.this_skb = &p.scene.skybox[0];
 	return (p);
 }
 
 void			set_viewparam(t_viewparam *p, t_rt *rt, int x, int y)
 {
 	t_hit		param;
-	t_ray		*ray;
+	t_ray		ray;
 	double		u;
 	double		v;
+	double		t[2];
 
+	t[0] = .001;
+	t[1] = FLT_MAX;
 	u = (double)x / (double)rt->r_view->w;
 	v = (double)y / (double)rt->r_view->h;
-	ray = camera_ray(rt->scene->cam, u, v);
-	param.pos = v3_new_vec(0.0, 0.0, 0.0);
-	param.normal = v3_new_vec(0.0, 0.0, 0.0);
-	if (hit_list(rt->scene, ray, 0.001, FLT_MAX, &param))
+	ray = ray_from_cam(rt->scene->this_cam, u, v);
+	param.pos = v3_(0., 0., 0.);
+	param.normal = v3_(0., 0., 0.);
+	if (hit_list(rt->scene, ray, t, &param))
 	{
-		free(p->scene->obj[0]);
-		p->scene->obj[0] = copy_object(rt->scene->obj[param.i_lst]);
-		p->obj = rt->scene->obj[param.i_lst];
+		p->scene.obj[0] = copy_object(&rt->scene->obj[param.i_lst]);
+		p->scene.this_obj = &rt->scene->obj[param.i_lst];
 	}
-	v3_free(param.pos);
-	v3_free(param.normal);
-	free_ray(ray);
 }
 
 t_action		actionparam(void *param, void (f)(void*))

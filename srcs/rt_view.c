@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:03:14 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 14:25:27 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 17:14:01 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ void		udpate_view(t_rt *rt)
 	int			x;
 	int			y;
 
-
 	i = 0;
 	while (i < rt->r_view->w * MULTISAMP)
 	{
 		j = 0;
 		while (j < rt->r_view->h * MULTISAMP)
 		{
-			v3_set(rt->tab[i][j], 0.0, 0.0, 0.0);
+			rt->tab[i][j] = v3_(0., 0., 0.);
 			++j;
 		}
 		++i;

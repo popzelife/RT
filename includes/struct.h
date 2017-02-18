@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 18:58:47 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 19:47:06 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct	s_cam
 	t_vec3			low_left_corner;
 	t_vec3			horizontal;
 	t_vec3			vertical;
+	t_vec3			origin;
 	t_vec3			u;
 	t_vec3			v;
 	t_vec3			w;
@@ -127,7 +128,7 @@ typedef struct	s_skybox
 {
 	t_vec3			color1;
 	t_vec3			color2;
-	BOOL			(*hit)(const struct s_skybox*, const t_ray);
+	t_vec3			(*hit)(const struct s_skybox*, const t_ray);
 	char			*name;
 }				t_skybox;
 
@@ -215,8 +216,7 @@ typedef struct	s_action
 
 typedef struct	s_viewparam
 {
-	t_scene			*scene;
-	t_obj			*obj;
+	t_scene			scene;
 
 	char			str_obj[128];
 	char			str_pos[128];
@@ -241,8 +241,8 @@ typedef struct	s_panel
 	t_string		*lst_string;
 	t_button		*lst_button;
 
-	t_viewparam		*viewparam;
-	t_imgparam		*imgparam;
+	t_viewparam		viewparam;
+	t_imgparam		imgparam;
 
 	t_font			title1;
 	t_font			sub_title1;
@@ -288,7 +288,7 @@ typedef struct	s_rt
 	SDL_Surface		*s_menu;
 	SDL_Texture		*t_menu;
 
-	t_panel			*panel;
+	t_panel			panel;
 
 	BOOL			render;
 	BOOL			suspend;

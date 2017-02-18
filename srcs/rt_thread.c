@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 17:48:21 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 17:58:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		render(t_rt *rt)
 	t_iter		*it_curs;
 	int			i;
 
-	esdl_clear_surface(rt->s_process, NULL_RECT, 0x00000000, NULL);
+	esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 	i = 0;
 	th_curs = rt->t;
 	it_curs = rt->iter;

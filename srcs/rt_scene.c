@@ -17,10 +17,11 @@ t_scene		init_scene(t_rt *rt)
 	t_scene		scene;
 
 	scene.sizeof_cam = 1;
-	scene.cam = (t_cam*)malloc(scene.sizeof_cam * sizeof(t_obj));
+	scene.cam = (t_cam*)malloc(scene.sizeof_cam * sizeof(t_cam));
 	scene.cam[0] = set_camera(v3_(13., 2., 3.), v3_(0., 0., 0.),
-	v3_(0., -1., 0.), 60., (double)rt->r_view->w / (double)rt->r_view->h,
-	0., v3_lenght_double_(v3_sub_vec_(v3_(13., 2., 3.), v3_(0., 0., 0.)));
+	v3_(0., -1., 0.), camparam(60., (double)rt->r_view->w / (double)
+	rt->r_view->h, 0., v3_lenght_double_(v3_sub_vec_(v3_(13., 2., 3.),
+	v3_(0., 0., 0.)))));
 	scene.this_cam = &scene.cam[0];
 
 	scene.sizeof_obj = 3;

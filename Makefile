@@ -79,7 +79,6 @@ SRC = \
 			rt_bound_box.c\
 			rt_object.c\
 			rt_sphere.c\
-			rt_plane.c\
 			rt_ray.c\
 			rt_thread.c\
 			rt_hook.c\

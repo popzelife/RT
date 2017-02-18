@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 11:31:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 14:23:56 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 18:25:48 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_strparam		strparam(char* string, t_font font, int xy[2], int i)
 	return (p);
 }
 
-t_butnparam		butnparam(t_string *string, t_surface *surface, SDL_Rect *rect, \
-	int i)
+t_butnparam		butnparam(t_string *string, t_surface *surface, SDL_Rect *rect,
+				int i)
 {
 	t_butnparam		p;
 
@@ -54,5 +54,17 @@ t_butnparam		butnparam(t_string *string, t_surface *surface, SDL_Rect *rect, \
 	p.surface = surface;
 	p.rect = rect;
 	p.i_lst = i;
+	return (p);
+}
+
+t_camparam		camparam(double vfov, double aspect, double aperture,
+				double focus)
+{
+	t_camparam		p;
+
+	p.vfov = vfov;
+	p.aspect = aspect;
+	p.aperture = aperture;
+	p.focus = focus;
 	return (p);
 }

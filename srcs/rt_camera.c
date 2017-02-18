@@ -26,13 +26,14 @@ t_cam		set_camera(t_vec3 look_from, t_vec3 look_at, t_vec3 v_up, \
 	cam.param.look_from = look_from;
 	cam.param.look_at = look_at;
 	cam.param.v_up = v_up;
-	cam.w = v3_unit_vec_(v3_sub_vec_(cam.look_from, cam.look_at));
-	cam.u = v3_unit_vec_(v3_cross_vec_(cam.v_up, w));
+	cam.w = v3_unit_vec_(v3_sub_vec_(look_from, look_at));
+	cam.u = v3_unit_vec_(v3_cross_vec_(v_up, cam.w));
 	cam.v = v3_cross_vec_(cam.w, cam.u);
-	cam.low_left_corner = v3_sub_vec_(v3_sub_vec_(v3_sub_vec_(cam.look_from,
+	cam.low_left_corner = v3_sub_vec_(v3_sub_vec_(v3_sub_vec_(look_from,
 	v3_scale_vec_(cam.u, cam.half_width * param.focus)), v3_scale_vec_(cam.v,
 	cam.half_height * param.focus)), v3_scale_vec_(cam.w, param.focus));
 	cam.horizontal = v3_scale_vec_(cam.u, 2. * cam.half_width * param.focus);
 	cam.vertical = v3_scale_vec_(cam.v, 2. * cam.half_height * param.focus);
+	cam.origin = look_from;
 	return (cam);
 }

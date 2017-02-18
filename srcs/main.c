@@ -6,14 +6,14 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 16:03:25 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:13:48 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 /*
-  Need work on mutex and pthread handling
+** Need work on mutex and pthread handling
 */
 
 int			main(int ac, char **av)
@@ -26,7 +26,7 @@ int			main(int ac, char **av)
 	kernel_isopencl();
 
 	/*
-	  Init RT and scene while displaying loading
+	** Init RT and scene while displaying loading
 	*/
 
 	rt = &p_rt;
@@ -36,7 +36,7 @@ int			main(int ac, char **av)
 	init_multithread(rt);
 
 	/*
-	  Start first render while loading panel is still on screen
+	** Start first render while loading panel is still on screen
 	*/
 
 	render(rt);
@@ -52,7 +52,7 @@ int			main(int ac, char **av)
 	display_rt(rt);
 
 	/*
-	  Start the rendering and display loop
+	** Start the rendering and display loop
 	*/
 
 	pthread_mutex_init(&rt->mutex, NULL);

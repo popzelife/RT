@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 19:08:39 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 18:41:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ t_scene		init_scene(t_rt *rt);
 ** Menu rendering
 */
 
-t_viewparam	*new_viewparam(t_scene *scene);
+t_viewparam	new_viewparam(t_scene *scene);
 void		set_viewparam(t_viewparam *p, t_rt *rt, int x, int y);
 
-t_imgparam	*new_imgparam(char* name);
+t_imgparam	new_imgparam(char* name);
 void		set_imgparam(t_imgparam *param, char* name);
 
-void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect rect, \
+void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect,
 			const int color, void *param);
 
 /*
@@ -95,6 +95,8 @@ void		display_rt(t_rt *rt);
 ** Cameras
 */
 
+t_camparam	camparam(double vfov, double aspect, double aperture, double focus);
+
 t_cam		set_camera(t_vec3 look_from, t_vec3 look_at, t_vec3 v_up, \
 			t_camparam param);
 
@@ -111,9 +113,10 @@ t_vec3		hit_none_skybox(const t_skybox *box, const t_ray ray);
 ** Bounding box
 */
 
-t_bound_box	*new_bound_box(t_vec3 *min, t_vec3 *max);
-BOOL		hit_bound_box(t_bound_box *box, const t_ray *ray, double t_min, \
+t_bound_box	new_bound_box(t_vec3 min, t_vec3 max);
+BOOL		hit_bound_box(t_bound_box *box, const t_ray ray, double t_min,
 			double t_max);
+BOOL		surrounding_box(const t_bound_box box0, const t_bound_box box1);
 
 /*
 ** Objects
@@ -121,7 +124,7 @@ BOOL		hit_bound_box(t_bound_box *box, const t_ray *ray, double t_min, \
 
 t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat, \
 			const UCHAR type_mat);
-t_obj		*copy_object(t_obj *obj);
+t_obj		copy_object(t_obj *obj);
 
 t_sphere	*new_sphere(t_vec3 center, const double radius);
 BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
@@ -129,10 +132,10 @@ BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 BOOL		bound_box_sphere(void *obj, t_bound_box *box, double const t0, \
 			double const t1);
 
-t_plane_xy	*new_plane_xy(const double x0, const double x1, double const y0, \
+/*t_plane_xy	*new_plane_xy(const double x0, const double x1, double const y0, \
 			double const y1, double const k);
 BOOL		hit_plane_xy(void *obj, const t_ray *ray, const double t[2], \
-			t_hit *param);
+			t_hit *param);*/
 
 /*
 ** Materials

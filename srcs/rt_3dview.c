@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:01:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 14:24:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:07:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,33 @@ void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect, \
 {
 	register int	x;
 	register int	y;
-	register int	s;
-	register double	u;
-	register double	v;
-	t_ray			ray;
-	t_vec3			ret;
-	t_vec3			temp;
-	SDL_Color		pixel;
-	t_viewparam		*viewparam;
+	//register int	s;
+	//register double	u;
+	//register double	v;
+	t_vec3			tp;
+	t_viewparam		*rt;
 
 	(void)color;
-	viewparam = (t_viewparam*)param;
+	rt = (t_viewparam*)param;
 	y = 0;
 	while (y < rect->h)
 	{
 		x = 0;
-		temp = v3(0.0, 0.0, 0.0);
+		tp = v3_(0., 0., 0.);
 		while (x < rect->w)
 		{
-			s = 0;
+			/*s = 0;
 			while (s < 10)
 			{
 				u = ((double)x + f_random()) / (double)rect->w;
 				v = ((double)y + f_random()) / (double)rect->h;
-				ray = camera_ray(viewparam->scene->cam, u, v);
-				ret = rt_color(ray, viewparam->scene, 0, 2);
-				free_ray(ray);
-				temp = v3(temp.x + ret->x, temp.y + ret->y, temp.z + ret->z);
-				v3_free(ret);
+				tp = v3_add_vec_(rt_color(ray_from_cam(rt->scene.cam, u, v),
+				&rt->scene, 0, 2), tp);
 				++s;
 			}
-			temp = v3(temp.x / 10, temp.y / 10, temp.z / 10);
-			pixel = vec3_to_sdlcolor(temp);
-			esdl_put_pixel(surf, x, y, esdl_color_to_int(pixel));
+			tp = v3_scale_vec_(tp, .1);
+			esdl_put_pixel(surf, x, y, esdl_color_to_int(vec3_to_sdlcolor(tp)));*/
+			esdl_put_pixel(surf, x, y, 0xffffffff);
 			++x;
 		}
 		++y;

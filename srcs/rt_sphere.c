@@ -47,7 +47,7 @@ BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 	oc = v3_sub_vec_(ray.orig, sphere->center);
 	a = v3_dot_double_(ray.dir, ray.dir);
 	b = v3_dot_double_(oc, ray.dir);
-	discriminant = b * b - a * (v3_dot_double_(oc, oc) - sphere->radius2));
+	discriminant = b * b - a * (v3_dot_double_(oc, oc) - sphere->radius2);
 	if (discriminant > 0)
 	{
 		sol = (-b - sqrt(discriminant)) / a;
@@ -75,6 +75,6 @@ BOOL		bound_box_sphere(void *obj, t_bound_box *box, const double t0, \
 	sphere->radius));
 	vmax = v3_add_vec_(sphere->center, v3_(sphere->radius, sphere->radius,
 	sphere->radius));
-	box = new_bound_box(vmin, vmax);
+	*box = new_bound_box(vmin, vmax);
 	return (TRUE);
 }

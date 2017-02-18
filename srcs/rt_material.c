@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:46:01 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 18:50:06 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/18 20:39:54 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,13 @@
 
 t_vec3		reflect(const t_vec3 v, const t_vec3 n)
 {
-	t_vec3		*v1;
-	t_vec3		*ret;
-
-	v1 = v3_scale_vec(n, 2.0 * v3_dot_double(v, n));
-	ret = v3_sub_vec(v, *v1);
-	v3_free(v1);
-	return (ret);
+	return (v3_sub_vec_(v, v3_scale_vec_(n, 2. * v3_dot_double_(v, n))));
 }
 
 BOOL		refract(const t_vec3 v, const t_vec3 n, double ni_over_nt,
 			t_vec3 *refracted)
 {
 	t_vec3		uv;
-	t_vec3		dt;
 	double		discriminant;
 	double		dt;
 
@@ -48,7 +41,7 @@ BOOL		refract(const t_vec3 v, const t_vec3 n, double ni_over_nt,
 		return (FALSE);
 }
 
-t_mat		*new_material(t_vec3 *albedo, double t)
+t_mat		*new_material(t_vec3 albedo, double t)
 {
 	t_mat		*m;
 
@@ -64,7 +57,8 @@ BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 	(void)		ray;
 	t_vec3		target;
 
-	target = v3_add_vec_(v3_add_vec_(param.pos), param.normal)),
+	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
+	target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
 	random_in_unit_sphere());
 	*scattered = new_ray(param.pos, v3_sub_vec_(target, param.pos));
 	*attenuation = param.material->albedo;
@@ -74,18 +68,23 @@ BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 BOOL		scatter_metal(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered)
 {
-	t_vec3		*reflected;
+	t_vec3		reflected;
 
+	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	reflected = reflect(v3_unit_vec_(ray.dir), param.normal);
-	*scattered = new_ray(param.pos, v3_add_vec_(*reflected, v3_scale_vec_
+	*scattered = new_ray(param.pos, v3_add_vec_(reflected, v3_scale_vec_
 	(random_in_unit_sphere(), param.material->t)));
 	*attenuation = param.material->albedo;
-	return ((v3_dot_double_(scattered->dir, param.normal) > 0) ? 1 : 0);
+	return ((v3_dot_double_(scattered->dir, param.normal) > 0) ? TRUE : FALSE);
 }
 
 BOOL		scatter_dielectric(const t_ray ray, const t_hit param, \
 	t_vec3 *attenuation, t_ray *scattered)
 {
-
+	(void)ray;
+	(void)param;
+	(void)attenuation;
+	(void)scattered;
+	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	return (FALSE);
 }
