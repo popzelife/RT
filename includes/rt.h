@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 18:41:52 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 14:37:37 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,9 @@ BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 BOOL		scatter_metal(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
 BOOL		scatter_dielectric(const t_ray ray, const t_hit param,
+			t_vec3 *attenuation, t_ray *scattered);
+
+BOOL		scatter_none(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
 
 /*

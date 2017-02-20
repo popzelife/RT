@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 20:46:47 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 15:08:38 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ BOOL			hit_list(t_scene *scene, const t_ray ray, const double t[2],
 	closest_so_far[1] = t[1];
 	while (i < scene->sizeof_obj)
 	{
-		if (scene->obj[i].active && (scene->obj[i].hit(scene->obj[i].p_obj,
-		ray, closest_so_far, param)))
+		if (scene->obj[i].hit(scene->obj[i].p_obj,
+		ray, closest_so_far, param)) //&& scene->obj[i].active
 		{
 			hit_anything = TRUE;
 			closest_so_far[1] = param->t;
@@ -69,18 +69,58 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 
 	param.pos = v3_(0., 0., 0.);
 	param.normal = v3_(0., 0., 0.);
+	param.material = new_material(v3_(0., 0., 0.), 0.);
+	param.material->scatter = (void*)&scatter_none;
+	param.material->emitted = v3_(0., 0., 0.);
+	param.material->type_mat = MAT_NONE;
+	attenuation = v3_(0., 0., 0.);
+	scattered = new_ray(v3_(0., 0., 0.), v3_(0., 0., 0.));
 	t[0] = .001;
 	t[1] = FLT_MAX;
 	if (hit_list(scene, ray, t, &param))
 	{
-		if ((depth < max_depth) && (param.material->scatter(ray, param,
-			&attenuation, &scattered)))
+		if ((depth < max_depth))// && (param.material->scatter(ray, param,
+		//	&attenuation, &scattered)))
 		{
+			/*
+			** Pick material as for now scatter func_ptr* doesn't work
+			*/
+			if (param.material->type_mat == MAT_METAL)
+			{
+				//scatter_metal(ray, param, attenuation, scattered);
+				t_vec3		reflected;
+				reflected = reflect(v3_unit_vec_(ray.dir), param.normal);
+				scattered = new_ray(param.pos, v3_add_vec_(reflected,
+				v3_scale_vec_(random_in_unit_sphere(), param.material->t)));
+				attenuation = param.material->albedo;
+				if (v3_dot_double_(scattered.dir, param.normal) <= 0)
+				{
+					return (param.material->emitted);
+				}
+			}
+			else if (param.material->type_mat == MAT_LAMBERT)
+			{
+				//scatter_lambertian(ray, param, attenuation, scattered);
+				t_vec3		target;
+				target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
+				random_in_unit_sphere());
+				scattered = new_ray(param.pos, v3_sub_vec_(target, param.pos));
+				attenuation = param.material->albedo;
+			}
+			else if (param.material->type_mat == MAT_DIFF_LIGHT)
+			{
+				//scatter_diff_light(ray, param, attenuation, scattered);
+				return (param.material->emitted);
+			}
+			else
+			{
+				return (param.material->emitted);
+			}
 			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_
 			(attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
 		}
 		else
-			return (v3_(0., 0., 0.));//param.material->emitted);
+			return (param.material->emitted);
 	}
 	else
 		return (scene->this_skb->hit(scene->this_skb, ray));

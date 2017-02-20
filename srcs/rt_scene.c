@@ -27,7 +27,7 @@ t_scene		init_scene(t_rt *rt)
 	scene.sizeof_obj = 3;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
 	scene.obj[0] = new_object((void*)new_sphere(v3_(0., -1000., 0.), 1000.),
-	OBJ_SPHERE, new_material(v3_(0., 0., 0.), 0.), MAT_LAMBERT);
+	OBJ_SPHERE, new_material(v3_(1., .2, .2), 0.), MAT_LAMBERT);
 	scene.obj[1] = new_object((void*)new_sphere(v3_(0., 2., 0.), 2.),
 	OBJ_SPHERE, new_material(v3_(.1, .8, 1.), .2), MAT_LAMBERT);
 	scene.obj[2] = new_object((void*)new_sphere(v3_(-1., 7., -1.), 2.),

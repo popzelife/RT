@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:46:01 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 20:39:54 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 14:36:55 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ t_mat		*new_material(t_vec3 albedo, double t)
 BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered)
 {
-	(void)		ray;
 	t_vec3		target;
 
+	(void)ray;
 	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
 	random_in_unit_sphere());
@@ -79,7 +79,18 @@ BOOL		scatter_metal(const t_ray ray, const t_hit param,
 }
 
 BOOL		scatter_dielectric(const t_ray ray, const t_hit param, \
-	t_vec3 *attenuation, t_ray *scattered)
+			t_vec3 *attenuation, t_ray *scattered)
+{
+	(void)ray;
+	(void)param;
+	(void)attenuation;
+	(void)scattered;
+	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
+	return (FALSE);
+}
+
+BOOL		scatter_none(const t_ray ray, const t_hit param,
+			t_vec3 *attenuation, t_ray *scattered)
 {
 	(void)ray;
 	(void)param;

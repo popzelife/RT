@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popzelife <popzelife@student.42.fr>        +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/15 18:02:32 by popzelife        ###   ########.fr       */
+/*   Updated: 2017/02/20 14:51:11 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 # define NULL_PARAM		0.0
 # define NULL_RECT		(SDL_Rect){0,0,0,0}
 
+# define MAT_NONE		0x0
 # define MAT_LAMBERT	0x1
 # define MAT_METAL		0x2
 # define MAT_DIELECT	0x4
