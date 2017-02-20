@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 20:03:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:54:16 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,10 @@ void			render_highres(t_tharg *arg)
 				arg->rt->r_view->h / MULTISAMP;
 				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
 				0, MAX_DEPTH);
-				arg->tab[x][y] = v3_add_vec_(temp, arg->tab[x][y]);
+				if (*(arg->s) == 1)
+					arg->tab[x][y] = temp;
+				else
+					arg->tab[x][y] = v3_add_vec_(temp, arg->tab[x][y]);
 			}
 			else
 			{
@@ -214,5 +217,12 @@ void			thread_render(t_tharg *arg)
 		render_highres(arg);
 		multisampling(arg);
 	}
+	set_thread_pos(arg);
+}
+
+void			thread_render_low(t_tharg *arg)
+{
+	if (*(arg->s) == 0)
+		render_lowres(arg);
 	set_thread_pos(arg);
 }

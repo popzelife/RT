@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 20:10:40 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:51:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		render_loop(t_rt *rt);
 void		display_loop(t_rt *rt);
 
 void		thread_render(t_tharg *arg);
+void		thread_render_low(t_tharg *arg);
 
 /*
 ** Hook events
@@ -87,6 +88,7 @@ void		draw_menu(t_rt *rt);
 
 void		update_menu(t_rt *rt);
 void		udpate_view(t_rt *rt);
+void		param_view_high(t_rt *rt);
 
 void		reset_menu(t_rt *rt);
 

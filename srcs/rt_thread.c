@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 20:15:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:42:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,35 @@ void		set_thread(t_thread *t, t_rt *rt, int *i, int *j, int *s)
 		//ft_dprintf(2, "RT error %d - pthread_attr_setstack failed\n", ret);
 		//exit(-1);
 	}
-	if ((ret = pthread_create(&t->thread, &t->attr, (void*)thread_render, \
+	if ((ret = pthread_create(&t->thread, &t->attr, (void*)thread_render,
+		(void*)&t->arg)) != 0)
+	{
+		ft_dprintf(2, "RT error %d - pthread_create failed\n", ret);
+		exit(-1);
+	}
+}
+
+void		set_thread_low(t_thread *t, t_rt *rt, int *i, int *j, int *s)
+{
+	int		ret;
+
+	t->arg.rt = rt;
+	t->arg.scene = rt->this_scene;
+	t->arg.i = i;
+	t->arg.j = j;
+	t->arg.tab = rt->tab;
+	t->arg.s = s;
+	if ((ret = pthread_attr_init(&t->attr)) != 0)
+	{
+		ft_dprintf(2, "RT error %d - pthread_attr_init failed\n", ret);
+		exit(-1);
+	}
+	if ((ret = pthread_attr_setstack(&t->attr, &(rt->stack), STACK_SIZE)) != 0)
+	{
+		//ft_dprintf(2, "RT error %d - pthread_attr_setstack failed\n", ret);
+		//exit(-1);
+	}
+	if ((ret = pthread_create(&t->thread, &t->attr, (void*)thread_render_low,
 		(void*)&t->arg)) != 0)
 	{
 		ft_dprintf(2, "RT error %d - pthread_create failed\n", ret);
@@ -114,9 +142,8 @@ void		render_low(t_rt *rt)
 	it_curs = rt->iter;
 	while (i < rt->m_thread)
 	{
-		if (it_curs->s != 0)
-			return;
-		set_thread(th_curs, rt, &(it_curs->x), &(it_curs->y), &(it_curs->s));
+		set_thread_low(th_curs, rt, &(it_curs->x), &(it_curs->y),
+		&(it_curs->s));
 		th_curs = th_curs->next;
 		it_curs = it_curs->next;
 		++i;

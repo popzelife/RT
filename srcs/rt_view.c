@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:03:14 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 19:39:18 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:49:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,39 @@ void		draw_view(t_rt *rt)
 void		udpate_view(t_rt *rt)
 {
 	t_iter		*curs_iter;
-	int			i;
-	int			j;
 	int			x;
 	int			y;
 
-	i = 0;
-	while (i < rt->r_view->w * MULTISAMP)
-	{
-		j = 0;
-		while (j < rt->r_view->h * MULTISAMP)
-		{
-			rt->tab[i][j] = v3_(0., 0., 0.);
-			++j;
-		}
-		++i;
-	}
 	curs_iter = rt->iter;
 	x = 0;
 	y = 0;
 	while (curs_iter != NULL)
 	{
 		curs_iter->s = 0;
+		curs_iter->x = x;
+		curs_iter->y = y;
+		x += RT_SUBXY;
+		if (x > rt->r_view->w * MULTISAMP)
+		{
+			x = 0;
+			y += RT_SUBXY;
+		}
+		curs_iter = curs_iter->next;
+	}
+}
+
+void		param_view_high(t_rt *rt)
+{
+	t_iter		*curs_iter;
+	int			x;
+	int			y;
+
+	curs_iter = rt->iter;
+	x = 0;
+	y = 0;
+	while (curs_iter != NULL)
+	{
+		curs_iter->s = 1;
 		curs_iter->x = x;
 		curs_iter->y = y;
 		x += RT_SUBXY;
