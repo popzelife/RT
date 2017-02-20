@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:46:01 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 14:36:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:22:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 	t_vec3		target;
 
 	(void)ray;
-	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
 	random_in_unit_sphere());
 	*scattered = new_ray(param.pos, v3_sub_vec_(target, param.pos));
@@ -70,7 +69,6 @@ BOOL		scatter_metal(const t_ray ray, const t_hit param,
 {
 	t_vec3		reflected;
 
-	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	reflected = reflect(v3_unit_vec_(ray.dir), param.normal);
 	*scattered = new_ray(param.pos, v3_add_vec_(reflected, v3_scale_vec_
 	(random_in_unit_sphere(), param.material->t)));
@@ -85,7 +83,6 @@ BOOL		scatter_dielectric(const t_ray ray, const t_hit param, \
 	(void)param;
 	(void)attenuation;
 	(void)scattered;
-	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	return (FALSE);
 }
 
@@ -96,6 +93,5 @@ BOOL		scatter_none(const t_ray ray, const t_hit param,
 	(void)param;
 	(void)attenuation;
 	(void)scattered;
-	dprintf(2, "%s (%d)\n", __FUNCTION__, __LINE__);
 	return (FALSE);
 }

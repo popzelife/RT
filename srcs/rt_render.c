@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 15:08:38 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:35:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 
 	param.pos = v3_(0., 0., 0.);
 	param.normal = v3_(0., 0., 0.);
-	param.material = new_material(v3_(0., 0., 0.), 0.);
+	/*param.material = new_material(v3_(0., 0., 0.), 0.);
 	param.material->scatter = (void*)&scatter_none;
 	param.material->emitted = v3_(0., 0., 0.);
 	param.material->type_mat = MAT_NONE;
 	attenuation = v3_(0., 0., 0.);
-	scattered = new_ray(v3_(0., 0., 0.), v3_(0., 0., 0.));
+	scattered = new_ray(v3_(0., 0., 0.), v3_(0., 0., 0.));*/
 	t[0] = .001;
 	t[1] = FLT_MAX;
 	if (hit_list(scene, ray, t, &param))
@@ -82,40 +82,12 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 		if ((depth < max_depth))// && (param.material->scatter(ray, param,
 		//	&attenuation, &scattered)))
 		{
-			/*
-			** Pick material as for now scatter func_ptr* doesn't work
-			*/
 			if (param.material->type_mat == MAT_METAL)
-			{
-				//scatter_metal(ray, param, attenuation, scattered);
-				t_vec3		reflected;
-				reflected = reflect(v3_unit_vec_(ray.dir), param.normal);
-				scattered = new_ray(param.pos, v3_add_vec_(reflected,
-				v3_scale_vec_(random_in_unit_sphere(), param.material->t)));
-				attenuation = param.material->albedo;
-				if (v3_dot_double_(scattered.dir, param.normal) <= 0)
-				{
-					return (param.material->emitted);
-				}
-			}
+				scatter_metal(ray, param, &attenuation, &scattered);
 			else if (param.material->type_mat == MAT_LAMBERT)
-			{
-				//scatter_lambertian(ray, param, attenuation, scattered);
-				t_vec3		target;
-				target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
-				random_in_unit_sphere());
-				scattered = new_ray(param.pos, v3_sub_vec_(target, param.pos));
-				attenuation = param.material->albedo;
-			}
-			else if (param.material->type_mat == MAT_DIFF_LIGHT)
-			{
-				//scatter_diff_light(ray, param, attenuation, scattered);
+				scatter_lambertian(ray, param, &attenuation, &scattered);
+			else //LIGHT!
 				return (param.material->emitted);
-			}
-			else
-			{
-				return (param.material->emitted);
-			}
 			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_
 			(attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
 		}
@@ -124,7 +96,6 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 	}
 	else
 		return (scene->this_skb->hit(scene->this_skb, ray));
-	return (v3_(0., 0., 0.));
 }
 
 void			thread_render(t_tharg *arg)
@@ -181,8 +152,8 @@ void			thread_render(t_tharg *arg)
 				esdl_put_pixel(arg->rt->s_view, x / 2, y / 2, esdl_color_to_int
 				(vec3_to_sdlcolor(temp)));
 			}
-			if (x == *(arg->i) || x == *(arg->i) + RT_SUBXY * 2 ||
-				y == *(arg->j) || y == *(arg->j) + RT_SUBXY * 2)
+			if (x == *(arg->i) || x == *(arg->i) + RT_SUBXY - 2 ||
+				y == *(arg->j) || y == *(arg->j) + RT_SUBXY - 2)
 				esdl_put_pixel(arg->rt->s_process, x / 2, y / 2, 0xff0055ff);
 			++x;
 		}
@@ -198,7 +169,6 @@ void			thread_render(t_tharg *arg)
 	{
 		*(arg->i) -= arg->rt->r_view->w * MULTISAMP;
 		*(arg->i) -= (*(arg->i) % RT_SUBXY);
-		//*(arg->i) -= RT_SUBXY;
 		*(arg->j) += RT_SUBXY;
 	}
 	if (*(arg->j) > arg->rt->r_view->h  * MULTISAMP)
