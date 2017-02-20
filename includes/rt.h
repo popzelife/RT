@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 14:37:37 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:10:40 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void		button_render(void *param);
 */
 
 void		render(t_rt *rt);
-t_vec3		rt_color(t_ray ray, t_scene *scene, int depth, int max_depth);
+void		render_low(t_rt *rt);
 
+t_vec3		rt_color(t_ray ray, t_scene *scene, int depth, int max_depth);
 BOOL		hit_list(t_scene *scene, const t_ray ray, const double t[2],
 			t_hit *param);
 

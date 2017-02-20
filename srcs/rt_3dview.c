@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:01:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 20:07:28 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:51:55 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect, \
 {
 	register int	x;
 	register int	y;
-	//register int	s;
-	//register double	u;
-	//register double	v;
+	register int	s;
+	register double	u;
+	register double	v;
 	t_vec3			tp;
 	t_viewparam		*rt;
 
@@ -32,7 +32,7 @@ void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect, \
 		tp = v3_(0., 0., 0.);
 		while (x < rect->w)
 		{
-			/*s = 0;
+			s = 0;
 			while (s < 10)
 			{
 				u = ((double)x + f_random()) / (double)rect->w;
@@ -42,8 +42,7 @@ void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect, \
 				++s;
 			}
 			tp = v3_scale_vec_(tp, .1);
-			esdl_put_pixel(surf, x, y, esdl_color_to_int(vec3_to_sdlcolor(tp)));*/
-			esdl_put_pixel(surf, x, y, 0xffffffff);
+			esdl_put_pixel(surf, x, y, esdl_color_to_int(vec3_to_sdlcolor(tp)));
 			++x;
 		}
 		++y;

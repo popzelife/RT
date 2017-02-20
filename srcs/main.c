@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 15:08:10 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:11:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int			main(int ac, char **av)
 	** Start first render while loading panel is still on screen
 	*/
 
-	render(rt);
+	while (rt->iter->s <= 1)
+		render(rt);
+	esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 
 	SDL_SetWindowSize(rt->esdl->eng.win, WIN_RX, WIN_RY);
 	SDL_SetWindowMinimumSize(rt->esdl->eng.win, WIN_RX - 400, WIN_RY - 300);
@@ -57,10 +59,9 @@ int			main(int ac, char **av)
 
 	pthread_mutex_init(&rt->mutex, NULL);
 	pthread_cond_init(&rt->display_cond, NULL);
-
-	rt->suspend = TRUE;
 	pthread_create(&rt->render_th, NULL, (void*)render_loop, (void*)rt);
 
+	rt->suspend = TRUE;
 	rt->esdl->eng.input->quit = 0;
 	while (rt->esdl->run)
 	{

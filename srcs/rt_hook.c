@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 13:56:11 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 18:43:14 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:12:05 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		display_rt(t_rt *rt)
 	t_button		*button_curs;
 
 	SDL_RenderClear(rt->esdl->eng.render);
-	if (rt->render)// && (rt->iter->s == 1 || rt->iter->s == 5))
+	if (rt->render)
 	{
 		rt->t_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
 			rt->s_view);

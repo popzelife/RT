@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 16:35:03 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:03:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 
 	param.pos = v3_(0., 0., 0.);
 	param.normal = v3_(0., 0., 0.);
-	/*param.material = new_material(v3_(0., 0., 0.), 0.);
-	param.material->scatter = (void*)&scatter_none;
-	param.material->emitted = v3_(0., 0., 0.);
-	param.material->type_mat = MAT_NONE;
-	attenuation = v3_(0., 0., 0.);
-	scattered = new_ray(v3_(0., 0., 0.), v3_(0., 0., 0.));*/
 	t[0] = .001;
 	t[1] = FLT_MAX;
 	if (hit_list(scene, ray, t, &param))
@@ -98,45 +92,30 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 		return (scene->this_skb->hit(scene->this_skb, ray));
 }
 
-void			thread_render(t_tharg *arg)
+void	set_thread_pos(t_tharg *arg)
+{
+	*(arg->i) += RT_SUBXY * arg->rt->m_thread;
+	if (*(arg->i) > arg->rt->r_view->w  * MULTISAMP)
+	{
+		*(arg->i) -= arg->rt->r_view->w * MULTISAMP;
+		*(arg->i) -= (*(arg->i) % RT_SUBXY);
+		*(arg->j) += RT_SUBXY;
+	}
+	if (*(arg->j) > arg->rt->r_view->h  * MULTISAMP)
+	{
+		++(*(arg->s));
+		*(arg->j) -= arg->rt->r_view->h * MULTISAMP;
+		*(arg->j) -= (*(arg->j) % RT_SUBXY);
+		*(arg->j) -= RT_SUBXY;
+	}
+}
+
+void			multisampling(t_tharg *arg)
 {
 	register int	x;
 	register int	y;
-	register double	u;
-	register double	v;
 	t_vec3			temp;
-
-	y = *(arg->j);
-	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MULTISAMP)
-	{
-		x = *(arg->i);
-		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MULTISAMP)
-		{
-			if (*(arg->s) <= ALIASING)
-			{
-				u = (double)((double)x + (*(arg->s) == NO_ALIASING ? 0 : \
-				f_random())) / (double)arg->rt->r_view->w / MULTISAMP;
-				v = (double)((double)y + (*(arg->s) == NO_ALIASING ? 0 : \
-				f_random())) / (double)arg->rt->r_view->h / MULTISAMP;
-				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
-				0, (*(arg->s) == -NO_ALIASING ? 1 : MAX_DEPTH));
-				arg->tab[x][y] = v3_add_vec_(temp, arg->tab[x][y]);
-			}
-			else
-			{
-				printf("thread stop %40s\r", "");
-				arg->rt->suspend = TRUE;
-				return ;
-			}
-			++x;
-		}
-		++y;
-	}
-
-	/*
-	** Multisampling and put pixel
-	*/
-
+	
 	y = *(arg->j);
 	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MULTISAMP)
 	{
@@ -159,23 +138,81 @@ void			thread_render(t_tharg *arg)
 		}
 		++y;
 	}
+}
 
-	/*
-	** Set new pos x y;
-	*/
+void			render_lowres(t_tharg *arg)
+{
+	register int	x;
+	register int	y;
+	register double	u;
+	register double	v;
+	t_vec3			temp;
 
-	*(arg->i) += RT_SUBXY * arg->rt->m_thread;
-	if (*(arg->i) > arg->rt->r_view->w  * MULTISAMP)
+	y = *(arg->j);
+	x = *(arg->i);
+	u = (double)(double)x / (double)arg->rt->r_view->w / MULTISAMP;
+	v = (double)(double)y / (double)arg->rt->r_view->h / MULTISAMP;
+	temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene, 0, 1);
+	temp = v3_(sqrt(temp.x), sqrt(temp.y), sqrt(temp.z));
+	y = *(arg->j);
+	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MULTISAMP)
 	{
-		*(arg->i) -= arg->rt->r_view->w * MULTISAMP;
-		*(arg->i) -= (*(arg->i) % RT_SUBXY);
-		*(arg->j) += RT_SUBXY;
+		x = *(arg->i);
+		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MULTISAMP &&
+			y % 2 == 0)
+		{
+			if (*(arg->s) == 0 && x % 2 == 0)
+				esdl_put_pixel(arg->rt->s_view, x / 2, y / 2, esdl_color_to_int(
+				vec3_to_sdlcolor(temp)));
+			++x;
+		}
+		++y;
 	}
-	if (*(arg->j) > arg->rt->r_view->h  * MULTISAMP)
+}
+
+void			render_highres(t_tharg *arg)
+{
+	register int	x;
+	register int	y;
+	register double	u;
+	register double	v;
+	t_vec3			temp;
+
+	y = *(arg->j);
+	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MULTISAMP)
 	{
-		++(*(arg->s));
-		*(arg->j) -= arg->rt->r_view->h * MULTISAMP;
-		*(arg->j) -= (*(arg->j) % RT_SUBXY);
-		*(arg->j) -= RT_SUBXY;
+		x = *(arg->i);
+		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MULTISAMP)
+		{
+			if (*(arg->s) <= ALIASING)
+			{
+				u = (double)((double)x + f_random()) / (double)
+				arg->rt->r_view->w / MULTISAMP;
+				v = (double)((double)y + f_random()) / (double)
+				arg->rt->r_view->h / MULTISAMP;
+				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
+				0, MAX_DEPTH);
+				arg->tab[x][y] = v3_add_vec_(temp, arg->tab[x][y]);
+			}
+			else
+			{
+				arg->rt->suspend = TRUE;
+				return ;
+			}
+			++x;
+		}
+		++y;
 	}
+}
+
+void			thread_render(t_tharg *arg)
+{
+	if (*(arg->s) == 0)
+		render_lowres(arg);
+	else
+	{
+		render_highres(arg);
+		multisampling(arg);
+	}
+	set_thread_pos(arg);
 }

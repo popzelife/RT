@@ -18,8 +18,6 @@ static void	*select_hit(const UCHAR t)
 
 	if (t == OBJ_SPHERE)
 		f = (void*)&hit_sphere;
-	/*else if (t == OBJ_PLANE_XY)
-		f = (void*)&hit_plane_xy;*/
 	else
 		f = NULL;
 	return (f);
@@ -87,8 +85,6 @@ static void	*select_obj(t_vec3 p, const double f, const UCHAR t)
 
 	if (t == OBJ_SPHERE)
 		o = (void*)new_sphere(p, f);
-	/*else if (t == OBJ_PLANE_XY)
-		o = (void*)new_plane_xy(1, 2, 1, 1, 1);*/
 	else
 		o = NULL;
 	return (o);

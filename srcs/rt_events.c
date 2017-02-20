@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 18:53:35 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:09:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at.z),
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_LEFT] &&
@@ -95,7 +97,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at.z),
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_UP] &&
@@ -110,7 +114,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at.z),
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
@@ -125,7 +131,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at.z),
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	} // ROTATE 
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
@@ -141,7 +149,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_from.y,
 		rt->scene->this_cam->param.look_from.z);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_LEFT] &&
@@ -154,7 +164,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at,
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_UP] &&
@@ -167,7 +179,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at,
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
@@ -180,8 +194,9 @@ void		rt_events(t_rt *rt, t_input *in)
 		rt->scene->this_cam->param.look_at,
 		rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
 		udpate_view(rt);
-		render(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		rt->render = TRUE;
 	}
-
 }

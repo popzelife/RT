@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 17:58:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:15:53 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,41 @@ void		render(t_rt *rt)
 		++i;
 	}
 	ft_printf("Render pass # %3d/%3d %20s\r", rt->iter->s - 1, ALIASING, "");
+}
+
+void		render_low(t_rt *rt)
+{
+	t_thread	*th_curs;
+	t_iter		*it_curs;
+	int			i;
+
+	i = 0;
+	th_curs = rt->t;
+	it_curs = rt->iter;
+	while (i < rt->m_thread)
+	{
+		if (it_curs->s != 0)
+			return;
+		set_thread(th_curs, rt, &(it_curs->x), &(it_curs->y), &(it_curs->s));
+		th_curs = th_curs->next;
+		it_curs = it_curs->next;
+		++i;
+	}
+	i = 0;
+	th_curs = rt->t;
+	while (i < rt->m_thread)
+	{
+		join_thread(th_curs);
+		th_curs = th_curs->next;
+		++i;
+	}
+	i = 0;
+	th_curs = rt->t;
+	while (i < rt->m_thread)
+	{
+		destroy_thread_attr(th_curs);
+		th_curs = th_curs->next;
+		++i;
+	}
+	ft_printf("Render pass # %3d/%3d %20s\r", rt->iter->s, ALIASING, "");
 }

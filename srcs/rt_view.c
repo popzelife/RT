@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:03:14 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 17:14:01 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 19:39:18 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,20 @@ void		udpate_view(t_rt *rt)
 		}
 		++i;
 	}
-
 	curs_iter = rt->iter;
 	x = 0;
 	y = 0;
 	while (curs_iter != NULL)
 	{
-		curs_iter->s = 1;
+		curs_iter->s = 0;
 		curs_iter->x = x;
 		curs_iter->y = y;
 		x += RT_SUBXY;
-		if (x > rt->r_view->w)
+		if (x > rt->r_view->w * MULTISAMP)
 		{
 			x = 0;
 			y += RT_SUBXY;
 		}
 		curs_iter = curs_iter->next;
 	}
-
-	/*SDL_GetWindowSize(rt->esdl->eng.win, &rt->r_view->w, &rt->r_view->h);
-	rt->r_view->x = 0;
-	rt->r_view->y = 0;
-	rt->r_view->w -= MENU_RX;
-	rt->s_view = esdl_scale_surface(rt->s_view, rt->r_view->w, rt->r_view->h);
-	esdl_clear_surface(rt->s_view, NULL_RECT, 0xff000000, NULL);
-	rt->t_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, rt->s_view);*/
 }
