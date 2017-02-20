@@ -6,7 +6,7 @@
 #    By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 17:10:25 by qfremeau          #+#    #+#              #
-#    Updated: 2017/01/04 18:11:30 by qfremeau         ###   ########.fr        #
+#    Updated: 2017/02/20 17:38:53 by nkhouide         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRC = \
 			rt_bound_box.c\
 			rt_object.c\
 			rt_sphere.c\
+			rt_plan.c\
 			rt_ray.c\
 			rt_thread.c\
 			rt_hook.c\

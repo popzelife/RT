@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/04 16:31:07 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:37:00 by nkhouide         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	*select_hit(const UCHAR t)
 
 	if (t == OBJ_SPHERE)
 		f = (void*)&hit_sphere;
-	/*else if (t == OBJ_PLANE_XY)
-		f = (void*)&hit_plane_xy;*/
+	else if (t == OBJ_PLANE)
+		f = (void*)&hit_plane;
 	else
 		f = NULL;
 	return (f);

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 19:47:06 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:38:24 by nkhouide         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,11 @@ typedef struct	s_bound_box
 ** Objects
 */
 
-typedef struct	s_plane_xy
+typedef struct	s_plane
 {
-	double		x0;
-	double		x1;
-	double		y0;
-	double		y1;
-	double		k;
-}				t_plane_xy;
+	t_vec3			normale;
+	t_vec3			on_plane;
+}				t_plane;
 
 typedef struct	s_sphere
 {

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 22:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/07 16:53:07 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:46:54 by nkhouide         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_scene		init_scene(t_rt *rt)
 
 	scene.sizeof_obj = 3;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
-	scene.obj[0] = new_object((void*)new_sphere(v3_(0., -1000., 0.), 1000.),
-	OBJ_SPHERE, new_material(v3_(1., .2, .2), 0.), MAT_LAMBERT);
+	scene.obj[0] = new_object((void*)new_plane(v3_(0., 1., 0.), v3_(0., 1., 0.)),
+	OBJ_PLANE, new_material(v3_(1., .2, .2), 0.), MAT_LAMBERT);
 	scene.obj[1] = new_object((void*)new_sphere(v3_(0., 2., 0.), 2.),
 	OBJ_SPHERE, new_material(v3_(.1, .8, 1.), .2), MAT_LAMBERT);
 	scene.obj[2] = new_object((void*)new_sphere(v3_(-1., 7., -1.), 2.),
