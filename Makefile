@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 # Compilation
-CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror
-ADDFLAGS =	-g
+CC =		clang
+CFLAGS =	-Wall -Wextra -Werror -g
+ADDFLAGS =	
 
 # Precompiled header
 PRECOMP =	stdafx.h
@@ -26,8 +26,8 @@ NAME =		rt
 DST =		
 
 # Directories
-SRCDIR =	srcs
-OBJDIR =	objs
+SRCDIR =	sources
+OBJDIR =	objects
 ifeq ($(OS),Windows_NT)
 	INCDIR =	includes\
 				librairies/libft/includes\
@@ -55,42 +55,42 @@ endif
 PREDIR =	includes
 
 # Sources
-SRC = \
-			esdl/esdl_init.c\
-			esdl/esdl_ttf.c\
-			esdl/esdl_fps.c\
-			esdl/esdl_surface.c\
-			esdl/esdl_events.c\
-			esdl/esdl_color.c\
-			esdl/esdl_pixel.c\
-			esdl/esdl_image.c\
-			esdl/esdl_rect.c\
-			esdl/esdl_exit.c\
-			kernel/kernel_isopencl.c\
-			rt_init.c\
-			rt_skybox.c\
-			rt_menu.c\
-			rt_view.c\
-			rt_3dview.c\
-			rt_scene.c\
-			rt_camera.c\
-			rt_material.c\
-			rt_light.c\
-			rt_bound_box.c\
-			rt_object.c\
-			rt_sphere.c\
-			rt_ray.c\
-			rt_thread.c\
-			rt_hook.c\
-			rt_button.c\
-			rt_render.c\
-			rt_events.c\
-			rt_random.c\
-			rt_quit.c\
-			ft_list.c\
-			ft_list2.c\
-			ft_utils.c\
-			ft_utils2.c\
+SRC =		esdl/color.c\
+			esdl/events.c\
+			esdl/exit.c\
+			esdl/fps.c\
+			esdl/init.c\
+			esdl/image.c\
+			esdl/pixel.c\
+			esdl/rect.c\
+			esdl/surface.c\
+			esdl/ttf.c\
+			kernel/isopencl.c\
+			events/events.c\
+			events/hook.c\
+			events/init.c\
+			events/quit.c\
+			events/events.c\
+			interface/3dview.c\
+			interface/button.c\
+			interface/menu.c\
+			interface/view.c\
+			parser/scene.c\
+			raytracer/random.c\
+			raytracer/ray.c\
+			raytracer/render.c\
+			raytracer/thread.c\
+			scene/bound_box.c\
+			scene/camera.c\
+			scene/light.c\
+			scene/material.c\
+			scene/object.c\
+			scene/skybox.c\
+			scene/sphere.c\
+			utils/list.c\
+			utils/list2.c\
+			utils/utils.c\
+			utils/utils2.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

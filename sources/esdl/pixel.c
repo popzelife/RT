@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   esdl_pixel.c                                       :+:      :+:    :+:   */
+/*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:10:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 14:03:09 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 18:45:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,4 @@ Uint32			esdl_read_pixel(SDL_Surface *surf, const int x, const int y)
 	else
 		pixel = 0;
 	return (pixel);
-}
-
-void			esdl_draw_filled_square(SDL_Surface *surf, \
-	const SDL_Rect *rect, const int color, void *param)
-{
-	register int		x;
-	register int		y;
-
-	(void)param;
-	y = 0;
-	while (y < rect->h)
-	{
-		x = 0;
-		while (x < rect->w)
-		{
-			esdl_put_pixel(surf, x + rect->x, y + rect->y, color);
-			++x;
-		}
-		++y;
-	}
 }

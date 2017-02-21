@@ -6,11 +6,19 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 20:06:48 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:08:06 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void		init_rand(t_rt *rt)
+{
+	time_t		t;
+
+	srand((unsigned)time(&t));
+	random_seed(rt->seed, 7);
+}
 
 void		init_rt(t_rt *rt)
 {
@@ -70,7 +78,7 @@ void		init_screen_buffer(t_rt *rt)
 }
 
 void		init_multithread(t_rt *rt)
-{ 
+{
 	int			i;
 	int			x;
 	int			y;
@@ -91,6 +99,7 @@ void		init_multithread(t_rt *rt)
 		}
 		++i;
 	}
+	rt->limit_iter = ALIASING;
 	posix_memalign(&(rt->stack), PAGE_SIZE, STACK_SIZE);
 	rt->t = NULL;
 	i = 0;

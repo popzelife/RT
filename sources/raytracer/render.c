@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_render.c                                        :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 20:54:16 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 19:53:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,18 +149,21 @@ void			render_lowres(t_tharg *arg)
 	t_vec3			temp;
 
 	y = *(arg->j);
-	x = *(arg->i);
-	u = (double)(double)x / (double)arg->rt->r_view->w / MULTISAMP;
-	v = (double)(double)y / (double)arg->rt->r_view->h / MULTISAMP;
-	temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene, 0, 1);
-	temp = v3_(sqrt(temp.x), sqrt(temp.y), sqrt(temp.z));
-	y = *(arg->j);
 	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MULTISAMP)
 	{
 		x = *(arg->i);
 		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MULTISAMP &&
 			y % 2 == 0)
 		{
+			if ((x == *(arg->i) && y == *(arg->j)) ||
+				(x == *(arg->i) && y == *(arg->j) + RT_SUBXY / 2))
+			{
+				u = (double)(double)x / (double)arg->rt->r_view->w / MULTISAMP;
+				v = (double)(double)y / (double)arg->rt->r_view->h / MULTISAMP;
+				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
+				0, 1);
+				temp = v3_(sqrt(temp.x), sqrt(temp.y), sqrt(temp.z));
+			}
 			if (*(arg->s) == 0 && x % 2 == 0)
 				esdl_put_pixel(arg->rt->s_view, x / 2, y / 2, esdl_color_to_int(
 				vec3_to_sdlcolor(temp)));
@@ -218,6 +221,7 @@ void			thread_render(t_tharg *arg)
 		multisampling(arg);
 	}
 	set_thread_pos(arg);
+	pthread_exit(NULL);
 }
 
 void			thread_render_low(t_tharg *arg)
@@ -225,4 +229,5 @@ void			thread_render_low(t_tharg *arg)
 	if (*(arg->s) == 0)
 		render_lowres(arg);
 	set_thread_pos(arg);
+	pthread_exit(NULL);
 }

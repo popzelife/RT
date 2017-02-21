@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 19:47:06 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:05:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,8 @@ typedef struct	s_rt
 {
 	t_esdl			*esdl;
 
+	char			seed[8];
+
 	t_scene			*scene;
 	int				sizeof_scn;
 	t_scene			*this_scene;
@@ -295,6 +297,7 @@ typedef struct	s_rt
 
 	t_vec3			**tab;
 	t_iter			*iter;
+	int				limit_iter;
 	void			*stack;
 	int				m_thread;
 	struct s_thread	*t;

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 21:17:20 by popzelife         #+#    #+#             */
-/*   Updated: 2017/02/18 20:08:22 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 11:25:17 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void		draw_menu(t_rt *rt)
 		lst_new_image(&nullsurf, surfparam(&rect, 0,
 			&rt->panel.imgparam, 0), rt->esdl->eng.render, esdl_load_texture),
 		&rect2, 0),
-	rt->esdl->eng.render, actionparam((void*)rt, button_render));
+	rt->esdl->eng.render, actionparam((void*)rt, button_snap));
 
 	rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(64 * 2 + 29 * 3, 790, 0, 0));
 	rect2 = esdl_fuse_rect(*(rt->r_menu), esdl_rect(14 * 3 + 82 * 2, 790, 80, 95));

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 17:11:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:07:10 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			main(int ac, char **av)
 	rt = &p_rt;
 	init_rt(rt);
 	loading(rt);
+	init_rand(rt);
 	init_screen_buffer(rt);
 	init_multithread(rt);
 

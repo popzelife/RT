@@ -6,14 +6,14 @@
 #    By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/02 11:44:08 by qfremeau          #+#    #+#              #
-#    Updated: 2017/02/06 12:41:58 by qfremeau         ###   ########.fr        #
+#    Updated: 2017/02/21 18:53:06 by qfremeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
 CC =		clang
 CFLAGS =	-Wall -Wextra -Werror
-ADDFLAGS =	
+ADDFLAGS =
 
 # Default rule
 DEFRULE =	all

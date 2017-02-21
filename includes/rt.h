@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 20:51:04 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:07:50 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 void		init_rt(t_rt *rt);
 void		loading(t_rt *rt);
+void		init_rand(t_rt *rt);
 void		init_screen_buffer(t_rt *rt);
 void		init_multithread(t_rt *rt);
 
@@ -51,6 +52,7 @@ void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect,
 t_action	actionparam(void *param, void (f)(void*));
 
 void		button_render(void *param);
+void		button_snap(void *param);
 
 /*
 ** Raytracer rendering
@@ -205,10 +207,13 @@ void		lst_set_string(t_string **string, t_strparam param, SDL_Renderer
 
 t_vec3		random_in_unit_sphere();
 t_vec3		random_in_unit_disk();
+
 double		f_random();
 
 double		f_min(double const a, double const b);
 double		f_max(double const a, double const b);
+
+void		random_seed(char *s, const int len);
 
 /*
 ** Exit
