@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 22:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/20 17:46:54 by nkhouide         ###   ########.fr       */
+/*   Updated: 2017/02/22 14:12:55 by nkhouide         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,22 @@ t_scene		init_scene(t_rt *rt)
 
 	scene.sizeof_obj = 3;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
-	scene.obj[0] = new_object((void*)new_plane(v3_(0., 1., 0.), v3_(0., 1., 0.)),
+	
+	scene.obj[0] = new_object((void*)new_plane(v3_(0., 1., 0.), v3_(0., 0., 0.)),
 	OBJ_PLANE, new_material(v3_(1., .2, .2), 0.), MAT_LAMBERT);
-	scene.obj[1] = new_object((void*)new_sphere(v3_(0., 2., 0.), 2.),
-	OBJ_SPHERE, new_material(v3_(.1, .8, 1.), .2), MAT_LAMBERT);
+
+//	scene.obj[1] = new_object((void*)new_sphere(v3_(0., 2., .8), 2.),
+//	OBJ_SPHERE, new_material(v3_(.1, .8, 1.), .2), MAT_LAMBERT);
+
+	scene.obj[1] = new_object((void*)new_cylindre(v3_(0., 1., .5), v3_(0., 1., -1.), .8),
+	OBJ_CYLINDRE, new_material(v3_(.1, .8, 1.), .2), MAT_LAMBERT);
+
+//	scene.obj[2] = new_object((void*)new_sphere(v3_(2., 2., 0.), 2.),
+//	OBJ_SPHERE, new_material(v3_(.1, .8, 1.), .2), MAT_LAMBERT);
+
 	scene.obj[2] = new_object((void*)new_sphere(v3_(-1., 7., -1.), 2.),
 	OBJ_SPHERE, new_material(v3_(4., 4., 4.), NULL_PARAM), MAT_DIFF_LIGHT);
+
 	scene.this_obj = &scene.obj[1];
 
 	scene.sizeof_skb = 1;

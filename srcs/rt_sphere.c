@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:43:54 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/04 20:44:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/22 11:56:39 by nkhouide         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ BOOL		normal_sphere(t_sphere *sphere, const t_ray ray, const float sol,
 	param->pos = ray_point_at(ray, param->t);
 	param->normal = v3_div_vec_(v3_sub_vec_(param->pos, sphere->center),
 	sphere->radius);
+//	param->normal = v3_sub_vec_(param->pos, sphere->center);
 	return (TRUE);
 }
 
