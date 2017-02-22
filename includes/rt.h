@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/21 12:07:50 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/22 16:52:36 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		display_rt(t_rt *rt);
 
 t_camparam	camparam(double vfov, double aspect, double aperture, double focus);
 
-t_cam		set_camera(t_vec3 look_from, t_vec3 look_at, t_vec3 v_up, \
+t_cam		set_camera(t_vec3 look_from, t_vec3 look_at, t_vec3 v_up,
 			t_camparam param);
 
 /*
@@ -127,20 +127,23 @@ BOOL		surrounding_box(const t_bound_box box0, const t_bound_box box1);
 ** Objects
 */
 
-t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat, \
+t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat,
 			const UCHAR type_mat);
 t_obj		copy_object(t_obj *obj);
 
 t_sphere	*new_sphere(t_vec3 center, const double radius);
 BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
-BOOL		bound_box_sphere(void *obj, t_bound_box *box, double const t0, \
+BOOL		bound_box_sphere(void *obj, t_bound_box *box, double const t0,
 			double const t1);
 
-/*t_plane_xy	*new_plane_xy(const double x0, const double x1, double const y0, \
-			double const y1, double const k);
-BOOL		hit_plane_xy(void *obj, const t_ray *ray, const double t[2], \
-			t_hit *param);*/
+t_plane		*new_plane(t_vec3 normale, t_vec3 on_plane);
+BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
+			t_hit *param);
+
+t_cylinder	*new_cylinder(t_vec3 vertex, t_vec3 cp, const double raidus);
+BOOL		hit_cylinder(void *obj, const t_ray ray, const double t[2],
+			t_hit *param);
 
 /*
 ** Materials

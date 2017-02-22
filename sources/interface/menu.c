@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_menu.c                                          :+:      :+:    :+:   */
+/*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 21:17:20 by popzelife         #+#    #+#             */
-/*   Updated: 2017/02/21 11:25:17 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/22 16:45:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		draw_menu(t_rt *rt)
 		sprintf(rt->panel.viewparam.str_param_o, "Radius: %10.3g",
 		sphere->radius);
 	}
-	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_PLANE_XY)
+	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_PLANE)
 		sprintf(rt->panel.viewparam.str_obj, "Plane Param:");
 	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_CUBE)
 		sprintf(rt->panel.viewparam.str_obj, "Cube Param:");
@@ -266,7 +266,7 @@ void		update_menu(t_rt *rt)
 		sprintf(rt->panel.viewparam.str_param_o, "Radius: %10.3g",
 		sphere->radius);
 	}
-	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_PLANE_XY)
+	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_PLANE)
 		sprintf(rt->panel.viewparam.str_obj, "Plane Param:");
 	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_CUBE)
 		sprintf(rt->panel.viewparam.str_obj, "Cube Param:");
@@ -403,7 +403,7 @@ void		reset_menu(t_rt *rt)
 		sprintf(rt->panel.viewparam.str_param_o, "Radius: %10.3g",
 		sphere->radius);
 	}
-	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_PLANE_XY)
+	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_PLANE)
 		sprintf(rt->panel.viewparam.str_obj, "Plane Param:");
 	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_CUBE)
 		sprintf(rt->panel.viewparam.str_obj, "Cube Param:");

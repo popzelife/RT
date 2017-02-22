@@ -18,8 +18,12 @@ static void	*select_hit(const UCHAR t)
 
 	if (t == OBJ_SPHERE)
 		f = (void*)&hit_sphere;
+	else if (t == OBJ_PLANE)
+		f = (void*)&hit_plane;
+	else if (t == OBJ_CYLINDER)
+		f = (void*)&hit_cylinder;
 	else
-		f = NULL;
+		f = (void*)&hit_sphere;
 	return (f);
 }
 
@@ -36,12 +40,12 @@ static void	*select_scatter(const UCHAR t)
 	else if (t == MAT_DIFF_LIGHT)
 		s = (void*)&scatter_diffuse_light;
 	else
-		s = NULL;
+		s = (void*)&scatter_lambertian;
 	return (s);
 }
 
-t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat, \
-	const UCHAR type_mat)
+t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat,
+			const UCHAR type_mat)
 {
 	t_obj	o;
 
@@ -86,7 +90,7 @@ static void	*select_obj(t_vec3 p, const double f, const UCHAR t)
 	if (t == OBJ_SPHERE)
 		o = (void*)new_sphere(p, f);
 	else
-		o = NULL;
+		o = (void*)new_sphere(p, f);
 	return (o);
 }
 

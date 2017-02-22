@@ -1,54 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_plane.c                                         :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:43:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 14:25:01 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/22 15:31:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_plane_xy	*new_plane_xy(const double x0, const double x1, double const y0, \
-	double const y1, double const k)
+t_plane		*new_plane(t_vec3 normale, t_vec3 on_plane)
 {
-	t_plane_xy		*p;
+	t_plane		*p;
 
-	p = malloc(sizeof(t_plane_xy));
-	p->x0 = x0;
-	p->x1 = x1;
-	p->y0 = y0;
-	p->y1 = y1;
-	p->k = k;
+	if (!(p = malloc(sizeof(t_plane))))
+		return (NULL);
+	p->normale = normale;
+	p->on_plane = on_plane;
 	return (p);
 }
 
-BOOL		hit_plane_xy(void *obj, const t_ray *ray, const double t_min, \
-	const double t_max, t_hit *param)
+BOOL		normal_plane(t_plane *plane, const t_ray ray, const float sol,
+		t_hit *param)
 {
-	t_plane_xy	*plane;
-	double		t;
-	double		x;
-	double		y;
-	t_vec3		*set;
-
-	plane = (t_plane_xy*)obj;
-	t = (plane->k - ray->orig->z) / ray->dir->z;
-	if (t < t_min || t < t_max)
-		return (FALSE);
-	x = ray->orig->x + t * ray->dir->x;
-	y = ray->orig->y + t * ray->dir->y;
-	if (x < plane->x0 || x > plane->x1 || y < plane->y0 || y > plane->y1)
-		return (FALSE);
-	param->u = (x - plane->x0) / (plane->x1 - plane->x0);
-	param->v = (y - plane->y0) / (plane->y1 - plane->y0);
-	param->t = t;
-	set = ray_point_at(ray, param->t);
-	v3_set(param->pos, set->x, set->y, set->z);
-	v3_free(set);
-	v3_set(param->normal, 0, 0, 1);
+	param->t = sol;
+	param->pos = ray_point_at(ray, param->t);
+	if (v3_dot_double_(ray.dir , plane->normale) < 0)
+		param->normal = plane->normale;
+	else
+		param->normal = v3_scale_vec_(plane->normale, -1);
 	return (TRUE);
+}
+
+BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
+			t_hit *param)
+{
+	t_plane		*plane;
+	t_vec3		oc;
+	double		sol;
+
+	sol = 0.;
+	plane = (t_plane*)obj;
+	oc = v3_sub_vec_(ray.orig, plane->on_plane);
+	if (v3_dot_double_(ray.dir , plane->normale))
+	{
+		sol = - (v3_dot_double_(oc, plane->normale) / v3_dot_double_(ray.dir ,
+		plane->normale));
+		if (sol > 0. && (sol < t[1] && sol > t[0]))
+			return (normal_plane(plane, ray, sol, param));
+	}
+	return (FALSE);
 }

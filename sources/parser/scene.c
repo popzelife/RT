@@ -26,10 +26,10 @@ t_scene		init_scene(t_rt *rt)
 
 	scene.sizeof_obj = 5;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
-	scene.obj[0] = new_object((void*)new_sphere(v3_(0., -1000., 0.), 1000.),
-	OBJ_SPHERE, new_material(v3_(1., 1., 1.), 0.), MAT_LAMBERT);
-	scene.obj[1] = new_object((void*)new_sphere(v3_(0., 2., 0.), 2.),
-	OBJ_SPHERE, new_material(v3_(.1, .8, 1.), 0.), MAT_LAMBERT);
+	scene.obj[0] = new_object((void*)new_plane(v3_(0., 1., 0.), v3_(0., 0., 0.)
+	), OBJ_PLANE, new_material(v3_(1., .2, .2), 0.), MAT_LAMBERT);
+	scene.obj[1] = new_object(new_cylinder(v3_(0., 1., 0.), v3_(0., 1., 0.),
+	1.), OBJ_CYLINDER, new_material(v3_(.1, .8, 1.), 0.), MAT_LAMBERT);
 	scene.obj[2] = new_object((void*)new_sphere(v3_(-3., 2., -4.), 2.),
 	OBJ_SPHERE, new_material(v3_(1., 0., 0.), .1), MAT_METAL);
 	scene.obj[3] = new_object((void*)new_sphere(v3_(-3., 2., 3.), 2.),
@@ -40,8 +40,8 @@ t_scene		init_scene(t_rt *rt)
 
 	scene.sizeof_skb = 1;
 	scene.skybox = (t_skybox*)malloc(scene.sizeof_skb * sizeof(t_skybox));
-	scene.skybox[0] = new_skybox(v3_(.01, .01, .01), v3_(.1, .1, .1),
-	SKYBX_GRADIENT);
+	scene.skybox[0] = new_skybox(v3_(.5, .4, .1), v3_(.6, 1., 1.),
+	SKYBX_NONE);
 	scene.this_skb = &scene.skybox[0];
 
 	return (scene);
