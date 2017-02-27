@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/22 16:44:09 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:36:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define EV_RESIZE		-2
 
 # define OBJ_PLANE		0x1
-# define OBJ_PLANE_YZ	0x2
+# define OBJ_CONE		0x2
 # define OBJ_PLANE_XZ	0x4
 # define OBJ_SPHERE		0x5
 # define OBJ_CUBE		0x10

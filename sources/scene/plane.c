@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:43:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/22 15:31:03 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:29:32 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ BOOL		normal_plane(t_plane *plane, const t_ray ray, const float sol,
 		param->normal = plane->normale;
 	else
 		param->normal = v3_scale_vec_(plane->normale, -1);
+	v3_normalize_(param->normal);
 	return (TRUE);
 }
 

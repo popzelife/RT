@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/22 16:52:36 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:32:54 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,10 @@ BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
 
 t_cylinder	*new_cylinder(t_vec3 vertex, t_vec3 cp, const double raidus);
 BOOL		hit_cylinder(void *obj, const t_ray ray, const double t[2],
+			t_hit *param);
+
+t_cone		*new_cone(t_vec3 vertex, t_vec3 cp, const double tang);
+BOOL		hit_cone(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
 /*

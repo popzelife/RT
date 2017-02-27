@@ -6,7 +6,7 @@
 #    By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/02 11:44:08 by qfremeau          #+#    #+#              #
-#    Updated: 2017/02/21 18:53:13 by qfremeau         ###   ########.fr        #
+#    Updated: 2017/02/27 11:20:23 by qfremeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC =\
 		vec3/_operation.c \
 		vec3/_operation2.c \
 		vec3/_unit.c \
+		vec3/_transform.c \
 		vec4/create.c \
 		vec4/operation.c \
 		vec4/transform.c \

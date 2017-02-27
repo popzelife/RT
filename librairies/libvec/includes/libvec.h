@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libvec.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsouchet <bsouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 20:20:12 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/02/01 16:43:55 by bsouchet         ###   ########.fr       */
+/*   Updated: 2017/02/27 11:21:58 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,16 @@ t_vec3			v3_div_vec_(t_vec3 const v, double const c);
 void			v3_normalize(t_vec3 *v);
 void			v3_negative(t_vec3 *v);
 
+void			v3_normalize_(t_vec3 v);
+void			v3_negative_(t_vec3 v);
+
 double			v3_dot_double(t_vec3 const *v1, t_vec3 const *v2);
-double			v3_dot_double_(t_vec3 const v1, t_vec3 const v2);
 double			v3_magnitude_double(t_vec3 const *v);
 double			v3_lenght_double(t_vec3 const *v);
 
+double			v3_magnitude_double_(t_vec3 const v);
 double			v3_lenght_double_(t_vec3 const v);
+double			v3_dot_double_(t_vec3 const v1, t_vec3 const v2);
 
 t_vec3			*v3_unit_vec(t_vec3 const *v);
 

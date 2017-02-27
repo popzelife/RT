@@ -89,6 +89,7 @@ SRC =		esdl/color.c\
 			scene/sphere.c\
 			scene/plane.c\
 			scene/cylinder.c\
+			scene/cone.c\
 			utils/list.c\
 			utils/list2.c\
 			utils/utils.c\

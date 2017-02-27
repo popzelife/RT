@@ -22,6 +22,8 @@ static void	*select_hit(const UCHAR t)
 		f = (void*)&hit_plane;
 	else if (t == OBJ_CYLINDER)
 		f = (void*)&hit_cylinder;
+	else if (t == OBJ_CONE)
+		f = (void*)&hit_cone;
 	else
 		f = (void*)&hit_sphere;
 	return (f);
