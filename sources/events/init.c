@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 11:49:37 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:12:59 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		init_multithread(t_rt *rt)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (i < rt->m_thread)
+	while (i++ < rt->m_thread)
 	{
 		rt->iter = lst_new_iter(&(rt->iter), 1, x, y);
 		x += RT_SUBXY;
@@ -97,15 +97,11 @@ void		init_multithread(t_rt *rt)
 			x = 0;
 			y += RT_SUBXY;
 		}
-		++i;
 	}
 	rt->limit_iter = ALIASING;
 	posix_memalign(&(rt->stack), PAGE_SIZE, STACK_SIZE);
 	rt->t = NULL;
 	i = 0;
-	while (i < rt->m_thread)
-	{
+	while (i++ < rt->m_thread)
 		rt->t = lst_new_thread(&(rt->t));
-		++i;
-	}
 }

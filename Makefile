@@ -71,10 +71,11 @@ SRC =		esdl/color.c\
 			events/init.c\
 			events/quit.c\
 			events/events.c\
-			interface/3dview.c\
+			interface/miniview.c\
 			interface/button.c\
 			interface/menu.c\
 			interface/view.c\
+			parser/xml.c\
 			parser/scene.c\
 			raytracer/random.c\
 			raytracer/ray.c\
@@ -84,6 +85,7 @@ SRC =		esdl/color.c\
 			scene/camera.c\
 			scene/light.c\
 			scene/material.c\
+			scene/scatter.c\
 			scene/object.c\
 			scene/skybox.c\
 			scene/sphere.c\

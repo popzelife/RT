@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   esdl_events.c                                      :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:47:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/06 12:31:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:08:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int					esdl_check_input(t_input *in, const int input)
 void				esdl_update_events(t_input *in, int *run)
 {
 	SDL_Event		event;
-	int				ret;	
+	int				ret;
 
 	ret = 0;
 	SDL_GetMouseState(&in->m_x, &in->m_y);

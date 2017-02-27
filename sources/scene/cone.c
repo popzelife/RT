@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 14:33:42 by nkhouide          #+#    #+#             */
-/*   Updated: 2017/02/27 11:47:24 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 15:58:01 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ t_cone	*new_cone(t_vec3 vertex, t_vec3 cp, const double tang)
 
 	if (!(cone = malloc(sizeof(t_cone))))	
 		return (0);
-	v3_normalize(&vertex);
-	cone->vertex = vertex;
+	cone->vertex = v3_normalize_(vertex);
 	cone->cp = cp;
 	cone->tang = tang;
 	return (cone);
@@ -37,12 +36,7 @@ BOOL	normal_cone(t_cone *cone, const t_ray ray, const float sol,
 	partb = v3_sub_vec_(param->pos, v3_sub_vec_(cone->cp, v3_scale_vec_(cone->vertex, cone->m)));
 	param->t = sol;
 	param->pos = ray_point_at(ray, param->t);
-	param->normal = v3_sub_vec_(partb, parta);
-//	param->normal = v3_sub_vec_(param->pos,	v3_sub_vec_
-//		(cone->cp, v3_scale_vec_(v3_scale_vec_(cone->vertex, (1 + cone->tang * cone->tang)), cone->m)));
-
-	v3_normalize(&param->normal);
-	
+	param->normal = v3_normalize_(v3_sub_vec_(partb, parta));
 	return (TRUE);
 }
 

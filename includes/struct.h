@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 11:31:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 13:54:00 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ typedef struct	s_rt
 
 	char			seed[8];
 
+	char*			filename;
 	t_scene			*scene;
 	int				sizeof_scn;
 	t_scene			*this_scene;

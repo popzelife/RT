@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 11:32:54 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:51:57 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ void		init_rand(t_rt *rt);
 void		init_screen_buffer(t_rt *rt);
 void		init_multithread(t_rt *rt);
 
+/*
+** Parsing
+*/
+
 t_scene		init_scene(t_rt *rt);
+void		read_xml(t_rt *rt, t_scene *scene);
 
 /*
 ** Menu rendering
@@ -42,7 +47,7 @@ void		set_viewparam(t_viewparam *p, t_rt *rt, int x, int y);
 t_imgparam	new_imgparam(char* name);
 void		set_imgparam(t_imgparam *param, char* name);
 
-void		rt_3dview_surface(SDL_Surface *surf, const SDL_Rect *rect,
+void		rt_miniview_surface(SDL_Surface *surf, const SDL_Rect *rect,
 			const int color, void *param);
 
 /*
@@ -212,10 +217,10 @@ void		lst_set_string(t_string **string, t_strparam param, SDL_Renderer
 ** Randomize & Min/Max
 */
 
-t_vec3		random_in_unit_sphere();
-t_vec3		random_in_unit_disk();
+t_vec3		random_in_unit_sphere(void);
+t_vec3		random_in_unit_disk(void);
 
-double		f_random();
+double		f_random(void);
 
 double		f_min(double const a, double const b);
 double		f_max(double const a, double const b);

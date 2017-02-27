@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/21 19:48:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:11:56 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void		rt_events(t_rt *rt, t_input *in)
 		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 		param_view_high(rt);
 		rt->render = TRUE;
-	} // ROTATE 
+	} // ROTATE
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
 		in->button[SDL_BUTTON_RIGHT])
 	{

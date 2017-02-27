@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_random.c                                        :+:      :+:    :+:   */
+/*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:54:32 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/21 12:01:59 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:53:46 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double			f_random()
+double			f_random(void)
 {
 	return ((double)rand() / (double)RAND_MAX);
 }
 
-t_vec3				random_in_unit_sphere()
+t_vec3			random_in_unit_sphere(void)
 {
 	t_vec3		p;
 
@@ -31,7 +31,7 @@ t_vec3				random_in_unit_sphere()
 	return (p);
 }
 
-t_vec3			random_in_unit_disk()
+t_vec3			random_in_unit_disk(void)
 {
 	t_vec3		p;
 
@@ -45,9 +45,8 @@ t_vec3			random_in_unit_disk()
 
 void			random_seed(char *s, const int len)
 {
+	static const char	alphanum[] = SEED;
 	int					i;
-	static const char	alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-									"abcdefghijklmnopqrstuvwxyz";
 
 	i = 0;
 	while (i < len)

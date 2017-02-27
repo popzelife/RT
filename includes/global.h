@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 11:36:03 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 16:53:10 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@
 # define IMG_TOOLPAINT	"image/Paint.bmp"
 # define IMG_TOOLSAVE	"image/Save.bmp"
 
-# define HELP			-2
-# define ERROR			-1
+# define SEED "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-# define EV_EXIT		-1
-# define EV_RESIZE		-2
+# define HELP			0x1
+# define ERROR			0x2
+
+# define EV_EXIT		0x1
+# define EV_RESIZE		0x2
 
 # define OBJ_PLANE		0x1
 # define OBJ_CONE		0x2
@@ -73,41 +75,53 @@
 # define MAT_DIELECT	0x4
 # define MAT_DIFF_LIGHT	0x8
 
-# define BO_S	"<scene>"
-# define BC_S	"</scene>"
-# define BO_C	"<camera>"
-# define BC_C	"</camera>"
-# define BO_L	"<light>"
-# define BC_L	"</light>"
-# define BO_O	"<object>"
-# define BC_O	"</object>"
-# define BO_N	"<name>"
-# define BC_N	"</name>"
-# define BO_A	"<ambient>"
-# define BC_A	"</ambient>"
-# define BO_AA	"<anti-aliasing>"
-# define BC_AA	"</anti-aliasing>"
-# define BO_MR	"<max-reflexion>"
-# define BC_MR	"</max-reflexion>"
-# define BO_P	"<position>"
-# define BC_P	"</position>"
-# define BO_R	"<rotation>"
-# define BC_R	"</rotation>"
-# define BO_FL	"<focal>"
-# define BC_FL	"</focal>"
-# define BO_V	"<visibility>"
-# define BC_V	"</visibility>"
-# define BO_I	"<intensity>"
-# define BC_I	"</intensity>"
-# define BO_T	"<type>"
-# define BC_T	"</type>"
-# define BO_M	"<material>"
-# define BC_M	"</material>"
-# define BO_OP	"<opacity>"
-# define BC_OP	"</opacity>"
-# define BO_CR	"<color-rgb>"
-# define BC_CR	"</color-rgb>"
-# define BO_CH	"<color-hex>"
-# define BC_CH	"</color-hex>"
+# define FILE_DEF		"SCNv.1 RT"
+
+# define BO_CAM			"<camera>"
+# define BC_CAM			"</camera>"
+# define BO_FOV			"<fov>"
+# define BC_FOV			"</fov>"
+# define BO_TARGET		"<target>"
+# define BC_TARGET		"</target>"
+# define BO_APERT		"<aperture>"
+# define BC_APERT		"</aperture>"
+
+# define BO_OBJ			"<obj>"
+# define BC_OBJ			"</obj>"
+# define BO_SPHERE		"<sphere>"
+# define BC_SPHERE		"</sphere>"
+# define BO_PLANE		"<plane>"
+# define BC_PLANE		"</plane>"
+# define BO_CYLINDER	"<cylinder>"
+# define BC_CYLINDER	"</cylinder>"
+# define BO_CONE		"<cone>"
+# define BC_CONE		"</cone>"
+
+# define BO_RADIUS		"<radius>"
+# define BC_RADIUS		"</radius>"
+
+# define BO_POS			"<pos>"
+# define BC_POS			"</pos>"
+# define BO_ROTATE		"<rotate>"
+# define BC_ROTATE		"</rotate>"
+
+# define BO_LAMBERT		"<lambert>"
+# define BC_LAMBERT		"</lambert>"
+# define BO_METAL		"<metal>"
+# define BC_METAL		"</metal>"
+# define BO_DIELECT		"<dielectric>"
+# define BC_DIELECT		"</dielectric>"
+# define BO_DIFFLIGHT	"<diffuse-light>"
+# define BC_DIFFLIGHT	"</diffuse-light>"
+
+# define BO_COLOR		"<color>"
+# define BC_COLOR		"</color>"
+# define BO_PARAM		"<param>"
+# define BC_PARAM		"</param>"
+
+# define BO_SKYBOX		"<skybox>"
+# define BC_SKYBOX		"</skybox>"
+# define BO_GRADIENT	"<gradient>"
+# define BC_GRADIENT	"</gradient>"
 
 #endif

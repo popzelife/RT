@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_camera.c                                        :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 22:11:23 by qfremeau          #+#    #+#             */
-/*   Updated: 2016/12/22 15:48:57 by qfremeau         ###   ########.fr       */
+/*   Created: 2017/02/27 14:34:02 by qfremeau          #+#    #+#             */
+/*   Updated: 2017/02/27 14:35:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_cam		set_camera(t_vec3 look_from, t_vec3 look_at, t_vec3 v_up, \
+t_cam		set_camera(t_vec3 look_from, t_vec3 look_at, t_vec3 v_up,
 			t_camparam param)
 {
 	t_cam			cam;
 	double			theta;
-	
+
 	cam.param = param;
 	cam.lens_radius = param.aperture / 2.;
 	theta = param.vfov * M_PI / 180.;

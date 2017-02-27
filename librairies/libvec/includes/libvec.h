@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 20:20:12 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/02/27 11:21:58 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 15:53:44 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_vec3			v3_div_vec_(t_vec3 const v, double const c);
 void			v3_normalize(t_vec3 *v);
 void			v3_negative(t_vec3 *v);
 
-void			v3_normalize_(t_vec3 v);
+t_vec3			v3_normalize_(t_vec3 v);
 void			v3_negative_(t_vec3 v);
 
 double			v3_dot_double(t_vec3 const *v1, t_vec3 const *v2);

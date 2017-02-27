@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 21:17:20 by popzelife         #+#    #+#             */
-/*   Updated: 2017/02/22 16:45:28 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:25:43 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		draw_menu(t_rt *rt)
 	rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(50, 50, 200, 200));
 	rt->panel.lst_surf = lst_new_surface(&(rt->panel.lst_surf), surfparam(
 	&rect, 0, (void*)&rt->panel.viewparam, 0), rt->esdl->eng.render,
-	rt_3dview_surface);
+	rt_miniview_surface);
 
 	//subtitle1
 	rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(0, 280, MENU_RX, 30));
@@ -248,7 +248,7 @@ void		update_menu(t_rt *rt)
 
 	lst_set_surface(&(rt->panel.lst_surf), surfparam(
 	NULL, 0, &rt->panel.viewparam, 2), rt->esdl->eng.render,
-	rt_3dview_surface);
+	rt_miniview_surface);
 
 	/*
 	  Get param from object
@@ -357,7 +357,7 @@ void		reset_menu(t_rt *rt)
 	rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(50, 50, 200, 200));
 	rt->panel.lst_surf = lst_new_surface(&(rt->panel.lst_surf), surfparam(
 	&rect, 0, &rt->panel.viewparam, 0), rt->esdl->eng.render,
-	rt_3dview_surface);
+	rt_miniview_surface);
 
 	//subtitle1
 	rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(0, 280, MENU_RX, 30));

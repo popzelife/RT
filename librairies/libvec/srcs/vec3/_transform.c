@@ -6,13 +6,13 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:18:43 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 11:23:04 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 15:52:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libvec.h"
 
-void		v3_normalize_(t_vec3 v)
+t_vec3		v3_normalize_(t_vec3 v)
 {
 	double	m;
 
@@ -20,6 +20,7 @@ void		v3_normalize_(t_vec3 v)
 	v.x /= m;
 	v.y /= m;
 	v.z /= m;
+	return (v);
 }
 
 double		v3_magnitude_double_(t_vec3 const v)

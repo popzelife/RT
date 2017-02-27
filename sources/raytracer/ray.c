@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_ray.c                                           :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 09:54:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 17:58:25 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:54:07 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_ray		ray_from_cam(t_cam *cam, double s, double t)
 	offset = v3_add_vec_(v3_scale_vec_(cam->u, radius.x), v3_scale_vec_(cam->v,
 	radius.y));
 	orig = v3_add_vec_(cam->origin, offset);
-	dir = v3_sub_vec_(v3_sub_vec_(v3_add_vec_(v3_add_vec_(cam->low_left_corner,v3_scale_vec_(cam->horizontal, s)), v3_scale_vec_(cam->vertical, t)),
+	dir = v3_sub_vec_(v3_sub_vec_(v3_add_vec_(v3_add_vec_(cam->low_left_corner,
+	v3_scale_vec_(cam->horizontal, s)), v3_scale_vec_(cam->vertical, t)),
 	cam->origin), offset);
 	return (new_ray(orig, dir));
 }

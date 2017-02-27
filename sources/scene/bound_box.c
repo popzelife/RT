@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_bound_box.c                                     :+:      :+:    :+:   */
+/*   bound_box.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:56:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 17:45:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/27 14:33:18 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double		f_max(double const a, double const b)
 t_bound_box	new_bound_box(t_vec3 min, t_vec3 max)
 {
 	t_bound_box		b;
-	
+
 	b.min = min;
 	b.max = max;
 	return (b);
@@ -55,7 +55,7 @@ BOOL		hit_bound_box(t_bound_box *box, const t_ray ray, double t_min,
 }
 
 /*
-  Moving object from time0 to time1
+** Moving object from time0 to time1
 */
 
 BOOL		surrounding_box(const t_bound_box box0, const t_bound_box box1)
