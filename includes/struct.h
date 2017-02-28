@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 13:54:00 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 18:55:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,26 @@ typedef struct	s_iter
 }				t_iter;
 
 /*
+** Parser
+*/
+
+typedef enum	e_bo
+{
+
+}				t_bo;
+
+typedef struct	s_parser
+{
+	int				l1;
+	int				l2;
+	int				l3;
+	int				l4;
+	void			*bo[3][5][4][4];
+	void			*bc[3][5][4][4];
+	void			(*f)(t_scene*, char*);
+}				t_parser;
+
+/*
 ** Raytracer main
 */
 
@@ -287,6 +307,7 @@ typedef struct	s_rt
 	char			seed[8];
 
 	char*			filename;
+	t_parser		parser;
 	t_scene			*scene;
 	int				sizeof_scn;
 	t_scene			*this_scene;

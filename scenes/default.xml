@@ -1,4 +1,4 @@
-SCNv.1 RT
+<!DOCTYPE scn-rt>
 
 <camera>
 	<pos>13 2 3</pos>
@@ -12,7 +12,6 @@ SCNv.1 RT
 	<sphere>
 		<pos>-3 2 -4</pos>
 		<radius>2</radius>
-		<rotate>0 0 0</rotate>
 
 		<metal>
 			<color>13 2 3</color>

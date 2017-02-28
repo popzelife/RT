@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 16:53:10 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 16:01:58 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@
 # define MAT_DIELECT	0x4
 # define MAT_DIFF_LIGHT	0x8
 
-# define FILE_DEF		"SCNv.1 RT"
+# define FILE_DEF		"<!DOCTYPE scn-rt>"
 
 # define BO_CAM			"<camera>"
 # define BC_CAM			"</camera>"
