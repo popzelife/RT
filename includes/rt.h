@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:51:57 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:29:10 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		init_multithread(t_rt *rt);
 */
 
 t_scene		init_scene(t_rt *rt);
+
+void		init_xml(t_rt *rt);
 void		read_xml(t_rt *rt, t_scene *scene);
 
 /*
@@ -146,11 +148,13 @@ t_plane		*new_plane(t_vec3 normale, t_vec3 on_plane);
 BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
-t_cylinder	*new_cylinder(t_vec3 vertex, t_vec3 cp, const double raidus);
+t_cylinder	*new_cylinder(t_vec3 vertex, t_vec3 cp, const double raidus,
+			const double height);
 BOOL		hit_cylinder(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
-t_cone		*new_cone(t_vec3 vertex, t_vec3 cp, const double tang);
+t_cone		*new_cone(t_vec3 vertex, t_vec3 cp, const double tang,
+			const double height);
 BOOL		hit_cone(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
@@ -189,6 +193,12 @@ t_ray		ray_from_cam(t_cam *cam, double s, double t);
 /*
 ** Utils & lists
 */
+
+//double		ft_atof(char *s);
+char*		ft_strtolower(char *s);
+char*		ft_rtrim(char *s);
+char*		ft_ltrim(char *s);
+char*		ft_trim(char *s);
 
 int			*ft_tab2(const int x, const int y);
 t_surfparam	surfparam(SDL_Rect *rect, int color, void *param, int i);

@@ -6,37 +6,46 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 14:33:42 by nkhouide          #+#    #+#             */
-/*   Updated: 2017/02/27 15:58:01 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 19:09:12 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_cone	*new_cone(t_vec3 vertex, t_vec3 cp, const double tang)
+t_cone	*new_cone(t_vec3 vertex, t_vec3 cp, const double tang, const double height)
 {
 	t_cone	*cone;
 
 	if (!(cone = malloc(sizeof(t_cone))))	
 		return (0);
-	cone->vertex = v3_normalize_(vertex);
+	v3_normalize(&vertex);
+	cone->vertex = vertex;
 	cone->cp = cp;
 	cone->tang = tang;
+	cone->height = -height;
 	return (cone);
 }
 
 BOOL	normal_cone(t_cone *cone, const t_ray ray, const float sol,
 		t_hit *param)
 {
-	double	a;
 	t_vec3	parta;
 	t_vec3	partb;
+	double	tmp;
 
-	a = cone->m * cone->tang * cone->tang;
-	parta = v3_scale_vec_(cone->vertex, a);
-	partb = v3_sub_vec_(param->pos, v3_sub_vec_(cone->cp, v3_scale_vec_(cone->vertex, cone->m)));
 	param->t = sol;
 	param->pos = ray_point_at(ray, param->t);
-	param->normal = v3_normalize_(v3_sub_vec_(partb, parta));
+
+	tmp = 1 + (cone->tang * cone->tang);
+
+	parta = v3_sub_vec_(param->pos, cone->cp);
+
+	partb = v3_scale_vec_(cone->vertex, tmp * cone->m);
+	
+	param->normal = v3_sub_vec_(parta, partb);
+
+	v3_normalize(&param->normal);
+	
 	return (TRUE);
 }
 
@@ -50,7 +59,6 @@ BOOL	hit_cone(void *obj, const t_ray ray, const double t[2],
 	double	c;
 	double	discriminant;
 	double	sol;
-	double	minm = -2.0;
 
 	cone = (t_cone*)obj;
 	oc = v3_sub_vec_(ray.orig, cone->cp);
@@ -72,17 +80,17 @@ BOOL	hit_cone(void *obj, const t_ray ray, const double t[2],
 		sol = (-b - sqrt(discriminant)) / (2.0 * a);
 		if (sol < t[1] && sol > t[0])
 		{
-			cone->m = (v3_dot_double_(ray.dir, v3_scale_vec_(cone->vertex, sol))
-						+ v3_dot_double_(oc, cone->vertex));
-			if (cone->m >= minm && cone->m <= 0)
+			cone->m = v3_dot_double_(ray.dir, v3_scale_vec_(cone->vertex, sol))
+						+ v3_dot_double_(oc, cone->vertex);
+	//		if (cone->m >= cone->height && cone->m <= 0)
 				return (normal_cone(cone, ray, sol, param));
 		}
 		sol = (-b + sqrt(discriminant)) / (2.0 * a);
 		if (sol < t[1] && sol > t[0])
 		{
-			cone->m = (v3_dot_double_(ray.dir, v3_scale_vec_(cone->vertex, sol))
-						+ v3_dot_double_(oc, cone->vertex));
-			if (cone->m >= minm && cone->m <= 0)
+			cone->m = v3_dot_double_(ray.dir, v3_scale_vec_(cone->vertex, sol))
+						+ v3_dot_double_(oc, cone->vertex);
+	//		if (cone->m >= cone->height && cone->m <= 0)
 				return (normal_cone(cone, ray, sol, param));
 		}
 	}

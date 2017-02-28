@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:43:54 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 15:55:35 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 19:08:50 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ BOOL		normal_sphere(t_sphere *sphere, const t_ray ray, const float sol,
 {
 	param->t = sol;
 	param->pos = ray_point_at(ray, param->t);
-	param->normal = v3_normalize_(v3_div_vec_(v3_sub_vec_(param->pos,
-	sphere->center), sphere->radius));
+	param->normal = v3_div_vec_(v3_sub_vec_(param->pos, 
+	sphere->center), sphere->radius);
+	v3_normalize(&param->normal);
 	return (TRUE);
 }
 
@@ -59,7 +60,6 @@ BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 	}
 	return (FALSE);
 }
-
 
 BOOL		bound_box_sphere(void *obj, t_bound_box *box, const double t0, \
 	const double t1)

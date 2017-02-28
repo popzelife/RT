@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 18:55:04 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:22:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_ray
 ** Param link object and material for rendering
 */
 
-typedef struct s_hit
+typedef struct	s_hit
 {
 	double			t;
 	double			u;
@@ -42,7 +42,7 @@ typedef struct s_hit
 ** Materials
 */
 
-typedef struct s_mat
+typedef struct	s_mat
 {
 	UCHAR			type_mat;
 	t_vec3			albedo;
@@ -69,7 +69,7 @@ typedef struct	s_plane
 {
 	t_vec3			normale;
 	t_vec3			on_plane;
-} 				t_plane;
+}				t_plane;
 
 typedef struct	s_sphere
 {
@@ -85,7 +85,8 @@ typedef struct	s_cylinder
 	double			m;
 	double			radius;
 	double			radius2;
-} 				t_cylinder;
+	double			height;
+}				t_cylinder;
 
 typedef struct	s_cone
 {
@@ -93,25 +94,27 @@ typedef struct	s_cone
 	t_vec3			cp;
 	double			m;
 	double			tang;
-} 				t_cone;
+	double			height;
+}				t_cone;
 
 /*
 ** Scene holder
 */
 
-typedef struct s_obj
+typedef struct	s_obj
 {
 	UCHAR			type_obj;
 	void			*p_obj;
 	BOOL			(*hit)(void*, const t_ray, const double[2], t_hit*);
-	BOOL			(*bound_box)(void*, t_bound_box*, const double, const double);
+	BOOL			(*bound_box)(void*, t_bound_box*, const double,
+					const double);
 	t_mat			*p_mat;
 	char			*name;
 	BOOL			active;
 	double			visible;
 }				t_obj;
 
-typedef struct s_camparam
+typedef struct	s_camparam
 {
 	t_vec3			look_from;
 	t_vec3			look_at;
@@ -178,7 +181,6 @@ typedef struct	s_string
 	struct s_string		*next;
 }				t_string;
 
-
 typedef struct	s_surfparam
 {
 	SDL_Rect		*rect;
@@ -190,7 +192,7 @@ typedef struct	s_surfparam
 typedef struct	s_strparam
 {
 	t_font			font;
-	char*			string;
+	char			*string;
 	int				xy[2];
 	int				i_lst;
 }				t_strparam;
@@ -231,7 +233,6 @@ typedef struct	s_action
 typedef struct	s_viewparam
 {
 	t_scene			scene;
-
 	char			str_obj[128];
 	char			str_pos[128];
 	char			str_param_o[128];
@@ -280,20 +281,13 @@ typedef struct	s_iter
 ** Parser
 */
 
-typedef enum	e_bo
-{
-
-}				t_bo;
-
 typedef struct	s_parser
 {
-	int				l1;
-	int				l2;
-	int				l3;
-	int				l4;
-	void			*bo[3][5][4][4];
-	void			*bc[3][5][4][4];
-	void			(*f)(t_scene*, char*);
+	int					is_close;
+	char				*bo[NB_BALISE];
+	char				*bc[NB_BALISE];
+	UINT				byte[NB_BALISE];
+	void				(*f)(t_scene*, char*);
 }				t_parser;
 
 /*
@@ -306,7 +300,7 @@ typedef struct	s_rt
 
 	char			seed[8];
 
-	char*			filename;
+	char			*filename;
 	t_parser		parser;
 	t_scene			*scene;
 	int				sizeof_scn;

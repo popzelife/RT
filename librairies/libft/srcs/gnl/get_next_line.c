@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:22:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2016/08/24 19:34:24 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:45:18 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ int				get_next_line(int const fd, char **line)
 
 	if (fd < 0 || !line)
 		return (-1);
+	printf("is ok\n");
 	node = search_fd(&archive, fd);
+	printf("node = %zu\n", node->content_size);
 	while (!ft_strchr((char*)node->content, '\n'))
 	{
+		printf("gnl\n");
 		ret = read(fd, buff, BUFF_SIZE);
 		if (ret == -1)
 			return (ret);

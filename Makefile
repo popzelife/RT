@@ -75,8 +75,9 @@ SRC =		esdl/color.c\
 			interface/button.c\
 			interface/menu.c\
 			interface/view.c\
-			parser/xml.c\
+			parser/init.c\
 			parser/scene.c\
+			parser/xml.c\
 			raytracer/random.c\
 			raytracer/ray.c\
 			raytracer/render.c\
@@ -96,6 +97,7 @@ SRC =		esdl/color.c\
 			utils/list2.c\
 			utils/utils.c\
 			utils/utils2.c\
+			utils/utils3.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

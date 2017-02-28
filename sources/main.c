@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:02:34 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/02/28 23:31:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void	loop_hook(t_rt *rt)
 	while (rt->esdl->run)
 	{
 		rt_events(rt, rt->esdl->eng.input);
-
 		display_rt(rt);
-
 		esdl_fps_limit(rt->esdl);
 		esdl_fps_counter(rt->esdl);
 	}
@@ -44,15 +42,15 @@ static void	init_firstrender(t_rt *rt)
 	SDL_SetWindowPosition(rt->esdl->eng.win, SDL_WINDOWPOS_CENTERED,
 	SDL_WINDOWPOS_CENTERED);
 	SDL_SetWindowBordered(rt->esdl->eng.win, TRUE);
-	SDL_Delay(100);
+	SDL_Delay(300);
 	rt->t_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, rt->s_view);
 	display_rt(rt);
 }
 
 int			main(int ac, char **av)
 {
-	t_rt			p_rt;
-	t_rt			*rt;
+	t_rt		p_rt;
+	t_rt		*rt;
 
 	kernel_isopencl();
 	rt = &p_rt;
@@ -60,7 +58,13 @@ int			main(int ac, char **av)
 	if (ac > 1)
 		rt->filename = ft_strdup(av[1]);
 	init_rt(rt);
+	ft_printf("init_rt\n");
+	init_xml(rt);
+	ft_printf("init_xml\n");
 	loading(rt);
+
+	exit(0);
+
 	init_rand(rt);
 	init_screen_buffer(rt);
 	init_multithread(rt);
