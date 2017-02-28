@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 12:14:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 23:38:24 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 00:27:46 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,27 +206,25 @@ void			read_xml(t_rt *rt, t_scene *scene)
 	int		fd;
 	UINT	flag;
 
-	ft_printf("read_xml\n");
 	(void)scene;
 	flag = 0;
 	if ((fd = open(rt->filename, O_RDONLY) == -1))
 	{
-		ft_printf("no such a file\n");
+		printf("no such a file\n");
 		exit(-1);
 	}
-	ft_printf("file exists\n");
+	printf("you shall not pass!\n");
 	get_next_line(fd, &line);
-	ft_printf("%s\n", line);
+	printf("%s\n", line);
 	if (ft_strcmp(ft_strtolower(ft_trim(line)), FILE_DEF))
 	{
-		ft_printf("not a valid file\n");
+		printf("not a valid file\n");
 		exit(-1);
 	}
-	ft_printf("file is valid\n");
 	free(line);
 	while (get_next_line(fd, &line))
 	{
-		ft_printf("%s\n", line);
+		printf("%s\n", line);
 		flag |= xml_to_flag(rt, ft_strtolower(ft_trim(line)));
 		printf("flag is %d\n", flag);
 		check_flag(rt, flag);
