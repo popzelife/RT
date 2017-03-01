@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 00:21:13 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 12:41:22 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,13 @@ int			main(int ac, char **av)
 	t_rt		p_rt;
 	t_rt		*rt;
 
-	//kernel_isopencl();
+	kernel_isopencl();
 	rt = &p_rt;
 	rt->filename = NULL;
 	if (ac > 1)
 		rt->filename = ft_strdup(av[1]);
-	//init_rt(rt);
-	//ft_printf("init_rt\n");
-	//init_xml(rt);
-	//ft_printf("init_xml\n");
-	read_xml(rt, rt->scene);
-	ft_printf("read_xml\n");
-
-	exit(0);
-	
+	init_rt(rt);
+	init_xml(rt);
 	loading(rt);
 	init_rand(rt);
 	init_screen_buffer(rt);

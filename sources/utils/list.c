@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 18:46:53 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 18:24:00 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:44:39 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_surface	*lst_new_surface(t_surface **surface, t_surfparam param,
 }
 
 t_surface	*lst_new_image(t_surface **surface, t_surfparam param,
-			SDL_Renderer *render, SDL_Texture* (f)(SDL_Renderer*, const char*,
+			SDL_Renderer *render, SDL_Texture *(f)(SDL_Renderer*, const char*,
 			int*, int*))
 {
 	t_surface		*new;
@@ -140,37 +140,4 @@ t_string	*lst_new_string(t_string **string, t_strparam param,
 		curs->next = new;
 	}
 	return (*string);
-}
-
-t_button	*lst_new_button(t_button **button, t_butnparam param,
-			SDL_Renderer *render, t_action action)
-{
-	t_button		*new;
-	t_button		*curs;
-
-	new = NULL;
-	new = (t_button*)malloc(sizeof(t_button));
-	if (new == NULL)
-		return (NULL);
-	new->rect = esdl_copy_rect(*(param.rect));
-	new->surface = NULL;
-	new->surface = lst_new_surface(&new->surface, surfparam(new->rect, \
-		0x88888888, NULL, 0), render, esdl_clear_surface);
-	new->surface->next = (t_surface*)malloc(sizeof(t_surface));
-	new->surface->next = param.surface;
-	new->string = param.string;
-	new->hover = FALSE;
-	new->param = action.param;
-	new->action = action.f;
-	new->next = NULL;
-	if (*button == NULL)
-		return (new);
-	else
-	{
-		curs = *button;
-		while (curs->next != NULL)
-			curs = curs->next;
-		curs->next = new;
-	}
-	return (*button);
 }

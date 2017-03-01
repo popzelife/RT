@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 11:31:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 18:25:48 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:53:14 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_surfparam		surfparam(SDL_Rect *rect, int color, void *param, int i)
 	return (p);
 }
 
-t_strparam		strparam(char* string, t_font font, int xy[2], int i)
+t_strparam		strparam(char *string, t_font font, int xy[2], int i)
 {
 	t_strparam		p;
 

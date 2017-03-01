@@ -6,27 +6,17 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 20:15:30 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/02/27 11:19:27 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:19:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libvec.h"
+#include "libvec.h"
 
 void		v3_negative(t_vec3 *v)
 {
 	v->x *= -1.;
 	v->y *= -1.;
 	v->z *= -1.;
-}
-
-void		v3_normalize(t_vec3 *v)
-{
-	double	m;
-
-	m = v3_magnitude_double(v);
-	v->x /= m;
-	v->y /= m;
-	v->z /= m;
 }
 
 double		v3_dot_double(t_vec3 const *v1, t_vec3 const *v2)
@@ -36,7 +26,7 @@ double		v3_dot_double(t_vec3 const *v1, t_vec3 const *v2)
 
 double		v3_magnitude_double(t_vec3 const *v)
 {
-	return(sqrt(v3_dot_double(v, v)));
+	return (sqrt(v3_dot_double(v, v)));
 }
 
 double		v3_lenght_double(t_vec3 const *v)

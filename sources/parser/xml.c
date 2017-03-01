@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 12:14:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 00:27:46 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 17:21:45 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,28 @@ void		check_flag(t_rt *rt, UINT flag)
 		ft_printf("bo_skybox_none\n");
 }
 
+BOOL			ft_strloopstr(const char *s1, const char *s2)
+{
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		j = 0;
+		while (s1[i] != s2[j])
+			++i;
+		while (s1[i] == s2[j] && s1[i] && s2[j])
+		{
+			++i;
+			++j;
+			if (!s2[j])
+				return (0);
+		}
+	}
+	return (-1);
+}
+
 int				strcmp_tab(char *line, char**tab)
 {
 	int		i;
@@ -176,7 +198,7 @@ int				strcmp_tab(char *line, char**tab)
 	i = 0;
 	while (i < NB_BALISE)
 	{
-		if (ft_strcmp(line, tab[i]) == 0)
+		if ((ft_strloopstr(line, tab[i])) == 0)
 			return (i);
 		++i;
 	}
@@ -187,15 +209,23 @@ UINT			xml_to_flag(t_rt *rt, char *line)
 {
 	int		pos;
 	
+	if (!line)
+		return (0);
 	if ((pos = strcmp_tab(line, rt->parser.bo)) != -1)
 	{
 		rt->parser.is_close = 0;
-		return (rt->parser.byte[pos]);
+		rt->parser.flag |= rt->parser.byte[pos];
+		printf("BO flag is %s from pos %d\n", ft_uitoa_32bit(rt->parser.flag),
+		pos);
+		check_flag(rt, rt->parser.flag);
 	}
 	if ((pos = strcmp_tab(line, rt->parser.bc)) != -1)
 	{
 		rt->parser.is_close = 1;
-		return (rt->parser.byte[pos]);
+		rt->parser.flag ^= rt->parser.byte[pos];
+		printf("BC flag is %s from pos %d\n", ft_uitoa_32bit(rt->parser.flag),
+		pos);
+		check_flag(rt, rt->parser.flag);
 	}
 	return (0);
 }
@@ -204,30 +234,27 @@ void			read_xml(t_rt *rt, t_scene *scene)
 {
 	char	*line;
 	int		fd;
-	UINT	flag;
 
 	(void)scene;
-	flag = 0;
-	if ((fd = open(rt->filename, O_RDONLY) == -1))
+	rt->parser.flag = 0;
+	if ((fd = open(rt->filename, O_RDONLY)) == -1)
 	{
-		printf("no such a file\n");
+		ft_printf("XML Parse ERROR - No such a file '%s'\n", rt->filename);
 		exit(-1);
 	}
-	printf("you shall not pass!\n");
 	get_next_line(fd, &line);
 	printf("%s\n", line);
-	if (ft_strcmp(ft_strtolower(ft_trim(line)), FILE_DEF))
+	if (ft_strcmp(ft_trim(line), FILE_DEF) != 0)
 	{
-		printf("not a valid file\n");
+		ft_printf("XML Parse ERROR - '%s' is not a valid file\n", rt->filename);
 		exit(-1);
 	}
 	free(line);
 	while (get_next_line(fd, &line))
 	{
-		printf("%s\n", line);
-		flag |= xml_to_flag(rt, ft_strtolower(ft_trim(line)));
-		printf("flag is %d\n", flag);
-		check_flag(rt, flag);
+		printf("%s\n", ft_strtolower(ft_trim(line)));
+		xml_to_flag(rt, ft_strtolower(ft_trim(line)));
 		free(line);
+		printf("\n");
 	}
 }

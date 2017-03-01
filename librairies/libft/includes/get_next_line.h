@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:19:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 00:14:38 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 12:13:25 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include "libft.h"
 
-# define GNL_BUFFSIZE 128
+# define GNL_BUFFSIZE 64
 
 int		get_next_line(int const fd, char **line);
 

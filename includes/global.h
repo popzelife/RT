@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 23:01:05 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:22:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@
 # define TRUE			1
 # define FALSE			0
 
-# ifdef __linux__
-# define PAGE_SIZE		4096
-# endif
 # define STACK_SIZE		(1 * PAGE_SIZE)
 
 # define ALIASING		100
 # define NO_ALIASING	1
 # define MAX_DEPTH		25
 # define RT_SUBXY		60
-# define MULTISAMP		2
+# define MSAMP		2
 
 # define API_NAME		"RT"
 # define MAX_FPS		25

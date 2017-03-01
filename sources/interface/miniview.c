@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:01:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 19:55:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:27:44 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 	register double	v;
 
 	tp = v3_(0., 0., 0.);
-	u = ((double)x + f_random()) / (double)rect->w;
-	v = ((double)y + f_random()) / (double)rect->h;
+	u = ((double)x + f_rand()) / (double)rect->w;
+	v = ((double)y + f_rand()) / (double)rect->h;
 	tp = v3_add_vec_(rt_color(ray_from_cam(rt->scene.cam, u, v), &rt->scene,
 	0, 2), tp);
 	return (tp);
@@ -76,8 +76,8 @@ void		rt_miniview_surface(SDL_Surface *surf, const SDL_Rect *rect, \
 			s = 0;
 			while (s < 10)
 			{
-				u = ((double)x + f_random()) / (double)rect->w;
-				v = ((double)y + f_random()) / (double)rect->h;
+				u = ((double)x + f_rand()) / (double)rect->w;
+				v = ((double)y + f_rand()) / (double)rect->h;
 				tp = v3_add_vec_(rt_color(ray_from_cam(rt->scene.cam, u, v),
 				&rt->scene, 0, 2), tp);
 				++s;

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 20:06:11 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/02/06 12:04:59 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:16:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int			v3_set_hex(t_vec3 *v, unsigned hex)
 	v->z = ((hex) & 0xFF);
 	return (1);
 }
-
 
 void		v3_free(t_vec3 *v)
 {

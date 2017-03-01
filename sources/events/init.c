@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:12:59 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:22:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ void		init_screen_buffer(t_rt *rt)
 	int			i;
 	int			j;
 
-	rt->tab = (t_vec3**)malloc(rt->r_view->w * MULTISAMP *
+	rt->tab = (t_vec3**)malloc(rt->r_view->w * MSAMP *
 		sizeof(t_vec3*));
 	i = 0;
-	while (i < rt->r_view->w * MULTISAMP)
+	while (i < rt->r_view->w * MSAMP)
 	{
-		rt->tab[i] = (t_vec3*)malloc(rt->r_view->h * MULTISAMP *
+		rt->tab[i] = (t_vec3*)malloc(rt->r_view->h * MSAMP *
 			sizeof(t_vec3));
 		j = 0;
-		while (j < rt->r_view->h * MULTISAMP)
+		while (j < rt->r_view->h * MSAMP)
 		{
 			rt->tab[i][j] = v3_(0., 0., 0.);
 			++j;
@@ -92,7 +92,7 @@ void		init_multithread(t_rt *rt)
 	{
 		rt->iter = lst_new_iter(&(rt->iter), 1, x, y);
 		x += RT_SUBXY;
-		if (x > rt->r_view->w * MULTISAMP)
+		if (x > rt->r_view->w * MSAMP)
 		{
 			x = 0;
 			y += RT_SUBXY;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _transform.c                                       :+:      :+:    :+:   */
+/*   transform2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 11:18:43 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 15:52:52 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:18:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vec3		v3_normalize_(t_vec3 v)
 
 double		v3_magnitude_double_(t_vec3 const v)
 {
-	return(sqrt(v3_dot_double_(v, v)));
+	return (sqrt(v3_dot_double_(v, v)));
 }
 
 double		v3_dot_double_(t_vec3 const v1, t_vec3 const v2)

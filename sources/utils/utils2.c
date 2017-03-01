@@ -6,13 +6,13 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:37:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/18 19:46:17 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:32:41 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_imgparam		new_imgparam(char* name)
+t_imgparam		new_imgparam(char *name)
 {
 	t_imgparam		p;
 
@@ -20,7 +20,7 @@ t_imgparam		new_imgparam(char* name)
 	return (p);
 }
 
-void			set_imgparam(t_imgparam *param, char* name)
+void			set_imgparam(t_imgparam *param, char *name)
 {
 	param->path = name;
 }

@@ -71,6 +71,8 @@ SRC =		esdl/color.c\
 			events/init.c\
 			events/quit.c\
 			events/events.c\
+			events/arrow_lmouse.c\
+			events/arrow_rmouse.c\
 			interface/miniview.c\
 			interface/button.c\
 			interface/menu.c\
@@ -82,7 +84,7 @@ SRC =		esdl/color.c\
 			raytracer/ray.c\
 			raytracer/render.c\
 			raytracer/thread.c\
-			scene/bound_box.c\
+			raytracer/thread_tools.c\
 			scene/camera.c\
 			scene/light.c\
 			scene/material.c\

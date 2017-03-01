@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:56:26 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:17:11 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,88 +17,34 @@
 ** Need also a pthread_mutex handling as rt->tab is shared between threads
 */
 
-void		set_thread(t_thread *t, t_rt *rt, int *i, int *j, int *s)
+static void		join_render(t_rt *rt)
 {
-	int		ret;
+	t_thread	*th_curs;
+	int			i;
 
-	t->arg.rt = rt;
-	t->arg.scene = rt->this_scene;
-	t->arg.i = i;
-	t->arg.j = j;
-	t->arg.tab = rt->tab;
-	t->arg.s = s;
-	if ((ret = pthread_attr_init(&t->attr)) != 0)
+	i = 0;
+	th_curs = rt->t;
+	while (i++ < rt->m_thread)
 	{
-		ft_dprintf(2, "RT error %d - pthread_attr_init failed\n", ret);
-		exit(-1);
+		join_thread(th_curs);
+		th_curs = th_curs->next;
 	}
-	if ((ret = pthread_attr_setstack(&t->attr, &(rt->stack), STACK_SIZE)) != 0)
+	i = 0;
+	th_curs = rt->t;
+	while (i++ < rt->m_thread)
 	{
-		//ft_dprintf(2, "RT error %d - pthread_attr_setstack failed\n", ret);
-		//exit(-1);
+		destroy_thread_attr(th_curs);
+		th_curs = th_curs->next;
 	}
-	if ((ret = pthread_create(&t->thread, &t->attr, (void*)thread_render,
-		(void*)&t->arg)) != 0)
-	{
-		ft_dprintf(2, "RT error %d - pthread_create failed\n", ret);
-		exit(-1);
-	}
+	ft_printf("Render pass # %3d/%3d %20s\r", (rt->iter->s == 1 ? rt->iter->s :
+	rt->iter->s - 1), ALIASING, " ");
 }
 
-void		set_thread_low(t_thread *t, t_rt *rt, int *i, int *j, int *s)
-{
-	int		ret;
-
-	t->arg.rt = rt;
-	t->arg.scene = rt->this_scene;
-	t->arg.i = i;
-	t->arg.j = j;
-	t->arg.tab = rt->tab;
-	t->arg.s = s;
-	if ((ret = pthread_attr_init(&t->attr)) != 0)
-	{
-		ft_dprintf(2, "RT error %d - pthread_attr_init failed\n", ret);
-		exit(-1);
-	}
-	if ((ret = pthread_attr_setstack(&t->attr, &(rt->stack), STACK_SIZE)) != 0)
-	{
-		//ft_dprintf(2, "RT error %d - pthread_attr_setstack failed\n", ret);
-		//exit(-1);
-	}
-	if ((ret = pthread_create(&t->thread, &t->attr, (void*)thread_render_low,
-		(void*)&t->arg)) != 0)
-	{
-		ft_dprintf(2, "RT error %d - pthread_create failed\n", ret);
-		exit(-1);
-	}
-}
-
-void		join_thread(t_thread *t)
-{
-	int		ret;
-
-	if ((ret = pthread_join(t->thread, NULL)) != 0)
-	{
-		ft_dprintf(2, "RT error %d - pthread_join failed\n", ret);
-		exit(-1);
-	}
-}
-
-void		destroy_thread_attr(t_thread *t)
-{
-	int		ret;
-
-	if ((ret = pthread_attr_destroy(&t->attr)) != 0)
-	{
-		ft_dprintf(2, "RT error %d - pthread_attr_destroy failed\n", ret);
-		exit(-1);
-	}
-}
-
-void		render(t_rt *rt)
+void			render(t_rt *rt)
 {
 	t_thread	*th_curs;
 	t_iter		*it_curs;
+	int			*tab[2];
 	int			i;
 
 	esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
@@ -107,31 +53,20 @@ void		render(t_rt *rt)
 	it_curs = rt->iter;
 	while (i++ < rt->m_thread)
 	{
-		set_thread(th_curs, rt, &(it_curs->x), &(it_curs->y), &(it_curs->s));
+		tab[0] = &(it_curs->x);
+		tab[1] = &(it_curs->y);
+		set_thread(th_curs, rt, tab, &(it_curs->s));
 		th_curs = th_curs->next;
 		it_curs = it_curs->next;
 	}
-	i = 0;
-	th_curs = rt->t;
-	while (i++ < rt->m_thread)
-	{
-		join_thread(th_curs);
-		th_curs = th_curs->next;
-	}
-	i = 0;
-	th_curs = rt->t;
-	while (i++ < rt->m_thread)
-	{
-		destroy_thread_attr(th_curs);
-		th_curs = th_curs->next;
-	}
-	ft_printf("Render pass # %3d/%3d %20s\r", rt->iter->s - 1, ALIASING, "");
+	join_render(rt);
 }
 
-void		render_low(t_rt *rt)
+void			render_low(t_rt *rt)
 {
 	t_thread	*th_curs;
 	t_iter		*it_curs;
+	int			*tab[2];
 	int			i;
 
 	i = 0;
@@ -139,24 +74,11 @@ void		render_low(t_rt *rt)
 	it_curs = rt->iter;
 	while (i++ < rt->m_thread)
 	{
-		set_thread_low(th_curs, rt, &(it_curs->x), &(it_curs->y),
-		&(it_curs->s));
+		tab[0] = &(it_curs->x);
+		tab[1] = &(it_curs->y);
+		set_thread(th_curs, rt, tab, &(it_curs->s));
 		th_curs = th_curs->next;
 		it_curs = it_curs->next;
 	}
-	i = 0;
-	th_curs = rt->t;
-	while (i++ < rt->m_thread)
-	{
-		join_thread(th_curs);
-		th_curs = th_curs->next;
-	}
-	i = 0;
-	th_curs = rt->t;
-	while (i++ < rt->m_thread)
-	{
-		destroy_thread_attr(th_curs);
-		th_curs = th_curs->next;
-	}
-	ft_printf("Render pass # %3d/%3d %20s\r", rt->iter->s, ALIASING, "");
+	join_render(rt);
 }

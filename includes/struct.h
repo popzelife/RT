@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 23:22:30 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:30:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,6 +269,15 @@ typedef struct	s_panel
 ** Param for rendering
 */
 
+typedef struct	s_render
+{
+	int				x;
+	int				y;
+	double			u;
+	double			v;
+	t_vec3			tmp;
+}				t_render;
+
 typedef struct	s_iter
 {
 	int				s;
@@ -287,6 +296,7 @@ typedef struct	s_parser
 	char				*bo[NB_BALISE];
 	char				*bc[NB_BALISE];
 	UINT				byte[NB_BALISE];
+	UINT				flag;
 	void				(*f)(t_scene*, char*);
 }				t_parser;
 

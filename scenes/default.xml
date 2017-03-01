@@ -24,13 +24,15 @@
 		<rotate>0 1 0</rotate>
 
 		<lambert>
+			<radius>0.5</radius>
 			<color>1 0.2 0.2</color>
 		</lambert>
 	</plane>
 
 	<cone>
 		<pos>2 2.1 -5</pos>
-		<radius>0.5</radius>
+		<radius>0.5
+		</radius>
 		<rotate>0 1 0</rotate>
 
 		<diffuse-light>

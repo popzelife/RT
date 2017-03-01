@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:03:14 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:17:28 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 19:22:51 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		udpate_view(t_rt *rt)
 		curs_iter->x = x;
 		curs_iter->y = y;
 		x += RT_SUBXY;
-		if (x > rt->r_view->w * MULTISAMP)
+		if (x > rt->r_view->w * MSAMP)
 		{
 			x = 0;
 			y += RT_SUBXY;
@@ -63,7 +63,7 @@ void		param_view_high(t_rt *rt)
 		curs_iter->x = x;
 		curs_iter->y = y;
 		x += RT_SUBXY;
-		if (x > rt->r_view->w * MULTISAMP)
+		if (x > rt->r_view->w * MSAMP)
 		{
 			x = 0;
 			y += RT_SUBXY;
