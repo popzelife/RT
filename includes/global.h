@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 14:10:37 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 23:10:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define CGRID			0xff0055ff
 
 # define API_NAME		"RT"
-# define MAX_FPS		25
+# define MAX_FPS		60
 # define WIN_RX			1400
 # define WIN_RY			900
 # define MENU_RX		300

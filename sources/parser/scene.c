@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:04:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:50:09 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	default_scene(t_rt *rt, t_scene *scene)
 	scene->sizeof_skb = 1;
 	scene->skybox = (t_skybox*)malloc(scene->sizeof_skb * sizeof(t_skybox));
 	scene->skybox[0] = new_skybox(v3_(.5, .4, .1), v3_(.6, 1., 1.),
-	SKYBX_GRADIENT);
+	SKYBX_NONE);
 	scene->this_skb = &scene->skybox[0];
 }
 
@@ -53,7 +53,7 @@ t_scene		init_scene(t_rt *rt)
 
 	if (rt->filename != NULL)
 		read_xml(rt, &scene);
-	else
+	//else
 		default_scene(rt, &scene);
 	return (scene);
 }
