@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 19:22:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:10:37 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@
 # define NO_ALIASING	1
 # define MAX_DEPTH		25
 # define RT_SUBXY		60
-# define MSAMP		2
+# define MSAMP			2
+
+# define CGRID			0xff0055ff
 
 # define API_NAME		"RT"
 # define MAX_FPS		25

@@ -85,6 +85,8 @@ SRC =		esdl/color.c\
 			raytracer/render.c\
 			raytracer/thread.c\
 			raytracer/thread_tools.c\
+			raytracer/render_thread_tools.c\
+			raytracer/render_tools.c\
 			scene/camera.c\
 			scene/light.c\
 			scene/material.c\

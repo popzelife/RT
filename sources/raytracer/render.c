@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 20:05:46 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:49:54 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,6 @@
 /*
 ** All vectors should get a unit length #v3_normalize()
 */
-
-t_vec3		v3_multisampling_x2(t_vec3 c1, t_vec3 c2, t_vec3 c3, t_vec3 c4)
-{
-	return (v3_((c1.x + c2.x + c3.x + c4.x) / 4,
-	(c1.y + c2.y + c3.y + c4.y) / 4, (c1.z + c2.z + c3.z + c4.z) / 4));
-}
-
-
-SDL_Color		vec3_to_sdlcolor(t_vec3 v)
-{
-	SDL_Color	c;
-
-	c.r = (v.x * 255.0) > 255 ? 255 : v.x * 254.99;
-	c.g = (v.y * 255.0) > 255 ? 255 : v.y * 254.99;
-	c.b = (v.z * 255.0) > 255 ? 255 : v.z * 254.99;
-	c.a = 255.0;
-	return (c);
-}
 
 BOOL			hit_list(t_scene *scene, const t_ray ray, const double t[2],
 				t_hit *param)
@@ -48,7 +30,7 @@ BOOL			hit_list(t_scene *scene, const t_ray ray, const double t[2],
 	while (i < scene->sizeof_obj)
 	{
 		if (scene->obj[i].hit(scene->obj[i].p_obj,
-		ray, closest_so_far, param)) //&& scene->obj[i].active
+		ray, closest_so_far, param))
 		{
 			hit_anything = TRUE;
 			closest_so_far[1] = param->t;
@@ -67,23 +49,20 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 	t_vec3		attenuation;
 	double		t[2];
 
-	param.pos = v3_(0., 0., 0.);
-	param.normal = v3_(0., 0., 0.);
-	t[0] = .001;
-	t[1] = FLT_MAX;
+	init_rt_color(&param.pos, &param.normal, &t[0], &t[1]);
 	if (hit_list(scene, ray, t, &param))
 	{
-		if ((depth < max_depth))// && (param.material->scatter(ray, param,
-		//	&attenuation, &scattered)))
+		if ((depth < max_depth))
 		{
 			if (param.material->type_mat == MAT_METAL)
 				scatter_metal(ray, param, &attenuation, &scattered);
 			else if (param.material->type_mat == MAT_LAMBERT)
 				scatter_lambertian(ray, param, &attenuation, &scattered);
-			else //LIGHT!
+			else
 				return (param.material->emitted);
-			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_
-			(attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
+			return (v3_add_vec_(param.material->emitted,
+						v3_multiply_vec_(attenuation,
+							rt_color(scattered, scene, depth + 1, max_depth))));
 		}
 		else
 			return (param.material->emitted);
@@ -92,142 +71,88 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 		return (scene->this_skb->hit(scene->this_skb, ray));
 }
 
-void	set_thread_pos(t_tharg *arg)
+void			multisampling(t_tharg *a)
 {
-	*(arg->i) += RT_SUBXY * arg->rt->m_thread;
-	if (*(arg->i) > arg->rt->r_view->w  * MSAMP)
-	{
-		*(arg->i) -= arg->rt->r_view->w * MSAMP;
-		*(arg->i) -= (*(arg->i) % RT_SUBXY);
-		*(arg->j) += RT_SUBXY;
-	}
-	if (*(arg->j) > arg->rt->r_view->h  * MSAMP)
-	{
-		++(*(arg->s));
-		*(arg->j) -= arg->rt->r_view->h * MSAMP;
-		*(arg->j) -= (*(arg->j) % RT_SUBXY);
-		*(arg->j) -= RT_SUBXY;
-	}
-}
+	t_render		r;
 
-void			multisampling(t_tharg *arg)
-{
-	register int	x;
-	register int	y;
-	t_vec3			temp;
-	
-	y = *(arg->j);
-	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MSAMP)
+	r.y = *(a->j);
+	while (r.y < *(a->j) + RT_SUBXY && r.y < a->rt->r_view->h * MSAMP)
 	{
-		x = *(arg->i);
-		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MSAMP)
+		r.x = *(a->i);
+		while (r.x < *(a->i) + RT_SUBXY && r.x < a->rt->r_view->w * MSAMP)
 		{
-			if (x % MSAMP != 0 && y % MSAMP != 0)
+			if (r.x % MSAMP != 0 && r.y % MSAMP != 0)
 			{
-				temp = v3_multisampling_x2(arg->tab[x][y], arg->tab[x - 1][y],
-				arg->tab[x][y - 1], arg->tab[x - 1][y - 1]);
-				temp = v3_(sqrt(temp.x / *(arg->s)), sqrt(temp.y / *(arg->s)),
-				sqrt(temp.z / *(arg->s)));
-				esdl_put_pixel(arg->rt->s_view, x / 2, y / 2, esdl_color_to_int
-				(vec3_to_sdlcolor(temp)));
+				r.tmp = v3_multismp(a->tab[r.x][r.y], a->tab[r.x - 1][r.y],
+				a->tab[r.x][r.y - 1], a->tab[r.x - 1][r.y - 1]);
+				r.tmp = v3_(sqrt(r.tmp.x / *(a->s)), sqrt(r.tmp.y / *
+				(a->s)), sqrt(r.tmp.z / *(a->s)));
+				esdl_put_pixel(a->rt->s_view, r.x / 2, r.y / 2,
+				esdl_color_to_int(vec3_to_sdlcolor(r.tmp)));
 			}
-			if (x == *(arg->i) || x == *(arg->i) + RT_SUBXY - 2 ||
-				y == *(arg->j) || y == *(arg->j) + RT_SUBXY - 2)
-				esdl_put_pixel(arg->rt->s_process, x / 2, y / 2, 0xff0055ff);
-			++x;
+			if (r.x == *(a->i) || r.x == *(a->i) + RT_SUBXY - 2 ||
+				r.y == *(a->j) || r.y == *(a->j) + RT_SUBXY - 2)
+				esdl_put_pixel(a->rt->s_process, r.x / 2, r.y / 2, CGRID);
+			++(r.x);
 		}
-		++y;
+		++(r.y);
 	}
 }
 
-void			render_lowres(t_tharg *arg)
+void			render_lowres(t_tharg *a)
 {
-	register int	x;
-	register int	y;
-	register double	u;
-	register double	v;
-	t_vec3			temp;
+	t_render		r;
 
-	y = *(arg->j);
-	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MSAMP)
+	r.y = *(a->j);
+	while (r.y < *(a->j) + RT_SUBXY && r.y < a->rt->r_view->h * MSAMP)
 	{
-		x = *(arg->i);
-		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MSAMP &&
-			y % 2 == 0)
+		r.x = *(a->i);
+		while (r.x < *(a->i) + RT_SUBXY && r.x < a->rt->r_view->w * MSAMP
+				&& r.y % 2 == 0)
 		{
-			if ((x == *(arg->i) && y == *(arg->j)) ||
-				(x == *(arg->i) && y == *(arg->j) + RT_SUBXY / 2))
+			if ((r.x == *(a->i) && r.y == *(a->j)) ||
+				(r.x == *(a->i) && r.y == *(a->j) + RT_SUBXY / 2))
 			{
-				u = (double)(double)x / (double)arg->rt->r_view->w / MSAMP;
-				v = (double)(double)y / (double)arg->rt->r_view->h / MSAMP;
-				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
-				0, 1);
-				temp = v3_(sqrt(temp.x), sqrt(temp.y), sqrt(temp.z));
+				r.u = (double)((double)r.x / (double)a->rt->r_view->w / MSAMP);
+				r.v = (double)((double)r.y / (double)a->rt->r_view->h / MSAMP);
+				r.tmp = rt_color(ray_from_cam(a->scene->cam, r.u, r.v),
+				a->scene, 0, 1);
+				r.tmp = v3_(sqrt(r.tmp.x), sqrt(r.tmp.y), sqrt(r.tmp.z));
 			}
-			if (*(arg->s) == 0 && x % 2 == 0)
-				esdl_put_pixel(arg->rt->s_view, x / 2, y / 2, esdl_color_to_int(
-				vec3_to_sdlcolor(temp)));
-			++x;
+			if (*(a->s) == 0 && r.x % 2 == 0)
+				esdl_put_pixel(a->rt->s_view, r.x / 2, r.y / 2,
+				esdl_color_to_int(vec3_to_sdlcolor(r.tmp)));
+			++(r.x);
 		}
-		++y;
+		++(r.y);
 	}
 }
 
-void			render_highres(t_tharg *arg)
+void			render_highres(t_tharg *a)
 {
-	register int	x;
-	register int	y;
-	register double	u;
-	register double	v;
-	t_vec3			temp;
+	t_render		r;
 
-	y = *(arg->j);
-	while (y < *(arg->j) + RT_SUBXY && y < arg->rt->r_view->h * MSAMP)
+	r.y = *(a->j);
+	while (r.y < *(a->j) + RT_SUBXY && r.y < a->rt->r_view->h * MSAMP)
 	{
-		x = *(arg->i);
-		while (x < *(arg->i) + RT_SUBXY && x < arg->rt->r_view->w * MSAMP)
+		r.x = *(a->i);
+		while (r.x < *(a->i) + RT_SUBXY && r.x < a->rt->r_view->w * MSAMP)
 		{
-			if (*(arg->s) <= ALIASING)
+			if (*(a->s) <= ALIASING)
 			{
-				u = (double)((double)x + f_rand()) / (double)
-				arg->rt->r_view->w / MSAMP;
-				v = (double)((double)y + f_rand()) / (double)
-				arg->rt->r_view->h / MSAMP;
-				temp = rt_color(ray_from_cam(arg->scene->cam, u, v), arg->scene,
-				0, MAX_DEPTH);
-				if (*(arg->s) == 1)
-					arg->tab[x][y] = temp;
+				r.u = (r.x + f_rand()) / a->rt->r_view->w / MSAMP;
+				r.v = (r.y + f_rand()) / a->rt->r_view->h / MSAMP;
+				r.tmp = rt_color(ray_from_cam(a->scene->cam, r.u, r.v),
+				a->scene, 0, MAX_DEPTH);
+				if (*(a->s) == 1)
+					a->tab[r.x][r.y] = r.tmp;
 				else
-					arg->tab[x][y] = v3_add_vec_(temp, arg->tab[x][y]);
+					a->tab[r.x][r.y] = v3_add_vec_(r.tmp, a->tab[r.x][r.y]);
 			}
 			else
-			{
-				arg->rt->suspend = TRUE;
-				return ;
-			}
-			++x;
+				return (end_thread(a));
+			++(r.x);
 		}
-		++y;
+		++(r.y);
 	}
-}
-
-void			thread_render(t_tharg *arg)
-{
-	if (*(arg->s) == 0)
-		render_lowres(arg);
-	else
-	{
-		render_highres(arg);
-		multisampling(arg);
-	}
-	set_thread_pos(arg);
-	pthread_exit(NULL);
-}
-
-void			thread_render_low(t_tharg *arg)
-{
-	if (*(arg->s) == 0)
-		render_lowres(arg);
-	set_thread_pos(arg);
-	pthread_exit(NULL);
 }

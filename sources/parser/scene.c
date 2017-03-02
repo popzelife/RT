@@ -43,7 +43,7 @@ static void	default_scene(t_rt *rt, t_scene *scene)
 	scene->sizeof_skb = 1;
 	scene->skybox = (t_skybox*)malloc(scene->sizeof_skb * sizeof(t_skybox));
 	scene->skybox[0] = new_skybox(v3_(.5, .4, .1), v3_(.6, 1., 1.),
-	SKYBX_NONE);
+	SKYBX_GRADIENT);
 	scene->this_skb = &scene->skybox[0];
 }
 

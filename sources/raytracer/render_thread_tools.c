@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 16:03:24 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/01 20:03:20 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:39:55 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 void		thread_render(t_tharg *arg)
 {
-	t_render		p_r;
-	t_render		*r;
-
-	r = &p_r;
-	r->tmp = v3_(0., 0., 0.);
 	if (*(arg->s) == 0)
-		render_lowres(arg, r);
+		render_lowres(arg);
 	else
 	{
-		render_highres(arg, r);
-		multisampling(arg, r);
+		render_highres(arg);
+		multisampling(arg);
 	}
 	set_thread_pos(arg);
 	pthread_exit(NULL);
@@ -32,12 +27,8 @@ void		thread_render(t_tharg *arg)
 
 void		thread_render_low(t_tharg *arg)
 {
-	t_render		p_r;
-	t_render		*r;
-
-	r = &p_r;
 	if (*(arg->s) == 0)
-		render_lowres(arg, r);
+		render_lowres(arg);
 	set_thread_pos(arg);
 	pthread_exit(NULL);
 }

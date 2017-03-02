@@ -6,13 +6,13 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 16:01:05 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/01 18:48:20 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:12:33 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vec3		v3_multisampling_x2(t_vec3 c1, t_vec3 c2, t_vec3 c3, t_vec3 c4)
+t_vec3		v3_multismp(t_vec3 c1, t_vec3 c2, t_vec3 c3, t_vec3 c4)
 {
 	return (v3_((c1.x + c2.x + c3.x + c4.x) / 4,
 		(c1.y + c2.y + c3.y + c4.y) / 4, (c1.z + c2.z + c3.z + c4.z) / 4));

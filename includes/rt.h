@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 20:05:57 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:39:55 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ void		button_snap(void *param);
 
 void		render(t_rt *rt);
 void		render_low(t_rt *rt);
-void		render_highres(t_tharg *arg);
-void		render_lowres(t_tharg *arg);
+void		render_highres(t_tharg *a);
+void		render_lowres(t_tharg *a);
 
 void		init_rt_color(t_vec3 *pos, t_vec3 *normal, double *t0, double *t1);
 t_vec3		rt_color(t_ray ray, t_scene *scene, int depth, int max_depth);
 BOOL		hit_list(t_scene *scene, const t_ray ray, const double t[2],
 			t_hit *param);
-void		multisampling(t_tharg *arg);
+void		multisampling(t_tharg *a);
 
 SDL_Color	vec3_to_sdlcolor(t_vec3 v);
-t_vec3		v3_multisampling_x2(t_vec3 c1, t_vec3 c2, t_vec3 c3, t_vec3 c4);
+t_vec3		v3_multismp(t_vec3 c1, t_vec3 c2, t_vec3 c3, t_vec3 c4);
 
 /*
 ** Multithreading
