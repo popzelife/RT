@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:03:14 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 19:22:51 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:42:38 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		draw_view(t_rt *rt)
 	rt->r_view->x = 0;
 	rt->r_view->y = 0;
 	rt->r_view->w -= MENU_RX;
-	rt->s_view = esdl_create_surface(rt->r_view->w, rt->r_view->h);
+	rt->sr_view = esdl_create_surface(rt->r_view->w, rt->r_view->h);
 	rt->s_process = esdl_create_surface(rt->r_view->w, rt->r_view->h);
 	rt->render = TRUE;
 }

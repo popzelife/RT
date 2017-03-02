@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_scene.c                                         :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 22:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/01/07 16:53:07 by qfremeau         ###   ########.fr       */
+/*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
+/*   Updated: 2017/03/02 22:04:55 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	default_obj(t_scene *scene)
 	scene->obj[0] = new_object((void*)new_plane(v3_(0., 1., 0.), v3_(0., 0.,
 	0.)), OBJ_PLANE, new_material(v3_(1., .2, .2), 0.), MAT_LAMBERT);
 	scene->obj[1] = new_object(new_cylinder(v3_(0., 1., 0.), v3_(0., 0., 0.),
-	1., 1.0), OBJ_CYLINDER, new_material(v3_(1., 1., 1.), 0.), MAT_DIFF_LIGHT);
+	1., 1.), OBJ_CYLINDER, new_material(v3_(1., 1., 1.), 0.), MAT_DIFF_LIGHT);
 	scene->obj[2] = new_object((void*)new_sphere(v3_(-4., 2., 0.), 1.),
 	OBJ_SPHERE, new_material(v3_(.1, 1., 1.), .1), MAT_LAMBERT);
 	scene->obj[3] = new_object((void*)new_sphere(v3_(0., 1., 4.), 1.),
@@ -36,7 +36,7 @@ static void	default_scene(t_rt *rt, t_scene *scene)
 	scene->sizeof_cam = 1;
 	scene->cam = (t_cam*)malloc(scene->sizeof_cam * sizeof(t_cam));
 	scene->cam[0] = set_camera(v3_(-5., 1., -10.), v3_(0., 0., 0.), v3_(0., -1.,
-	0.), camparam(60., (double)rt->r_view->w / (double) rt->r_view->h, .0,
+	0.), camparam(60., (double)rt->r_view->w / (double)rt->r_view->h, .0,
 	v3_lenght_double_(v3_sub_vec_(v3_(13., 2., 3.), v3_(0., 0., 0.)))));
 	scene->this_cam = &scene->cam[0];
 	default_obj(scene);

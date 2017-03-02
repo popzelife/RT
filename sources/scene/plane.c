@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:43:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 19:08:16 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 17:11:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ BOOL		normal_plane(t_plane *plane, const t_ray ray, const float sol,
 {
 	param->t = sol;
 	param->pos = ray_point_at(ray, param->t);
-	if (v3_dot_double_(ray.dir , plane->normale) < 0)
+	if (v3_dot_double_(ray.dir, plane->normale) < 0)
 		param->normal = plane->normale;
 	else
 		param->normal = v3_scale_vec_(plane->normale, -1);
@@ -39,23 +39,17 @@ BOOL		normal_plane(t_plane *plane, const t_ray ray, const float sol,
 BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
 			t_hit *param)
 {
-	t_plane		*plane;
-	t_vec3		oc;
-	double		sol;
+	t_plane			*plane;
+	t_discriminant	d;
 
-	sol = 0.;
 	plane = (t_plane*)obj;
-	oc = v3_sub_vec_(ray.orig, plane->on_plane);
-	if (v3_dot_double_(ray.dir , plane->normale))
+	d.oc = v3_sub_vec_(ray.orig, plane->on_plane);
+	if (v3_dot_double_(ray.dir, plane->normale))
 	{
-		sol = - (v3_dot_double_(oc, plane->normale) / v3_dot_double_(ray.dir ,
-		plane->normale));
-		if (sol > 0. && (sol < t[1] && sol > t[0]))
-//		{
-//			if (sol >= 0 && sol <= (3.14 * 0.5))
-				return (normal_plane(plane, ray, sol, param));
-//		}
-
+		d.sol = -1 * (v3_dot_double_(d.oc, plane->normale) /
+		v3_dot_double_(ray.dir, plane->normale));
+		if (d.sol > 0. && (d.sol < t[1] && d.sol > t[0]))
+			return (normal_plane(plane, ray, d.sol, param));
 	}
 	return (FALSE);
 }

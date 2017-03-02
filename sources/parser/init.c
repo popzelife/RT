@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/28 23:29:43 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:27:43 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ static void		init_xmlbyte(t_rt *rt)
 {
 	register int		i;
 
-	rt->parser.byte[0] = 0;
 	i = 1;
+	rt->parser.byte[0] = 0;
 	while (i < NB_BALISE)
 	{
-		rt->parser.byte[i] = (UINT)1 << (i - 1);
+		rt->parser.byte[i] = (UINT)(1 << (i - 1));
 		++i;
 	}
 	rt->parser.is_close = 0;

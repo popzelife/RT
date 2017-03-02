@@ -6,16 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 15:56:02 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/02 21:58:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*
-**SDL_WINDOWEVENT_RESIZED needs more work, and other rendering functions
-**need to get dynamic values not just MACROS.
-*/
 
 void		button_list(t_rt *rt, t_input *in)
 {
@@ -25,9 +20,9 @@ void		button_list(t_rt *rt, t_input *in)
 	while (button_curs != NULL)
 	{
 		if (in->m_x > button_curs->rect->x &&
-				in->m_x < (button_curs->rect->x + button_curs->rect->w) &&
-				in->m_y > button_curs->rect->y &&
-				in->m_y < (button_curs->rect->y + button_curs->rect->h))
+			in->m_x < (button_curs->rect->x + button_curs->rect->w) &&
+			in->m_y > button_curs->rect->y &&
+			in->m_y < (button_curs->rect->y + button_curs->rect->h))
 		{
 			button_curs->hover = TRUE;
 			if (in->button[SDL_BUTTON_LEFT])
@@ -40,19 +35,6 @@ void		button_list(t_rt *rt, t_input *in)
 			button_curs->hover = FALSE;
 		button_curs = button_curs->next;
 	}
-}
-
-void		windows_resized(t_rt *rt, t_input *in)
-{
-	pthread_cancel(rt->render_th);
-	pthread_join(rt->render_th, NULL);
-	rt->render = 0;
-	udpate_view(rt);
-	free(rt->r_menu);
-	reset_menu(rt);
-	display_rt(rt);
-	pthread_create(&rt->render_th, NULL, (void*)render_loop, (void*)rt);
-	in->window = 0;
 }
 
 void		button_left(t_rt *rt, t_input *in)
@@ -86,9 +68,7 @@ void		rt_events(t_rt *rt, t_input *in)
 	if (in->quit)
 		pthread_join(rt->render_th, NULL);
 	button_list(rt, in);
-	if (in->window == SDL_WINDOWEVENT_RESIZED)
-		windows_resized(rt, in);
-	else if (in->button[SDL_BUTTON_LEFT])
+	if (in->button[SDL_BUTTON_LEFT])
 		button_left(rt, in);
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
 			!in->button[SDL_BUTTON_RIGHT])

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 19:22:52 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:39:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void		init_rt(t_rt *rt)
 	}
 	SDL_SetWindowBordered(rt->esdl->eng.win, FALSE);
 	r_load = malloc(sizeof(SDL_Rect));
-	rt->t_load = esdl_load_texture(rt->esdl->eng.render, LOAD_NAME,
+	rt->tx_load = esdl_load_texture(rt->esdl->eng.render, LOAD_NAME,
 	&r_load->w, &r_load->h);
 	SDL_RenderClear(rt->esdl->eng.render);
-	SDL_RenderCopy(rt->esdl->eng.render, rt->t_load, NULL, NULL);
+	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_load, NULL, NULL);
 	SDL_RenderPresent(rt->esdl->eng.render);
-	SDL_DestroyTexture(rt->t_load);
+	SDL_DestroyTexture(rt->tx_load);
 	free(r_load);
 }
 

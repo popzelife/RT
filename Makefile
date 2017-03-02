@@ -76,6 +76,11 @@ SRC =		esdl/color.c\
 			interface/miniview.c\
 			interface/button.c\
 			interface/menu.c\
+			interface/surface_bkg.c\
+			interface/surface_text.c\
+			interface/surface_button.c\
+			interface/param_object.c\
+			interface/param_material.c\
 			interface/view.c\
 			parser/init.c\
 			parser/scene.c\
@@ -130,7 +135,6 @@ else
 endif
 LIBFT =		-Llibrairies/libft/ -lft
 LIBVEC =	-Llibrairies/libvec/ -lvec
-
 
 # Paths foreach
 OBJP =		$(addprefix $(OBJDIR)/, $(SRC:.c=.o))

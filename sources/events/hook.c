@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 13:56:11 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:11:41 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:42:11 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void		display_rt(t_rt *rt)
 	SDL_RenderClear(rt->esdl->eng.render);
 	if (rt->render)
 	{
-		rt->t_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
-			rt->s_view);
-		rt->t_process = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
+		rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
+			rt->sr_view);
+		rt->tx_process = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
 			rt->s_process);
 		rt->render = FALSE;
 	}
-	SDL_RenderCopy(rt->esdl->eng.render, rt->t_view, NULL, rt->r_view);
-	SDL_RenderCopy(rt->esdl->eng.render, rt->t_process, NULL, rt->r_view);
+	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_view, NULL, rt->r_view);
+	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_process, NULL, rt->r_view);
 	display_surf_string(rt);
 	display_button(rt);
 	SDL_RenderPresent(rt->esdl->eng.render);

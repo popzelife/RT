@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:22:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/21 19:27:26 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:42:17 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		button_snap(void *param)
 	{
 		flash_snap(rt, 0);
 		sprintf(name, "%s_snapshot%0.2d" ".BMP", rt->seed, i++);
-		SDL_SaveBMP(rt->s_view, name);
+		SDL_SaveBMP(rt->sr_view, name);
 		flash_snap(rt, 1);
 	}
 }

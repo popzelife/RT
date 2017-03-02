@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 14:39:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 21:43:36 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ void		set_imgparam(t_imgparam *param, char *name);
 
 void		rt_miniview_surface(SDL_Surface *surf, const SDL_Rect *rect,
 			const int color, void *param);
+
+void		get_param_material(t_rt *rt);
+void		get_param_object(t_rt *rt);
+void		draw_bkg_surface(t_rt *rt, t_menu *m);
+void		draw_text_surface(t_rt *rt);
+void		draw_text_list_object(t_rt *rt);
+void		draw_button_surface(t_rt *rt, t_menu *m);
 
 /*
 ** Button action
@@ -106,11 +113,9 @@ void		display_rt(t_rt *rt);
 
 void		draw_view(t_rt *rt);
 void		draw_menu(t_rt *rt);
-
 void		update_menu(t_rt *rt);
 void		udpate_view(t_rt *rt);
 void		param_view_high(t_rt *rt);
-void		reset_menu(t_rt *rt);
 
 void		right_lmouse(t_rt *rt);
 void		left_lmouse(t_rt *rt);
@@ -150,8 +155,6 @@ t_obj		copy_object(t_obj *obj);
 t_sphere	*new_sphere(t_vec3 center, const double radius);
 BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
-BOOL		bound_box_sphere(void *obj, t_bound_box *box, double const t0,
-			double const t1);
 
 t_plane		*new_plane(t_vec3 normale, t_vec3 on_plane);
 BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],

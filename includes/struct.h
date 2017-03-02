@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 19:30:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:42:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,6 @@ typedef struct	s_mat
 }				t_mat;
 
 /*
-** Bounding box
-*/
-
-typedef struct	s_bound_box
-{
-	t_vec3			min;
-	t_vec3			max;
-}				t_bound_box;
-
-/*
 ** Objects
 */
 
@@ -98,6 +88,21 @@ typedef struct	s_cone
 }				t_cone;
 
 /*
+** Discriminant
+*/
+
+typedef struct	s_discriminant
+{
+	t_vec3			oc;
+	double			a;
+	double			b;
+	double			c;
+	double			discriminant;
+	double			sol;
+	double			m;
+}				t_discriminant;
+
+/*
 ** Scene holder
 */
 
@@ -106,8 +111,6 @@ typedef struct	s_obj
 	UCHAR			type_obj;
 	void			*p_obj;
 	BOOL			(*hit)(void*, const t_ray, const double[2], t_hit*);
-	BOOL			(*bound_box)(void*, t_bound_box*, const double,
-					const double);
 	t_mat			*p_mat;
 	char			*name;
 	BOOL			active;
@@ -235,6 +238,7 @@ typedef struct	s_viewparam
 	t_scene			scene;
 	char			str_obj[128];
 	char			str_pos[128];
+	char			str_rotate[128];
 	char			str_param_o[128];
 	char			str_mat[128];
 	char			str_color[128];
@@ -249,6 +253,14 @@ typedef struct	s_imgparam
 /*
 ** Menu view
 */
+
+typedef struct	s_menu
+{
+	t_surface		*nullsurf;
+	t_string		*nullstring;
+	SDL_Rect		rect;
+	SDL_Rect		rect2;
+}				t_menu;
 
 typedef struct	s_panel
 {
@@ -273,6 +285,7 @@ typedef struct	s_render
 {
 	int				x;
 	int				y;
+	int				s;
 	double			u;
 	double			v;
 	t_vec3			tmp;
@@ -309,7 +322,6 @@ typedef struct	s_rt
 	t_esdl			*esdl;
 
 	char			seed[8];
-
 	char			*filename;
 	t_parser		parser;
 	t_scene			*scene;
@@ -317,31 +329,25 @@ typedef struct	s_rt
 	t_scene			*this_scene;
 
 	SDL_Window		*win_temp;
-	SDL_Texture		*t_load;
-
+	SDL_Texture		*tx_load;
 	SDL_Rect		*r_view;
-	SDL_Surface		*s_view;
-	SDL_Texture		*t_view;
-
+	SDL_Surface		*sr_view;
+	SDL_Texture		*tx_view;
 	SDL_Surface		*s_process;
-	SDL_Texture		*t_process;
-
+	SDL_Texture		*tx_process;
 	SDL_Rect		*r_menu;
-	SDL_Surface		*s_menu;
-	SDL_Texture		*t_menu;
-
+	SDL_Surface		*sr_menu;
+	SDL_Texture		*tx_menu;
 	t_panel			panel;
 
 	BOOL			render;
 	BOOL			suspend;
-
 	t_vec3			**tab;
 	t_iter			*iter;
 	int				limit_iter;
 	void			*stack;
 	int				m_thread;
 	struct s_thread	*t;
-
 	pthread_t		render_th;
 	pthread_mutex_t	mutex;
 	pthread_cond_t	display_cond;

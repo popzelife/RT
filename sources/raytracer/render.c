@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 14:49:54 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:41:51 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void			multisampling(t_tharg *a)
 				a->tab[r.x][r.y - 1], a->tab[r.x - 1][r.y - 1]);
 				r.tmp = v3_(sqrt(r.tmp.x / *(a->s)), sqrt(r.tmp.y / *
 				(a->s)), sqrt(r.tmp.z / *(a->s)));
-				esdl_put_pixel(a->rt->s_view, r.x / 2, r.y / 2,
+				esdl_put_pixel(a->rt->sr_view, r.x / 2, r.y / 2,
 				esdl_color_to_int(vec3_to_sdlcolor(r.tmp)));
 			}
 			if (r.x == *(a->i) || r.x == *(a->i) + RT_SUBXY - 2 ||
@@ -120,7 +120,7 @@ void			render_lowres(t_tharg *a)
 				r.tmp = v3_(sqrt(r.tmp.x), sqrt(r.tmp.y), sqrt(r.tmp.z));
 			}
 			if (*(a->s) == 0 && r.x % 2 == 0)
-				esdl_put_pixel(a->rt->s_view, r.x / 2, r.y / 2,
+				esdl_put_pixel(a->rt->sr_view, r.x / 2, r.y / 2,
 				esdl_color_to_int(vec3_to_sdlcolor(r.tmp)));
 			++(r.x);
 		}

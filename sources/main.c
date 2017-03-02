@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 12:41:22 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:43:10 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void	init_firstrender(t_rt *rt)
 	SDL_WINDOWPOS_CENTERED);
 	SDL_SetWindowBordered(rt->esdl->eng.win, TRUE);
 	SDL_Delay(300);
-	rt->t_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, rt->s_view);
+	rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
+	rt->sr_view);
 	display_rt(rt);
 }
 

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:37:46 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:12:36 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,33 +66,20 @@ t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat,
 	return (o);
 }
 
-/*
-** Some alternativ functions
-*/
-
-/*static void	*select_copied_obj(const UCHAR t, void *p_obj)
-{
-	t_sphere	*sphere;
-	void		*o;
-
-	if (t == OBJ_SPHERE)
-	{
-		sphere = (t_sphere*)p_obj;
-		o = (void*)new_sphere(sphere->center, sphere->radius);
-	}
-	else
-		o = NULL;
-	return (o);
-}*/
-
-static void	*select_obj(t_vec3 p, const double f, const UCHAR t)
+static void	*select_obj(const UCHAR t)
 {
 	void	*o;
 
 	if (t == OBJ_SPHERE)
-		o = (void*)new_sphere(p, f);
+		o = (void*)new_sphere(v3_(0., 0., 0.), .39);
+	else if (t == OBJ_PLANE)
+		o = (void*)new_plane(v3_(1., 0., 0.), v3_(0., 0., 0.));
+	else if (t == OBJ_CYLINDER)
+		o = (void*)new_cylinder(v3_(0., 1., 0.), v3_(0., 0., 0.), .3, 1.);
+	else if (t == OBJ_CONE)
+		o = (void*)new_cone(v3_(1., 1., 0.), v3_(0., 0., 0.), .2, 1.);
 	else
-		o = (void*)new_sphere(p, f);
+		o = (void*)new_sphere(v3_(0., 0., 0.), .39);
 	return (o);
 }
 
@@ -101,7 +88,7 @@ t_obj		copy_object(t_obj *obj)
 	t_obj	o;
 
 	o.type_obj = obj->type_obj;
-	o.p_obj = select_obj(v3_(0., 0., 0.), .39, o.type_obj);
+	o.p_obj = select_obj(o.type_obj);
 	o.hit = select_hit(o.type_obj);
 	o.p_mat = new_material(obj->p_mat->albedo, obj->p_mat->t);
 	o.p_mat->type_mat = obj->p_mat->type_mat;

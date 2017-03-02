@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 14:36:47 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:38:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/02 15:44:44 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ BOOL		refract(const t_vec3 v, const t_vec3 n, double ni_over_nt,
 	discriminant = 1. - ni_over_nt * ni_over_nt * (1. - dt * dt);
 	if (discriminant > 0.)
 	{
-		*refracted = v3_sub_vec_(v3_scale_vec_(v3_sub_vec_(uv, v3_scale_vec_
-		(n, dt)), ni_over_nt), v3_scale_vec_(n, sqrt(discriminant)));
+		*refracted = v3_sub_vec_(v3_scale_vec_(v3_sub_vec_(uv, v3_scale_vec_(
+		n, dt)), ni_over_nt), v3_scale_vec_(n, sqrt(discriminant)));
 		return (TRUE);
 	}
 	else
@@ -60,13 +60,13 @@ BOOL		scatter_metal(const t_ray ray, const t_hit param,
 	t_vec3		reflected;
 
 	reflected = reflect(v3_unit_vec_(ray.dir), param.normal);
-	*scattered = new_ray(param.pos, v3_add_vec_(reflected, v3_scale_vec_
-	(random_in_unit_sphere(), param.material->t)));
+	*scattered = new_ray(param.pos, v3_add_vec_(reflected, v3_scale_vec_(
+	random_in_unit_sphere(), param.material->t)));
 	*attenuation = param.material->albedo;
 	return ((v3_dot_double_(scattered->dir, param.normal) > 0) ? TRUE : FALSE);
 }
 
-BOOL		scatter_dielectric(const t_ray ray, const t_hit param, \
+BOOL		scatter_dielectric(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered)
 {
 	(void)ray;
