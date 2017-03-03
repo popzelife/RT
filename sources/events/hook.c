@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 13:56:11 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:42:11 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/03 14:33:26 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ void		display_rt(t_rt *rt)
 	SDL_RenderClear(rt->esdl->eng.render);
 	if (rt->render)
 	{
-		rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
-			rt->sr_view);
-		rt->tx_process = SDL_CreateTextureFromSurface(rt->esdl->eng.render, \
-			rt->s_process);
+		rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
+		rt->sr_view);
+		rt->tx_process = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
+		rt->s_process);
 		rt->render = FALSE;
 	}
 	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_view, NULL, rt->r_view);

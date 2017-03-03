@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 12:14:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 17:21:45 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/03 13:53:44 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,10 @@ BOOL			ft_strloopstr(const char *s1, const char *s2)
 			++i;
 			++j;
 			if (!s2[j])
+			{
+				printf("match: %s\n", s2);
 				return (0);
+			}
 		}
 	}
 	return (-1);

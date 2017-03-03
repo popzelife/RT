@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 23:10:30 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/03 14:54:31 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@
 
 # define API_NAME		"RT"
 # define MAX_FPS		60
+# define MENU_RX		300
+# define MINWIN_RX		1400
+# define MINWIN_RY		900
 # define WIN_RX			1400
 # define WIN_RY			900
-# define MENU_RX		300
+# define MAXWIN_RX		2200
+# define MAXWIN_RY		1200
 # define LOAD_NAME		"image/Loader.bmp"
 # define LOAD_RX		900
 # define LOAD_RY		563
