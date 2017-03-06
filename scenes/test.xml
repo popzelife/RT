@@ -1,0 +1,13 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>13 1 3</pos>
+	<target>0 0 0</target>
+	<rotate>0 -1 0</rotate>
+	<fov>60</fov>
+	<aperture>0</aperture>
+</camera>
+
+<skybox>
+	<none></none>
+</skybox>

@@ -85,6 +85,12 @@ SRC =		esdl/color.c\
 			parser/init.c\
 			parser/scene.c\
 			parser/xml.c\
+			parser/get.c\
+			parser/camera.c\
+			parser/skybox.c\
+			parser/bc_cam.c\
+			parser/bc_skybox.c\
+			parser/temp.c\
 			raytracer/random.c\
 			raytracer/ray.c\
 			raytracer/render.c\
@@ -107,6 +113,7 @@ SRC =		esdl/color.c\
 			utils/utils.c\
 			utils/utils2.c\
 			utils/utils3.c\
+			utils/utils4.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)

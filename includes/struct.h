@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:42:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/06 18:45:10 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct	s_skybox
 	t_vec3			color2;
 	t_vec3			(*hit)(const struct s_skybox*, const t_ray);
 	char			*name;
+	UCHAR			type;
 }				t_skybox;
 
 typedef struct	s_scene
@@ -305,12 +306,23 @@ typedef struct	s_iter
 
 typedef struct	s_parser
 {
-	int					is_close;
-	char				*bo[NB_BALISE];
-	char				*bc[NB_BALISE];
-	UINT				byte[NB_BALISE];
-	UINT				flag;
-	void				(*f)(t_scene*, char*);
+	int				l;
+	int				is_close;
+	char			*bo[NB_BALISE];
+	char			*bc[NB_BALISE];
+	UINT			byte[NB_BALISE];
+	UINT			flag;
+	UINT			opt;
+	int				nb_balise;
+	void			(*f)(t_scene*, struct s_parser*, char*);
+	int				lim_obj;
+	int				lim_cam;
+	int				lim_skb;
+	int				i_obj;
+	int				i_cam;
+	int				i_skb;
+	double			ratio;
+	int				grad;
 }				t_parser;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:27:43 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/06 14:41:45 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void		init_xmlbo(t_rt *rt)
 	rt->parser.bo[i++] = ft_strdup(BO_PARAM);
 	rt->parser.bo[i++] = ft_strdup(BO_GRADIENT);
 	rt->parser.bo[i++] = ft_strdup(BO_NONE);
+	rt->parser.nb_balise = --i;
 }
 
 static void		init_xmlbc(t_rt *rt)
@@ -68,25 +69,22 @@ static void		init_xmlbc(t_rt *rt)
 	rt->parser.bc[i++] = ft_strdup(BC_PARAM);
 	rt->parser.bc[i++] = ft_strdup(BC_GRADIENT);
 	rt->parser.bc[i++] = ft_strdup(BC_NONE);
+	if (--i != rt->parser.nb_balise)
+		ft_printf("!WARNING! - Number of BO and BC balises are not equal\n");
 }
 
-static void		init_xmlbyte(t_rt *rt)
+void			init_xml(t_rt *rt)
 {
 	register int		i;
 
+	init_xmlbo(rt);
+	init_xmlbc(rt);
 	i = 1;
 	rt->parser.byte[0] = 0;
-	while (i < NB_BALISE)
+	while (i < rt->parser.nb_balise)
 	{
 		rt->parser.byte[i] = (UINT)(1 << (i - 1));
 		++i;
 	}
 	rt->parser.is_close = 0;
-}
-
-void			init_xml(t_rt *rt)
-{
-	init_xmlbo(rt);
-	init_xmlbc(rt);
-	init_xmlbyte(rt);
 }
