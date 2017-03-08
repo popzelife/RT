@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 14:15:07 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:29:38 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:50:47 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void		bo_cam_pos(t_scene *s, t_parser *p, char *line)
 		" '%s' in cam[%d].param.look_from\n", __FUNCTION__, value, p->i_cam);
 		exit(-1);
 	}
+	p->opt |= p->byte[E_TAB_POS];
+	printf("opt flag is %s\n", ft_uitoa_32bit(p->opt));
 	free(value);
 }
 
@@ -53,6 +55,8 @@ void		bo_cam_target(t_scene *s, t_parser *p, char *line)
 		" '%s'' in cam[%d].param.look_at\n", __FUNCTION__, value, p->i_cam);
 		exit(-1);
 	}
+	p->opt |= p->byte[E_TAB_TARGET];
+	printf("opt flag is %s\n", ft_uitoa_32bit(p->opt));
 	free(value);
 }
 

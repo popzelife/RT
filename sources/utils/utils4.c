@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 17:16:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 17:43:26 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:39:51 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int			ft_isnumerical(char *s)
 	digit = 0;
 	coma = 0;
 	minus = 0;
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		while (s[i] && ft_isspace(s[i]))
+		while (s[i] == ' ' || s[i] == '\t')
 			++i;
-		if (s[i] && (s[i] != '-' || s[i] == '+') && minus < 1
+		if (s[i] && (s[i] == '-' || s[i] == '+') && minus < 1
 			&& !digit && !coma)
 			++minus;
 		else if (s[i] && s[i] == '.' && coma < 1)
@@ -93,12 +93,12 @@ int			ft_strloopstr(const char *s1, const char *s2)
 	return (-1);
 }
 
-int			ft_strcmptab(char *line, char**tab)
+int			ft_strcmptab(char *line, char**tab, int size)
 {
 	int		i;
 
 	i = 0;
-	while (i < NB_BALISE)
+	while (i < size)
 	{
 		if ((ft_strloopstr(line, tab[i])) == 0)
 			return (i);

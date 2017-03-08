@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 12:14:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:38:22 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:04:15 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,29 @@ void		bo_void(t_scene *s, t_parser *p, char *line)
 	(void)line;
 }
 
+void		check_bo(t_parser *parser, UINT flag)
+{
+	if (flag == BYTE_CAM)
+		parser->f = (void*)&bo_cam;
+
+	else if (flag == BYTE_GRADIENT)
+		parser->f = (void*)&bo_skybox_gradient;
+	else if (flag == BYTE_NONE)
+		parser->f = (void*)&bo_skybox_none;
+
+	else
+		parser->f = (void*)&bo_void;
+}
+
 void		check_bc(t_parser *parser, UINT flag)
 {
 	if (flag == BYTE_CAM)
 		parser->f = (void*)&bc_cam;
 
-	else if (flag == BYTE_SKYBOX)
-		parser->f = (void*)&bc_skybox;
+	else if (flag == BYTE_GRADIENT)
+		parser->f = (void*)&bc_skybox_gradient;
+	else if (flag == BYTE_NONE)
+		parser->f = (void*)&bc_skybox_none;
 
 	else
 		parser->f = (void*)&bo_void;
@@ -104,13 +120,26 @@ void		check_flag(t_parser *parser, UINT flag)
 		parser->f = (void*)&bo_difflight_color;
 
 	else if (flag == (BYTE_SKYBOX | BYTE_GRADIENT | BYTE_COLOR))
-		parser->f = (void*)&bo_skybox_gradient;
-
-	else if (flag == (BYTE_SKYBOX | BYTE_NONE))
-		parser->f = (void*)&bo_skybox_none;
+		parser->f = (void*)&bo_skgradient_color;
 
 	else
 		parser->f = (void*)&bo_void;
+}
+
+int			check_opt(UINT opt)
+{
+	if (opt == (BYTE_CAM | BYTE_POS | BYTE_TARGET))
+		return (E_TAB_CAM);
+
+	else if (opt == (BYTE_SPHERE | BYTE_POS | BYTE_RADIUS))
+		return (E_TAB_SPHERE);
+
+	else if (opt == (BYTE_GRADIENT | BYTE_COLOR))
+		return (E_TAB_GRADIENT);
+	else if (opt == (BYTE_NONE))
+		return (E_TAB_NONE);
+	
+	return (0);
 }
 
 void		print_flag(UINT flag)
@@ -185,10 +214,7 @@ void		print_flag(UINT flag)
 		ft_printf("bo_difflight_color\n");
 
 	else if (flag == (BYTE_SKYBOX | BYTE_GRADIENT | BYTE_COLOR))
-		ft_printf("bo_skybox_gradient\n");
-
-	else if (flag == (BYTE_SKYBOX | BYTE_NONE))
-		ft_printf("bo_skybox_none\n");
+		ft_printf("bo_skgradient_color\n");
 
 	else
 		ft_printf("bo_void\n");
@@ -200,20 +226,22 @@ UINT			xml_to_flag(t_scene *scene, t_parser *parser, char *line)
 	
 	if (!line)
 		return (0);
-	if ((pos = ft_strcmptab(line, parser->bo)) != -1)
+	if ((pos = ft_strcmptab(line, parser->bo, parser->nb_balise)) != -1)
 	{
 		parser->is_close = 0;
 		parser->flag |= parser->byte[pos];
-		//printf("BO flag is %s from pos %d\n", ft_uitoa_32bit(parser->flag), pos);
+		printf("BO flag is %s from pos %d\n", ft_uitoa_32bit(parser->flag), pos);
+		check_bo(parser, parser->byte[pos]);
+		parser->f(scene, parser, line);
 		check_flag(parser, parser->flag);
-		//print_flag(parser->flag);
 	}
+	print_flag(parser->flag);
 	parser->f(scene, parser, line);
-	if ((pos = ft_strcmptab(line, parser->bc)) != -1)
+	if ((pos = ft_strcmptab(line, parser->bc, parser->nb_balise)) != -1)
 	{
 		parser->is_close = 1;
 		parser->flag ^= parser->byte[pos];
-		//printf("BC flag is %s from pos %d\n", ft_uitoa_32bit(parser->flag), pos);
+		printf("BC flag is %s from pos %d\n", ft_uitoa_32bit(parser->flag), pos);
 		check_bc(parser, parser->byte[pos]);
 		parser->f(scene, parser, line);
 	}
@@ -225,13 +253,13 @@ void			read_xml(t_rt *rt, t_scene *scene)
 	char	*line;
 	int		fd;
 
-	rt->parser.i_obj = 0;
-	rt->parser.i_cam = 0;
-	rt->parser.i_skb = 0;
+	rt->parser.i_obj = -1;
+	rt->parser.i_cam = -1;
+	rt->parser.i_skb = -1;
 	rt->parser.flag = 0;
+	rt->parser.opt = 0;
 	rt->parser.f = &bo_void;
 	rt->parser.ratio = (double)rt->r_view->w / (double)rt->r_view->h;
-	rt->parser.grad = 1;
 	rt->parser.l = 1;
 	if ((fd = open(rt->filename, O_RDONLY)) == -1)
 	{

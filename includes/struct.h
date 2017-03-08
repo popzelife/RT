@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:45:10 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:26:59 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,13 +304,40 @@ typedef struct	s_iter
 ** Parser
 */
 
+enum			e_bytetab
+{
+	E_TAB_VOID = 0,
+	E_TAB_CAM,
+	E_TAB_OBJ,
+	E_TAB_SKYBOX,
+	E_TAB_FOV,
+	E_TAB_TARGET,
+	E_TAB_APERT,
+	E_TAB_SPHERE,
+	E_TAB_PLANE,
+	E_TAB_CYLINDER,
+	E_TAB_CONE,
+	E_TAB_RADIUS,
+	E_TAB_POS,
+	E_TAB_ROTATE,
+	E_TAB_LAMBERT,
+	E_TAB_METAL,
+	E_TAB_DIELECT,
+	E_TAB_DIFFLIGHT,
+	E_TAB_COLOR,
+	E_TAB_PARAM,
+	E_TAB_GRADIENT,
+	E_TAB_NONE,
+	E_TAB_LAST
+};
+
 typedef struct	s_parser
 {
 	int				l;
 	int				is_close;
-	char			*bo[NB_BALISE];
-	char			*bc[NB_BALISE];
-	UINT			byte[NB_BALISE];
+	char			**bo;
+	char			**bc;
+	UINT			*byte;
 	UINT			flag;
 	UINT			opt;
 	int				nb_balise;

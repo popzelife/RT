@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:18:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:06:35 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ t_scene		init_scene(t_rt *rt);
 void		init_xml(t_rt *rt);
 void		read_xml(t_rt *rt, t_scene *scene);
 
+int			check_opt(UINT opt);
+void		check_bo(t_parser *parser, UINT flag);
+void		check_bc(t_parser *parser, UINT flag);
+void		check_flag(t_parser *parser, UINT flag);
+
 int			xml_get_value(char *line, char **value);
 int			xml_to_int(char *line, int *i);
 int			xml_to_double(char *line, double *i);
@@ -65,12 +70,17 @@ void		bo_metal_param(t_scene *s, t_parser *p, char *line);
 void		bo_dielect_color(t_scene *s, t_parser *p, char *line);
 void		bo_dielect_param(t_scene *s, t_parser *p, char *line);
 void		bo_difflight_color(t_scene *s, t_parser *p, char *line);
-void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
-void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
+void		bo_skgradient_color(t_scene *s, t_parser *p, char *line);
+void		bo_sknone_color(t_scene *s, t_parser *p, char *line);
 void		bo_void(t_scene *s, t_parser *p, char *line);
 
+void		bo_cam(t_scene *s, t_parser *p, char *line);
+void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
+void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
+
 void		bc_cam(t_scene *s, t_parser *p, char *line);
-void		bc_skybox(t_scene *s, t_parser *p, char *line);
+void		bc_skybox_gradient(t_scene *s, t_parser *p, char *line);
+void		bc_skybox_none(t_scene *s, t_parser *p, char *line);
 
 /*
 ** Menu rendering
@@ -185,7 +195,8 @@ t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat,
 			const UCHAR type_mat);
 t_obj		copy_object(t_obj *obj);
 
-t_sphere	*new_sphere(t_vec3 center, const double radius);
+t_sphere	*new_sphere(const t_vec3 center, const double radius);
+t_sphere	set_sphere(const t_vec3 center, const double radius);
 BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
@@ -243,7 +254,7 @@ int			ft_isnumerical(char *s);
 char		*ft_strccstr(char *dst, char *src, char start, char end);
 char		*ft_strcstr(char *dst, char *src, char end);
 int			ft_strloopstr(const char *s1, const char *s2);
-int			ft_strcmptab(char *line, char**tab);
+int			ft_strcmptab(char *line, char**tab, int size);
 
 int			*ft_tab2(const int x, const int y);
 t_surfparam	surfparam(SDL_Rect *rect, int color, void *param, int i);

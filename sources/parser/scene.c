@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:49:34 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:22:02 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,23 @@ t_scene		init_scene(t_rt *rt)
 {
 	t_scene		scene;
 
-	scene.sizeof_cam = 1;
-	rt->parser.lim_cam = 1;
+	scene.sizeof_cam = 2;
+	rt->parser.lim_cam = 2;
 	scene.cam = (t_cam*)malloc(scene.sizeof_cam * sizeof(t_cam));
 	scene.sizeof_obj = 6;
 	rt->parser.lim_obj = 6;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
-	scene.sizeof_skb = 1;
-	rt->parser.lim_skb = 1;
+	scene.sizeof_skb = 2;
+	rt->parser.lim_skb = 2;
 	scene.skybox = (t_skybox*)malloc(scene.sizeof_skb * sizeof(t_skybox));
 	if (rt->filename != NULL)
 	{
+		/*if (!ft_rstrnstr(rt->filename, ".xml", 4))
+		{
+			ft_printf("XML Read ERROR - '%s' is not an XML file\n",
+			rt->filename);
+			exit(-1);
+		}*/
 		read_xml(rt, &scene);
 		default_obj(&scene);
 	}

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:15:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:09:50 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:27:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ int			xml_to_vec(char *line, t_vec3 *v)
 int			xml_to_int(char *line, int *i)
 {
 	printf("%s\n", __FUNCTION__);
-	//if (!ft_isnumerical(line))
-	//	return (0);
+	if (!ft_isnumerical(line))
+	{
+		ft_printf("XML ERROR - This value: %s is not numerical\n", line);
+		return (0);
+	}
 	*i = ft_atoi(line);
 	printf("%d\n", *i);
 	return (1);
@@ -50,8 +53,11 @@ int			xml_to_int(char *line, int *i)
 int			xml_to_double(char *line, double *i)
 {
 	printf("%s\n", __FUNCTION__);
-	//if (!ft_isnumerical(line))
-	//	return (0);
+	if (!ft_isnumerical(line))
+	{
+		ft_printf("XML ERROR - This value: %s is not numerical\n", line);
+		return (0);
+	}
 	*i = ft_atof(line);
 	printf("%f\n", *i);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:21:37 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 21:56:02 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:38:14 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		draw_text_surface(t_rt *rt)
 	"Object Setting:", rt->panel.title1, ft_tab2(WIN_RX - MENU_RX + 5, 7), 0),
 	rt->esdl->eng.render, esdl_render_blendedtext);
 	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	"2D view", rt->panel.word1, ft_tab2(WIN_RX - MENU_RX + 220, 257), 0),
+	"MiniRT", rt->panel.word1, ft_tab2(WIN_RX - MENU_RX + 220, 257), 0),
 	rt->esdl->eng.render, esdl_render_blendedtext);
 	text_list_object(rt);
 	text_add_prim(rt);

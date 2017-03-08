@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 10:32:44 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 20:51:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 # define MENU_RX		300
 # define MINWIN_RX		1400
 # define MINWIN_RY		900
-# define WIN_RX			1400
-# define WIN_RY			900
+# define WIN_RX			1919
+# define WIN_RY			1200
 # define MAXWIN_RX		2200
-# define MAXWIN_RY		1200
+# define MAXWIN_RY		1120
 # define LOAD_NAME		"image/Loader.bmp"
 # define LOAD_RX		900
 # define LOAD_RY		563
@@ -66,8 +66,8 @@
 # define OBJ_CYLINDER	0x40
 # define OBJ_SKYBOX		0x80
 
-# define SKYBX_NONE		0x0
-# define SKYBX_GRADIENT	0x1
+# define SKYBX_NONE		0x1
+# define SKYBX_GRADIENT	0x2
 
 # define NULL_PARAM		0.0
 # define NULL_RECT		(SDL_Rect){0,0,0,0}
@@ -79,7 +79,6 @@
 # define MAT_DIFF_LIGHT	0x8
 
 # define FILE_DEF		"<?DOCTYPE scn-rt?>"
-# define NB_BALISE		22
 
 # define BO_CAM			"<camera>"
 # define BO_FOV			"<fov>"

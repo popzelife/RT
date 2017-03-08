@@ -6,13 +6,13 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 18:13:14 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:48:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:23:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line)
+void		bo_skgradient_color(t_scene *s, t_parser *p, char *line)
 {
 	printf("%s\n", __FUNCTION__);
 	char		*value;
@@ -43,15 +43,6 @@ void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line)
 		"'%s' in skybox[%d].color%d\n", __FUNCTION__, value, p->i_skb, p->grad);
 		exit(-1);
 	}
-	s->skybox[p->i_skb].type = SKYBX_GRADIENT;
+	p->opt |= p->byte[E_TAB_COLOR];
 	free(value);
-}
-
-void		bo_skybox_none(t_scene *s, t_parser *p, char *line)
-{
-	printf("%s\n", __FUNCTION__);
-	(void)line;
-	s->skybox[p->i_skb].color1 = v3_(0., 0., 0.);
-	s->skybox[p->i_skb].color2 = v3_(0., 0., 0.);
-	s->skybox[p->i_skb].type = SKYBX_NONE;
 }
