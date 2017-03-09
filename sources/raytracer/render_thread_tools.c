@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 16:03:24 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/02 14:39:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 18:39:12 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		thread_render_low(t_tharg *arg)
 void		set_thread_pos(t_tharg *arg)
 {
 	*(arg->i) += RT_SUBXY * arg->rt->m_thread;
-	if (*(arg->i) > arg->rt->r_view->w * MSAMP)
+	if (*(arg->i) >= arg->rt->r_view->w * MSAMP)
 	{
 		*(arg->i) -= arg->rt->r_view->w * MSAMP;
 		*(arg->i) -= (*(arg->i) % RT_SUBXY);

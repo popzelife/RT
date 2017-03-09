@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bc_sphere.c                                        :+:      :+:    :+:   */
+/*   bc_cone.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 19:33:27 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 18:31:44 by qfremeau         ###   ########.fr       */
+/*   Created: 2017/03/09 17:33:06 by vafanass          #+#    #+#             */
+/*   Updated: 2017/03/09 17:58:48 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		bc_sphere(t_scene *s, t_parser *p, char *line)
+void		bc_cylinder(t_scene *s, t_parser *p, char *line)
 {
 	printf("%s %d\n", __FUNCTION__, p->i_obj);
 	if (p->i_obj >= p->lim_obj || p->i_obj < 0)
 	{
-		ft_printf("XML %s ERROR - Can't assign more or less (%d) spheres than "
+		ft_printf("XML %s ERROR - Can't assign more or less (%d) cylinder than "
 		"initiated at line %d: '%s'\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
-	printf("opt flag is %s / %s\n", ft_uitoa_32bit(p->opt), ft_uitoa_32bit(BYTE_SPHERE | BYTE_POS | BYTE_RADIUS));
-	if (check_opt(p->opt) != E_TAB_SPHERE || p->mat == FALSE)
+	printf("opt flag is %s / %s\n", ft_uitoa_32bit(p->opt), ft_uitoa_32bit(BYTE_CYLINDER | BYTE_POS | BYTE_ROTATE | BYTE_RADIUS));
+	if (check_opt(p->opt) != E_TAB_CYLINDER || p->mat == FALSE)
 	{
-		ft_printf("XML %s ERROR - Some flags are missing within <sphere> balise"
-		" for sphere %d at line %d: %s\n", __FUNCTION__, p->i_obj, p->l, line);
+		ft_printf("XML %s ERROR - Some flags are missing within <cylinder> balise"
+		" for cone %d at line %d: %s\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
 	s->obj[p->i_obj]= new_object(s->obj[p->i_obj].p_obj, s->obj[p->i_obj].type_obj,
@@ -39,7 +39,7 @@ void		bc_sphere(t_scene *s, t_parser *p, char *line)
 	p->obj = -1;
 }
 
-void		bo_sphere(t_scene *s, t_parser *p, char *line)
+void		bo_cylinder(t_scene *s, t_parser *p, char *line)
 {
 	(void)line;
 	p->i_obj++;
@@ -47,7 +47,7 @@ void		bo_sphere(t_scene *s, t_parser *p, char *line)
 	if (p->i_obj >= p->lim_obj)
 	{
 		printf("realloc\n");
-		p->lim_obj += 1;
+		p->lim_obj += 8;
 		if ((s->obj = (t_obj*)realloc(s->obj, p->lim_obj * sizeof(t_obj)))
 			== NULL)
 		{
@@ -57,10 +57,10 @@ void		bo_sphere(t_scene *s, t_parser *p, char *line)
 			exit(-1);
 		}
 	}
-	s->obj[p->i_obj].p_obj = (void*)new_sphere(v3_(0., 0., 0.), 1.);
-	s->obj[p->i_obj].type_obj = OBJ_SPHERE;
+	s->obj[p->i_obj].p_obj = (void*)new_cylinder(v3_(0., 1., 0.), v3_(0. ,0. ,0.), 1.0, 1.0);
+	s->obj[p->i_obj].type_obj = OBJ_CYLINDER;
 	p->f = (void*)&bo_void;
-	p->opt |= p->byte[E_TAB_SPHERE];
+	p->opt |= p->byte[E_TAB_CYLINDER];
 	p->obj = p->i_obj;
 	p->opt_m = 0;
 }

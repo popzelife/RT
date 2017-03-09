@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 20:51:41 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 19:19:21 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 # define MENU_RX		300
 # define MINWIN_RX		1400
 # define MINWIN_RY		900
-# define WIN_RX			1919
-# define WIN_RY			1200
-# define MAXWIN_RX		2200
-# define MAXWIN_RY		1120
+# define MAXWIN_RX		1920
+# define MAXWIN_RY		1200
+# define WIN_RX			1400
+# define WIN_RY			900
 # define LOAD_NAME		"image/Loader.bmp"
 # define LOAD_RX		900
 # define LOAD_RY		563

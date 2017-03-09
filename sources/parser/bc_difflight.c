@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bc_lambert.c                                       :+:      :+:    :+:   */
+/*   bc_difflight.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 19:34:59 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 17:52:49 by qfremeau         ###   ########.fr       */
+/*   Created: 2017/03/09 18:02:45 by qfremeau          #+#    #+#             */
+/*   Updated: 2017/03/09 18:12:50 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		bc_lambert(t_scene *s, t_parser *p, char *line)
+void		bc_difflight(t_scene *s, t_parser *p, char *line)
 {
 	(void)s;
 	printf("%s %d\n", __FUNCTION__, p->i_obj);
@@ -23,11 +23,11 @@ void		bc_lambert(t_scene *s, t_parser *p, char *line)
 		p->l, line);
 		exit(-1);
 	}
-	printf("opt_m flag is %s / %s\n", ft_uitoa_32bit(p->opt_m), ft_uitoa_32bit(BYTE_LAMBERT | BYTE_COLOR));
-	if (check_opt(p->opt_m) != E_TAB_LAMBERT)
+	printf("opt_m flag is %s / %s\n", ft_uitoa_32bit(p->opt_m), ft_uitoa_32bit(BYTE_DIFFLIGHT | BYTE_COLOR));
+	if (check_opt(p->opt_m) != E_TAB_DIFFLIGHT)
 	{
-		ft_printf("XML %s ERROR - Some flags are missing within <lambert> "
-		"balise for mat %d at line %d: %s\n", __FUNCTION__, p->i_obj, p->l,
+		ft_printf("XML %s ERROR - Some flags are missing within <difflight>"
+		" balise for mat %d at line %d: %s\n", __FUNCTION__, p->i_obj, p->l,
 		line);
 		exit(-1);
 	}
@@ -35,7 +35,7 @@ void		bc_lambert(t_scene *s, t_parser *p, char *line)
 	p->mat = TRUE;
 }
 
-void		bo_lambert(t_scene *s, t_parser *p, char *line)
+void		bo_difflight(t_scene *s, t_parser *p, char *line)
 {
 	(void)line;
 	printf("%s %d\n", __FUNCTION__, p->i_obj);
@@ -53,8 +53,8 @@ void		bo_lambert(t_scene *s, t_parser *p, char *line)
 		exit(-1);
 	}
 	s->obj[p->i_obj].p_mat = (void*)new_material(v3_(0., 0., 0.), 0.);
-	s->obj[p->i_obj].p_mat->type_mat = MAT_LAMBERT;
+	s->obj[p->i_obj].p_mat->type_mat = MAT_DIFF_LIGHT;
 	p->f = (void*)&bo_void;
-	p->opt_m |= p->byte[E_TAB_LAMBERT];
+	p->opt_m |= p->byte[E_TAB_DIFFLIGHT];
 	p->lim_mat++;
 }

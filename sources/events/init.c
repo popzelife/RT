@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:39:52 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 18:05:54 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		init_multithread(t_rt *rt)
 	int			x;
 	int			y;
 
-	rt->m_thread = 32;
+	rt->m_thread = 16;
 	rt->iter = NULL;
 	i = 0;
 	x = 0;

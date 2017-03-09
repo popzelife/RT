@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 14:52:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 18:59:24 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,23 @@ void		bo_void(t_scene *s, t_parser *p, char *line);
 
 void		bo_cam(t_scene *s, t_parser *p, char *line);
 void		bo_sphere(t_scene *s, t_parser *p, char *line);
+void		bo_plane(t_scene *s, t_parser *p, char *line);
+void		bo_cone(t_scene *s, t_parser *p, char *line);
+void		bo_cylinder(t_scene *s, t_parser *p, char *line);
 void		bo_lambert(t_scene *s, t_parser *p, char *line);
+void		bo_metal(t_scene *s, t_parser *p, char *line);
+void		bo_difflight(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
 
 void		bc_cam(t_scene *s, t_parser *p, char *line);
 void		bc_sphere(t_scene *s, t_parser *p, char *line);
+void		bc_plane(t_scene *s, t_parser *p, char *line);
+void		bc_cone(t_scene *s, t_parser *p, char *line);
+void		bc_cylinder(t_scene *s, t_parser *p, char *line);
 void		bc_lambert(t_scene *s, t_parser *p, char *line);
+void		bc_metal(t_scene *s, t_parser *p, char *line);
+void		bc_difflight(t_scene *s, t_parser *p, char *line);
 void		bc_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bc_skybox_none(t_scene *s, t_parser *p, char *line);
 

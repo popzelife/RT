@@ -1,11 +1,11 @@
 <?DOCTYPE scn-rt?>
 
 <camera>
-	<pos>13 2 3</pos>
-	<target>0 0 0</target>
+	<pos>13 4 3</pos>
+	<target>-3 2 -4</target>
 	<rotate>0 -1 0</rotate>
 	<fov>60</fov>
-	<aperture>0</aperture>
+	<aperture>0.4</aperture>
 </camera>
 
 <obj>
@@ -14,7 +14,8 @@
 		<radius>2</radius>
 
 		<metal>
-			<color>13 2 3</color>
+			<color>0.13 0.2 0.3</color>
+			<param>0.5</param>
 		</metal>
 	</sphere>
 
@@ -23,29 +24,27 @@
 		<rotate>0 1 0</rotate>
 
 		<lambert>
-			<radius>0.5</radius>
-			<color>1 0.2 0.2</color>
+			<color>0.2 0.2 0.2</color>
 		</lambert>
 	</plane>
 
 	<cone>
 		<pos>2 2.1 -5</pos>
-		<radius>0.5
-		</radius>
+		<radius>0.5</radius>
 		<rotate>0 1 0</rotate>
 
-		<diffuse-light>
-			<color>1 1 1</color>
-		</diffuse-light>
+		<difflight>
+			<color>0.5 1 1</color>
+		</difflight>
 	</cone>
 
 	<cylinder>
-		<pos>-3 2 -4</pos>
+		<pos>0 0 4</pos>
 		<radius>2</radius>
-		<rotate>0 0 0</rotate>
+		<rotate>0 1 0</rotate>
 
 		<lambert>
-			<color>1 0.2 0.2</color>
+			<color>0.2 0.2 1</color>
 		</lambert>
 	</cylinder>
 </obj>
