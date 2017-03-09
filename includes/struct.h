@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 16:26:59 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 14:57:59 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,16 +340,20 @@ typedef struct	s_parser
 	UINT			*byte;
 	UINT			flag;
 	UINT			opt;
+	UINT			opt_m;
 	int				nb_balise;
 	void			(*f)(t_scene*, struct s_parser*, char*);
 	int				lim_obj;
 	int				lim_cam;
 	int				lim_skb;
+	int				lim_mat;
 	int				i_obj;
 	int				i_cam;
 	int				i_skb;
 	double			ratio;
 	int				grad;
+	int				mat;
+	int				obj;
 }				t_parser;
 
 /*

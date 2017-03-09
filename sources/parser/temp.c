@@ -6,27 +6,11 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 15:19:21 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/06 18:14:20 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 13:29:13 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void		bo_sphere_pos(t_scene *s, t_parser *p, char *line)
-{
-	printf("%s", __FUNCTION__);
-	(void)s;
-	(void)p;
-	(void)line;
-}
-
-void		bo_sphere_radius(t_scene *s, t_parser *p, char *line)
-{
-	printf("%s", __FUNCTION__);
-	(void)s;
-	(void)p;
-	(void)line;
-}
 
 void		bo_plane_pos(t_scene *s, t_parser *p, char *line)
 {
@@ -85,14 +69,6 @@ void		bo_cylinder_radius(t_scene *s, t_parser *p, char *line)
 }
 
 void		bo_cylinder_rotate(t_scene *s, t_parser *p, char *line)
-{
-	printf("%s", __FUNCTION__);
-	(void)s;
-	(void)p;
-	(void)line;
-}
-
-void		bo_lamber_color(t_scene *s, t_parser *p, char *line)
 {
 	printf("%s", __FUNCTION__);
 	(void)s;

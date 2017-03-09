@@ -15,7 +15,6 @@
 
 		<metal>
 			<color>13 2 3</color>
-			<param>0.1</param>
 		</metal>
 	</sphere>
 

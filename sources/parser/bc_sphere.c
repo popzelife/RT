@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 19:33:27 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 20:18:13 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:47:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void		bc_sphere(t_scene *s, t_parser *p, char *line)
 {
-	t_sphere	*o;
-
 	printf("%s %d\n", __FUNCTION__, p->i_obj);
 	if (p->i_obj >= p->lim_obj || p->i_obj < 0)
 	{
@@ -23,20 +21,22 @@ void		bc_sphere(t_scene *s, t_parser *p, char *line)
 		"initiated at line %d: '%s'\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
-	printf("opt flag is %s / %s\n", ft_uitoa_32bit(p->opt), ft_uitoa_32bit(BYTE_CAM | BYTE_POS | BYTE_TARGET));
+	printf("opt flag is %s / %s\n", ft_uitoa_32bit(p->opt), ft_uitoa_32bit(BYTE_SPHERE | BYTE_POS | BYTE_RADIUS));
 	if (check_opt(p->opt) != E_TAB_SPHERE || p->mat == FALSE)
 	{
 		ft_printf("XML %s ERROR - Some flags are missing within <sphere> balise"
 		" for sphere %d at line %d: %s\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
-	o = (t_sphere*)s->obj[p->i_obj].p_obj;
-	*o = set_sphere(o->center, o->radius);
-	s->obj[p->i_obj]= new_object((void*)o, s->type_obj, s->p_mat, s->type_mat);
+	s->obj[p->i_obj]= new_object(s->obj[p->i_obj].p_obj, s->obj[p->i_obj].type_obj,
+	s->obj[p->i_obj].p_mat, s->obj[p->i_obj].p_mat->type_mat);
 	s->this_obj = &s->obj[p->i_obj];
+	s->sizeof_obj = p->i_obj + 1;
 	p->f = (void*)&bo_void;
 	p->opt = 0;
 	p->mat = FALSE;
+	p->lim_mat = 0;
+	p->obj = -1;
 }
 
 void		bo_sphere(t_scene *s, t_parser *p, char *line)
@@ -47,11 +47,20 @@ void		bo_sphere(t_scene *s, t_parser *p, char *line)
 	if (p->i_obj >= p->lim_obj)
 	{
 		printf("realloc\n");
-		p->lim_obj += 6;
-		s->obj = (t_obj*)ft_realloc((void*)s->obj, sizeof(t_obj) * p->lim_obj);
+		p->lim_obj += 8;
+		if ((s->obj = (t_obj*)realloc(s->obj, p->lim_obj * sizeof(t_obj)))
+			== NULL)
+		{
+			ft_printf("Realloc %s ERROR - Something went wrong trying to "
+			"realloc the given structure at object %d\n", __FUNCTION__,
+			p->i_obj);
+			exit(-1);
+		}
 	}
-	s->obj[p->i_obj].p_obj = (void*)malloc(sizeof(t_sphere));
+	s->obj[p->i_obj].p_obj = (void*)new_sphere(v3_(0., 0., 0.), 1.);
 	s->obj[p->i_obj].type_obj = OBJ_SPHERE;
 	p->f = (void*)&bo_void;
 	p->opt |= p->byte[E_TAB_SPHERE];
+	p->obj = p->i_obj;
+	p->opt_m = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 17:23:51 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 17:13:58 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:42:11 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		bc_cam(t_scene *s, t_parser *p, char *line)
 	s->cam[p->i_cam].param.look_at, s->cam[p->i_cam].param.v_up,
 	s->cam[p->i_cam].param);
 	s->this_cam = &s->cam[p->i_cam];
+	s->sizeof_cam = p->i_cam + 1;
 	p->f = (void*)&bo_void;
 	p->opt = 0;
 }
@@ -47,7 +48,14 @@ void		bo_cam(t_scene *s, t_parser *p, char *line)
 	{
 		printf("realloc\n");
 		p->lim_cam += 4;
-		s->cam = (t_cam*)ft_realloc((void*)s->cam, sizeof(t_cam) * p->lim_cam);
+		if ((s->cam = (t_cam*)realloc(s->cam, p->lim_cam * sizeof(t_cam)))
+			== NULL)
+		{
+			ft_printf("Realloc %s ERROR - Something went wrong trying to "
+			"realloc the given structure at camera %d\n", __FUNCTION__,
+			p->i_cam);
+			exit(-1);
+		}
 	}
 	s->cam[p->i_cam].param.aspect = p->ratio;
 	s->cam[p->i_cam].param.v_up = v3_(0., -1., 0.);

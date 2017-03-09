@@ -88,8 +88,12 @@ SRC =		esdl/color.c\
 			parser/get.c\
 			parser/camera.c\
 			parser/skybox.c\
+			parser/sphere.c\
+			parser/lambert.c\
 			parser/bc_cam.c\
 			parser/bc_skybox.c\
+			parser/bc_sphere.c\
+			parser/bc_lambert.c\
 			parser/temp.c\
 			raytracer/random.c\
 			raytracer/ray.c\

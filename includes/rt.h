@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 20:06:35 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 14:52:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		bo_cone_rotate(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_pos(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_radius(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_rotate(t_scene *s, t_parser *p, char *line);
-void		bo_lamber_color(t_scene *s, t_parser *p, char *line);
+void		bo_lambert_color(t_scene *s, t_parser *p, char *line);
 void		bo_metal_color(t_scene *s, t_parser *p, char *line);
 void		bo_metal_param(t_scene *s, t_parser *p, char *line);
 void		bo_dielect_color(t_scene *s, t_parser *p, char *line);
@@ -75,10 +75,14 @@ void		bo_sknone_color(t_scene *s, t_parser *p, char *line);
 void		bo_void(t_scene *s, t_parser *p, char *line);
 
 void		bo_cam(t_scene *s, t_parser *p, char *line);
+void		bo_sphere(t_scene *s, t_parser *p, char *line);
+void		bo_lambert(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
 
 void		bc_cam(t_scene *s, t_parser *p, char *line);
+void		bc_sphere(t_scene *s, t_parser *p, char *line);
+void		bc_lambert(t_scene *s, t_parser *p, char *line);
 void		bc_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bc_skybox_none(t_scene *s, t_parser *p, char *line);
 
@@ -196,7 +200,6 @@ t_obj		new_object(void *obj, const UCHAR type_obj, t_mat *mat,
 t_obj		copy_object(t_obj *obj);
 
 t_sphere	*new_sphere(const t_vec3 center, const double radius);
-t_sphere	set_sphere(const t_vec3 center, const double radius);
 BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 

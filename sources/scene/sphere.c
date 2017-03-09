@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:43:54 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 20:06:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 14:52:21 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,6 @@ t_sphere	*new_sphere(const t_vec3 center, const double radius)
 	s->radius2 = radius * radius;
 	return (s);
 }
-
-t_sphere	set_sphere(const t_vec3 center, const double radius)
-{
-	t_sphere		s;
-
-	s.center = center;
-	s.radius = radius;
-	s.radius2 = radius * radius;
-	return (s);
-}
-
 
 BOOL		normal_sphere(t_sphere *sphere, const t_ray ray, const float sol,
 			t_hit *param)

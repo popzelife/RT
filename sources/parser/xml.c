@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 12:14:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 20:04:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 14:24:09 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void		check_bo(t_parser *parser, UINT flag)
 	if (flag == BYTE_CAM)
 		parser->f = (void*)&bo_cam;
 
+	else if (flag == BYTE_SPHERE)
+		parser->f = (void*)&bo_sphere;
+
+	else if (flag == BYTE_LAMBERT)
+		parser->f = (void*)&bo_lambert;
+
 	else if (flag == BYTE_GRADIENT)
 		parser->f = (void*)&bo_skybox_gradient;
 	else if (flag == BYTE_NONE)
@@ -38,6 +44,12 @@ void		check_bc(t_parser *parser, UINT flag)
 {
 	if (flag == BYTE_CAM)
 		parser->f = (void*)&bc_cam;
+
+	else if (flag == BYTE_SPHERE)
+		parser->f = (void*)&bc_sphere;
+
+	else if (flag == BYTE_LAMBERT)
+		parser->f = (void*)&bc_lambert;
 
 	else if (flag == BYTE_GRADIENT)
 		parser->f = (void*)&bc_skybox_gradient;
@@ -89,7 +101,7 @@ void		check_flag(t_parser *parser, UINT flag)
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR))
-		parser->f = (void*)&bo_lamber_color;
+		parser->f = (void*)&bo_lambert_color;
 
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
@@ -133,6 +145,9 @@ int			check_opt(UINT opt)
 
 	else if (opt == (BYTE_SPHERE | BYTE_POS | BYTE_RADIUS))
 		return (E_TAB_SPHERE);
+
+	else if (opt == (BYTE_LAMBERT | BYTE_COLOR))
+		return (E_TAB_LAMBERT);
 
 	else if (opt == (BYTE_GRADIENT | BYTE_COLOR))
 		return (E_TAB_GRADIENT);
@@ -183,7 +198,7 @@ void		print_flag(UINT flag)
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR))
-		ft_printf("bo_lamber_color\n");
+		ft_printf("bo_lambert_color\n");
 
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
@@ -258,9 +273,12 @@ void			read_xml(t_rt *rt, t_scene *scene)
 	rt->parser.i_skb = -1;
 	rt->parser.flag = 0;
 	rt->parser.opt = 0;
+	rt->parser.opt_m = 0;
 	rt->parser.f = &bo_void;
 	rt->parser.ratio = (double)rt->r_view->w / (double)rt->r_view->h;
 	rt->parser.l = 1;
+	rt->parser.obj = -1;
+	rt->parser.mat = false;
 	if ((fd = open(rt->filename, O_RDONLY)) == -1)
 	{
 		ft_printf("XML Parse ERROR - No such a file '%s'\n", rt->filename);
