@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/16 14:04:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 20:37:52 by qfremeau         ###   ########.fr       */
+/*   Created: 2017/03/10 01:07:19 by qfremeau          #+#    #+#             */
+/*   Updated: 2017/03/10 01:07:42 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		quit_rt(t_rt *rt)
+void		settab2(int *xy, const int x, const int y)
 {
-	SDL_FreeSurface(rt->sr_view);
-	SDL_FreeSurface(rt->sr_menu);
-	SDL_FreeSurface(rt->s_process);
-	SDL_DestroyTexture(rt->tx_view);
-	SDL_DestroyTexture(rt->tx_menu);
-	SDL_DestroyTexture(rt->tx_process);
-	esdl_exit(rt->esdl);
+	xy[0] = x;
+	xy[1] = y;
 }

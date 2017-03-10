@@ -6,21 +6,25 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:43:10 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 22:37:47 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-/*
-** Need work on mutex and pthread handling
-*/
-
 static void	loop_hook(t_rt *rt)
 {
+	int			ret;
+
 	pthread_mutex_init(&rt->mutex, NULL);
 	pthread_cond_init(&rt->display_cond, NULL);
-	pthread_create(&rt->render_th, NULL, (void*)render_loop, (void*)rt);
+	if ((ret = pthread_create(&rt->render_th, NULL, (void*)render_loop,
+		(void*)rt)) != 0)
+	{
+		ft_dprintf(2, "RT error %d - pthread_create failed at %s\n", ret,
+		__FUNCTION__);
+		exit(-1);
+	}
 	rt->suspend = TRUE;
 	rt->esdl->eng.input->quit = 0;
 	while (rt->esdl->run)
@@ -48,6 +52,20 @@ static void	init_firstrender(t_rt *rt)
 	display_rt(rt);
 }
 
+static void	init_flag(t_rt *rt, int ac, char **av)
+{
+	rt->filename = NULL;
+	if (ac > 1)
+		rt->filename = ft_strdup(av[1]);
+	rt->rx = MINWIN_RX;
+	rt->ry = MINWIN_RY;
+	if (ac > 2)
+	{
+		rt->rx = MAXWIN_RX;
+		rt->ry = MAXWIN_RY;
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_rt		p_rt;
@@ -55,9 +73,7 @@ int			main(int ac, char **av)
 
 	kernel_isopencl();
 	rt = &p_rt;
-	rt->filename = NULL;
-	if (ac > 1)
-		rt->filename = ft_strdup(av[1]);
+	init_flag(rt, ac, av);
 	init_rt(rt);
 	init_xml(rt);
 	loading(rt);

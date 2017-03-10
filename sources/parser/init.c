@@ -6,17 +6,14 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 19:17:36 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:30:16 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		init_xmlbo(t_rt *rt)
+static void		init_xmlbo(t_rt *rt, int i)
 {
-	register int		i;
-
-	i = 0;
 	rt->parser.bo[i++] = ft_strdup("\0");
 	rt->parser.bo[i++] = ft_strdup(BO_CAM);
 	rt->parser.bo[i++] = ft_strdup(BO_OBJ);
@@ -42,11 +39,8 @@ static void		init_xmlbo(t_rt *rt)
 	rt->parser.nb_balise = i;
 }
 
-static void		init_xmlbc(t_rt *rt)
+static void		init_xmlbc(t_rt *rt, int i)
 {
-	register int		i;
-
-	i = 0;
 	rt->parser.bc[i++] = ft_strdup("\0");
 	rt->parser.bc[i++] = ft_strdup(BC_CAM);
 	rt->parser.bc[i++] = ft_strdup(BC_OBJ);
@@ -80,8 +74,8 @@ void			init_xml(t_rt *rt)
 	rt->parser.byte = (UINT*)malloc(sizeof(UINT) * (E_TAB_LAST));
 	rt->parser.bo = (char**)malloc(sizeof(char*) * (E_TAB_LAST));
 	rt->parser.bc = (char**)malloc(sizeof(char*) * (E_TAB_LAST));
-	init_xmlbo(rt);
-	init_xmlbc(rt);
+	init_xmlbo(rt, 0);
+	init_xmlbc(rt, 0);
 	i = 1;
 	rt->parser.byte[0] = 0;
 	while (i < rt->parser.nb_balise)
@@ -90,5 +84,4 @@ void			init_xml(t_rt *rt)
 		++i;
 	}
 	rt->parser.is_close = 0;
-	printf("init %d / %d\n", E_TAB_LAST, rt->parser.nb_balise);
 }

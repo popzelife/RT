@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 21:31:36 by popzelife         #+#    #+#             */
-/*   Updated: 2017/02/27 14:05:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 23:59:19 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ t_text		esdl_render_blendedtext(char *text, t_font f, int xy[2],
 	surf = TTF_RenderText_Blended(f.font, text, f.color);
 	t.text = SDL_CreateTextureFromSurface(render, surf);
 	SDL_FreeSurface(surf);
-	t.rect = malloc(sizeof(SDL_Rect));
-	t.rect->x = xy[0];
-	t.rect->y = xy[1];
-	SDL_QueryTexture(t.text, NULL, NULL, &(t.rect->w), &(t.rect->h));
+	t.rect.x = xy[0];
+	t.rect.y = xy[1];
+	SDL_QueryTexture(t.text, NULL, NULL, &(t.rect.w), &(t.rect.h));
 	return (t);
 }
 
@@ -65,9 +64,8 @@ t_text		esdl_render_solidtext(char *text, t_font f, int xy[2],
 	surf = TTF_RenderText_Solid(f.font, text, f.color);
 	t.text = SDL_CreateTextureFromSurface(render, surf);
 	SDL_FreeSurface(surf);
-	t.rect = malloc(sizeof(SDL_Rect));
-	t.rect->x = xy[0];
-	t.rect->y = xy[1];
-	SDL_QueryTexture(t.text, NULL, NULL, &(t.rect->w), &(t.rect->h));
+	t.rect.x = xy[0];
+	t.rect.y = xy[1];
+	SDL_QueryTexture(t.text, NULL, NULL, &(t.rect.w), &(t.rect.h));
 	return (t);
 }

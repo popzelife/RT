@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 17:46:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/10 01:02:13 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ typedef struct	s_button
 {
 	t_string			*string;
 	t_surface			*surface;
-	SDL_Rect			*rect;
+	SDL_Rect			rect;
 	BOOL				hover;
 	void				*param;
 	void				(*action)(void*);
@@ -354,6 +354,7 @@ typedef struct	s_parser
 	int				grad;
 	int				mat;
 	int				obj;
+	int				same;
 }				t_parser;
 
 /*
@@ -371,6 +372,8 @@ typedef struct	s_rt
 	int				sizeof_scn;
 	t_scene			*this_scene;
 
+	int				rx;
+	int				ry;
 	SDL_Window		*win_temp;
 	SDL_Texture		*tx_load;
 	SDL_Rect		*r_view;
@@ -415,7 +418,6 @@ typedef struct	s_tharg
 typedef struct	s_thread
 {
 	pthread_t			thread;
-	pthread_attr_t		attr;
 	t_tharg				arg;
 	struct s_thread		*next;
 }				t_thread;

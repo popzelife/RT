@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 12:55:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:04:20 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:30:17 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ SDL_Surface		*esdl_create_surface(int width, int height)
 	return (surf);
 }
 
-void			esdl_draw_filled_square(SDL_Surface *surf, \
-	const SDL_Rect *rect, const int color, void *param)
+void			esdl_draw_filled_square(SDL_Surface *surf,
+				const SDL_Rect *rect, const int color, void *param)
 {
 	register int		x;
 	register int		y;
@@ -70,7 +70,7 @@ void			esdl_draw_filled_square(SDL_Surface *surf, \
 	}
 }
 
-void			esdl_clear_surface(SDL_Surface *surf, \
+void			esdl_clear_surface(SDL_Surface *surf,
 				const SDL_Rect *rect, const int color, void *param)
 {
 	register int		x;

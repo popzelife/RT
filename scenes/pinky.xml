@@ -27,6 +27,15 @@
 		</metal>
 	</sphere>
 
+	<PLANE>
+		<pos>-5.2 2.1 0.2</pos>
+		<rotate>0 1 1</rotate>
+
+		<metal>
+			<color>1 0.2 1</color>
+		</metal>
+	</planE>
+
 	<sphere>
 		<pos>0.0 -20.0 0.0</pos>
 		<radius>20</radius>

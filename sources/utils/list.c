@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.c                                          :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 18:46:53 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 14:44:39 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/10 00:16:14 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_surface	*lst_new_surface(t_surface **surface, t_surfparam param,
 	new = (t_surface*)malloc(sizeof(t_surface));
 	if (new == NULL)
 		return (NULL);
-	new->rect = esdl_copy_rect(*(param.rect));
+	new->rect = esdl_copy_rect(*param.rect);
 	new->surf = esdl_create_surface(new->rect->w, new->rect->h);
 	f(new->surf, new->rect, param.color, param.param);
 	new->text = SDL_CreateTextureFromSurface(render, new->surf);
@@ -101,7 +101,7 @@ t_surface	*lst_new_image(t_surface **surface, t_surfparam param,
 	new = (t_surface*)malloc(sizeof(t_surface));
 	if (new == NULL)
 		return (NULL);
-	new->rect = esdl_copy_rect(*(param.rect));
+	new->rect = esdl_copy_rect(*param.rect);
 	new->surf = NULL;
 	new->text = f(render, p->path, &new->rect->w, &new->rect->h);
 	new->next = NULL;

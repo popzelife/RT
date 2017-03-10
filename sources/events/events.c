@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 21:58:52 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/10 00:12:42 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void		button_list(t_rt *rt, t_input *in)
 	button_curs = rt->panel.lst_button;
 	while (button_curs != NULL)
 	{
-		if (in->m_x > button_curs->rect->x &&
-			in->m_x < (button_curs->rect->x + button_curs->rect->w) &&
-			in->m_y > button_curs->rect->y &&
-			in->m_y < (button_curs->rect->y + button_curs->rect->h))
+		if (in->m_x > button_curs->rect.x &&
+			in->m_x < (button_curs->rect.x + button_curs->rect.w) &&
+			in->m_y > button_curs->rect.y &&
+			in->m_y < (button_curs->rect.y + button_curs->rect.h))
 		{
 			button_curs->hover = TRUE;
 			if (in->button[SDL_BUTTON_LEFT])

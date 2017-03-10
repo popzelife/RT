@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 17:16:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 17:39:51 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 22:05:50 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 
 int			ft_isnumerical(char *s)
 {
-	int		coma;
-	int		minus;
-	int		digit;
+	int		c;
+	int		m;
+	int		d;
 	int		i;
 
 	i = 0;
-	digit = 0;
-	coma = 0;
-	minus = 0;
+	d = 0;
+	c = 0;
+	m = 0;
 	while (s[i] != '\0')
 	{
 		while (s[i] == ' ' || s[i] == '\t')
 			++i;
-		if (s[i] && (s[i] == '-' || s[i] == '+') && minus < 1
-			&& !digit && !coma)
-			++minus;
-		else if (s[i] && s[i] == '.' && coma < 1)
-			++coma;
+		if (s[i] && (s[i] == '-' || s[i] == '+') && m < 1
+			&& !d && !c)
+			++m;
+		else if (s[i] && s[i] == '.' && c < 1 && ft_isdigit(s[i + 1]) && d)
+			++c;
 		else if (s[i] && ft_isdigit(s[i]))
-			++digit;
+			++d;
 		else
 			return (0);
 		++i;
 	}
-	return (digit);
+	return (d);
 }
 
 char		*ft_strccstr(char *dst, char *src, char start, char end)
@@ -93,7 +93,7 @@ int			ft_strloopstr(const char *s1, const char *s2)
 	return (-1);
 }
 
-int			ft_strcmptab(char *line, char**tab, int size)
+int			ft_strcmptab(char *line, char **tab, int size)
 {
 	int		i;
 

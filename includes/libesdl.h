@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:14:03 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 18:30:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/10 00:15:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_font
 typedef struct	s_text
 {
 	SDL_Texture		*text;
-	SDL_Rect		*rect;
+	SDL_Rect		rect;
 }				t_text;
 
 typedef struct	s_input

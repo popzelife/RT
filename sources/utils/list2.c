@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list2.c                                         :+:      :+:    :+:   */
+/*   list2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:38:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/01 14:52:03 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/10 01:04:58 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 void		lst_set_surface(t_surface **surface, t_surfparam param,
-		SDL_Renderer *render, void (f)(SDL_Surface*, const SDL_Rect*,
+			SDL_Renderer *render, void (f)(SDL_Surface*, const SDL_Rect*,
 			const int, void*))
 {
 	t_surface		*curs;
@@ -35,7 +35,7 @@ void		lst_set_surface(t_surface **surface, t_surfparam param,
 }
 
 void		lst_set_string(t_string **string, t_strparam param,
-		SDL_Renderer *render, t_text (f)(char*, t_font, int[2],
+			SDL_Renderer *render, t_text (f)(char*, t_font, int[2],
 			SDL_Renderer*))
 {
 	t_string		*curs;
@@ -58,17 +58,16 @@ t_button	*init_button(t_button *new)
 }
 
 t_button	*lst_new_button(t_button **button, t_butnparam param,
-		SDL_Renderer *render, t_action action)
+			SDL_Renderer *render, t_action action)
 {
 	t_button		*new;
 	t_button		*curs;
 
 	new = NULL;
 	new = init_button(new);
-	new->rect = esdl_copy_rect(*(param.rect));
-	new->surface = lst_new_surface(&new->surface, surfparam(new->rect, \
-				0x88888888, NULL, 0), render, esdl_clear_surface);
-	new->surface->next = (t_surface*)malloc(sizeof(t_surface));
+	new->rect = *param.rect;
+	new->surface = lst_new_surface(&new->surface, surfparam(&new->rect,
+	0x88888888, NULL, 0), render, esdl_clear_surface);
 	new->surface->next = param.surface;
 	new->string = param.string;
 	new->hover = FALSE;

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 18:59:24 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/10 01:08:00 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void		init_multithread(t_rt *rt);
 */
 
 t_scene		init_scene(t_rt *rt);
+void		default_cam(t_rt *rt, t_scene *scene);
+void		default_skybox(t_rt *rt, t_scene *scene);
+void		default_obj(t_scene *scene);
 
 void		init_xml(t_rt *rt);
 void		read_xml(t_rt *rt, t_scene *scene);
@@ -43,6 +46,7 @@ int			check_opt(UINT opt);
 void		check_bo(t_parser *parser, UINT flag);
 void		check_bc(t_parser *parser, UINT flag);
 void		check_flag(t_parser *parser, UINT flag);
+void		check_objsame(t_parser *p, char *line, char *str);
 
 int			xml_get_value(char *line, char **value);
 int			xml_to_int(char *line, int *i);
@@ -270,6 +274,7 @@ int			ft_strloopstr(const char *s1, const char *s2);
 int			ft_strcmptab(char *line, char**tab, int size);
 
 int			*ft_tab2(const int x, const int y);
+void		settab2(int *xy, const int x, const int y);
 t_surfparam	surfparam(SDL_Rect *rect, int color, void *param, int i);
 t_strparam	strparam(char *string, t_font font, int rx[2], int i);
 t_butnparam	butnparam(t_string *string, t_surface *surface, SDL_Rect *rect,

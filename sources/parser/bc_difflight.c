@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 18:02:45 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 18:12:50 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:26:56 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		bc_difflight(t_scene *s, t_parser *p, char *line)
 {
 	(void)s;
-	printf("%s %d\n", __FUNCTION__, p->i_obj);
 	if (p->i_obj >= p->lim_obj || p->i_obj < 0)
 	{
 		ft_printf("XML %s ERROR - Can't assign mat to more or less (%d)"
@@ -23,7 +22,6 @@ void		bc_difflight(t_scene *s, t_parser *p, char *line)
 		p->l, line);
 		exit(-1);
 	}
-	printf("opt_m flag is %s / %s\n", ft_uitoa_32bit(p->opt_m), ft_uitoa_32bit(BYTE_DIFFLIGHT | BYTE_COLOR));
 	if (check_opt(p->opt_m) != E_TAB_DIFFLIGHT)
 	{
 		ft_printf("XML %s ERROR - Some flags are missing within <difflight>"
@@ -38,7 +36,6 @@ void		bc_difflight(t_scene *s, t_parser *p, char *line)
 void		bo_difflight(t_scene *s, t_parser *p, char *line)
 {
 	(void)line;
-	printf("%s %d\n", __FUNCTION__, p->i_obj);
 	if (p->obj != p->i_obj)
 	{
 		ft_printf("XML %s ERROR - Material need to be assigned to a declared"

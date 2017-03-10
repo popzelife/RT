@@ -1,0 +1,54 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>-5.0 1.0 -10.0</pos>
+	<target>0 0 0</target>
+	<rotate>0 -1 0</rotate>
+	<fov>60</fov>
+	<aperture>5</aperture>
+</camera>
+
+<obj>
+	<sphere>
+		<pos>4.0 2.0 0.0</pos>
+		<radius>1</radius>
+
+		<lambert>
+			<color>1 0.2 0.2</color>
+		</lambert>
+	</sphere>
+
+	<sphere>
+		<pos>-5.0 2.0 0.0</pos>
+		<radius>2</radius>
+
+		<metal>
+			<color>0.2 0.2 1</color>
+		</metal>
+	</sphere>
+
+	<sphere>
+		<pos>0.0 -20.0 0.0</pos>
+		<radius>20</radius>
+
+		<lambert>
+			<color>0.2 1 0.2</color>
+		</lambert>
+	</sphere>
+
+	<plane>
+		<pos>0.0 8.0 0.0</pos>
+		<rotate>0 1 8865487896548564545145456464564654546654465464</rotate>
+
+		<difflight>
+			<color>1 1 1</color>
+		</difflight>
+	</plane>
+</obj>
+
+<skybox>
+	<gradient>
+		<color>0.5 0.4 0.1</color>
+		<color>0.6 1 1</color>
+	</gradient>
+</skybox>

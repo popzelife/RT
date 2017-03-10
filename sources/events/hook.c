@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 13:56:11 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 18:31:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/10 00:01:54 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	display_surf_string(t_rt *rt)
 	while (string_curs != NULL)
 	{
 		SDL_RenderCopy(rt->esdl->eng.render, string_curs->text.text, NULL,
-		string_curs->text.rect);
+		&string_curs->text.rect);
 		string_curs = string_curs->next;
 	}
 }
@@ -46,7 +46,7 @@ static void	display_button(t_rt *rt)
 		SDL_RenderCopy(rt->esdl->eng.render, button_curs->surface->next->text,
 			NULL, button_curs->surface->next->rect);
 		SDL_RenderCopy(rt->esdl->eng.render, button_curs->string->text.text,
-			NULL, button_curs->string->text.rect);
+			NULL, &button_curs->string->text.rect);
 		button_curs = button_curs->next;
 	}
 }
@@ -69,6 +69,8 @@ void		display_rt(t_rt *rt)
 	SDL_RenderClear(rt->esdl->eng.render);
 	if (rt->render)
 	{
+		SDL_DestroyTexture(rt->tx_view);
+		SDL_DestroyTexture(rt->tx_process);
 		rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
 		rt->sr_view);
 		rt->tx_process = SDL_CreateTextureFromSurface(rt->esdl->eng.render,

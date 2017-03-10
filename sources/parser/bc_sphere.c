@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 19:33:27 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 18:31:44 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/09 21:57:00 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 void		bc_sphere(t_scene *s, t_parser *p, char *line)
 {
-	printf("%s %d\n", __FUNCTION__, p->i_obj);
 	if (p->i_obj >= p->lim_obj || p->i_obj < 0)
 	{
 		ft_printf("XML %s ERROR - Can't assign more or less (%d) spheres than "
 		"initiated at line %d: '%s'\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
-	printf("opt flag is %s / %s\n", ft_uitoa_32bit(p->opt), ft_uitoa_32bit(BYTE_SPHERE | BYTE_POS | BYTE_RADIUS));
 	if (check_opt(p->opt) != E_TAB_SPHERE || p->mat == FALSE)
 	{
 		ft_printf("XML %s ERROR - Some flags are missing within <sphere> balise"
 		" for sphere %d at line %d: %s\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
-	s->obj[p->i_obj]= new_object(s->obj[p->i_obj].p_obj, s->obj[p->i_obj].type_obj,
+	s->obj[p->i_obj] = new_object(s->obj[p->i_obj].p_obj,
+	s->obj[p->i_obj].type_obj,
 	s->obj[p->i_obj].p_mat, s->obj[p->i_obj].p_mat->type_mat);
 	s->this_obj = &s->obj[p->i_obj];
 	s->sizeof_obj = p->i_obj + 1;
@@ -37,16 +36,15 @@ void		bc_sphere(t_scene *s, t_parser *p, char *line)
 	p->mat = FALSE;
 	p->lim_mat = 0;
 	p->obj = -1;
+	p->same--;
 }
 
 void		bo_sphere(t_scene *s, t_parser *p, char *line)
 {
-	(void)line;
+	check_objsame(p, line, "sphere");
 	p->i_obj++;
-	printf("%s %d\n", __FUNCTION__, p->i_obj);
 	if (p->i_obj >= p->lim_obj)
 	{
-		printf("realloc\n");
 		p->lim_obj += 1;
 		if ((s->obj = (t_obj*)realloc(s->obj, p->lim_obj * sizeof(t_obj)))
 			== NULL)
