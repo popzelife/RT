@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 20:30:16 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/10 16:38:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_PARAM);
 	rt->parser.bo[i++] = ft_strdup(BO_GRADIENT);
 	rt->parser.bo[i++] = ft_strdup(BO_NONE);
+	rt->parser.bo[i++] = ft_strdup(BO_TEXTURE);
 	rt->parser.nb_balise = i;
 }
 
@@ -63,6 +64,7 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_PARAM);
 	rt->parser.bc[i++] = ft_strdup(BC_GRADIENT);
 	rt->parser.bc[i++] = ft_strdup(BC_NONE);
+	rt->parser.bC[i++] = ft_strdup(BC_TEXTURE;
 	if (i != rt->parser.nb_balise)
 		ft_printf("!WARNING! - Number of BO and BC balises are not equal\n");
 }

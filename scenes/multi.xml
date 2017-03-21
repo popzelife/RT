@@ -1,0 +1,67 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>-10.0 5.0 0.0</pos>
+	<target>0.0 0.0 0.0</target>
+	<rotate>0 -1.0 0</rotate>
+	<fov>60</fov>
+	<aperture>0</aperture>
+</camera>
+
+<obj>
+	<cylinder>
+		<pos>3.0 0.0 4.0</pos>
+		<radius>1.0</radius>
+		<rotate>0.0 1.0 0.0</rotate>
+		<lambert>
+			<color>0.9 0.2 0.2</color>
+		</lambert>
+	</cylinder>
+	<cylinder>
+		<pos>3.0 0.0 -4.0</pos>
+		<radius>1.0</radius>
+		<rotate>0.0 1.0 0.0</rotate>
+		<lambert>
+			<color>0.1 0.6 0.6</color>
+		</lambert>
+	</cylinder>
+	<cylinder>
+		<pos>6.0 0.0 0.0</pos>
+		<radius>1.0</radius>
+		<rotate>0.0 1.0 0.0</rotate>
+		<lambert>
+			<color>0.1 0.6 0.6</color>
+		</lambert>
+	</cylinder>
+	<cylinder>
+		<pos>0.0 0.0 0.0</pos>
+		<radius>1.0</radius>
+		<rotate>0.0 1.0 0.0</rotate>
+		<lambert>
+			<color>0.1 0.6 0.6</color>
+		</lambert>
+	</cylinder>
+	<cylinder>
+		<pos>6.0 0.0 5.0</pos>
+		<radius>1.0</radius>
+		<rotate>0.0 1.0 0.0</rotate>
+		<difflight>
+			<color>1.0 1.0 1.0</color>
+		</difflight>
+	</cylinder>
+	<cylinder>
+		<pos>6.0 0.0 -5.0</pos>
+		<radius>1.0</radius>
+		<rotate>0.0 1.0 0.0</rotate>
+		<difflight>
+			<color>1.0 1.0 1.0</color>
+		</difflight>
+	</cylinder>
+	<plane>
+		<pos> 20.0 0.0 -5.0</pos>
+		<rotate>0.0 1.0 0.0</rotate>
+		<lambert>
+			<color>0.2 0.7 0.2</color>
+		</lambert>
+	</plane>
+</obj>

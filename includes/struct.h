@@ -328,6 +328,7 @@ enum			e_bytetab
 	E_TAB_PARAM,
 	E_TAB_GRADIENT,
 	E_TAB_NONE,
+	E_TAB_TEXTURE,
 	E_TAB_LAST
 };
 
