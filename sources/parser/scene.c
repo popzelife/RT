@@ -6,18 +6,18 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 22:36:18 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 14:40:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static t_scene	default_scene(t_rt *rt)
+t_scene	default_scene(t_rt *rt)
 {
 	t_scene		scene;
 
-	scene.sizeof_obj = 6;
-	rt->parser.lim_obj = 6;
+	scene.sizeof_obj = 7;
+	rt->parser.lim_obj = 7;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
 	default_obj(&scene);
 	default_cam(rt, &scene);
@@ -31,6 +31,7 @@ t_scene			init_scene(t_rt *rt)
 
 	if (rt->filename != NULL)
 	{
+		ft_printf("-- Parsing XML file ''%s'' --\n", rt->filename);
 		scene.sizeof_cam = 0;
 		rt->parser.lim_cam = 0;
 		scene.cam = (t_cam*)malloc(scene.sizeof_cam * sizeof(t_cam));
@@ -47,6 +48,7 @@ t_scene			init_scene(t_rt *rt)
 			default_skybox(rt, &scene);
 	}
 	else
-		return (default_scene(rt));
+		return (random_scene_sphere(rt));
+		//return (default_scene(rt));
 	return (scene);
 }

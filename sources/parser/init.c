@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/10 16:38:28 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/21 13:35:25 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_PLANE);
 	rt->parser.bo[i++] = ft_strdup(BO_CYLINDER);
 	rt->parser.bo[i++] = ft_strdup(BO_CONE);
+	rt->parser.bo[i++] = ft_strdup(BO_ELLIPSOID);
+	//rt->parser.bo[i++] = ft_strdup(BO_PARABOLOID);
 	rt->parser.bo[i++] = ft_strdup(BO_RADIUS);
 	rt->parser.bo[i++] = ft_strdup(BO_POS);
 	rt->parser.bo[i++] = ft_strdup(BO_ROTATE);
+	rt->parser.bo[i++] = ft_strdup(BO_HEIGHT);
 	rt->parser.bo[i++] = ft_strdup(BO_LAMBERT);
 	rt->parser.bo[i++] = ft_strdup(BO_METAL);
 	rt->parser.bo[i++] = ft_strdup(BO_DIELECT);
@@ -36,7 +39,6 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_PARAM);
 	rt->parser.bo[i++] = ft_strdup(BO_GRADIENT);
 	rt->parser.bo[i++] = ft_strdup(BO_NONE);
-	rt->parser.bo[i++] = ft_strdup(BO_TEXTURE);
 	rt->parser.nb_balise = i;
 }
 
@@ -53,9 +55,12 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_PLANE);
 	rt->parser.bc[i++] = ft_strdup(BC_CYLINDER);
 	rt->parser.bc[i++] = ft_strdup(BC_CONE);
+	rt->parser.bc[i++] = ft_strdup(BC_ELLIPSOID);
+	//rt->parser.bo[i++] = ft_strdup(BC_PARABOLOID);
 	rt->parser.bc[i++] = ft_strdup(BC_RADIUS);
 	rt->parser.bc[i++] = ft_strdup(BC_POS);
 	rt->parser.bc[i++] = ft_strdup(BC_ROTATE);
+	rt->parser.bc[i++] = ft_strdup(BC_HEIGHT);
 	rt->parser.bc[i++] = ft_strdup(BC_LAMBERT);
 	rt->parser.bc[i++] = ft_strdup(BC_METAL);
 	rt->parser.bc[i++] = ft_strdup(BC_DIELECT);
@@ -64,7 +69,6 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_PARAM);
 	rt->parser.bc[i++] = ft_strdup(BC_GRADIENT);
 	rt->parser.bc[i++] = ft_strdup(BC_NONE);
-	rt->parser.bC[i++] = ft_strdup(BC_TEXTURE;
 	if (i != rt->parser.nb_balise)
 		ft_printf("!WARNING! - Number of BO and BC balises are not equal\n");
 }
@@ -72,7 +76,7 @@ static void		init_xmlbc(t_rt *rt, int i)
 void			init_xml(t_rt *rt)
 {
 	register int		i;
-
+	
 	rt->parser.byte = (UINT*)malloc(sizeof(UINT) * (E_TAB_LAST));
 	rt->parser.bo = (char**)malloc(sizeof(char*) * (E_TAB_LAST));
 	rt->parser.bc = (char**)malloc(sizeof(char*) * (E_TAB_LAST));

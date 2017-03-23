@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 11:15:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 20:30:07 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/22 11:32:45 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			xml_to_double(char *line, double *i)
 		ft_printf("XML ERROR - This value: %s is not numerical\n", line);
 		return (0);
 	}
-	*i = ft_atof(line);
+	*i = atof(line);
 	return (1);
 }
 

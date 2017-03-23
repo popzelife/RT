@@ -1,0 +1,28 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>-10.0 0.0 0.0</pos>
+	<target>0.0 0.0 0.0</target>
+	<rotate>0 -1.0 0</rotate>
+	<fov>60</fov>
+	<aperture>0</aperture>
+</camera>
+
+<obj>
+	<ellipsoid>
+		<pos>0.0 0.0 0.0</pos>
+		<rotate>0 1.0 0</rotate>
+		<height>1.0</height>
+		<radius>0.9</radius>
+		<lambert>
+			<color>0.9 0.2 0.2</color>
+		</lambert>
+	</ellipsoid>
+</obj>
+
+<skybox>
+	<gradient>
+		<color>0.3 0.2 0.5</color>
+		<color>0.2 0.1 0.1</color>
+	</gradient>
+</skybox>

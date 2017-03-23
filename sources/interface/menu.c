@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 21:17:20 by popzelife         #+#    #+#             */
-/*   Updated: 2017/03/10 00:03:59 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:27:02 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	init_param(t_rt *rt, t_menu *m)
 	rt->r_menu = malloc(sizeof(SDL_Rect));
 	SDL_GetWindowSize(rt->win_temp, &(rt->r_menu->w), &(rt->r_menu->h));
 	rt->r_menu->x = rt->r_menu->w - MENU_RX;
-	rt->r_menu->y = 0;
+	rt->r_menu->y = TILE_RY;
+	rt->r_menu->h -= TILE_RY;
 }
 
 void		draw_menu(t_rt *rt)

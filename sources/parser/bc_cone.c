@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:33:06 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/09 21:58:21 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:54:22 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		bc_cone(t_scene *s, t_parser *p, char *line)
 	p->lim_mat = 0;
 	p->obj = -1;
 	p->same--;
+	ft_printf("\t- Cone[%d] Initiated\n", s->sizeof_obj);
 }
 
 void		bo_cone(t_scene *s, t_parser *p, char *line)

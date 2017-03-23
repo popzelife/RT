@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:33:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/09 21:58:10 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:55:12 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		bc_plane(t_scene *s, t_parser *p, char *line)
 	p->lim_mat = 0;
 	p->obj = -1;
 	p->same--;
+	ft_printf("\t- Plane[%d] Initiated\n", s->sizeof_obj);
 }
 
 void		bo_plane(t_scene *s, t_parser *p, char *line)

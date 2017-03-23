@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:01:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 21:54:40 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:20:43 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		get_param_material(t_rt *rt)
 	if (rt->panel.viewparam.scene.this_obj->p_mat->type_mat == MAT_METAL)
 	{
 		sprintf(rt->panel.viewparam.str_mat, "Material: %5sMetallic", " ");
-		sprintf(rt->panel.viewparam.str_param_m, "Fuzzy: %10.3g",
+		sprintf(rt->panel.viewparam.str_param_m, "Reflection: %2s" "%.3g", " ",
 		rt->panel.viewparam.scene.this_obj->p_mat->t);
 	}
 	else if (rt->panel.viewparam.scene.this_obj->p_mat->type_mat == MAT_LAMBERT)
@@ -42,7 +42,7 @@ void		get_param_material(t_rt *rt)
 	else if (rt->panel.viewparam.scene.this_obj->p_mat->type_mat == MAT_DIELECT)
 	{
 		sprintf(rt->panel.viewparam.str_mat, "Material: %5sDielectric", " ");
-		sprintf(rt->panel.viewparam.str_param_m, "Reflection: %5.3g",
+		sprintf(rt->panel.viewparam.str_param_m, "Refraction: %2s" "%.3g", " ",
 		rt->panel.viewparam.scene.this_obj->p_mat->t);
 	}
 	material_color(rt);

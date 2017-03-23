@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/10 01:08:00 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 00:42:13 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@
 */
 
 void		init_rt(t_rt *rt);
-void		loading(t_rt *rt);
 void		init_rand(t_rt *rt);
 void		init_screen_buffer(t_rt *rt);
 void		init_multithread(t_rt *rt);
+
+void		loading(t_rt *rt);
+void		init_loader(t_rt *rt);
+void		progress_load(t_rt *rt, int percent);
+void		render_load(t_rt *rt);
 
 /*
 ** Parsing
@@ -38,6 +42,8 @@ t_scene		init_scene(t_rt *rt);
 void		default_cam(t_rt *rt, t_scene *scene);
 void		default_skybox(t_rt *rt, t_scene *scene);
 void		default_obj(t_scene *scene);
+
+t_scene		random_scene_sphere(t_rt *rt);
 
 void		init_xml(t_rt *rt);
 void		read_xml(t_rt *rt, t_scene *scene);
@@ -68,6 +74,14 @@ void		bo_cone_rotate(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_pos(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_radius(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_rotate(t_scene *s, t_parser *p, char *line);
+void		bo_ellipsoid_pos(t_scene *s, t_parser *p, char *line);
+void		bo_ellipsoid_rotate(t_scene *s, t_parser *p, char *line);
+void		bo_ellipsoid_radius(t_scene *s, t_parser *p, char *line);
+void		bo_ellipsoid_height(t_scene *s, t_parser *p, char *line);
+//void		bo_paraboloid_pos(t_scene *s, t_parser *p, char *line);
+//void		bo_paraboloid_rotate(t_scene *s, t_parser *p, char *line);
+//void		bo_paraboloid_height(t_scene *s, t_parser *p, char *line);
+
 void		bo_lambert_color(t_scene *s, t_parser *p, char *line);
 void		bo_metal_color(t_scene *s, t_parser *p, char *line);
 void		bo_metal_param(t_scene *s, t_parser *p, char *line);
@@ -85,10 +99,15 @@ void		bo_cone(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder(t_scene *s, t_parser *p, char *line);
 void		bo_lambert(t_scene *s, t_parser *p, char *line);
 void		bo_metal(t_scene *s, t_parser *p, char *line);
+void		bo_dielectric(t_scene *s, t_parser *p, char *line);
 void		bo_difflight(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
+void		bo_ellipsoid(t_scene *s, t_parser *p, char *line);
+//void		bo_paraboloid(t_scene *s, t_parser *p, char *line);
 
+//void		bc_paraboloid(t_scene *s, t_parser *p, char *line);
+void		bc_ellipsoid(t_scene *s, t_parser *p, char *line);
 void		bc_cam(t_scene *s, t_parser *p, char *line);
 void		bc_sphere(t_scene *s, t_parser *p, char *line);
 void		bc_plane(t_scene *s, t_parser *p, char *line);
@@ -96,6 +115,7 @@ void		bc_cone(t_scene *s, t_parser *p, char *line);
 void		bc_cylinder(t_scene *s, t_parser *p, char *line);
 void		bc_lambert(t_scene *s, t_parser *p, char *line);
 void		bc_metal(t_scene *s, t_parser *p, char *line);
+void		bc_dielectric(t_scene *s, t_parser *p, char *line);
 void		bc_difflight(t_scene *s, t_parser *p, char *line);
 void		bc_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bc_skybox_none(t_scene *s, t_parser *p, char *line);
@@ -128,7 +148,24 @@ t_action	actionparam(void *param, void (f)(void*));
 
 void		button_render(void *param);
 void		button_snap(void *param);
+void		button_filter(void *param);
+void		button_close(void *param);
+void		button_minus(void *param);
 
+void		filter_negative(t_rt *rt, t_filtervalue *f);
+void		filter_sepia(t_rt *rt, t_filtervalue *f);
+void		filter_greyscale(t_rt *rt, t_filtervalue *f);
+void		filter_matrice(t_rt *rt, t_filtervalue *f, t_matrixf t);
+void		calc_filter(t_filtermatrice *m, t_filtervalue *f, t_matrixf t,
+			t_rt *rt);
+void		init_filter(t_filtermatrice *m, t_filtervalue *f, t_matrixf t,
+			t_rt *rt);
+void		reset_rgb(t_filtermatrice *m);
+void		choose_matrice(t_matrixf *t);
+void		matrice_low_blur(t_matrixf *t);
+void		matrice_motion_blur(t_matrixf *t);
+void		matrice_sharpen(t_matrixf *t);
+void		matrice_emboss(t_matrixf *t);
 /*
 ** Raytracer rendering
 */
@@ -231,6 +268,30 @@ t_cone		*new_cone(t_vec3 vertex, t_vec3 cp, const double tang,
 BOOL		hit_cone(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
+t_ellipsoid	*new_ellipsoid(t_vec3 center, t_vec3 vertex, double k,
+			double radius);
+BOOL		hit_ellispoid(void *obj, const t_ray ray, const double t[2],
+				t_hit *param);
+t_paraboloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k);
+BOOL		hit_paraboloid(void *obj, const t_ray ray, const double t[2],
+			t_hit *param);
+
+/*
+** Texture
+*/
+
+void		texture_rainbow(t_vec3 pos, t_vec3 *attenuation);
+void		texture_liney(t_vec3 pos, t_vec3 *attenuation);
+void		texture_linex(t_vec3 pos, t_vec3 *attenuation);
+void		texture_checkboard(t_vec3 pos, t_vec3 *attenuation);
+void		texture_it(const t_hit  param, t_vec3 *attenuation);
+
+void		sphere_uv(const t_vec3 p, double *u, double *v);
+t_vec3		surface_value(SDL_Surface *data, double u, double v);
+uint32_t	getpixel(SDL_Surface *surface, int x, int y);
+
+t_texture	*new_texture(const UCHAR type_texture, char *filename);
+
 /*
 ** Materials
 */
@@ -238,6 +299,9 @@ BOOL		hit_cone(void *obj, const t_ray ray, const double t[2],
 t_mat		*new_material(t_vec3 albedo, double t);
 
 t_vec3		reflect(const t_vec3 v, const t_vec3 n);
+BOOL		refract(const t_vec3 v, const t_vec3 n, double ni_over_nt,
+			t_vec3 *refracted);
+
 BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
 BOOL		scatter_metal(const t_ray ray, const t_hit param,
@@ -246,7 +310,6 @@ BOOL		scatter_dielectric(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
 BOOL		scatter_none(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
-
 BOOL		scatter_diffuse_light(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
 
@@ -311,6 +374,9 @@ double		f_min(double const a, double const b);
 double		f_max(double const a, double const b);
 
 void		random_seed(char *s, const int len);
+
+int			min(const int a, const int b);
+int			max(const int a, const int b);
 
 /*
 ** Exit

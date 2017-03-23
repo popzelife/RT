@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 18:31:12 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:04:27 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 				scatter_metal(ray, param, &attenuation, &scattered);
 			else if (param.material->type_mat == MAT_LAMBERT)
 				scatter_lambertian(ray, param, &attenuation, &scattered);
+			else if (param.material->type_mat == MAT_DIELECT)
+				scatter_dielectric(ray, param, &attenuation, &scattered);
 			else
 				return (param.material->emitted);
-			return (v3_add_vec_(param.material->emitted,
-						v3_multiply_vec_(attenuation,
-							rt_color(scattered, scene, depth + 1, max_depth))));
+			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_(
+			attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
 		}
 		else
 			return (param.material->emitted);

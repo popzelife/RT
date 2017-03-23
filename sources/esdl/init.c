@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:11:48 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/27 14:05:55 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 20:49:57 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ int			esdl_init(t_esdl *esdl, const int rx, const int ry, char *name)
 		ret = -1;
 		ft_dprintf(2, "SDL_CreateRenderer() failed: %s\n", SDL_GetError());
 	}
+	if (!esdl_init_img(esdl))
+		ret = -1;
 	return (ret);
 }

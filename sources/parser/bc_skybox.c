@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 18:17:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 22:14:04 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:55:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		bc_skybox_gradient(t_scene *s, t_parser *p, char *line)
 	p->f = (void*)&bo_void;
 	p->opt = 0;
 	p->same--;
+	ft_printf("\t- Skybox[%d] Initiated\n", s->sizeof_skb);
 }
 
 void		bc_skybox_none(t_scene *s, t_parser *p, char *line)

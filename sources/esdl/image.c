@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   esdl_image.c                                       :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:57:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/17 18:55:21 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 21:02:49 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ SDL_Texture			*esdl_load_texture(SDL_Renderer *render, \
 	SDL_Surface		*surf;
 	SDL_Texture		*tex;
 
-	surf = SDL_LoadBMP(path);
+	surf = IMG_Load(path);
 	if (w != NULL)
 		*w = surf->w;
 	if (h != NULL)
@@ -45,4 +45,18 @@ SDL_Texture			*esdl_load_texture(SDL_Renderer *render, \
 	tex = SDL_CreateTextureFromSurface(render, surf);
 	SDL_FreeSurface(surf);
 	return (tex);
+}
+
+int		esdl_init_img(t_esdl *esdl)
+{
+	int		ret;
+
+	ret = 1;
+	if (IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG) == -1)
+	{
+		ret = -1;
+		ft_dprintf(2, "esdl_init_img() failed: %s\n", IMG_GetError());
+	}
+	esdl->img = 1;
+	return (ret);
 }

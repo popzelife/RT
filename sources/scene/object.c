@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:12:36 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:04:52 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void	*select_hit(const UCHAR t)
 		f = (void*)&hit_cylinder;
 	else if (t == OBJ_CONE)
 		f = (void*)&hit_cone;
+	else if (t == OBJ_ELLIPSOID)
+		f = (void*)&hit_ellispoid;
+	else if (t == OBJ_PARABOLOID)
+		f = (void*)&hit_paraboloid;
 	else
 		f = (void*)&hit_sphere;
 	return (f);
@@ -41,6 +45,8 @@ static void	*select_scatter(const UCHAR t)
 		s = (void*)&scatter_dielectric;
 	else if (t == MAT_DIFF_LIGHT)
 		s = (void*)&scatter_diffuse_light;
+	else if (t == MAT_DIELECT)
+		s = (void*)&scatter_dielectric;
 	else
 		s = (void*)&scatter_lambertian;
 	return (s);

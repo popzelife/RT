@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:52:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 22:18:59 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 18:17:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	sphere_param(t_rt *rt)
 	sprintf(rt->panel.viewparam.str_obj, "Sphere Param:");
 	sprintf(rt->panel.viewparam.str_pos, "Position: %5s[%.3g; %.3g; %.3g]", " ",
 	sphere->center.x, sphere->center.y, sphere->center.z);
-	sprintf(rt->panel.viewparam.str_param_o, "Radius: %6s %.3g %7s", " ",
+	sprintf(rt->panel.viewparam.str_param_o, "Radius: %7s %.3g %7s", " ",
 	sphere->radius, " ");
 }
 
@@ -56,7 +56,7 @@ static void	cylinder_param(t_rt *rt)
 	sprintf(rt->panel.viewparam.str_obj, "Cylinder Param:");
 	sprintf(rt->panel.viewparam.str_pos, "Position: %5s[%.3g; %.3g; %.3g]", " ",
 	cylinder->vertex.x, cylinder->vertex.y, cylinder->vertex.z);
-	sprintf(rt->panel.viewparam.str_param_o, "Radius: %6s %.3g%7s", " ",
+	sprintf(rt->panel.viewparam.str_param_o, "Radius: %7s %.3g%7s", " ",
 	cylinder->radius, " ");
 }
 

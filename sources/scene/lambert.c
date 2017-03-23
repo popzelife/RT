@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   temp.c                                             :+:      :+:    :+:   */
+/*   lambert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 15:19:21 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 21:21:22 by qfremeau         ###   ########.fr       */
+/*   Created: 2017/03/21 17:08:38 by qfremeau          #+#    #+#             */
+/*   Updated: 2017/03/21 17:09:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		bo_dielect_color(t_scene *s, t_parser *p, char *line)
+BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
+			t_vec3 *attenuation, t_ray *scattered)
 {
-	(void)s;
-	(void)p;
-	(void)line;
-}
+	t_vec3		target;
 
-void		bo_dielect_param(t_scene *s, t_parser *p, char *line)
-{
-	(void)s;
-	(void)p;
-	(void)line;
+	(void)ray;
+	target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
+	random_in_unit_sphere());
+	*scattered = new_ray(param.pos, v3_sub_vec_(target, param.pos));
+	*attenuation = param.material->albedo;
+	return (TRUE);
 }

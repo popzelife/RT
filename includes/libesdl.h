@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:14:03 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/10 00:15:28 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 20:46:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <SDL.h>
 # include <SDL_ttf.h>
+# include <SDL_image.h>
 
 typedef struct	s_font
 {
@@ -67,6 +68,7 @@ typedef	struct	s_esdl
 	t_timer			fps;
 	int				run;
 	int				ttf;
+	int				img;
 }				t_esdl;
 
 /*
@@ -98,9 +100,6 @@ void			esdl_draw_filled_square(SDL_Surface *surf,
 void			esdl_clear_surface(SDL_Surface *surf,
 				const SDL_Rect *rect, const int color, void *param);
 
-SDL_Texture		*esdl_load_texture(SDL_Renderer *render,
-				const char *path, int *w, int *h);
-
 void			esdl_exit(t_esdl *esdl);
 
 /*
@@ -114,5 +113,14 @@ t_text			esdl_render_blendedtext(char *text, t_font f, int xy[2],
 				SDL_Renderer *render);
 t_text			esdl_render_solidtext(char *text, t_font f, int xy[2],
 				SDL_Renderer *render);
+
+/*
+** SDL_IMG
+*/
+
+int				esdl_init_img(t_esdl *esdl);
+
+SDL_Texture		*esdl_load_texture(SDL_Renderer *render,
+				const char *path, int *w, int *h);
 
 #endif

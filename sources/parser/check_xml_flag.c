@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:39:28 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/09 22:16:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/21 13:35:00 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,43 @@ static void	check_flag_ter(t_parser *parser, UINT flag)
 	if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_METAL | BYTE_PARAM) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_METAL | BYTE_PARAM) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_METAL | BYTE_PARAM) ||
-			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_METAL | BYTE_PARAM))
+			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_METAL | BYTE_PARAM) ||
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_METAL | BYTE_PARAM))
 		parser->f = (void*)&bo_metal_param;
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_DIELECT | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_DIELECT | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_DIELECT | BYTE_COLOR) ||
-			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_DIELECT | BYTE_COLOR))
+			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_DIELECT | BYTE_COLOR) ||
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_DIELECT | BYTE_COLOR))
 		parser->f = (void*)&bo_dielect_color;
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_DIELECT | BYTE_PARAM) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_DIELECT | BYTE_PARAM) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_DIELECT | BYTE_PARAM) ||
-			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_DIELECT | BYTE_PARAM))
+			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_DIELECT | BYTE_PARAM) ||
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_DIELECT | BYTE_PARAM))
 		parser->f = (void*)&bo_dielect_param;
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_DIFFLIGHT | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_DIFFLIGHT | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_DIFFLIGHT | BYTE_COLOR) ||
-			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_DIFFLIGHT | BYTE_COLOR))
+			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_DIFFLIGHT | BYTE_COLOR) ||
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_DIFFLIGHT | BYTE_COLOR))
 		parser->f = (void*)&bo_difflight_color;
 	else if (flag == (BYTE_SKYBOX | BYTE_GRADIENT | BYTE_COLOR))
 		parser->f = (void*)&bo_skgradient_color;
+	else if (flag == (BYTE_OBJ | BYTE_ELLIPSOID | BYTE_POS))
+		parser->f = (void*)&bo_ellipsoid_pos;
+	else if (flag == (BYTE_OBJ | BYTE_ELLIPSOID | BYTE_ROTATE))
+		parser->f = (void*)&bo_ellipsoid_rotate;
+	else if (flag == (BYTE_OBJ | BYTE_ELLIPSOID | BYTE_RADIUS))
+		parser->f = (void*)&bo_ellipsoid_radius;
+	else if (flag == (BYTE_OBJ | BYTE_ELLIPSOID | BYTE_HEIGHT))
+		parser->f = (void*)&bo_ellipsoid_height;
+	//else if (flag == (BYTE_OBJ | BYTE_PARABOLOID | BYTE_HEIGHT))
+	//	parser->f = (void*)&bo_paraboloid_height;
+	//else if (flag == (BYTE_OBJ | BYTE_PARABOLOID | BYTE_POS))
+	//	parser->f = (void*)&bo_paraboloid_pos;
+	//else if (flag == (BYTE_OBJ | BYTE_PARABOLOID | BYTE_ROTATE))
+	//	parser->f = (void*)&bo_paraboloid_rotate;
 	else
 		parser->f = (void*)&bo_void;
 }
@@ -55,12 +73,16 @@ static void	check_flag_bis(t_parser *parser, UINT flag)
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
-			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR))
+			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR)) //||
+			//(flag ^ BYTE_PARABOLOID) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR))
 		parser->f = (void*)&bo_lambert_color;
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
-			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR))
+			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR)) //||
+			//(flag ^ BYTE_PARABOLOID) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR))
 		parser->f = (void*)&bo_metal_color;
 	else
 		check_flag_ter(parser, flag);
