@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 23:52:26 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:30:44 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,35 @@ void		button_list(t_rt *rt, t_input *in)
 	button_curs = rt->panel.lst_button;
 	while (button_curs != NULL)
 	{
-		if (in->m_x > button_curs->rect.x &&
+		if (button_curs->enabled && in->m_x > button_curs->rect.x &&
 			in->m_x < (button_curs->rect.x + button_curs->rect.w) &&
 			in->m_y > button_curs->rect.y &&
 			in->m_y < (button_curs->rect.y + button_curs->rect.h))
 		{
-			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
 			button_curs->hover = TRUE;
 			if (in->button[SDL_BUTTON_LEFT])
 			{
 				button_curs->action(button_curs->param);
 				SDL_Delay(300);
 			}
+		}
+		else
+			button_curs->hover = FALSE;
+		button_curs = button_curs->next;
+	}
+	button_curs = rt->panel.lst_button;
+	while (button_curs != NULL)
+	{
+		if (button_curs->enabled && in->m_x > button_curs->rect.x &&
+			in->m_x < (button_curs->rect.x + button_curs->rect.w) &&
+			in->m_y > button_curs->rect.y &&
+			in->m_y < (button_curs->rect.y + button_curs->rect.h))
+		{
+			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
 			break;
 		}
 		else
-		{
 			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
-			button_curs->hover = FALSE;
-		}
 		button_curs = button_curs->next;
 	}
 	if (in->m_x < rt->r_view->w && in->m_y < rt->r_view->h + TILE_RY

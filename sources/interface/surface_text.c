@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:21:37 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 19:29:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 16:59:07 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,6 @@ void		draw_text_surface(t_rt *rt)
 {
 	int		*i;
 
-	rt->panel.title1 = esdl_load_font(QUICKFONT, 22, 0x222222ff);
-	rt->panel.sub_title1 = esdl_load_font(QUICKFONT, 18, 0xccccccff);
-	rt->panel.word1 = esdl_load_font(QUICKFONT, 18, 0xccccccff);
 	i = ft_tab2(WIN_RX - MENU_RX + 5, 7 + TILE_RY);
 	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
 	"Object Setting:", rt->panel.title1, i, 0), rt->esdl->eng.render,

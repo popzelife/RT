@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 13:29:48 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 19:10:53 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void		rt_miniview_surface(SDL_Surface *surf, const SDL_Rect *rect,
 
 void		get_param_material(t_rt *rt);
 void		get_param_object(t_rt *rt);
+void		buffer_button_param(t_rt *rt, t_menu *m);
 void		draw_bkg_surface(t_rt *rt, t_menu *m);
 void		draw_text_surface(t_rt *rt);
 void		draw_text_list_object(t_rt *rt);
@@ -146,11 +147,16 @@ void		draw_button_surface(t_rt *rt, t_menu *m);
 
 t_action	actionparam(void *param, void (f)(void*));
 
+void		lst_active_button(t_button **button, UINT i_lst, BOOL active);
+void		lst_set_button(t_button **button, UINT i_lst, t_action action);
+
 void		button_render(void *param);
 void		button_snap(void *param);
 void		button_filter(void *param);
 void		button_close(void *param);
 void		button_minus(void *param);
+
+void		button_sphereradius(void *param);
 
 void		filter_negative(t_rt *rt, t_filtervalue *f);
 void		filter_sepia(t_rt *rt, t_filtervalue *f);

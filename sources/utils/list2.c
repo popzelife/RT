@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:38:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 18:15:12 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 18:16:13 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_button	*lst_new_button(t_button **button, t_butnparam param,
 	new->hover = FALSE;
 	new->param = action.param;
 	new->action = action.f;
+	new->enabled = TRUE;
+	new->i_lst = param.i_lst;
 	new->next = NULL;
 	if (*button == NULL)
 		return (new);
@@ -84,4 +86,29 @@ t_button	*lst_new_button(t_button **button, t_butnparam param,
 		curs->next = new;
 	}
 	return (*button);
+}
+
+void		lst_active_button(t_button **button, UINT i_lst, BOOL active)
+{
+	t_button		*curs;
+
+	curs = *button;
+	while (curs && curs->i_lst != i_lst)
+		curs = curs->next;
+	if (curs)
+		curs->enabled = active;
+}
+
+void		lst_set_button(t_button **button, UINT i_lst, t_action action)
+{
+	t_button		*curs;
+
+	curs = *button;
+	while (curs && curs->i_lst != i_lst)
+		curs = curs->next;
+	if (curs)
+	{
+		curs->param = action.param;
+		curs->action = action.f;
+	}
 }

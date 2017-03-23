@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 14:22:56 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:47:38 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@
 # define OBJ_PYRAMID	0x20
 # define OBJ_CYLINDER	0x40
 # define OBJ_SKYBOX		0x80
-# define OBJ_PARABOLOID 0x90
-# define OBJ_ELLIPSOID	0x91
+# define OBJ_PARABOLOID 0x11
+# define OBJ_ELLIPSOID	0x12
 
 # define SKYBX_NONE		0x1
 # define SKYBX_GRADIENT	0x2
@@ -84,14 +84,26 @@
 # define MAT_METAL		0x2
 # define MAT_DIELECT	0x4
 # define MAT_DIFF_LIGHT	0x8
+# define TEXT_IMAGE		0x10
+# define TEXT_NONE		0x20
+# define TEXT_TEST		0x40
+# define TEXT_CHCKBOARD	0x80
+# define TEXT_LINEY 	0x11
+# define TEXT_LINEX 	0x12
+# define TEXT_RAINBOW	0x13
 
-# define TEXT_IMAGE	0x12
-# define TEXT_NONE	0x13
-# define TEXT_TEST	0x14
-# define TEXT_CHECKBOARD 0x15
-# define TEXT_LINEY 0x17
-# define TEXT_LINEX 0x18
-# define TEXT_RAINBOW 0x19
+# define BTN_MINUS		0x1
+# define BTN_CLOSE		0x2
+# define BTN_RENDER		0x4
+# define BTN_FILTER		0x8
+# define BTN_SNAP		0x10
+# define BTN_MORE		0x20
+# define BTN_PARAM1		0x40
+# define BTN_PARAM2		0x80
+# define BTN_PARAM3		0x11
+# define BTN_PARAM4		0x12
+# define BTN_PARAM5		0x13
+# define BTN_PARAM6		0x15
 
 # define FILE_DEF		"<?DOCTYPE scn-rt?>"
 

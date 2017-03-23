@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:52:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 18:17:34 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 19:13:35 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static void	sphere_param(t_rt *rt)
 	sphere->center.x, sphere->center.y, sphere->center.z);
 	sprintf(rt->panel.viewparam.str_param_o, "Radius: %7s %.3g %7s", " ",
 	sphere->radius, " ");
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
+	lst_set_button(&rt->panel.lst_button, BTN_PARAM1,
+	actionparam((void*)rt, button_minus));
+	lst_set_button(&rt->panel.lst_button, BTN_PARAM2,
+	actionparam((void*)rt, button_sphereradius));
 }
 
 static void	plane_param(t_rt *rt)
@@ -34,6 +40,8 @@ static void	plane_param(t_rt *rt)
 	plane->on_plane.x, plane->on_plane.y, plane->on_plane.z);
 	sprintf(rt->panel.viewparam.str_param_o, "Normal: %6s[%.3g; %.3g; %.3g]",
 	" ", plane->normale.x, plane->normale.y, plane->normale.z);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
 }
 
 static void	cone_param(t_rt *rt)
@@ -46,6 +54,8 @@ static void	cone_param(t_rt *rt)
 	cone->vertex.x, cone->vertex.y, cone->vertex.z);
 	sprintf(rt->panel.viewparam.str_param_o, "Normal: %6s[%.3g; %.3g; %.3g]",
 	" ", cone->cp.x, cone->cp.y, cone->cp.z);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
 }
 
 static void	cylinder_param(t_rt *rt)
@@ -58,6 +68,8 @@ static void	cylinder_param(t_rt *rt)
 	cylinder->vertex.x, cylinder->vertex.y, cylinder->vertex.z);
 	sprintf(rt->panel.viewparam.str_param_o, "Radius: %7s %.3g%7s", " ",
 	cylinder->radius, " ");
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
 }
 
 void		get_param_object(t_rt *rt)
@@ -70,4 +82,6 @@ void		get_param_object(t_rt *rt)
 		cone_param(rt);
 	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_CYLINDER)
 		cylinder_param(rt);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
+	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
 }

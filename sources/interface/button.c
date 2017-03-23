@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:22:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 22:39:02 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 19:28:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,32 @@ void		button_minus(void *param)
 
 	rt = (void*)param;
 	SDL_MinimizeWindow(rt->esdl->eng.win);
+}
+
+void		button_sphereradius(void *param)
+{
+	char			value[32];
+	t_sphere		*o;
+	t_rt			*rt;
+
+	rt = (void*)param;
+	if (rt->suspend)
+	{
+		o = (t_sphere*)rt->scene->this_obj->p_obj;
+		ft_printf("%-40s", "Enter a new radius:");
+		scanf("%31s", value);
+		while (!xml_to_double(&value[0], &o->radius))
+		{
+			ft_printf("%-40s", "!Error! Try a different radius:");
+			scanf("%31s", value);
+		}
+		o->radius2 = o->radius * o->radius;
+		update_menu(rt);
+		udpate_view(rt);
+		while (rt->iter->s == 0)
+			render_low(rt);
+		esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
+		param_view_high(rt);
+		rt->render = TRUE;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:37:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 13:33:26 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 19:03:43 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void			set_viewparam(t_viewparam *p, t_rt *rt, int x, int y)
 	param.normal = v3_(0., 0., 0.);
 	if (hit_list(rt->scene, ray, t, &param))
 	{
+		rt->scene->this_obj = &rt->scene->obj[param.i_lst];
 		free(p->scene.obj[0].p_obj);
 		free(p->scene.obj[0].p_mat);
 		p->scene.obj[0] = copy_object(&rt->scene->obj[param.i_lst]);

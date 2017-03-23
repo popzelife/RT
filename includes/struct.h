@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 13:03:51 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:53:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,8 @@ typedef struct	s_button
 	SDL_Rect			rect;
 	BOOL				hover;
 	void				*param;
+	BOOL				enabled;
+	UINT				i_lst;
 	void				(*action)(void*);
 	struct s_button		*next;
 }				t_button;
@@ -310,7 +312,6 @@ typedef struct	s_butnparam
 	t_string		*string;
 	t_surface		*surface;
 	SDL_Rect		*rect;
-	int				*corner;
 	int				i_lst;
 }				t_butnparam;
 

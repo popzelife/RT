@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:50:44 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/23 13:46:25 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:36:22 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		texture_it(const t_hit param, t_vec3 *attenuation)
 			if (param.type_obj == OBJ_SPHERE)
 				return (texture_sphere(param, attenuation));
 		}
-		else if (param.material->m_text->type_texture == TEXT_CHECKBOARD)
+		else if (param.material->m_text->type_texture == TEXT_CHCKBOARD)
 			return (texture_checkboard(param.pos, attenuation));
 		else if (param.material->m_text->type_texture == TEXT_LINEX)
 			return (texture_linex(param.pos, attenuation));

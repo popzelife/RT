@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 14:40:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 19:23:01 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_scene	default_scene(t_rt *rt)
 	default_obj(&scene);
 	default_cam(rt, &scene);
 	default_skybox(rt, &scene);
+	ft_printf("-- Initiated ''Default Simple'' scene --\n");
 	return (scene);
 }
 
@@ -48,7 +49,7 @@ t_scene			init_scene(t_rt *rt)
 			default_skybox(rt, &scene);
 	}
 	else
-		return (random_scene_sphere(rt));
-		//return (default_scene(rt));
+		//return (random_scene_sphere(rt));
+		return (default_scene(rt));
 	return (scene);
 }
