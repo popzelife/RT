@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 00:27:21 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:22:56 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@
 # define BO_PLANE		"<plane>"
 # define BO_CYLINDER	"<cylinder>"
 # define BO_CONE		"<cone>"
-# define BO_ELLIPSOID   "<ellipsoid>"
-# define BO_PARABOLOID	"<paraboloid>"
+# define BO_ELLIPSOID	"<ellipsoid>"
+# define BO_PARABLOID	"<paraboloid>"
 # define BO_RADIUS		"<radius>"
 # define BO_POS			"<pos>"
 # define BO_ROTATE		"<rotate>"
@@ -129,7 +129,7 @@
 # define BC_SPHERE		"</sphere>"
 # define BC_PLANE		"</plane>"
 # define BC_CYLINDER	"</cylinder>"
-# define BC_PARABOLOID  "</paraboloid>"
+# define BC_PARABLOID	"</paraboloid>"
 # define BC_CONE		"</cone>"
 # define BC_RADIUS		"</radius>"
 # define BC_POS			"</pos>"
@@ -158,19 +158,19 @@
 # define BYTE_CYLINDER	((UINT)1 << 8)
 # define BYTE_CONE		((UINT)1 << 9)
 # define BYTE_ELLIPSOID ((UINT)1 << 10)
-//# define BYTE_PARABOLOID ((UINT)1 <<30)
-# define BYTE_RADIUS	((UINT)1 << 11)
-# define BYTE_POS		((UINT)1 << 12)
-# define BYTE_ROTATE	((UINT)1 << 13)
-# define BYTE_HEIGHT    ((UINT)1 << 14)
-# define BYTE_LAMBERT	((UINT)1 << 15)
-# define BYTE_METAL		((UINT)1 << 16)
-# define BYTE_DIELECT	((UINT)1 << 17)
-# define BYTE_DIFFLIGHT	((UINT)1 << 18)
-# define BYTE_COLOR		((UINT)1 << 19)
-# define BYTE_PARAM		((UINT)1 << 20)
-# define BYTE_GRADIENT	((UINT)1 << 21)
-# define BYTE_NONE		((UINT)1 << 31)
+# define BYTE_PARABLOID ((UINT)1 << 11)
+# define BYTE_RADIUS	((UINT)1 << 12)
+# define BYTE_POS		((UINT)1 << 13)
+# define BYTE_ROTATE	((UINT)1 << 14)
+# define BYTE_HEIGHT    ((UINT)1 << 15)
+# define BYTE_LAMBERT	((UINT)1 << 16)
+# define BYTE_METAL		((UINT)1 << 17)
+# define BYTE_DIELECT	((UINT)1 << 18)
+# define BYTE_DIFFLIGHT	((UINT)1 << 19)
+# define BYTE_COLOR		((UINT)1 << 20)
+# define BYTE_PARAM		((UINT)1 << 21)
+# define BYTE_GRADIENT	((UINT)1 << 22)
+# define BYTE_NONE		((UINT)1 << 23)
 
 enum			e_bytetab
 {
@@ -186,7 +186,7 @@ enum			e_bytetab
 	E_TAB_CYLINDER,
 	E_TAB_CONE,
 	E_TAB_ELLIPSOID,
-	//E_TAB_PARABOLOID,
+	E_TAB_PARABLOID,
 	E_TAB_RADIUS,
 	E_TAB_POS,
 	E_TAB_ROTATE,

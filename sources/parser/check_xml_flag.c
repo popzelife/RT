@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:39:28 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/21 13:35:00 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:07:33 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static void	check_flag_ter(t_parser *parser, UINT flag)
 		parser->f = (void*)&bo_ellipsoid_radius;
 	else if (flag == (BYTE_OBJ | BYTE_ELLIPSOID | BYTE_HEIGHT))
 		parser->f = (void*)&bo_ellipsoid_height;
-	//else if (flag == (BYTE_OBJ | BYTE_PARABOLOID | BYTE_HEIGHT))
-	//	parser->f = (void*)&bo_paraboloid_height;
-	//else if (flag == (BYTE_OBJ | BYTE_PARABOLOID | BYTE_POS))
-	//	parser->f = (void*)&bo_paraboloid_pos;
-	//else if (flag == (BYTE_OBJ | BYTE_PARABOLOID | BYTE_ROTATE))
-	//	parser->f = (void*)&bo_paraboloid_rotate;
+	else if (flag == (BYTE_OBJ | BYTE_PARABLOID | BYTE_HEIGHT))
+		parser->f = (void*)&bo_paraboloid_height;
+	else if (flag == (BYTE_OBJ | BYTE_PARABLOID | BYTE_POS))
+		parser->f = (void*)&bo_paraboloid_pos;
+	else if (flag == (BYTE_OBJ | BYTE_PARABLOID | BYTE_ROTATE))
+		parser->f = (void*)&bo_paraboloid_rotate;
 	else
 		parser->f = (void*)&bo_void;
 }
@@ -74,15 +74,15 @@ static void	check_flag_bis(t_parser *parser, UINT flag)
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
 			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
-			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR)) //||
-			//(flag ^ BYTE_PARABOLOID) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR))
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR) ||
+			(flag ^ BYTE_PARABLOID) == (BYTE_OBJ | BYTE_LAMBERT | BYTE_COLOR))
 		parser->f = (void*)&bo_lambert_color;
 	else if ((flag ^ BYTE_SPHERE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_PLANE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_CONE) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
 			(flag ^ BYTE_CYLINDER) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
-			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR)) //||
-			//(flag ^ BYTE_PARABOLOID) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR))
+			(flag ^ BYTE_ELLIPSOID) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR) ||
+			(flag ^ BYTE_PARABLOID) == (BYTE_OBJ | BYTE_METAL | BYTE_COLOR))
 		parser->f = (void*)&bo_metal_color;
 	else
 		check_flag_ter(parser, flag);

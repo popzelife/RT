@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parboloid.c                                        :+:      :+:    :+:   */
+/*   paraboloid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 15:33:08 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/13 17:06:10 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:14:53 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_paraboloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k)
+t_parabloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k)
 {
-	t_paraboloid *p;
-	if (!(p = malloc(sizeof(t_paraboloid))))
+	t_parabloid *p;
+	if (!(p = malloc(sizeof(t_parabloid))))
 		return (0);
 	v3_normalize(&vertex);
 	p->vertex = vertex;
@@ -24,7 +24,7 @@ t_paraboloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k)
 	return (p);
 }
 
-BOOL	normal_paraboloid(const t_paraboloid *p, const t_ray ray, t_hit *param, double sol, t_vec3 oc)
+BOOL	normal_paraboloid(const t_parabloid *p, const t_ray ray, t_hit *param, double sol, t_vec3 oc)
 {
 	double	m;
 	t_vec3	tmp;
@@ -40,9 +40,9 @@ BOOL	normal_paraboloid(const t_paraboloid *p, const t_ray ray, t_hit *param, dou
 	return (TRUE);
 }
 
-BOOL	hit_paraboloid(void *obj, const t_ray ray, const double t[2], t_hit *param)
+BOOL	hit_parabloid(void *obj, const t_ray ray, const double t[2], t_hit *param)
 {
-	t_paraboloid	*p;
+	t_parabloid	*p;
 	double	a;
 	double	b;
 	double	c;
@@ -50,7 +50,7 @@ BOOL	hit_paraboloid(void *obj, const t_ray ray, const double t[2], t_hit *param)
 	t_vec3	oc;
 	double	sol;
 
-	p = (t_paraboloid*)obj;
+	p = (t_parabloid*)obj;
 	oc = v3_sub_vec_(ray.orig, p->center);
 	a = v3_dot_double_(ray.dir, ray.dir) -
 	(v3_dot_double_(ray.dir, p->vertex) * v3_dot_double_(ray.dir, p->vertex));
@@ -61,10 +61,10 @@ BOOL	hit_paraboloid(void *obj, const t_ray ray, const double t[2], t_hit *param)
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant >= 0)
 	{
-		sol = (-b - sqrt(discriminant) / (2.0 * a));
+		sol = ((-b - sqrt(discriminant)) / (2.0 * a));
 		if (sol < t[1] && sol > t[0])
 			return (normal_paraboloid(p, ray, param, sol,oc));
-		sol = (-b + sqrt(discriminant) / (2.0 * a));
+		sol = ((-b + sqrt(discriminant)) / (2.0 * a));
 		if (sol < t[1] && sol > t[0])
 			return (normal_paraboloid(p, ray, param, sol, oc));
 	}

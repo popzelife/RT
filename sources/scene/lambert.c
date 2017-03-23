@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 17:08:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/21 17:09:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:39:57 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ BOOL		scatter_lambertian(const t_ray ray, const t_hit param,
 	target = v3_add_vec_(v3_add_vec_(param.pos, param.normal),
 	random_in_unit_sphere());
 	*scattered = new_ray(param.pos, v3_sub_vec_(target, param.pos));
-	*attenuation = param.material->albedo;
+	texture_it(param, attenuation);
 	return (TRUE);
 }

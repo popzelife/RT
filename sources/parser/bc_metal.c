@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:45:35 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 19:40:24 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:31:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		bo_metal(t_scene *s, t_parser *p, char *line)
 		p->l, line);
 		exit(-1);
 	}
-	s->obj[p->i_obj].p_mat = (void*)new_material(v3_(0., 0., 0.), 0.);
+	s->obj[p->i_obj].p_mat = (void*)new_material(v3_(0., 0., 0.), 0., NULL);
 	s->obj[p->i_obj].p_mat->type_mat = MAT_METAL;
 	p->f = (void*)&bo_void;
 	p->opt_m |= p->byte[E_TAB_METAL];

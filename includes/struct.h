@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 23:14:05 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:03:51 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ typedef	struct	s_paraboloid
 	t_vec3	vertex;
 	double	k;
 	t_vec3	center;
-}				t_paraboloid;
+}				t_parabloid;
 
 /*
 ** Discriminant

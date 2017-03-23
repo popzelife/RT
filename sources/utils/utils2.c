@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:37:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/10 01:05:17 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:33:26 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ t_viewparam		new_viewparam(t_scene *scene)
 	p.scene.obj = (t_obj*)malloc(p.scene.sizeof_obj * sizeof(t_obj));
 	p.scene.obj[0] = copy_object(scene->this_obj);
 	p.scene.obj[1] = new_object((void*)new_sphere(v3_(0., 1.5, 0.), .5),
-	OBJ_SPHERE, new_material(v3_(1., 1., 1.), NULL_PARAM),
-	MAT_DIFF_LIGHT);
+	OBJ_SPHERE, new_material(v3_(1., 1., 1.), 0., NULL), MAT_DIFF_LIGHT);
 	p.scene.this_obj = scene->this_obj;
 	p.scene.sizeof_skb = 1;
 	p.scene.skybox = (t_skybox*)malloc(p.scene.sizeof_skb * sizeof(t_skybox));

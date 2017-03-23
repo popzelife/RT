@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 00:42:13 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:29:48 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void		bo_ellipsoid_pos(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid_rotate(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid_radius(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid_height(t_scene *s, t_parser *p, char *line);
-//void		bo_paraboloid_pos(t_scene *s, t_parser *p, char *line);
-//void		bo_paraboloid_rotate(t_scene *s, t_parser *p, char *line);
-//void		bo_paraboloid_height(t_scene *s, t_parser *p, char *line);
+void		bo_paraboloid_pos(t_scene *s, t_parser *p, char *line);
+void		bo_paraboloid_rotate(t_scene *s, t_parser *p, char *line);
+void		bo_paraboloid_height(t_scene *s, t_parser *p, char *line);
 
 void		bo_lambert_color(t_scene *s, t_parser *p, char *line);
 void		bo_metal_color(t_scene *s, t_parser *p, char *line);
@@ -104,9 +104,9 @@ void		bo_difflight(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid(t_scene *s, t_parser *p, char *line);
-//void		bo_paraboloid(t_scene *s, t_parser *p, char *line);
+void		bo_paraboloid(t_scene *s, t_parser *p, char *line);
 
-//void		bc_paraboloid(t_scene *s, t_parser *p, char *line);
+void		bc_paraboloid(t_scene *s, t_parser *p, char *line);
 void		bc_ellipsoid(t_scene *s, t_parser *p, char *line);
 void		bc_cam(t_scene *s, t_parser *p, char *line);
 void		bc_sphere(t_scene *s, t_parser *p, char *line);
@@ -272,8 +272,8 @@ t_ellipsoid	*new_ellipsoid(t_vec3 center, t_vec3 vertex, double k,
 			double radius);
 BOOL		hit_ellispoid(void *obj, const t_ray ray, const double t[2],
 				t_hit *param);
-t_paraboloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k);
-BOOL		hit_paraboloid(void *obj, const t_ray ray, const double t[2],
+t_parabloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k);
+BOOL		hit_parabloid(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
 /*
@@ -296,7 +296,7 @@ t_texture	*new_texture(const UCHAR type_texture, char *filename);
 ** Materials
 */
 
-t_mat		*new_material(t_vec3 albedo, double t);
+t_mat		*new_material(t_vec3 albedo, double t, t_texture *text);
 
 t_vec3		reflect(const t_vec3 v, const t_vec3 n);
 BOOL		refract(const t_vec3 v, const t_vec3 n, double ni_over_nt,

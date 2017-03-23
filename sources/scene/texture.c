@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:50:44 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/06 14:54:34 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:46:25 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,21 @@ void		texture_sphere(const t_hit param, t_vec3 *attenuation)
 
 void		texture_it(const t_hit param, t_vec3 *attenuation)
 {
-	if (param.material->m_text->type_texture == TEXT_IMAGE)
+	if (param.material->m_text)
 	{
-		if (param.type_obj == OBJ_SPHERE)
-			texture_sphere(param, attenuation);
+		if (param.material->m_text->type_texture == TEXT_IMAGE)
+		{
+			if (param.type_obj == OBJ_SPHERE)
+				return (texture_sphere(param, attenuation));
+		}
+		else if (param.material->m_text->type_texture == TEXT_CHECKBOARD)
+			return (texture_checkboard(param.pos, attenuation));
+		else if (param.material->m_text->type_texture == TEXT_LINEX)
+			return (texture_linex(param.pos, attenuation));
+		else if (param.material->m_text->type_texture == TEXT_LINEY)
+			return (texture_liney(param.pos, attenuation));
+		else if (param.material->m_text->type_texture == TEXT_RAINBOW)
+			return (texture_rainbow(param.pos, attenuation));
 	}
-	else if (param.material->m_text->type_texture == TEXT_CHECKBOARD)
-		texture_checkboard(param.pos, attenuation);
-	else if (param.material->m_text->type_texture == TEXT_LINEX)
-		texture_linex(param.pos, attenuation);
-	else if (param.material->m_text->type_texture == TEXT_LINEY)
-		texture_liney(param.pos, attenuation);
-	else if (param.material->m_text->type_texture == TEXT_RAINBOW)
-		texture_rainbow(param.pos, attenuation);
-	else
-		*attenuation = param.material->albedo;
+	*attenuation = param.material->albedo;
 }

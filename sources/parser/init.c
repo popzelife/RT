@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/21 13:35:25 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:02:47 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_CYLINDER);
 	rt->parser.bo[i++] = ft_strdup(BO_CONE);
 	rt->parser.bo[i++] = ft_strdup(BO_ELLIPSOID);
-	//rt->parser.bo[i++] = ft_strdup(BO_PARABOLOID);
+	rt->parser.bo[i++] = ft_strdup(BO_PARABLOID);
 	rt->parser.bo[i++] = ft_strdup(BO_RADIUS);
 	rt->parser.bo[i++] = ft_strdup(BO_POS);
 	rt->parser.bo[i++] = ft_strdup(BO_ROTATE);
@@ -56,7 +56,7 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_CYLINDER);
 	rt->parser.bc[i++] = ft_strdup(BC_CONE);
 	rt->parser.bc[i++] = ft_strdup(BC_ELLIPSOID);
-	//rt->parser.bo[i++] = ft_strdup(BC_PARABOLOID);
+	rt->parser.bc[i++] = ft_strdup(BC_PARABLOID);
 	rt->parser.bc[i++] = ft_strdup(BC_RADIUS);
 	rt->parser.bc[i++] = ft_strdup(BC_POS);
 	rt->parser.bc[i++] = ft_strdup(BC_ROTATE);

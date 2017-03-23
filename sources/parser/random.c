@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:25:15 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 14:40:17 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:37:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_scene		random_scene_sphere(t_rt *rt)
 	rt->parser.lim_obj = 486;
 	scene.obj = (t_obj*)malloc(scene.sizeof_obj * sizeof(t_obj));
 	scene.obj[0] = new_object((void*)new_sphere(v3_(0., -1000., 0.), 1000.),
-	OBJ_SPHERE, new_material(v3_(.5, .5, .5), 0.), MAT_LAMBERT);
+	OBJ_SPHERE, new_material(v3_(.5, .5, .5), 0., NULL), MAT_LAMBERT);
 	i = 1;
 	a = -11;
 	while (a < 11)
@@ -53,25 +53,26 @@ t_scene		random_scene_sphere(t_rt *rt)
 				if (choose_mat < .8)
 					scene.obj[i++] = new_object((void*)new_sphere(center, .2),
 					OBJ_SPHERE, new_material(v3_(f_rand() * f_rand(), f_rand() *
-					f_rand(), f_rand() * f_rand()), 0.), MAT_LAMBERT);
+					f_rand(), f_rand() * f_rand()), 0., NULL), MAT_LAMBERT);
 				else if (choose_mat < .95)
 					scene.obj[i++] = new_object((void*)new_sphere(center, .2),
 					OBJ_SPHERE, new_material(v3_(.5 * (1 + f_rand()), .5 * (1 +
-					f_rand()), .5 * (1 + f_rand())), .5 * f_rand()), MAT_METAL);
+					f_rand()), .5 * (1 + f_rand())), .5 * f_rand(), NULL), MAT_METAL);
 				else
 					scene.obj[i++] = new_object((void*)new_sphere(center, .2),
-					OBJ_SPHERE, new_material(v3_(1., 1., 1.), 1.5), MAT_DIELECT);
+					OBJ_SPHERE, new_material(v3_(1., 1., 1.), 1.5, NULL), MAT_DIELECT);
 			}
 			++b;
 		}
 		++a;
 	}
 	scene.obj[i++] = new_object((void*)new_sphere(v3_(0., 1., 0.), 1.),
-	OBJ_SPHERE, new_material(v3_(1., 1., 1.), 1.5), MAT_DIELECT);
+	OBJ_SPHERE, new_material(v3_(1., 1., 1.), 1.5, NULL), MAT_DIELECT);
 	scene.obj[i++] = new_object((void*)new_sphere(v3_(-4., 1., 0.), 1.),
-	OBJ_SPHERE, new_material(v3_(.4, .2, .1), 0.), MAT_LAMBERT);
+	OBJ_SPHERE, new_material(v3_(.4, .2, .1), 0., new_texture(TEXT_LINEY, NULL)),
+	MAT_LAMBERT);
 	scene.obj[i++] = new_object((void*)new_sphere(v3_(4., 1., 0.), 1.),
-	OBJ_SPHERE, new_material(v3_(.7, .6, .5), 0.), MAT_METAL);
+	OBJ_SPHERE, new_material(v3_(.7, .6, .5), 0., NULL), MAT_METAL);
 	scene.this_obj = &scene.obj[i - 1];
 	ft_printf("-- Initiated ''Randomized Spheres'' scene --\n");
 	return (scene);

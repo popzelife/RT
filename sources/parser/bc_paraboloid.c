@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:59 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/22 15:55:06 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:11:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		bc_paraboloid(t_scene *s, t_parser *p, char *line)
 		"initiated at line %d: '%s'\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
-	if (check_opt(p->opt) != E_TAB_NONE || p->mat == FALSE)
+	if (check_opt(p->opt) != E_TAB_PARABLOID || p->mat == FALSE)
 	{
 		ft_printf("XML %s ERROR - Some flags are missing within <paraboloid>"
 		"balise"
@@ -60,7 +60,7 @@ void		bo_paraboloid(t_scene *s, t_parser *p, char *line)
 	s->obj[p->i_obj].p_obj = (void*)new_paraboloid(v3_(0., 1., 0.), v3_(0., 0., 0.), 1.0);
 	s->obj[p->i_obj].type_obj = OBJ_PARABOLOID;
 	p->f = (void*)&bo_void;
-	p->opt |= p->byte[E_TAB_NONE];
+	p->opt |= p->byte[E_TAB_PARABLOID];
 	p->obj = p->i_obj;
 	p->opt_m = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:37:19 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/22 11:16:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:07:20 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void		check_bo(t_parser *parser, UINT flag)
 		parser->f = (void*)&bo_cylinder;
 	else if (flag == BYTE_ELLIPSOID)
 		parser->f = (void*)&bo_ellipsoid;
-	//else if (flag == BYTE_PARABOLOID)
-	//	parser->f = (void*)&bo_paraboloid;
+	else if (flag == BYTE_PARABLOID)
+		parser->f = (void*)&bo_paraboloid;
 	else if (flag == BYTE_LAMBERT)
 		parser->f = (void*)&bo_lambert;
 	else if (flag == BYTE_METAL)
@@ -65,8 +65,8 @@ void		check_bc(t_parser *parser, UINT flag)
 		parser->f = (void*)&bc_cylinder;
 	else if (flag == BYTE_ELLIPSOID)
 		parser->f = (void*)&bc_ellipsoid;
-	//else if (flag == BYTE_PARABOLOID)
-	//	parser->f = (void*)&bc_paraboloid;
+	else if (flag == BYTE_PARABLOID)
+		parser->f = (void*)&bc_paraboloid;
 	else if (flag == BYTE_LAMBERT)
 		parser->f = (void*)&bc_lambert;
 	else if (flag == BYTE_METAL)
@@ -97,8 +97,8 @@ int			check_opt(UINT opt)
 		return (E_TAB_CYLINDER);
 	else if (opt == (BYTE_ELLIPSOID | BYTE_POS | BYTE_RADIUS | BYTE_ROTATE | BYTE_HEIGHT))
 		return(E_TAB_ELLIPSOID);
-	//else if (opt == (BYTE_PARABOLOID | BYTE_POS | BYTE_ROTATE | BYTE_HEIGHT))
-	//	return (E_TAB_PARABOLOID);
+	else if (opt == (BYTE_PARABLOID | BYTE_POS | BYTE_ROTATE | BYTE_HEIGHT))
+		return (E_TAB_PARABLOID);
 	else if (opt == (BYTE_LAMBERT | BYTE_COLOR))
 		return (E_TAB_LAMBERT);
 	else if (opt == (BYTE_METAL | BYTE_COLOR))
