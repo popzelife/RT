@@ -1,5 +1,4 @@
-![42-Project](https://dl.dropboxusercontent.com/u/59532932/48-cole204220logo.png)
-# RT ~steam
+![Logo](image/title.bmp)
 RT ~steam is raytracer coded in C using SDL2 and OpenCL. It generates a 3D view out of a given scene file. The parser use a kind of XML file structure, it reads, writes and checks error all at the same time (no double reading). The error system indicates you the line where it fails and the reason why. The parser can itself solve few mistake or apply default values.
 
 Rendering is progressiv based on several passes to be photorealistic... the limit is currently 100. Depending on the scene, rendering can be instant. A full render (100 passes) may takes 5 minutes for simple scene. This process is based on Pixar Renderman system.
