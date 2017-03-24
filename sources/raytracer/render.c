@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 13:41:12 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 22:44:01 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void			render_lowres(t_tharg *a)
 				r.u = (double)((double)r.x / (double)a->rt->r_view->w / MSAMP);
 				r.v = (double)((double)r.y / (double)a->rt->r_view->h / MSAMP);
 				r.tmp = rt_color(ray_from_cam(a->scene->this_cam, r.u, r.v),
-				a->scene, 0, 1);
+				a->scene, 0, 2);
 				r.tmp = v3_(sqrt(r.tmp.x), sqrt(r.tmp.y), sqrt(r.tmp.z));
 			}
 			if (*(a->s) == 0 && r.x % 2 == 0)
