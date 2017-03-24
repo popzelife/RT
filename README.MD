@@ -6,11 +6,12 @@ Rendering is progressiv based on several passes to be photorealistic... the limi
 - SDL used to manage windows, hook events and draw a pixel on surface;
 - Loader for the first initialisation;
 - Interface craft from scratch - with a borderless window design;
-- Menu and object selecter to get their parameters;
+- Menu and object selecter to get their parameters and modify them in live;
 - Simple objects: sphere, plane, cone, cylinder, triangle;
 - Complexe objects: paraboloid, ellipsoid; 
 - Materials can be applied to any object: Lambert, Metal & Dielectric (reflection and refraction parametable);
 - Light and shadowing based on Monte-Carlo algorithm (depending on the material) - Light is a material applyable to any object;
+- Global Illumination;
 - Objects hold in a placeholder list with function pointers according to type and material;
 - Generated Skybox such as gradiant for global illunmination; 
 - Anti-aliasing trick with max depth for reflection materials;
@@ -45,7 +46,7 @@ We also provided a personnal library of vector in 3 dimensions.
 - Options to launch RT;
 - Moveable camera based on relative position and not global;
 - Debugg materials as function pointers;
-- Menu on right to modify/add scene and objects;
+- Menu on right to add scene and objects;
 - Open CL to use GPU.
 
 # Preview
@@ -54,3 +55,9 @@ We also provided a personnal library of vector in 3 dimensions.
 
 #### Default Scene
 ![preview2](interface.png)
+
+#### The Box
+![preview3](box.png)
+
+#### Multispot
+![preview3](multispot.png)
