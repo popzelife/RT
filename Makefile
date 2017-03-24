@@ -6,14 +6,14 @@
 #    By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 17:10:25 by qfremeau          #+#    #+#              #
-#    Updated: 2017/02/21 15:02:20 by nkhouide         ###   ########.fr        #
+#    Updated: 2017/03/21 13:53:00 by vafanass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
-CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror
-ADDFLAGS =	-g
+CC =		clang
+CFLAGS =	-Wall -Wextra -Werror -g
+ADDFLAGS =	
 
 # Precompiled header
 PRECOMP =	stdafx.h
@@ -26,8 +26,8 @@ NAME =		rt
 DST =		
 
 # Directories
-SRCDIR =	srcs
-OBJDIR =	objs
+SRCDIR =	sources
+OBJDIR =	objects
 ifeq ($(OS),Windows_NT)
 	INCDIR =	includes\
 				librairies/libft/includes\
@@ -42,6 +42,7 @@ else
 					librairies/libvec/includes\
 					/Users/$(ID_UN)/.brew/Cellar/sdl2/2.0.5/include/SDL2\
 					/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/include/SDL2\
+					/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/include/SDL2\
 					-F -framework Cocoa 
 		CFSDL =		
 	endif
@@ -55,44 +56,101 @@ endif
 PREDIR =	includes
 
 # Sources
-SRC = \
-			esdl/esdl_init.c\
-			esdl/esdl_ttf.c\
-			esdl/esdl_fps.c\
-			esdl/esdl_surface.c\
-			esdl/esdl_events.c\
-			esdl/esdl_color.c\
-			esdl/esdl_pixel.c\
-			esdl/esdl_image.c\
-			esdl/esdl_rect.c\
-			esdl/esdl_exit.c\
-			kernel/kernel_isopencl.c\
-			rt_init.c\
-			rt_skybox.c\
-			rt_menu.c\
-			rt_view.c\
-			rt_3dview.c\
-			rt_scene.c\
-			rt_camera.c\
-			rt_material.c\
-			rt_light.c\
-			rt_bound_box.c\
-			rt_object.c\
-			rt_sphere.c\
-			rt_plan.c\
-			rt_cylindre.c\
-			rt_ray.c\
-			rt_thread.c\
-			rt_hook.c\
-			rt_button.c\
-			rt_render.c\
-			rt_events.c\
-			rt_random.c\
-			rt_quit.c\
-			ft_list.c\
-			ft_list2.c\
-			ft_utils.c\
-			ft_utils2.c\
+SRC =		esdl/color.c\
+			esdl/events.c\
+			esdl/exit.c\
+			esdl/fps.c\
+			esdl/init.c\
+			esdl/image.c\
+			esdl/pixel.c\
+			esdl/rect.c\
+			esdl/surface.c\
+			esdl/ttf.c\
+			kernel/isopencl.c\
+			events/events.c\
+			events/hook.c\
+			events/init.c\
+			events/loading.c\
+			events/quit.c\
+			events/events.c\
+			events/arrow_lmouse.c\
+			events/arrow_rmouse.c\
+			interface/miniview.c\
+			interface/button.c\
+			interface/menu.c\
+			interface/surface_bkg.c\
+			interface/surface_text.c\
+			interface/surface_button.c\
+			interface/param_object.c\
+			interface/param_material.c\
+			interface/view.c\
+			interface/filter.c\
+			parser/init.c\
+			parser/default.c\
+			parser/random.c\
+			parser/scene.c\
+			parser/read_xml.c\
+			parser/check_xml_flag.c\
+			parser/check_xml.c\
+			parser/get.c\
+			parser/camera.c\
+			parser/skybox.c\
+			parser/sphere.c\
+			parser/plane.c\
+			parser/cylinder.c\
+			parser/cone.c\
+			parser/ellipsoid.c\
+			parser/lambert.c\
+			parser/metal.c\
+			parser/dielectric.c\
+			parser/difflight.c\
+			parser/bc_cam.c\
+			parser/bc_skybox.c\
+			parser/bc_sphere.c\
+			parser/bc_plane.c\
+			parser/bc_cylinder.c\
+			parser/bc_cone.c\
+			parser/bc_ellipsoid.c\
+			parser/bc_lambert.c\
+			parser/bc_metal.c\
+			parser/bc_dielectric.c\
+			parser/bc_difflight.c\
+			parser/bc_paraboloid.c\
+			parser/paraboloid.c\
+			raytracer/random.c\
+			raytracer/ray.c\
+			raytracer/render.c\
+			raytracer/thread.c\
+			raytracer/thread_tools.c\
+			raytracer/render_thread_tools.c\
+			raytracer/render_tools.c\
+			scene/camera.c\
+			scene/light.c\
+			scene/material.c\
+			scene/lambert.c\
+			scene/metal.c\
+			scene/dielectric.c\
+			scene/object.c\
+			scene/skybox.c\
+			scene/sphere.c\
+			scene/plane.c\
+			scene/cylinder.c\
+			scene/cone.c\
+			scene/texture.c\
+			scene/texture_bmp.c\
+			scene/texture_calculator.c\
+			scene/paraboloid.c\
+			scene/ellipsoid.c\
+			utils/list.c\
+			utils/list2.c\
+			utils/utils.c\
+			utils/utils2.c\
+			utils/utils3.c\
+			utils/utils4.c\
+			utils/utils5.c\
+			utils/util_texture.c\
+			utils/util_filter.c\
+			utils/util_matrice_filter.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)
@@ -100,7 +158,7 @@ OBJ =		$(SRC:.c=.o)
 # Prefixes
 ifeq ($(OS),Windows_NT)
 	OPNCL =		-L/lib/ -lOpenCL
-	LSDL2 =		-L/lib/ -lSDL2 -lSDL2_ttf
+	LSDL2 =		-L/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
 	LMATH =		
 	LPTHR =		
 else
@@ -108,20 +166,20 @@ else
 	ifeq ($(UNAME_S),Darwin)
 		OPNCL =		-framework OpenCL
 		LSDL2 =		-L/Users/$(ID_UN)/.brew/Cellar/sdl2/2.0.5/lib -lSDL2\
-					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf
+					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf\
+					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/lib -lSDL2_image
 		LMATH =		-lm
 		LPTHR =		-lpthread
 	endif
 	ifeq ($(UNAME_S),Linux)
 		OPNCL =		-L/usr/lib/x86_64-linux-gnu -lOpenCL
-		LSDL2 =		`sdl2-config --libs` -lSDL2_ttf
+		LSDL2 =		`sdl2-config --libs` -lSDL2_ttf -lSDL2_image
 		LMATH =		-lm
 		LPTHR =		-pthread
 	endif
 endif
 LIBFT =		-Llibrairies/libft/ -lft
 LIBVEC =	-Llibrairies/libvec/ -lvec
-
 
 # Paths foreach
 OBJP =		$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
@@ -212,3 +270,5 @@ sdl2:
 	brew link sdl2
 	brew install sdl2_ttf
 	brew link sdl2_ttf
+	brew install sdl2_image
+	brew link sdl2_image

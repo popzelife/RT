@@ -6,12 +6,12 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:42:25 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/02/06 12:33:43 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 18:28:13 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _STDAFX_h
-# define _STDAFX_h
+#ifndef _STDAFX_H
+# define _STDAFX_H
 
 # include "libft.h"
 # include "ft_printf.h"

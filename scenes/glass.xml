@@ -1,0 +1,63 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>0 0.5 -5</pos>
+	<target>0 0 0</target>
+	<rotate>0 -1 0</rotate>
+	<fov>60</fov>
+	<aperture>0</aperture>
+</camera>
+
+<obj>
+	<sphere>
+		<pos>0 0 -1</pos>
+		<radius>0.5</radius>
+		<lambert>
+			<color>0.1 0.2 0.5</color>
+		</lambert>
+	</sphere>
+
+	<sphere>
+		<pos>0 -100.5 -1</pos>
+		<radius>100</radius>
+		<lambert>
+			<color>0.8 0.8 0</color>
+		</lambert>
+	</sphere>
+
+	<sphere>
+		<pos>-1 0 -1</pos>
+		<radius>0.5</radius>
+		<dielectric>
+			<color>1 1 1</color>
+			<param>1.5</param>
+		</dielectric>
+	</sphere>
+
+	<sphere>
+		<pos>1 0 -1</pos>
+		<radius>-0.5</radius>
+		<dielectric>
+			<color>1 1 1</color>
+			<param>1.5</param>
+		</dielectric>
+	</sphere>
+
+	<cylinder>
+		<pos>0 0 -3</pos>
+		<radius>-1</radius>
+		<rotate>0 1 0</rotate>
+		<dielectric>
+			<color>1 0.8 1</color>
+			<param>1.1</param>
+		</dielectric>
+	</cylinder>
+
+</obj>
+
+<skybox>
+	<gradient>
+		<color>1 1 1</color>
+		<color>0.5 0.7 1</color>
+	</gradient>
+</skybox>

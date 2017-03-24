@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 14:22:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2016/08/24 19:34:24 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/01 12:13:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				get_next_line(int const fd, char **line)
 {
 	static t_list	*archive;
 	t_list			*node;
-	char			buff[BUFF_SIZE + 1];
+	char			buff[GNL_BUFFSIZE + 1];
 	int				ret;
 	char			*tmp;
 
@@ -67,7 +67,7 @@ int				get_next_line(int const fd, char **line)
 	node = search_fd(&archive, fd);
 	while (!ft_strchr((char*)node->content, '\n'))
 	{
-		ret = read(fd, buff, BUFF_SIZE);
+		ret = read(fd, buff, GNL_BUFFSIZE);
 		if (ret == -1)
 			return (ret);
 		if (ret == 0)

@@ -6,14 +6,14 @@
 #    By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/02 11:44:08 by qfremeau          #+#    #+#              #
-#    Updated: 2017/02/06 11:30:20 by qfremeau         ###   ########.fr        #
+#    Updated: 2017/03/01 18:17:14 by qfremeau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
 CC =		clang
 CFLAGS =	-Wall -Wextra -Werror
-ADDFLAGS =	
+ADDFLAGS =
 
 # Default rule
 DEFRULE =	all
@@ -36,15 +36,13 @@ SRC =\
 		vec3/operation2.c \
 		vec3/transform.c \
 		vec3/unit.c \
-		vec3/_access.c \
-		vec3/_create.c \
-		vec3/_operation.c \
-		vec3/_operation2.c \
-		vec3/_unit.c \
-		vec4/create.c \
-		vec4/operation.c \
-		vec4/transform.c \
-		vec4/unit.c
+		\
+		vec3/access2.c \
+		vec3/create2.c \
+		vec3/operation3.c \
+		vec3/operation4.c \
+		vec3/unit2.c \
+		vec3/transform2.c
 
 LIB =		
 OBJ =		$(SRC:.c=.o)
