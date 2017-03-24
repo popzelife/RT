@@ -6,13 +6,13 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 13:33:08 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:13:35 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	*select_hit(const UCHAR t)
+void		*select_hit(const UCHAR t)
 {
 	void	*f;
 
@@ -28,12 +28,14 @@ static void	*select_hit(const UCHAR t)
 		f = (void*)&hit_ellispoid;
 	else if (t == OBJ_PARABOLOID)
 		f = (void*)&hit_parabloid;
+	else if (t == OBJ_TRIANGLE)
+		f = (void*)&hit_triangle;
 	else
 		f = (void*)&hit_sphere;
 	return (f);
 }
 
-static void	*select_scatter(const UCHAR t)
+void		*select_scatter(const UCHAR t)
 {
 	void	*s;
 

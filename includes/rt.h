@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 19:10:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 21:51:12 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ int			xml_get_value(char *line, char **value);
 int			xml_to_int(char *line, int *i);
 int			xml_to_double(char *line, double *i);
 int			xml_to_vec(char *line, t_vec3 *v);
+int			xml_to_material(char *line, UCHAR *i);
+int			xml_to_path(char *line, char **path);
+int			xml_to_texture(char *line, UCHAR *i);
+
+int			ft_check_filename(char *line);
+UCHAR		ft_choose_texture(char *line);
 
 void		bo_cam_pos(t_scene *s, t_parser *p, char *line);
 void		bo_cam_target(t_scene *s, t_parser *p, char *line);
@@ -81,6 +87,9 @@ void		bo_ellipsoid_height(t_scene *s, t_parser *p, char *line);
 void		bo_paraboloid_pos(t_scene *s, t_parser *p, char *line);
 void		bo_paraboloid_rotate(t_scene *s, t_parser *p, char *line);
 void		bo_paraboloid_height(t_scene *s, t_parser *p, char *line);
+void		bo_texture(t_scene *s, t_parser *p, char *line);
+void		bo_texture_filename(t_scene *s, t_parser *p, char *line);
+void		bo_triangle_pos(t_scene *s, t_parser *p, char *line);
 
 void		bo_lambert_color(t_scene *s, t_parser *p, char *line);
 void		bo_metal_color(t_scene *s, t_parser *p, char *line);
@@ -105,7 +114,9 @@ void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line);
 void		bo_skybox_none(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid(t_scene *s, t_parser *p, char *line);
 void		bo_paraboloid(t_scene *s, t_parser *p, char *line);
+void		bo_triangle(t_scene *s, t_parser *p, char *line);
 
+void		bc_triangle(t_scene *s, t_parser *p, char *line);
 void		bc_paraboloid(t_scene *s, t_parser *p, char *line);
 void		bc_ellipsoid(t_scene *s, t_parser *p, char *line);
 void		bc_cam(t_scene *s, t_parser *p, char *line);
@@ -157,6 +168,22 @@ void		button_close(void *param);
 void		button_minus(void *param);
 
 void		button_sphereradius(void *param);
+void		button_spherepos(void *param);
+void		button_spherenormal(void *param);
+void		button_planepos(void *param);
+void		button_planenormal(void *param);
+void		button_planeradius(void *param);
+void		button_conepos(void *param);
+void		button_conenormal(void *param);
+void		button_coneheight(void *param);
+void		button_cylindpos(void *param);
+void		button_cylindradius(void *param);
+void		button_cylindnormal(void *param);
+
+void		button_mattype(void *param);
+void		button_matalbedo(void *param);
+void		button_matmetal(void *param);
+void		button_matdielect(void *param);
 
 void		filter_negative(t_rt *rt, t_filtervalue *f);
 void		filter_sepia(t_rt *rt, t_filtervalue *f);
@@ -282,6 +309,12 @@ t_parabloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k);
 BOOL		hit_parabloid(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
+t_triangle	*new_triangle(t_vec3 vertex, t_vec3 v2, t_vec3 v3);
+BOOL		hit_triangle(void *obj, const t_ray ray, const double t[2],
+			t_hit *param);
+
+void		*select_hit(const UCHAR t);
+
 /*
 ** Texture
 */
@@ -318,6 +351,8 @@ BOOL		scatter_none(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
 BOOL		scatter_diffuse_light(const t_ray ray, const t_hit param,
 			t_vec3 *attenuation, t_ray *scattered);
+
+void		*select_scatter(const UCHAR t);
 
 /*
 ** Rays

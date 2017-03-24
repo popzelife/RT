@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 17:47:38 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:41:13 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 # define STACK_SIZE		(1 * PAGE_SIZE)
 
-# define ALIASING		100
+# define ALIASING		1000
 # define NO_ALIASING	1
-# define MAX_DEPTH		25
+# define MAX_DEPTH		100
 # define RT_SUBXY		60
 # define MSAMP			2
 
@@ -72,6 +72,7 @@
 # define OBJ_SKYBOX		0x80
 # define OBJ_PARABOLOID 0x11
 # define OBJ_ELLIPSOID	0x12
+# define OBJ_TRIANGLE	0x92
 
 # define SKYBX_NONE		0x1
 # define SKYBX_GRADIENT	0x2
@@ -131,6 +132,8 @@
 # define BO_TEXTURE		"<texture>"
 # define BO_SKYBOX		"<skybox>"
 # define BO_GRADIENT	"<gradient>"
+# define BO_PATH		"<path>"
+# define BO_TRIANGLE	"<triangle>"
 # define BO_NONE		"<none>"
 
 # define BC_CAM			"</camera>"
@@ -157,6 +160,8 @@
 # define BC_SKYBOX		"</skybox>"
 # define BC_GRADIENT	"</gradient>"
 # define BC_ELLIPSOID   "</ellipsoid>"
+# define BC_PATH		"</path>"
+# define BC_TRIANGLE	"</triangle>"
 # define BC_NONE		"</none>"
 
 # define BYTE_CAM		((UINT)1 << 0)
@@ -171,18 +176,21 @@
 # define BYTE_CONE		((UINT)1 << 9)
 # define BYTE_ELLIPSOID ((UINT)1 << 10)
 # define BYTE_PARABLOID ((UINT)1 << 11)
-# define BYTE_RADIUS	((UINT)1 << 12)
-# define BYTE_POS		((UINT)1 << 13)
-# define BYTE_ROTATE	((UINT)1 << 14)
-# define BYTE_HEIGHT    ((UINT)1 << 15)
-# define BYTE_LAMBERT	((UINT)1 << 16)
-# define BYTE_METAL		((UINT)1 << 17)
-# define BYTE_DIELECT	((UINT)1 << 18)
-# define BYTE_DIFFLIGHT	((UINT)1 << 19)
-# define BYTE_COLOR		((UINT)1 << 20)
-# define BYTE_PARAM		((UINT)1 << 21)
-# define BYTE_GRADIENT	((UINT)1 << 22)
-# define BYTE_NONE		((UINT)1 << 23)
+# define BYTE_TRIANGLE	((UINT)1 << 12)
+# define BYTE_RADIUS	((UINT)1 << 13)
+# define BYTE_POS		((UINT)1 << 14)
+# define BYTE_ROTATE	((UINT)1 << 15)
+# define BYTE_HEIGHT    ((UINT)1 << 16)
+# define BYTE_LAMBERT	((UINT)1 << 17)
+# define BYTE_METAL		((UINT)1 << 18)
+# define BYTE_DIELECT	((UINT)1 << 19)
+# define BYTE_DIFFLIGHT	((UINT)1 << 20)
+# define BYTE_COLOR		((UINT)1 << 21)
+# define BYTE_PARAM		((UINT)1 << 22)
+# define BYTE_GRADIENT	((UINT)1 << 23)
+# define BYTE_TEXTURE   ((UINT)1 << 24)
+# define BYTE_PATH		((UINT)1 << 25)
+# define BYTE_NONE		((UINT)1 << 26)
 
 enum			e_bytetab
 {
@@ -199,6 +207,7 @@ enum			e_bytetab
 	E_TAB_CONE,
 	E_TAB_ELLIPSOID,
 	E_TAB_PARABLOID,
+	E_TAB_TRIANGLE,
 	E_TAB_RADIUS,
 	E_TAB_POS,
 	E_TAB_ROTATE,
@@ -210,6 +219,8 @@ enum			e_bytetab
 	E_TAB_COLOR,
 	E_TAB_PARAM,
 	E_TAB_GRADIENT,
+	E_TAB_TEXTURE,
+	E_TAB_PATH,
 	E_TAB_NONE,
 	E_TAB_LAST
 };

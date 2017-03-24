@@ -117,6 +117,9 @@ SRC =		esdl/color.c\
 			parser/bc_difflight.c\
 			parser/bc_paraboloid.c\
 			parser/paraboloid.c\
+			parser/triangle.c\
+			parser/bc_triangle.c\
+			parser/texture.c\
 			raytracer/random.c\
 			raytracer/ray.c\
 			raytracer/render.c\
@@ -141,6 +144,7 @@ SRC =		esdl/color.c\
 			scene/texture_calculator.c\
 			scene/paraboloid.c\
 			scene/ellipsoid.c\
+			scene/triangle.c\
 			utils/list.c\
 			utils/list2.c\
 			utils/utils.c\

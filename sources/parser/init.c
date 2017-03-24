@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 13:02:47 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:19:33 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_CONE);
 	rt->parser.bo[i++] = ft_strdup(BO_ELLIPSOID);
 	rt->parser.bo[i++] = ft_strdup(BO_PARABLOID);
+	rt->parser.bo[i++] = ft_strdup(BO_TRIANGLE);
 	rt->parser.bo[i++] = ft_strdup(BO_RADIUS);
 	rt->parser.bo[i++] = ft_strdup(BO_POS);
 	rt->parser.bo[i++] = ft_strdup(BO_ROTATE);
@@ -38,6 +39,8 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_COLOR);
 	rt->parser.bo[i++] = ft_strdup(BO_PARAM);
 	rt->parser.bo[i++] = ft_strdup(BO_GRADIENT);
+	rt->parser.bo[i++] = ft_strdup(BO_TEXTURE);
+	rt->parser.bo[i++] = ft_strdup(BO_PATH);
 	rt->parser.bo[i++] = ft_strdup(BO_NONE);
 	rt->parser.nb_balise = i;
 }
@@ -57,6 +60,7 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_CONE);
 	rt->parser.bc[i++] = ft_strdup(BC_ELLIPSOID);
 	rt->parser.bc[i++] = ft_strdup(BC_PARABLOID);
+	rt->parser.bc[i++] = ft_strdup(BC_TRIANGLE);
 	rt->parser.bc[i++] = ft_strdup(BC_RADIUS);
 	rt->parser.bc[i++] = ft_strdup(BC_POS);
 	rt->parser.bc[i++] = ft_strdup(BC_ROTATE);
@@ -68,6 +72,8 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_COLOR);
 	rt->parser.bc[i++] = ft_strdup(BC_PARAM);
 	rt->parser.bc[i++] = ft_strdup(BC_GRADIENT);
+	rt->parser.bc[i++] = ft_strdup(BC_TEXTURE);
+	rt->parser.bc[i++] = ft_strdup(BC_PATH);
 	rt->parser.bc[i++] = ft_strdup(BC_NONE);
 	if (i != rt->parser.nb_balise)
 		ft_printf("!WARNING! - Number of BO and BC balises are not equal\n");

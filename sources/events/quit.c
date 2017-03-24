@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:04:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 20:37:52 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 10:54:46 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void		quit_rt(t_rt *rt)
 {
+	ft_printf("-- Exit! Cleaning memory --\n");
 	SDL_FreeSurface(rt->sr_view);
 	SDL_FreeSurface(rt->sr_menu);
 	SDL_FreeSurface(rt->s_process);

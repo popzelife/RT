@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:01:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 18:45:27 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 21:46:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ static void	material_color(t_rt *rt)
 	{
 		sprintf(rt->panel.viewparam.str_color, "Color: %10srgb(%.3g, %.3g,"
 		"%.3g)", " ", rt->panel.viewparam.scene.this_obj->p_mat->albedo.x *
-		249.9, rt->panel.viewparam.scene.this_obj->p_mat->albedo.y * 249.9,
-		rt->panel.viewparam.scene.this_obj->p_mat->albedo.z * 249.9);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM4, TRUE);
+		255, rt->panel.viewparam.scene.this_obj->p_mat->albedo.y * 255,
+		rt->panel.viewparam.scene.this_obj->p_mat->albedo.z * 255);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, TRUE);
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM5,
+		actionparam((void*)rt, button_matalbedo));
 	}
 	else
 	{
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM4, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, TRUE);
 		if (rt->panel.viewparam.scene.this_obj->p_mat->m_text->type_texture ==
 			TEXT_IMAGE)
 			sprintf(rt->panel.viewparam.str_color, "Texture: %6s" "\"%10s\"",
@@ -46,7 +48,7 @@ static void	material_color(t_rt *rt)
 			sprintf(rt->panel.viewparam.str_color, "Texture: %6s"
 			"Rainbow", " ");
 		else
-			lst_active_button(&rt->panel.lst_button, BTN_PARAM4, FALSE);
+			lst_active_button(&rt->panel.lst_button, BTN_PARAM5, FALSE);
 	}
 }
 
@@ -57,31 +59,43 @@ void		get_param_material(t_rt *rt)
 		sprintf(rt->panel.viewparam.str_mat, "Material: %5sMetallic", " ");
 		sprintf(rt->panel.viewparam.str_param_m, "Reflection: %2s" "%.3g", " ",
 		rt->panel.viewparam.scene.this_obj->p_mat->t);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM3, TRUE);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM4, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM6, TRUE);
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM4,
+		actionparam((void*)rt, button_mattype));
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM6,
+		actionparam((void*)rt, button_matmetal));
 	}
 	else if (rt->panel.viewparam.scene.this_obj->p_mat->type_mat == MAT_LAMBERT)
 	{
 		sprintf(rt->panel.viewparam.str_mat, "Material: %5sLambertian", " ");
 		sprintf(rt->panel.viewparam.str_param_m, "");
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM3, TRUE);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, FALSE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM4, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM6, FALSE);
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM4,
+		actionparam((void*)rt, button_mattype));
 	}
 	else if (rt->panel.viewparam.scene.this_obj->p_mat->type_mat ==
 			MAT_DIFF_LIGHT)
 	{
 		sprintf(rt->panel.viewparam.str_mat, "Material: %5sDiffuse Light", " ");
 		sprintf(rt->panel.viewparam.str_param_m, " ");
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM3, TRUE);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, FALSE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM4, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM6, FALSE);
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM4,
+		actionparam((void*)rt, button_mattype));
 	}
 	else if (rt->panel.viewparam.scene.this_obj->p_mat->type_mat == MAT_DIELECT)
 	{
 		sprintf(rt->panel.viewparam.str_mat, "Material: %5sDielectric", " ");
 		sprintf(rt->panel.viewparam.str_param_m, "Refraction: %2s" "%.3g", " ",
 		rt->panel.viewparam.scene.this_obj->p_mat->t);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM3, TRUE);
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM4, TRUE);
+		lst_active_button(&rt->panel.lst_button, BTN_PARAM6, TRUE);
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM4,
+		actionparam((void*)rt, button_mattype));
+		lst_set_button(&rt->panel.lst_button, BTN_PARAM6,
+		actionparam((void*)rt, button_matdielect));
 	}
 	material_color(rt);
 }

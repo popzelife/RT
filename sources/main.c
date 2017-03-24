@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 00:55:41 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 11:00:51 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ static void	init_firstrender(t_rt *rt)
 	SDL_WINDOWPOS_CENTERED);
 	SDL_SetWindowMinimumSize(rt->esdl->eng.win, WIN_RX - 400, WIN_RY - 300);
 	SDL_SetWindowOpacity(rt->esdl->eng.win, 1.);
+	SDL_FreeSurface(rt->sr_bar);
+	SDL_FreeSurface(rt->sr_progress);
+	SDL_DestroyTexture(rt->tx_bar);
+	SDL_DestroyTexture(rt->tx_progress);
+	SDL_DestroyTexture(rt->tx_load);
 	SDL_Delay(100);
 	rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
 	rt->sr_view);

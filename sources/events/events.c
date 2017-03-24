@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 17:30:44 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 21:25:26 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void		rt_events_bis(t_rt *rt, t_input *in)
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
 			in->button[SDL_BUTTON_RIGHT])
 		down_rmouse(rt);
+	else if (in->key[SDL_SCANCODE_P])
+		SDL_SetWindowPosition(rt->esdl->eng.win, SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED);
 }
 
 void		rt_events(t_rt *rt, t_input *in)

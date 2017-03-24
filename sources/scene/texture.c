@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:50:44 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/23 17:36:22 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:22:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_texture	*new_texture(const UCHAR type_texture, char *filename)
 	if (t->filename != NULL && type_texture == TEXT_IMAGE)
 	{
 		t->data = SDL_LoadBMP(filename);
+		if (t->data == NULL)
+			t->type_texture = TEXT_NONE;
 	}
 	return (t);
 }
@@ -42,7 +44,8 @@ void		texture_it(const t_hit param, t_vec3 *attenuation)
 {
 	if (param.material->m_text)
 	{
-		if (param.material->m_text->type_texture == TEXT_IMAGE)
+		if (param.material->m_text->type_texture == TEXT_IMAGE &&
+			param.material->m_text->filename != NULL)
 		{
 			if (param.type_obj == OBJ_SPHERE)
 				return (texture_sphere(param, attenuation));

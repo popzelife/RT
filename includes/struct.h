@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 17:53:41 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 21:53:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,13 @@ typedef struct	s_plane
 {
 	t_vec3			normale;
 	t_vec3			on_plane;
+	double			radius;
 }				t_plane;
 
 typedef struct	s_sphere
 {
 	t_vec3			center;
+	t_vec3			normal;
 	double			radius;
 	double			radius2;
 }				t_sphere;
@@ -115,6 +117,28 @@ typedef struct	s_cone
 	double			tang;
 	double			height;
 }				t_cone;
+
+typedef	struct	s_triangle_var
+{
+	t_vec3		p;
+	t_vec3		q;
+	t_vec3		ter;
+	double		det;
+	double		inv_det;
+	double		u;
+	double		v;
+	double		tbis;
+}				t_triangle_var;
+
+typedef struct	s_triangle
+{
+	t_vec3	vertex;
+	t_vec3	v2;
+	t_vec3	v3;
+	t_vec3	normal;
+	t_vec3	e1;
+	t_vec3	e2;
+}				t_triangle;
 
 typedef struct s_ellipsoid
 {
@@ -415,6 +439,7 @@ typedef struct	s_parser
 	int				i_cam;
 	int				i_skb;
 	double			ratio;
+	int				triangle;
 	int				grad;
 	int				mat;
 	int				obj;
