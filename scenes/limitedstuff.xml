@@ -33,7 +33,6 @@
 		<radius>0.5</radius>
 		<rotate>0 1 0</rotate>
         <height>2.0</height>
-		
 		<lambert>
 			<color>0.5 1 1</color>
 		</lambert>
@@ -43,7 +42,6 @@
 		<pos>0 0 4</pos>
 		<radius>2</radius>
 		<rotate>0 1 0</rotate>
-        <height>2.0</height>
 		<lambert>
 			<color>0.2 0.2 1</color>
 		</lambert>

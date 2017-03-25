@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:43:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 16:03:18 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:29:49 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
 	t_plane			*plane;
 	t_discriminant	d;
 	t_vec3			diago;
-	//	double			rayon_disque = 0.2 * 4; // tan * hauteur
 
 	plane = (t_plane*)obj;
 	d.oc = v3_sub_vec_(ray.orig, plane->on_plane);
@@ -55,10 +54,10 @@ BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
 		{
 			param->t = d.sol;
 			param->pos = ray_point_at(ray, param->t);
-					diago = v3_sub_vec_(param->pos, plane->on_plane);
+			diago = v3_sub_vec_(param->pos, plane->on_plane);
 			if (plane->radius == 0)
 				return (normal_plane(plane, ray, d.sol, param));
-			else if (v3_magnitude_double(&diago) <= plane->radius)   //rayon_disque)
+			else if (v3_magnitude_double(&diago) <= plane->radius)
 				return (normal_plane(plane, ray, d.sol, param));
 		}
 	}

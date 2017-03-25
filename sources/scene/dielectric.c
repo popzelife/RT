@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   dielectric.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 17:07:54 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 12:34:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 18:03:29 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void		help_norme(t_dielec *d, const t_ray ray, const t_hit param)
+{
+	d->outw_normal = v3_negative_(param.normal);
+	d->ni = param.material->t;
+	d->cosine = v3_dot_double_(ray.dir, param.normal) / v3_length(ray.dir);
+	d->cosine = sqrt(1.0 - d->ni * d->ni * (1.0 - d->cosine * d->cosine));
+}
 
 static double	f_schlick(double cosine, double ref_idx)
 {
@@ -44,35 +52,27 @@ BOOL			refract(const t_vec3 v, const t_vec3 n, double ni_over_nt,
 BOOL			scatter_dielectric(const t_ray ray, const t_hit param,
 				t_vec3 *attenuation, t_ray *scattered)
 {
-	t_vec3		outw_normal;
-	t_vec3		refracted;
-	t_vec3		reflected;
-	double		cosine;
-	double		prob;
-	double		ni;
+	t_dielec	d;
 
-	reflected = reflect(ray.dir, param.normal);
+	d.reflected = reflect(ray.dir, param.normal);
 	*attenuation = param.material->albedo;
 	if (v3_dot_double_(ray.dir, param.normal) > 0.0)
 	{
-		outw_normal = v3_negative_(param.normal);
-		ni = param.material->t;
-		cosine = v3_dot_double_(ray.dir, param.normal) / v3_length(ray.dir);
-		cosine = sqrt(1.0 - ni * ni * (1.0 - cosine * cosine));
+		help_norme(&d, ray, param);
 	}
 	else
 	{
-		outw_normal = param.normal;
-		ni = 1.0 / param.material->t;
-		cosine = -v3_dot_double_(ray.dir, param.normal) / v3_length(ray.dir);
+		d.outw_normal = param.normal;
+		d.ni = 1.0 / param.material->t;
+		d.cosine = -v3_dot_double_(ray.dir, param.normal) / v3_length(ray.dir);
 	}
-	if (refract(ray.dir, outw_normal, ni, &refracted))
-		prob = f_schlick(cosine, param.material->t);
+	if (refract(ray.dir, d.outw_normal, d.ni, &d.refracted))
+		d.prob = f_schlick(d.cosine, param.material->t);
 	else
-		prob = 1.0;
-	if (f_rand() < prob)
-		*scattered = new_ray(param.pos, reflected);
+		d.prob = 1.0;
+	if (f_rand() < d.prob)
+		*scattered = new_ray(param.pos, d.reflected);
 	else
-		*scattered = new_ray(param.pos, refracted);
+		*scattered = new_ray(param.pos, d.refracted);
 	return (TRUE);
 }

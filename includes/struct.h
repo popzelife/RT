@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 21:53:03 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:57:36 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ typedef struct	s_hit
 	void			*p_obj;	
 	struct s_mat	*material;
 }				t_hit;
+
+typedef struct	s_dielec
+{
+	t_vec3		outw_normal;
+	t_vec3		refracted;
+	t_vec3		reflected;
+	double		cosine;
+	double		prob;
+	double		ni;
+}				t_dielec;
 
 /*
 ** Texture
@@ -166,6 +176,8 @@ typedef struct	s_discriminant
 	double			a;
 	double			b;
 	double			c;
+	double			a1;
+	double			a2;
 	double			discriminant;
 	double			sol;
 	double			m;

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 16:10:27 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:30:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ t_obj		copy_object(t_obj *obj)
 	o.type_obj = obj->type_obj;
 	o.p_obj = select_obj(o.type_obj);
 	o.hit = select_hit(o.type_obj);
-	o.p_mat = new_material(obj->p_mat->albedo, obj->p_mat->t, obj->p_mat->m_text);
+	o.p_mat = new_material(obj->p_mat->albedo,
+	obj->p_mat->t, obj->p_mat->m_text);
 	o.p_mat->type_mat = obj->p_mat->type_mat;
 	o.p_mat->scatter = select_scatter(o.type_obj);
 	if (o.p_mat->type_mat == MAT_DIFF_LIGHT)

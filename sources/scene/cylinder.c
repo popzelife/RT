@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:15:56 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 16:02:23 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:54:04 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void		discriminant_cylinder(t_cylinder *c, const t_ray ray,
 				t_discriminant *d)
 {
+	d->oc = v3_sub_vec_(ray.orig, c->cp);
 	d->a = v3_dot_double_(ray.dir, ray.dir) - v3_dot_double_(ray.dir,
 	c->vertex) * v3_dot_double_(ray.dir, c->vertex);
 	d->b = 2 * (v3_dot_double_(ray.dir, d->oc) - v3_dot_double_(ray.dir,
@@ -58,7 +59,6 @@ BOOL			hit_cylinder(void *obj, const t_ray ray, const double t[2],
 	t_discriminant	d;
 
 	c = (t_cylinder*)obj;
-	d.oc = v3_sub_vec_(ray.orig, c->cp);
 	discriminant_cylinder(c, ray, &d);
 	if (d.discriminant >= 0)
 	{
@@ -67,9 +67,7 @@ BOOL			hit_cylinder(void *obj, const t_ray ray, const double t[2],
 		{
 			d.m = v3_dot_double_(ray.dir, v3_scale_vec_(c->vertex, d.sol))
 			+ v3_dot_double_(d.oc, c->vertex);
-			if (c->height == 0)
-				return (normal_cylinder(c, ray, d, param));
-			else if (d.m >= 0 && d.m <= c->height)				
+			if ((d.m >= 0 && d.m <= c->height) || c->height == 0)
 				return (normal_cylinder(c, ray, d, param));
 		}
 		d.sol = (-(d.b) + sqrt(d.discriminant)) / (2.0 * d.a);
@@ -77,9 +75,7 @@ BOOL			hit_cylinder(void *obj, const t_ray ray, const double t[2],
 		{
 			d.m = v3_dot_double_(ray.dir, v3_scale_vec_(c->vertex, d.sol))
 			+ v3_dot_double_(d.oc, c->vertex);
-			if (c->height == 0)
-				return (normal_cylinder(c, ray, d, param));
-			else if (d.m >= 0 && d.m <= c->height)
+			if ((d.m >= 0 && d.m <= c->height) || c->height == 0)
 				return (normal_cylinder(c, ray, d, param));
 		}
 	}

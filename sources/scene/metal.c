@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   metal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 17:09:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/21 17:49:43 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:26:31 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vec3			reflect(const t_vec3 v, const t_vec3 n)
+t_vec3		reflect(const t_vec3 v, const t_vec3 n)
 {
 	return (v3_sub_vec_(v, v3_scale_vec_(n, 2. * v3_dot_double_(v, n))));
 }
