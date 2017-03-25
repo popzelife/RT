@@ -11,17 +11,17 @@
 <obj>
 	##LIGHT
 	<triangle>
-		<pos>-2.0 9.9 2.0</pos>
-		<pos>-2.0 9.9 -2.0</pos>
-		<pos>2.0 9.9 -2.0</pos>
+		<pos>-2.0 10.0 2.0</pos>
+		<pos>-2.0 10.0 -2.0</pos>
+		<pos>2.0 10.0 -2.0</pos>
 		<difflight>
 			<color> 2.0 2.0 2.0</color>
 		</difflight>
 	</triangle>
 	<triangle>
-		<pos>-2.0 9.9 2.0</pos>
-		<pos>2.0 9.9 2.0</pos>
-		<pos>2.0 9.9 -2.0</pos>
+		<pos>-2.0 10.0 2.0</pos>
+		<pos>2.0 10.0 2.0</pos>
+		<pos>2.0 10.0 -2.0</pos>
 		<difflight>
 			<color>2.0 2.0 2.0</color>
 		</difflight>  

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:01:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/09 20:29:35 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:06:34 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,28 @@ void		bo_cone_radius(t_scene *s, t_parser *p, char *line)
 		exit(-1);
 	}
 	p->opt |= p->byte[E_TAB_RADIUS];
+	free(value);
+}
+
+void        bo_cone_height(t_scene *s, t_parser *p, char *line)
+{
+	char			*value;
+	t_cone			*o;
+	
+	value = NULL;
+	o = (t_cone*)s->obj[p->i_obj].p_obj;
+	if (!xml_get_value(line, &value))
+	{
+		ft_printf("XML %s ERROR - Value not found at line %d: '%s'\n",
+				__FUNCTION__, p->l, line);
+		exit(-1);
+	}
+	if (!xml_to_double(value, &o->height))
+	{
+		ft_printf("XML %s ERROR - Something went wrong while assigning value:"
+				" '%s' in cone[%d].height\n", __FUNCTION__, value, p->i_obj);
+		exit(-1);
+	}
+	o->height = -o->height;
 	free(value);
 }

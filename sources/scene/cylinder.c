@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:15:56 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/02 20:20:28 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:02:23 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,20 @@ BOOL			hit_cylinder(void *obj, const t_ray ray, const double t[2],
 		{
 			d.m = v3_dot_double_(ray.dir, v3_scale_vec_(c->vertex, d.sol))
 			+ v3_dot_double_(d.oc, c->vertex);
-			return (normal_cylinder(c, ray, d, param));
+			if (c->height == 0)
+				return (normal_cylinder(c, ray, d, param));
+			else if (d.m >= 0 && d.m <= c->height)				
+				return (normal_cylinder(c, ray, d, param));
 		}
 		d.sol = (-(d.b) + sqrt(d.discriminant)) / (2.0 * d.a);
 		if (d.sol < t[1] && d.sol > t[0])
 		{
 			d.m = v3_dot_double_(ray.dir, v3_scale_vec_(c->vertex, d.sol))
 			+ v3_dot_double_(d.oc, c->vertex);
-			return (normal_cylinder(c, ray, d, param));
+			if (c->height == 0)
+				return (normal_cylinder(c, ray, d, param));
+			else if (d.m >= 0 && d.m <= c->height)
+				return (normal_cylinder(c, ray, d, param));
 		}
 	}
 	return (FALSE);

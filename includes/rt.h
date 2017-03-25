@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 21:51:12 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 15:59:39 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,15 @@ void		bo_sphere_pos(t_scene *s, t_parser *p, char *line);
 void		bo_sphere_radius(t_scene *s, t_parser *p, char *line);
 void		bo_plane_pos(t_scene *s, t_parser *p, char *line);
 void		bo_plane_rotate(t_scene *s, t_parser *p, char *line);
+void		bo_plane_radius(t_scene *s, t_parser *p, char *line);
 void		bo_cone_pos(t_scene *s, t_parser *p, char *line);
 void		bo_cone_radius(t_scene *s, t_parser *p, char *line);
 void		bo_cone_rotate(t_scene *s, t_parser *p, char *line);
+void		bo_cone_height(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_pos(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_radius(t_scene *s, t_parser *p, char *line);
 void		bo_cylinder_rotate(t_scene *s, t_parser *p, char *line);
+void		bo_cylinder_height(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid_pos(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid_rotate(t_scene *s, t_parser *p, char *line);
 void		bo_ellipsoid_radius(t_scene *s, t_parser *p, char *line);
@@ -287,7 +290,7 @@ t_sphere	*new_sphere(const t_vec3 center, const double radius);
 BOOL		hit_sphere(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
-t_plane		*new_plane(t_vec3 normale, t_vec3 on_plane);
+t_plane		*new_plane(t_vec3 normale, t_vec3 on_plane, double radius);
 BOOL		hit_plane(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);
 
@@ -305,6 +308,7 @@ t_ellipsoid	*new_ellipsoid(t_vec3 center, t_vec3 vertex, double k,
 			double radius);
 BOOL		hit_ellispoid(void *obj, const t_ray ray, const double t[2],
 				t_hit *param);
+
 t_parabloid	*new_paraboloid(t_vec3 vertex, t_vec3 center, double k);
 BOOL		hit_parabloid(void *obj, const t_ray ray, const double t[2],
 			t_hit *param);

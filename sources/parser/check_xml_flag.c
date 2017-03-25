@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_xml_flag.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:39:28 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/24 18:29:34 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:09:00 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,14 @@ static void	check_flag_ter(t_parser *parser, UINT flag)
 		parser->f = (void*)&bo_paraboloid_pos;
 	else if (flag == (BYTE_OBJ | BYTE_PARABLOID | BYTE_ROTATE))
 		parser->f = (void*)&bo_paraboloid_rotate;
-		else if (flag == (BYTE_OBJ | BYTE_TRIANGLE | BYTE_POS))
+	else if (flag == (BYTE_OBJ | BYTE_TRIANGLE | BYTE_POS))
 		parser->f = (void*)&bo_triangle_pos;
+	else if (flag == (BYTE_OBJ | BYTE_CYLINDER | BYTE_HEIGHT))
+		parser->f = (void*)&bo_cylinder_height;
+	else if (flag == (BYTE_OBJ | BYTE_CONE | BYTE_HEIGHT))
+		parser->f = (void*)&bo_cone_height;
+	else if (flag == (BYTE_OBJ | BYTE_PLANE | BYTE_RADIUS))
+		parser->f = (void*)&bo_plane_radius;
 	else
 		check_flag_texture(parser, flag);
 }

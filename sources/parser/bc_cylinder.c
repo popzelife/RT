@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bc_cylinder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:33:06 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/22 15:54:35 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:05:44 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		bo_cylinder(t_scene *s, t_parser *p, char *line)
 		}
 	}
 	s->obj[p->i_obj].p_obj = (void*)new_cylinder(v3_(0., 1., 0.),
-	v3_(0., 0., 0.), 1.0, 1.0);
+	v3_(0., 0., 0.), 1.0, 0.0);
 	s->obj[p->i_obj].type_obj = OBJ_CYLINDER;
 	p->f = (void*)&bo_void;
 	p->opt |= p->byte[E_TAB_CYLINDER];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 18:13:35 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 16:10:27 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	*select_obj(const UCHAR t)
 	if (t == OBJ_SPHERE)
 		o = (void*)new_sphere(v3_(0., 0., 0.), .39);
 	else if (t == OBJ_PLANE)
-		o = (void*)new_plane(v3_(1., 0., 0.), v3_(0., 0., 0.));
+		o = (void*)new_plane(v3_(1., 0., 0.), v3_(0., 0., 0.), 0.0);
 	else if (t == OBJ_CYLINDER)
 		o = (void*)new_cylinder(v3_(0., 1., 0.), v3_(0., 0., 0.), .3, 1.);
 	else if (t == OBJ_CONE)
