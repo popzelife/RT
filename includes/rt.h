@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 15:59:39 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 20:15:11 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			check_opt(UINT opt);
 void		check_bo(t_parser *parser, UINT flag);
 void		check_bc(t_parser *parser, UINT flag);
 void		check_flag(t_parser *parser, UINT flag);
+void		check_flag_dielect(t_parser *parser, UINT flag);
 void		check_objsame(t_parser *p, char *line, char *str);
 
 int			xml_get_value(char *line, char **value);

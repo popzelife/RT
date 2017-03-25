@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:22:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 21:54:17 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 18:20:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ void		button_filter(void *param)
 		free(t->matrice);
 		free(t);
 	}
-	//if (t->flag == 1)
-	//	free(t->matrice);
-	//-2(t);
 	reset++;
 	rt->render = TRUE;
 	display_rt(rt);

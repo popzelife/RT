@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:01:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/25 16:06:34 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:08:51 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void		bo_cone_radius(t_scene *s, t_parser *p, char *line)
 	free(value);
 }
 
-void        bo_cone_height(t_scene *s, t_parser *p, char *line)
+void		bo_cone_height(t_scene *s, t_parser *p, char *line)
 {
 	char			*value;
 	t_cone			*o;
-	
+
 	value = NULL;
 	o = (t_cone*)s->obj[p->i_obj].p_obj;
 	if (!xml_get_value(line, &value))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bc_paraboloid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:59 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/23 13:11:04 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 18:59:27 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		bc_paraboloid(t_scene *s, t_parser *p, char *line)
 {
 	if (p->i_obj >= p->lim_obj || p->i_obj < 0)
 	{
-		ft_printf("XML %s ERROR - Can't assign more or less (%d) paraboloid than "
+		ft_printf("XML %s ERROR - Can't assign + or - (%d) paraboloid than "
 		"initiated at line %d: '%s'\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}
@@ -57,7 +57,8 @@ void		bo_paraboloid(t_scene *s, t_parser *p, char *line)
 			exit(-1);
 		}
 	}
-	s->obj[p->i_obj].p_obj = (void*)new_paraboloid(v3_(0., 1., 0.), v3_(0., 0., 0.), 1.0);
+	s->obj[p->i_obj].p_obj = (void*)new_paraboloid(v3_(0., 1., 0.),
+	v3_(0., 0., 0.), 1.0);
 	s->obj[p->i_obj].type_obj = OBJ_PARABOLOID;
 	p->f = (void*)&bo_void;
 	p->opt |= p->byte[E_TAB_PARABLOID];

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:01:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/25 16:06:51 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:09:42 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		bo_cylinder_radius(t_scene *s, t_parser *p, char *line)
 	free(value);
 }
 
-void        bo_cylinder_height(t_scene *s, t_parser *p, char *line)
+void		bo_cylinder_height(t_scene *s, t_parser *p, char *line)
 {
 	char			*value;
 	t_cylinder		*o;
@@ -99,7 +99,7 @@ void        bo_cylinder_height(t_scene *s, t_parser *p, char *line)
 	if (!xml_to_double(value, &o->height))
 	{
 		ft_printf("XML %s ERROR - Something went wrong while assigning value:"
-				" '%s' in cylinder[%d].height\n", __FUNCTION__, value, p->i_obj);
+			" '%s' in cylinder[%d].height\n", __FUNCTION__, value, p->i_obj);
 		exit(-1);
 	}
 	free(value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paraboloid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:01:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/23 13:10:39 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:34:16 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void		bo_paraboloid_pos(t_scene *s, t_parser *p, char *line)
 {
-	char		*value;
+	char			*value;
 	t_parabloid		*o;
-	
+
 	value = NULL;
 	o = (t_parabloid*)s->obj[p->i_obj].p_obj;
 	if (!xml_get_value(line, &value))
@@ -37,7 +37,7 @@ void		bo_paraboloid_pos(t_scene *s, t_parser *p, char *line)
 
 void		bo_paraboloid_rotate(t_scene *s, t_parser *p, char *line)
 {
-	char		*value;
+	char			*value;
 	t_parabloid		*o;
 
 	value = NULL;
@@ -59,7 +59,7 @@ void		bo_paraboloid_rotate(t_scene *s, t_parser *p, char *line)
 	free(value);
 }
 
-void        bo_paraboloid_height(t_scene *s, t_parser *p, char *line)
+void		bo_paraboloid_height(t_scene *s, t_parser *p, char *line)
 {
 	char			*value;
 	t_parabloid		*o;
@@ -81,4 +81,3 @@ void        bo_paraboloid_height(t_scene *s, t_parser *p, char *line)
 	p->opt |= p->byte[E_TAB_HEIGHT];
 	free(value);
 }
-

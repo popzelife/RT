@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 20:54:16 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 18:19:33 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:54:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void		init_xmlbo_bis(t_rt *rt, int i)
+{
+	rt->parser.bo[i++] = ft_strdup(BO_GRADIENT);
+	rt->parser.bo[i++] = ft_strdup(BO_TEXTURE);
+	rt->parser.bo[i++] = ft_strdup(BO_PATH);
+	rt->parser.bo[i++] = ft_strdup(BO_NONE);
+	rt->parser.nb_balise = i;
+}
 
 static void		init_xmlbo(t_rt *rt, int i)
 {
@@ -38,11 +47,17 @@ static void		init_xmlbo(t_rt *rt, int i)
 	rt->parser.bo[i++] = ft_strdup(BO_DIFFLIGHT);
 	rt->parser.bo[i++] = ft_strdup(BO_COLOR);
 	rt->parser.bo[i++] = ft_strdup(BO_PARAM);
-	rt->parser.bo[i++] = ft_strdup(BO_GRADIENT);
-	rt->parser.bo[i++] = ft_strdup(BO_TEXTURE);
-	rt->parser.bo[i++] = ft_strdup(BO_PATH);
-	rt->parser.bo[i++] = ft_strdup(BO_NONE);
-	rt->parser.nb_balise = i;
+	init_xmlbo_bis(rt, i);
+}
+
+static void		init_xmlbc_bis(t_rt *rt, int i)
+{
+	rt->parser.bc[i++] = ft_strdup(BC_GRADIENT);
+	rt->parser.bc[i++] = ft_strdup(BC_TEXTURE);
+	rt->parser.bc[i++] = ft_strdup(BC_PATH);
+	rt->parser.bc[i++] = ft_strdup(BC_NONE);
+	if (i != rt->parser.nb_balise)
+		ft_printf("!WARNING! - Number of BO and BC balises are not equal\n");
 }
 
 static void		init_xmlbc(t_rt *rt, int i)
@@ -71,18 +86,13 @@ static void		init_xmlbc(t_rt *rt, int i)
 	rt->parser.bc[i++] = ft_strdup(BC_DIFFLIGHT);
 	rt->parser.bc[i++] = ft_strdup(BC_COLOR);
 	rt->parser.bc[i++] = ft_strdup(BC_PARAM);
-	rt->parser.bc[i++] = ft_strdup(BC_GRADIENT);
-	rt->parser.bc[i++] = ft_strdup(BC_TEXTURE);
-	rt->parser.bc[i++] = ft_strdup(BC_PATH);
-	rt->parser.bc[i++] = ft_strdup(BC_NONE);
-	if (i != rt->parser.nb_balise)
-		ft_printf("!WARNING! - Number of BO and BC balises are not equal\n");
+	init_xmlbc_bis(rt, i);
 }
 
 void			init_xml(t_rt *rt)
 {
 	register int		i;
-	
+
 	rt->parser.byte = (UINT*)malloc(sizeof(UINT) * (E_TAB_LAST));
 	rt->parser.bo = (char**)malloc(sizeof(char*) * (E_TAB_LAST));
 	rt->parser.bc = (char**)malloc(sizeof(char*) * (E_TAB_LAST));

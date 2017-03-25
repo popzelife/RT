@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:38:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 18:16:13 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 18:49:17 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,6 @@ void		lst_set_string(t_string **string, t_strparam param,
 	while (i++ < param.i_lst)
 		curs = curs->next;
 	curs->text = f(param.string, param.font, param.xy, render);
-}
-
-t_button	*init_button(t_button *new)
-{
-	new = (t_button*)malloc(sizeof(t_button));
-	if (new == NULL)
-		return (NULL);
-	new->surface = NULL;
-	return (new);
-}
-
-t_button	*lst_new_button(t_button **button, t_butnparam param,
-			SDL_Renderer *render, t_action action)
-{
-	t_button		*new;
-	t_button		*curs;
-
-	new = NULL;
-	new = init_button(new);
-	new->rect = *param.rect;
-	new->surface = lst_new_surface(&new->surface, surfparam(&new->rect,
-	0x88888888, NULL, 0), render, esdl_clear_surface);
-	new->surface->next = param.surface;
-	new->string = param.string;
-	new->hover = FALSE;
-	new->param = action.param;
-	new->action = action.f;
-	new->enabled = TRUE;
-	new->i_lst = param.i_lst;
-	new->next = NULL;
-	if (*button == NULL)
-		return (new);
-	else
-	{
-		curs = *button;
-		while (curs->next != NULL)
-			curs = curs->next;
-		curs->next = new;
-	}
-	return (*button);
 }
 
 void		lst_active_button(t_button **button, UINT i_lst, BOOL active)

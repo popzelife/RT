@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bc_ellipsoid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:33:06 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/22 15:54:53 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:00:54 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		bc_ellipsoid(t_scene *s, t_parser *p, char *line)
 {
 	if (p->i_obj >= p->lim_obj || p->i_obj < 0)
 	{
-		ft_printf("XML %s ERROR - Can't assign more or less (%d) ellipsoid than "
+		ft_printf("XML %s ERROR - Can't assign + or - (%d) ellipsoid than "
 		"initiated at line %d: '%s'\n", __FUNCTION__, p->i_obj, p->l, line);
 		exit(-1);
 	}

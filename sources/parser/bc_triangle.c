@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   bc_triangle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:44:42 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/24 20:21:05 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:07:35 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void	bc_flag_triangle(t_scene *s, t_parser *p)
+{
+	s->obj[p->i_obj] = new_object(s->obj[p->i_obj].p_obj,
+	s->obj[p->i_obj].type_obj,
+	s->obj[p->i_obj].p_mat, s->obj[p->i_obj].p_mat->type_mat);
+	s->this_obj = &s->obj[p->i_obj];
+	s->sizeof_obj = p->i_obj + 1;
+	p->f = (void*)&bo_void;
+	p->opt = 0;
+	p->mat = FALSE;
+	p->lim_mat = 0;
+	p->obj = -1;
+	p->triangle = 0;
+	p->same--;
+}
 
 void		bc_triangle(t_scene *s, t_parser *p, char *line)
 {
@@ -27,18 +43,7 @@ void		bc_triangle(t_scene *s, t_parser *p, char *line)
 		p->l, line);
 		exit(-1);
 	}
-	s->obj[p->i_obj] = new_object(s->obj[p->i_obj].p_obj,
-	s->obj[p->i_obj].type_obj,
-	s->obj[p->i_obj].p_mat, s->obj[p->i_obj].p_mat->type_mat);
-	s->this_obj = &s->obj[p->i_obj];
-	s->sizeof_obj = p->i_obj + 1;
-	p->f = (void*)&bo_void;
-	p->opt = 0;
-	p->mat = FALSE;
-	p->lim_mat = 0;
-	p->obj = -1;
-	p->triangle = 0;
-	p->same--;
+	bc_flag_triangle(s, p);
 	ft_printf("\t- Triangle[%d] Initiated\n", s->sizeof_obj);
 }
 
@@ -58,7 +63,8 @@ void		bo_triangle(t_scene *s, t_parser *p, char *line)
 			exit(-1);
 		}
 	}
-	s->obj[p->i_obj].p_obj = (void*)new_triangle(v3_(0., 0., 0.), v3_(0., 0., 0.), v3_(0., 0., 0.));
+	s->obj[p->i_obj].p_obj = (void*)new_triangle(v3_(0., 0., 0.),
+	v3_(0., 0., 0.), v3_(0., 0., 0.));
 	s->obj[p->i_obj].type_obj = OBJ_TRIANGLE;
 	p->f = (void*)&bo_void;
 	p->opt |= p->byte[E_TAB_TRIANGLE];

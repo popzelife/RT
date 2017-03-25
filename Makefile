@@ -91,8 +91,11 @@ SRC =		esdl/color.c\
 			parser/scene.c\
 			parser/read_xml.c\
 			parser/check_xml_flag.c\
+			parser/check_xml_flag2.c\
 			parser/check_xml.c\
+			parser/check_opt.c\
 			parser/get.c\
+			parser/get2.c\
 			parser/camera.c\
 			parser/skybox.c\
 			parser/sphere.c\
@@ -147,6 +150,7 @@ SRC =		esdl/color.c\
 			scene/triangle.c\
 			utils/list.c\
 			utils/list2.c\
+			utils/list3.c\
 			utils/utils.c\
 			utils/utils2.c\
 			utils/utils3.c\

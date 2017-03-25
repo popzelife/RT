@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:33:42 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/25 16:07:17 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:33:16 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		bo_plane_rotate(t_scene *s, t_parser *p, char *line)
 	free(value);
 }
 
-void	bo_plane_pos(t_scene *s, t_parser *p, char *line)
+void		bo_plane_pos(t_scene *s, t_parser *p, char *line)
 {
 	char	*value;
 	t_plane	*o;
@@ -58,7 +58,7 @@ void	bo_plane_pos(t_scene *s, t_parser *p, char *line)
 	free(value);
 }
 
-void	bo_plane_radius(t_scene *s, t_parser *p, char *line)
+void		bo_plane_radius(t_scene *s, t_parser *p, char *line)
 {
 	char	*value;
 	t_plane	*o;

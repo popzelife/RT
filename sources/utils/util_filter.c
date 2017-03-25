@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:48 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/21 11:18:55 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 18:50:02 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	reset_rgb(t_filtermatrice *m)
 
 void	calc_filter(t_filtermatrice *m, t_filtervalue *f, t_matrixf t, t_rt *rt)
 {
-	m->imagex = (f->x - m->matricewidth / 2 + m->filterx + rt->sr_view->w) % rt->sr_view->w;
-	m->imagey = (f->y - m->matriceheigth / 2 + m->filtery + rt->sr_view->h) % rt->sr_view->h;
+	m->imagex = (f->x - m->matricewidth / 2 + m->filterx + rt->sr_view->w) %
+	rt->sr_view->w;
+	m->imagey = (f->y - m->matriceheigth / 2 + m->filtery + rt->sr_view->h) %
+	rt->sr_view->h;
 	f->pixel = f->pixels[m->imagey * rt->sr_view->w + m->imagex];
 	f->b = f->pixel >> 16 & 0xFF;
 	f->g = f->pixel >> 8 & 0xFF;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 22:40:51 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:35:24 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_scene	default_scene(t_rt *rt)
+t_scene			default_scene(t_rt *rt)
 {
 	t_scene		scene;
 
@@ -25,6 +25,10 @@ t_scene	default_scene(t_rt *rt)
 	ft_printf("-- Initiated ''Default Simple'' scene --\n");
 	return (scene);
 }
+
+/*
+** return (default_scene(rt));
+*/
 
 t_scene			init_scene(t_rt *rt)
 {
@@ -50,6 +54,5 @@ t_scene			init_scene(t_rt *rt)
 	}
 	else
 		return (random_scene_sphere(rt));
-		//return (default_scene(rt));
 	return (scene);
 }

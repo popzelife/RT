@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 01:07:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 18:23:42 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 18:50:22 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ UCHAR		ft_choose_texture(char *line)
 int			ft_check_filename(char *line)
 {
 	int		fd;
-	
+
 	fd = open(line, O_RDONLY);
 	if (fd > 0)
 	{
