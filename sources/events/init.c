@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 21:16:31 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:00:05 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,30 @@ void		init_rand(t_rt *rt)
 
 void		init_rt(t_rt *rt)
 {
-	SDL_Rect		*r_load;
-
 	rt->esdl = malloc(sizeof(t_esdl));
 	if (esdl_init(rt->esdl, LOAD_RX, LOAD_RY, API_NAME) == -1 ||
 		esdl_init_ttf(rt->esdl) == -1)
 	{
 		esdl_exit(rt->esdl);
 	}
-	SDL_SetWindowBordered(rt->esdl->eng.win, FALSE);
-	r_load = malloc(sizeof(SDL_Rect));
-	rt->tx_load = esdl_load_texture(rt->esdl->eng.render, LOAD_NAME,
-	&r_load->w, &r_load->h);
-	SDL_RenderClear(rt->esdl->eng.render);
-	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_load, NULL, NULL);
-	SDL_RenderPresent(rt->esdl->eng.render);
-	SDL_DestroyTexture(rt->tx_load);
-	free(r_load);
+	init_loader(rt);
+	progress_load(rt, 1);
+	render_load(rt);
+	SDL_Delay(1000);
 }
 
 void		loading(t_rt *rt)
 {
-	rt->win_temp = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED,
-	SDL_WINDOWPOS_UNDEFINED, WIN_RX, WIN_RY, SDL_WINDOW_HIDDEN |
-	SDL_WINDOW_ALLOW_HIGHDPI);
+	rt->win_temp = SDL_CreateWindow(" ", SDL_WINDOWPOS_UNDEFINED,
+	SDL_WINDOWPOS_UNDEFINED, WIN_RX, WIN_RY, SDL_WINDOW_HIDDEN);
 	draw_view(rt);
 	rt->sizeof_scn = 1;
 	rt->scene = (t_scene*)malloc(rt->sizeof_scn * sizeof(t_scene));
 	rt->scene[0] = init_scene(rt);
 	rt->this_scene = &rt->scene[0];
 	draw_menu(rt);
+	progress_load(rt, 20);
+	render_load(rt);
 	SDL_DestroyWindow(rt->win_temp);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/08 18:31:12 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:26:55 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ BOOL			hit_list(t_scene *scene, const t_ray ray, const double t[2],
 			closest_so_far[1] = param->t;
 			param->material = scene->obj[i].p_mat;
 			param->i_lst = i;
+			param->type_obj = scene->obj[i].type_obj;
+			param->p_obj = scene->obj[i].p_obj;
 		}
 		++i;
 	}
@@ -54,15 +56,10 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 	{
 		if ((depth < max_depth))
 		{
-			if (param.material->type_mat == MAT_METAL)
-				scatter_metal(ray, param, &attenuation, &scattered);
-			else if (param.material->type_mat == MAT_LAMBERT)
-				scatter_lambertian(ray, param, &attenuation, &scattered);
-			else
+			if (!render_scatter(ray, param, &attenuation, &scattered))
 				return (param.material->emitted);
-			return (v3_add_vec_(param.material->emitted,
-						v3_multiply_vec_(attenuation,
-							rt_color(scattered, scene, depth + 1, max_depth))));
+			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_(
+			attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
 		}
 		else
 			return (param.material->emitted);
@@ -116,7 +113,7 @@ void			render_lowres(t_tharg *a)
 				r.u = (double)((double)r.x / (double)a->rt->r_view->w / MSAMP);
 				r.v = (double)((double)r.y / (double)a->rt->r_view->h / MSAMP);
 				r.tmp = rt_color(ray_from_cam(a->scene->this_cam, r.u, r.v),
-				a->scene, 0, 1);
+				a->scene, 0, 2);
 				r.tmp = v3_(sqrt(r.tmp.x), sqrt(r.tmp.y), sqrt(r.tmp.z));
 			}
 			if (*(a->s) == 0 && r.x % 2 == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/10 01:02:13 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:54:21 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,46 @@ typedef struct	s_hit
 	int				i_lst;
 	t_vec3			pos;
 	t_vec3			normal;
+	UCHAR			type_obj;
+	void			*p_obj;
 	struct s_mat	*material;
 }				t_hit;
+
+typedef struct	s_dielec
+{
+	t_vec3		outw_normal;
+	t_vec3		refracted;
+	t_vec3		reflected;
+	double		cosine;
+	double		prob;
+	double		ni;
+}				t_dielec;
+
+/*
+** Texture
+*/
+
+typedef	struct	s_textvalue
+{
+	int				i;
+	int				j;
+	float			r;
+	float			g;
+	float			b;
+	uint8_t			ri;
+	uint8_t			gi;
+	uint8_t			bi;
+	uint32_t		pixel;
+}				t_textvalue;
+
+typedef	struct	s_texture
+{
+	UCHAR			type_texture;
+	SDL_Surface		*data;
+	char			*filename;
+	double			u;
+	double			v;
+}				t_texture;
 
 /*
 ** Materials
@@ -45,6 +83,7 @@ typedef struct	s_hit
 typedef struct	s_mat
 {
 	UCHAR			type_mat;
+	t_texture		*m_text;
 	t_vec3			albedo;
 	t_vec3			emitted;
 	double			t;
@@ -59,11 +98,13 @@ typedef struct	s_plane
 {
 	t_vec3			normale;
 	t_vec3			on_plane;
+	double			radius;
 }				t_plane;
 
 typedef struct	s_sphere
 {
 	t_vec3			center;
+	t_vec3			normal;
 	double			radius;
 	double			radius2;
 }				t_sphere;
@@ -87,6 +128,44 @@ typedef struct	s_cone
 	double			height;
 }				t_cone;
 
+typedef	struct	s_triangle_var
+{
+	t_vec3		p;
+	t_vec3		q;
+	t_vec3		ter;
+	double		det;
+	double		inv_det;
+	double		u;
+	double		v;
+	double		tbis;
+}				t_triangle_var;
+
+typedef struct	s_triangle
+{
+	t_vec3	vertex;
+	t_vec3	v2;
+	t_vec3	v3;
+	t_vec3	normal;
+	t_vec3	e1;
+	t_vec3	e2;
+}				t_triangle;
+
+typedef struct	s_ellipsoid
+{
+	t_vec3	center;
+	t_vec3	vertex;
+	double	k;
+	double	radius;
+	double	radius2;
+}				t_ellipsoid;
+
+typedef	struct	s_paraboloid
+{
+	t_vec3	vertex;
+	double	k;
+	t_vec3	center;
+}				t_parabloid;
+
 /*
 ** Discriminant
 */
@@ -97,11 +176,57 @@ typedef struct	s_discriminant
 	double			a;
 	double			b;
 	double			c;
+	double			a1;
+	double			a2;
 	double			discriminant;
 	double			sol;
 	double			m;
 }				t_discriminant;
 
+/*
+** Filter Structure
+*/
+
+typedef	struct	s_filtervalue
+{
+	int				x;
+	int				y;
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+	uint8_t			v;
+	float			rtmp;
+	float			gtmp;
+	float			btmp;
+	uint32_t		pixel;
+	uint32_t		*pixels;
+}				t_filtervalue;
+
+typedef	struct	s_filtermatrice
+{
+	int				filterx;
+	int				filtery;
+	int				imagex;
+	int				imagey;
+	int				matricewidth;
+	int				matriceheigth;
+	int				red;
+	int				green;
+	int				blue;
+	double			r;
+	double			g;
+	double			b;
+	double			factor;
+	double			bias;
+}				t_filtermatrice;
+
+typedef	struct	s_matrixf
+{
+	double			*matrice;
+	double			factor;
+	int				size;
+	int				flag;
+}				t_matrixf;
 /*
 ** Scene holder
 */
@@ -212,6 +337,8 @@ typedef struct	s_button
 	SDL_Rect			rect;
 	BOOL				hover;
 	void				*param;
+	BOOL				enabled;
+	UINT				i_lst;
 	void				(*action)(void*);
 	struct s_button		*next;
 }				t_button;
@@ -304,33 +431,6 @@ typedef struct	s_iter
 ** Parser
 */
 
-enum			e_bytetab
-{
-	E_TAB_VOID = 0,
-	E_TAB_CAM,
-	E_TAB_OBJ,
-	E_TAB_SKYBOX,
-	E_TAB_FOV,
-	E_TAB_TARGET,
-	E_TAB_APERT,
-	E_TAB_SPHERE,
-	E_TAB_PLANE,
-	E_TAB_CYLINDER,
-	E_TAB_CONE,
-	E_TAB_RADIUS,
-	E_TAB_POS,
-	E_TAB_ROTATE,
-	E_TAB_LAMBERT,
-	E_TAB_METAL,
-	E_TAB_DIELECT,
-	E_TAB_DIFFLIGHT,
-	E_TAB_COLOR,
-	E_TAB_PARAM,
-	E_TAB_GRADIENT,
-	E_TAB_NONE,
-	E_TAB_LAST
-};
-
 typedef struct	s_parser
 {
 	int				l;
@@ -351,6 +451,7 @@ typedef struct	s_parser
 	int				i_cam;
 	int				i_skb;
 	double			ratio;
+	int				triangle;
 	int				grad;
 	int				mat;
 	int				obj;
@@ -374,8 +475,22 @@ typedef struct	s_rt
 
 	int				rx;
 	int				ry;
+	int				grab;
+	int				g_mx;
+	int				g_my;
+	int				mx;
+	int				my;
+
 	SDL_Window		*win_temp;
 	SDL_Texture		*tx_load;
+	SDL_Rect		r_bar;
+	SDL_Surface		*sr_bar;
+	SDL_Texture		*tx_bar;
+	SDL_Rect		r_progress;
+	SDL_Surface		*sr_progress;
+	SDL_Texture		*tx_progress;
+
+	SDL_Surface		*sr_logo;
 	SDL_Rect		*r_view;
 	SDL_Surface		*sr_view;
 	SDL_Texture		*tx_view;

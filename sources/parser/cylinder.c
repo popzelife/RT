@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cone.c                                             :+:      :+:    :+:   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:01:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/09 20:29:46 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:09:42 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,27 @@ void		bo_cylinder_radius(t_scene *s, t_parser *p, char *line)
 	}
 	o->radius2 = o->radius * o->radius;
 	p->opt |= p->byte[E_TAB_RADIUS];
+	free(value);
+}
+
+void		bo_cylinder_height(t_scene *s, t_parser *p, char *line)
+{
+	char			*value;
+	t_cylinder		*o;
+
+	value = NULL;
+	o = (t_cylinder*)s->obj[p->i_obj].p_obj;
+	if (!xml_get_value(line, &value))
+	{
+		ft_printf("XML %s ERROR - Value not found at line %d: '%s'\n",
+				__FUNCTION__, p->l, line);
+		exit(-1);
+	}
+	if (!xml_to_double(value, &o->height))
+	{
+		ft_printf("XML %s ERROR - Something went wrong while assigning value:"
+			" '%s' in cylinder[%d].height\n", __FUNCTION__, value, p->i_obj);
+		exit(-1);
+	}
 	free(value);
 }

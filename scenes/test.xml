@@ -1,0 +1,45 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>-20.0 5.0 0.0</pos>
+	<target>0.0 5.0 0.0</target>
+	<rotate>0 -1.0 0</rotate>
+	<fov>45</fov>
+	<aperture>0</aperture>
+</camera>
+
+<obj>
+    <triangle>
+		<pos>-5.0 0.0 5.0</pos>
+		<pos>-5.0 0.0 -5.0</pos>
+		<pos>5.0 0.0 -5.0</pos>
+		<lambert>
+            <color>0.73 0.73 0.73</color>
+		</lambert>
+	</triangle>
+	<triangle>
+		<pos>-5.0 0.0 5.0</pos>
+		<pos>5.0 0.0 5.0</pos>
+		<pos>5.0 0.0 -5.0</pos>
+		<lambert>
+			<color>0.73 0.73 0.73</color>
+             <texture>linex</texture>
+		</lambert>
+	</triangle>
+    <sphere>
+        <pos>0.0 4.0 0.0</pos>
+        <radius>3.0</radius>
+        <lambert>
+            <color>0.73 0.73 0.73</color>
+			<texture>image</texture>
+			 <path>./earthmap.bmp</path>
+        </lambert>
+    </sphere>
+</obj>
+
+<skybox>
+	<gradient>
+		<color>1.0 1.0 1.0</color>
+		<color>0.5 0.7 1.0</color>
+	</gradient>
+</skybox>

@@ -6,7 +6,7 @@
 #    By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/23 17:10:25 by qfremeau          #+#    #+#              #
-#    Updated: 2017/01/04 18:11:30 by qfremeau         ###   ########.fr        #
+#    Updated: 2017/03/21 13:53:00 by vafanass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ PRECOMP =	stdafx.h
 DEFRULE =	all
 
 # Binary
-NAME =		rtv1
+NAME =		rt
 DST =		
 
 # Directories
@@ -42,6 +42,7 @@ else
 					librairies/libvec/includes\
 					/Users/$(ID_UN)/.brew/Cellar/sdl2/2.0.5/include/SDL2\
 					/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/include/SDL2\
+					/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/include/SDL2\
 					-F -framework Cocoa 
 		CFSDL =		
 	endif
@@ -69,34 +70,52 @@ SRC =		esdl/color.c\
 			events/events.c\
 			events/hook.c\
 			events/init.c\
+			events/loading.c\
 			events/quit.c\
 			events/events.c\
 			events/arrow_lmouse.c\
 			events/arrow_rmouse.c\
 			interface/miniview.c\
 			interface/button.c\
+			interface/button_cone.c\
+			interface/button_cylinder.c\
+			interface/button_material.c\
+			interface/button_plane.c\
+			interface/button_sphere.c\
+			interface/button_top.c\
 			interface/menu.c\
 			interface/surface_bkg.c\
 			interface/surface_text.c\
+			interface/surface_text2.c\
 			interface/surface_button.c\
+			interface/surface_draw_button.c\
+			interface/surface_draw_button_param.c\
+			interface/surface_draw_button_param2.c\
 			interface/param_object.c\
 			interface/param_material.c\
 			interface/view.c\
+			interface/filter.c\
 			parser/init.c\
 			parser/default.c\
+			parser/random.c\
 			parser/scene.c\
 			parser/read_xml.c\
 			parser/check_xml_flag.c\
+			parser/check_xml_flag2.c\
 			parser/check_xml.c\
+			parser/check_opt.c\
 			parser/get.c\
+			parser/get2.c\
 			parser/camera.c\
 			parser/skybox.c\
 			parser/sphere.c\
 			parser/plane.c\
 			parser/cylinder.c\
 			parser/cone.c\
+			parser/ellipsoid.c\
 			parser/lambert.c\
 			parser/metal.c\
+			parser/dielectric.c\
 			parser/difflight.c\
 			parser/bc_cam.c\
 			parser/bc_skybox.c\
@@ -104,13 +123,20 @@ SRC =		esdl/color.c\
 			parser/bc_plane.c\
 			parser/bc_cylinder.c\
 			parser/bc_cone.c\
+			parser/bc_ellipsoid.c\
 			parser/bc_lambert.c\
 			parser/bc_metal.c\
+			parser/bc_dielectric.c\
 			parser/bc_difflight.c\
-			parser/temp.c\
+			parser/bc_paraboloid.c\
+			parser/paraboloid.c\
+			parser/triangle.c\
+			parser/bc_triangle.c\
+			parser/texture.c\
 			raytracer/random.c\
 			raytracer/ray.c\
 			raytracer/render.c\
+			raytracer/scatter.c\
 			raytracer/thread.c\
 			raytracer/thread_tools.c\
 			raytracer/render_thread_tools.c\
@@ -118,20 +144,32 @@ SRC =		esdl/color.c\
 			scene/camera.c\
 			scene/light.c\
 			scene/material.c\
-			scene/scatter.c\
+			scene/lambert.c\
+			scene/metal.c\
+			scene/dielectric.c\
 			scene/object.c\
 			scene/skybox.c\
 			scene/sphere.c\
 			scene/plane.c\
 			scene/cylinder.c\
 			scene/cone.c\
+			scene/texture.c\
+			scene/texture_bmp.c\
+			scene/texture_calculator.c\
+			scene/paraboloid.c\
+			scene/ellipsoid.c\
+			scene/triangle.c\
 			utils/list.c\
 			utils/list2.c\
+			utils/list3.c\
 			utils/utils.c\
 			utils/utils2.c\
 			utils/utils3.c\
 			utils/utils4.c\
 			utils/utils5.c\
+			utils/util_texture.c\
+			utils/util_filter.c\
+			utils/util_matrice_filter.c\
 			main.c
 
 OBJ =		$(SRC:.c=.o)
@@ -139,7 +177,7 @@ OBJ =		$(SRC:.c=.o)
 # Prefixes
 ifeq ($(OS),Windows_NT)
 	OPNCL =		-L/lib/ -lOpenCL
-	LSDL2 =		-L/lib/ -lSDL2 -lSDL2_ttf
+	LSDL2 =		-L/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
 	LMATH =		
 	LPTHR =		
 else
@@ -147,13 +185,14 @@ else
 	ifeq ($(UNAME_S),Darwin)
 		OPNCL =		-framework OpenCL
 		LSDL2 =		-L/Users/$(ID_UN)/.brew/Cellar/sdl2/2.0.5/lib -lSDL2\
-					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf
+					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf\
+					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/lib -lSDL2_image
 		LMATH =		-lm
 		LPTHR =		-lpthread
 	endif
 	ifeq ($(UNAME_S),Linux)
 		OPNCL =		-L/usr/lib/x86_64-linux-gnu -lOpenCL
-		LSDL2 =		`sdl2-config --libs` -lSDL2_ttf
+		LSDL2 =		`sdl2-config --libs` -lSDL2_ttf -lSDL2_image
 		LMATH =		-lm
 		LPTHR =		-pthread
 	endif
@@ -250,3 +289,5 @@ sdl2:
 	brew link sdl2
 	brew install sdl2_ttf
 	brew link sdl2_ttf
+	brew install sdl2_image
+	brew link sdl2_image

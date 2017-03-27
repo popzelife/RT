@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 20:15:30 by bsouchet          #+#    #+#             */
-/*   Updated: 2017/03/01 18:19:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:57:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ double		v3_magnitude_double(t_vec3 const *v)
 	return (sqrt(v3_dot_double(v, v)));
 }
 
-double		v3_lenght_double(t_vec3 const *v)
+double		v3_length_double(t_vec3 const *v)
 {
 	return (sqrt(v3_dot_double(v, v)));
 }
 
-double		v3_length(t_vec3 const *v)
+double		v3_length(t_vec3 const v)
 {
-	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

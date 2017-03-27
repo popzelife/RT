@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 18:17:46 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 22:14:04 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:09:59 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		bc_skybox_gradient(t_scene *s, t_parser *p, char *line)
 	p->f = (void*)&bo_void;
 	p->opt = 0;
 	p->same--;
+	ft_printf("\t- Skybox[%d] Initiated\n", s->sizeof_skb);
 }
 
 void		bc_skybox_none(t_scene *s, t_parser *p, char *line)
@@ -56,10 +57,11 @@ void		bc_skybox_none(t_scene *s, t_parser *p, char *line)
 	s->skybox[p->i_skb] = new_skybox(s->skybox[p->i_skb].color1,
 	s->skybox[p->i_skb].color2, s->skybox[p->i_skb].type);
 	s->this_skb = &s->skybox[p->i_skb];
-	s->sizeof_skb = p->i_skb;
+	s->sizeof_skb = p->i_skb + 1;
 	p->f = (void*)&bo_void;
 	p->opt = 0;
 	p->same--;
+	ft_printf("\t- Skybox[%d] Initiated\n", s->sizeof_skb);
 }
 
 void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line)
@@ -69,8 +71,14 @@ void		bo_skybox_gradient(t_scene *s, t_parser *p, char *line)
 	if (p->i_skb >= p->lim_skb)
 	{
 		p->lim_skb += 4;
-		s->skybox = (t_skybox*)ft_realloc((void*)s->skybox, sizeof(t_skybox) *
-		p->lim_skb);
+		if ((s->skybox = (t_skybox*)realloc(s->skybox, p->lim_skb *
+			sizeof(t_skybox))) == NULL)
+		{
+			ft_printf("Realloc %s ERROR - Something went wrong trying to "
+			"realloc the given structure at skybox %d\n", __FUNCTION__,
+			p->i_skb);
+			exit(-1);
+		}
 	}
 	p->grad = 1;
 	s->skybox[p->i_skb].type = SKYBX_GRADIENT;
@@ -85,7 +93,7 @@ void		bo_skybox_none(t_scene *s, t_parser *p, char *line)
 	if (p->i_skb >= p->lim_skb)
 	{
 		p->lim_skb += 4;
-		if ((s->skybox = (t_skybox*)realloc(s->cam, p->lim_skb *
+		if ((s->skybox = (t_skybox*)realloc(s->skybox, p->lim_skb *
 			sizeof(t_skybox))) == NULL)
 		{
 			ft_printf("Realloc %s ERROR - Something went wrong trying to "

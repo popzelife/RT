@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:43:54 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 14:52:21 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/24 21:53:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_sphere	*new_sphere(const t_vec3 center, const double radius)
 	s->center = center;
 	s->radius = radius;
 	s->radius2 = radius * radius;
+	s->normal = v3_(0., 1., 0.);
 	return (s);
 }
 

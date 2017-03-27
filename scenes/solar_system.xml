@@ -1,0 +1,84 @@
+<?DOCTYPE scn-rt?>
+
+<camera>
+	<pos>0.0 4.0 10.0</pos>
+	<target>0 0 0</target>
+	<rotate>0 -1 0</rotate>
+	<fov>60</fov>
+	<aperture>0</aperture>
+</camera>
+
+<obj>
+## sky
+	<sphere>
+		<pos>0.0 0.0 0.0</pos>
+		<radius>-15</radius>
+
+		<dielectric>
+			<color>1 1 1</color>
+			<path>./scenes/milky_way.bmp</path>
+			<param>1.5</param>
+		</dielectric>
+
+	</sphere>
+## sun
+	<sphere>
+		<pos>8.0 6.0 -1.0</pos>
+		<radius>-5</radius>
+
+		<lambert>
+			<color>1 1 1</color>
+			<path>./scenes/sun.bmp</path>
+		</lambert>
+
+	</sphere>
+
+	<sphere>
+		<pos>8.0 6.0 -1.0</pos>
+		<radius>4</radius>
+
+		<difflight>
+			<color>1 1 1</color>
+		</difflight>
+	</sphere>
+## planets
+	<sphere>
+		<pos>-5.0 2.0 0.0</pos>
+		<radius>1</radius>
+
+		<lambert>
+			<color>1 1 1</color>
+			<path>./scenes/mars.bmp</path>
+		</lambert>
+	</sphere>
+
+	<sphere>
+		<pos>2.0 1.0 5.0</pos>
+		<radius>1.0</radius>
+
+		<lambert>
+			<color>1 1 1</color>
+			<path>./scenes/jupiter.bmp</path>
+		</lambert>
+	</sphere>
+
+	<sphere>
+		<pos>-1.0 2.0 -8.0</pos>
+		<radius>1</radius>
+
+		<lambert>
+			<color>1 1 1</color>
+			<path>./scenes/earth.bmp</path>
+		</lambert>
+	</sphere>
+
+	<sphere>
+		<pos>1.0 2.0 -8.0</pos>
+		<radius>0.4</radius>
+
+		<lambert>
+			<color>1 1 1</color>
+			<path>./scenes/Moon.bmp</path>
+		</lambert>
+	</sphere>
+</obj>

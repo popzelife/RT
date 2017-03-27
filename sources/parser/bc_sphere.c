@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 19:33:27 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 21:57:00 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:55:36 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		bc_sphere(t_scene *s, t_parser *p, char *line)
 	p->lim_mat = 0;
 	p->obj = -1;
 	p->same--;
+	ft_printf("\t- Sphere[%d] Initiated\n", s->sizeof_obj);
 }
 
 void		bo_sphere(t_scene *s, t_parser *p, char *line)

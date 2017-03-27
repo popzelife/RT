@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bc_plane.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 17:33:20 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/09 21:58:10 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/25 19:01:28 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		bc_plane(t_scene *s, t_parser *p, char *line)
 	p->lim_mat = 0;
 	p->obj = -1;
 	p->same--;
+	ft_printf("\t- Plane[%d] Initiated\n", s->sizeof_obj);
 }
 
 void		bo_plane(t_scene *s, t_parser *p, char *line)
@@ -56,7 +57,7 @@ void		bo_plane(t_scene *s, t_parser *p, char *line)
 		}
 	}
 	s->obj[p->i_obj].p_obj = (void*)new_plane(v3_(0., 1., 0.),
-	(v3_(0., 0., 0.)));
+	(v3_(0., 0., 0.)), 0.);
 	s->obj[p->i_obj].type_obj = OBJ_PLANE;
 	p->f = (void*)&bo_void;
 	p->opt |= p->byte[E_TAB_PLANE];

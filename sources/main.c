@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 21:40:50 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/09 22:37:47 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:58:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,24 @@ static void	loop_hook(t_rt *rt)
 static void	init_firstrender(t_rt *rt)
 {
 	while (rt->iter->s <= 1)
+	{
+		progress_load(rt, 2);
+		render_load(rt);
 		render(rt);
+	}
 	esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
+	SDL_SetWindowOpacity(rt->esdl->eng.win, 0.);
 	SDL_SetWindowSize(rt->esdl->eng.win, WIN_RX, WIN_RY);
-	SDL_SetWindowMinimumSize(rt->esdl->eng.win, WIN_RX - 400, WIN_RY - 300);
 	SDL_SetWindowPosition(rt->esdl->eng.win, SDL_WINDOWPOS_CENTERED,
 	SDL_WINDOWPOS_CENTERED);
-	SDL_SetWindowBordered(rt->esdl->eng.win, TRUE);
-	SDL_Delay(300);
+	SDL_SetWindowMinimumSize(rt->esdl->eng.win, WIN_RX - 400, WIN_RY - 300);
+	SDL_SetWindowOpacity(rt->esdl->eng.win, 1.);
+	SDL_FreeSurface(rt->sr_bar);
+	SDL_FreeSurface(rt->sr_progress);
+	SDL_DestroyTexture(rt->tx_bar);
+	SDL_DestroyTexture(rt->tx_progress);
+	SDL_DestroyTexture(rt->tx_load);
+	SDL_Delay(100);
 	rt->tx_view = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
 	rt->sr_view);
 	display_rt(rt);
@@ -58,12 +68,13 @@ static void	init_flag(t_rt *rt, int ac, char **av)
 	if (ac > 1)
 		rt->filename = ft_strdup(av[1]);
 	rt->rx = MINWIN_RX;
-	rt->ry = MINWIN_RY;
+	rt->ry = MINWIN_RY + TILE_RY;
 	if (ac > 2)
 	{
 		rt->rx = MAXWIN_RX;
-		rt->ry = MAXWIN_RY;
+		rt->ry = MAXWIN_RY + TILE_RY;
 	}
+	rt->grab = 0;
 }
 
 int			main(int ac, char **av)
@@ -73,6 +84,7 @@ int			main(int ac, char **av)
 
 	kernel_isopencl();
 	rt = &p_rt;
+	ft_printf("-- Initiating RT configuration --\n");
 	init_flag(rt, ac, av);
 	init_rt(rt);
 	init_xml(rt);
@@ -80,6 +92,7 @@ int			main(int ac, char **av)
 	init_rand(rt);
 	init_screen_buffer(rt);
 	init_multithread(rt);
+	ft_printf("-- Rendering first preview --\n\n");
 	init_firstrender(rt);
 	loop_hook(rt);
 	quit_rt(rt);
