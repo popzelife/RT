@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 17:07:54 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 18:03:29 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:09:56 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ BOOL			scatter_dielectric(const t_ray ray, const t_hit param,
 	t_dielec	d;
 
 	d.reflected = reflect(ray.dir, param.normal);
-	*attenuation = param.material->albedo;
+	texture_it(param, attenuation);
 	if (v3_dot_double_(ray.dir, param.normal) > 0.0)
 	{
 		help_norme(&d, ray, param);

@@ -77,11 +77,20 @@ SRC =		esdl/color.c\
 			events/arrow_rmouse.c\
 			interface/miniview.c\
 			interface/button.c\
+			interface/button_cone.c\
+			interface/button_cylinder.c\
+			interface/button_material.c\
+			interface/button_plane.c\
+			interface/button_sphere.c\
+			interface/button_top.c\
 			interface/menu.c\
 			interface/surface_bkg.c\
 			interface/surface_text.c\
 			interface/surface_text2.c\
 			interface/surface_button.c\
+			interface/surface_draw_button.c\
+			interface/surface_draw_button_param.c\
+			interface/surface_draw_button_param2.c\
 			interface/param_object.c\
 			interface/param_material.c\
 			interface/view.c\

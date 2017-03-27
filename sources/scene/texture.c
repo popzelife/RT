@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:50:44 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/24 18:22:03 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:08:30 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_texture	*new_texture(const UCHAR type_texture, char *filename)
 	t->filename = filename;
 	if (t->filename != NULL && type_texture == TEXT_IMAGE)
 	{
-		t->data = SDL_LoadBMP(filename);
+		t->data = IMG_Load(filename);
 		if (t->data == NULL)
 			t->type_texture = TEXT_NONE;
 	}

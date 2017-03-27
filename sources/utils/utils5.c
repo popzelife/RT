@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 01:07:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 18:50:22 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:04:03 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,10 @@ int			ft_check_filename(char *line)
 		return (1);
 	}
 	return (0);
+}
+
+void		free_matrice(t_matrixf *t)
+{
+	free(t->matrice);
+	free(t);
 }

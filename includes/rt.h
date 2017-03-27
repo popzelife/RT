@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 12:08:12 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:01:56 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,11 +184,23 @@ void		button_coneheight(void *param);
 void		button_cylindpos(void *param);
 void		button_cylindradius(void *param);
 void		button_cylindnormal(void *param);
-
+void		re_render_win(t_rt *rt);
 void		button_mattype(void *param);
 void		button_matalbedo(void *param);
 void		button_matmetal(void *param);
 void		button_matdielect(void *param);
+
+void		draw_button1(t_rt *rt, t_menu *m);
+void		draw_button2(t_rt *rt, t_menu *m);
+void		draw_button_minus_surface(t_rt *rt, t_menu *m, int *i);
+void		draw_button_close_surface(t_rt *rt, t_menu *m, int *i);
+void		draw_button_render_surface(t_rt *rt, t_menu *m, int *i);
+void		draw_button_param1(t_rt *rt, t_menu *m, int *i);
+void		draw_button_param2(t_rt *rt, t_menu *m, int *i);
+void		draw_button_param3(t_rt *rt, t_menu *m, int *i);
+void		draw_button_param4(t_rt *rt, t_menu *m, int *i);
+void		draw_button_param5(t_rt *rt, t_menu *m, int *i);
+void		draw_button_param6(t_rt *rt, t_menu *m, int *i);
 
 void		filter_negative(t_rt *rt, t_filtervalue *f);
 void		filter_sepia(t_rt *rt, t_filtervalue *f);
@@ -204,6 +216,7 @@ void		matrice_low_blur(t_matrixf *t);
 void		matrice_motion_blur(t_matrixf *t);
 void		matrice_sharpen(t_matrixf *t);
 void		matrice_emboss(t_matrixf *t);
+void		free_matrice(t_matrixf *t);
 /*
 ** Raytracer rendering
 */
