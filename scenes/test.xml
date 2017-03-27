@@ -31,7 +31,8 @@
         <radius>3.0</radius>
         <lambert>
             <color>0.73 0.73 0.73</color>
-             <texture>liney</texture>
+			<texture>image</texture>
+			 <path>./earthmap.bmp</path>
         </lambert>
     </sphere>
 </obj>
