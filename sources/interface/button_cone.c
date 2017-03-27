@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:24:09 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 22:45:20 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 22:52:26 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	button_conetang(t_rt *rt)
 	!xml_to_double(strtok(&value[0], "\n"), &o->height)))
 		ft_printf("%-40s", "Try a different cone height:");
 	if (value[0] <= 32)
-			exit(-1);
+		exit(-1);
 }
 
 void		button_coneheight(void *param)

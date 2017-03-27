@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:01:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 15:11:01 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 23:16:07 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ static void	material_color_bis(t_rt *rt)
 		== TEXT_RAINBOW)
 		sprintf(rt->panel.viewparam.str_color, "Texture: %6s"
 		"Rainbow", " ");
-	else
-		lst_active_button(&rt->panel.lst_button, BTN_PARAM5, FALSE);
 }
 
 static void	material_color(t_rt *rt)
 {
-	if (!rt->panel.viewparam.scene.this_obj->p_mat->m_text)
+	if (!rt->panel.viewparam.scene.this_obj->p_mat->m_text || rt->panel.
+	viewparam.scene.this_obj->p_mat->m_text->type_texture == TEXT_NONE)
 	{
 		sprintf(rt->panel.viewparam.str_color, "Color: %10srgb(%.3g, %.3g,"
 		"%.3g)", " ", rt->panel.viewparam.scene.this_obj->p_mat->albedo.x *

@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:25:15 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 14:47:46 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 23:07:12 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,24 @@ static void	init_scene_sphere(t_rt *rt, t_scene *scene)
 	SKYBX_GRADIENT);
 	scene->this_skb = &scene->skybox[0];
 	scene->sizeof_obj = 486;
-	rt->parser.lim_obj = 486;
+	rt->parser.lim_obj = 500;
 	scene->obj = (t_obj*)malloc(scene->sizeof_obj * sizeof(t_obj));
 	scene->obj[0] = new_object((void*)new_sphere(v3_(0., -1000., 0.), 1000.),
 	OBJ_SPHERE, new_material(v3_(.5, .5, .5), 0., NULL), MAT_LAMBERT);
 }
 
-static void	add_last_sphere(t_scene *scene, int i)
+static void	add_last_sphere(t_scene *scene, int *i)
 {
-	scene->obj[i++] = new_object((void*)new_sphere(v3_(0., 1., 0.), 1.),
+	scene->obj[*i] = new_object((void*)new_sphere(v3_(0., 1., 0.), 1.),
 	OBJ_SPHERE, new_material(v3_(1., 1., 1.), 1.5, NULL), MAT_DIELECT);
-	scene->obj[i++] = new_object((void*)new_sphere(v3_(-4., 1., 0.), 1.),
+	*i += 1;
+	scene->obj[*i] = new_object((void*)new_sphere(v3_(-4., 1., 0.), 1.),
 	OBJ_SPHERE, new_material(v3_(.4, .2, .1), 0., new_texture(TEXT_LINEY, NULL))
 	, MAT_LAMBERT);
-	scene->obj[i++] = new_object((void*)new_sphere(v3_(4., 1., 0.), 1.),
+	*i += 1;
+	scene->obj[*i] = new_object((void*)new_sphere(v3_(4., 1., 0.), 1.),
 	OBJ_SPHERE, new_material(v3_(.7, .6, .5), 0., NULL), MAT_METAL);
-	scene->this_obj = &scene->obj[i - 1];
+	scene->this_obj = &scene->obj[*i];
 }
 
 static void	random_sphere(t_scene *scene, int a, int b, int *i)
@@ -92,7 +94,10 @@ t_scene		random_scene_sphere(t_rt *rt)
 		}
 		++a;
 	}
-	add_last_sphere(&scene, i);
+	add_last_sphere(&scene, &i);
+	rt->parser.i_obj = i;
+	rt->parser.i_cam = 1;
+	rt->parser.i_skb = 1;
 	ft_printf("-- Initiated ''Randomized Spheres'' scene --\n");
 	return (scene);
 }

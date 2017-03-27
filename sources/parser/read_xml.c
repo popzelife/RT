@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:38:43 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/21 13:33:31 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 23:31:26 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ UINT			xml_to_flag(t_scene *scene, t_parser *parser, char *line)
 	return (0);
 }
 
+static void		check_filename(t_rt *rt, int fd)
+{
+	char		buff[32];
+
+	ft_bzero(&buff[0], 32);
+	if (read(fd, buff, ft_strlen(FILE_DEF)) <= 0 ||
+	ft_strcmp(buff, FILE_DEF) != 0)
+	{
+		ft_printf("XML Parse ERROR - '%s' is not a valid file. "
+		"Maybe check the \"<?DOCTYPE scn-rt?>\" reference.\n", rt->filename);
+		exit(-1);
+	}
+}
+
 void			read_xml(t_rt *rt, t_scene *scene)
 {
 	char	*line;
@@ -64,13 +78,7 @@ void			read_xml(t_rt *rt, t_scene *scene)
 		ft_printf("XML Parse ERROR - No such a file '%s'\n", rt->filename);
 		exit(-1);
 	}
-	get_next_line(fd, &line);
-	if (ft_strcmp(ft_trim(line), FILE_DEF) != 0)
-	{
-		ft_printf("XML Parse ERROR - '%s' is not a valid file\n", rt->filename);
-		exit(-1);
-	}
-	free(line);
+	check_filename(rt, fd);
 	while (get_next_line(fd, &line))
 	{
 		xml_to_flag(scene, &rt->parser, ft_strtolower(ft_trim(line)));

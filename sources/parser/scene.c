@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 17:15:30 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 22:55:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ t_scene			default_scene(t_rt *rt)
 	ft_printf("-- Initiated \"Default Simple\" scene --\n");
 	return (scene);
 }
-
-/*
-** return (default_scene(rt));
-** return (random_scene_sphere(rt));
-*/
 
 static void		check_scene(t_rt *rt, t_scene *scene)
 {
@@ -78,6 +73,6 @@ t_scene			init_scene(t_rt *rt)
 		check_scene(rt, &scene);
 	}
 	else
-		return (default_scene(rt));
+		return (random_scene_sphere(rt));
 	return (scene);
 }
