@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 17:09:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 17:26:31 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:18:38 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ BOOL		scatter_metal(const t_ray ray, const t_hit param,
 	reflected = reflect(v3_unit_vec_(ray.dir), param.normal);
 	*scattered = new_ray(param.pos, v3_add_vec_(reflected, v3_scale_vec_(
 	random_in_unit_sphere(), param.material->t)));
-	*attenuation = param.material->albedo;
+	texture_it(param, attenuation);
 	return ((v3_dot_double_(scattered->dir, param.normal) > 0) ? TRUE : FALSE);
 }
