@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 00:30:30 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 17:30:17 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:19:51 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,18 @@ static void	*select_obj(const UCHAR t)
 	if (t == OBJ_SPHERE)
 		o = (void*)new_sphere(v3_(0., 0., 0.), .39);
 	else if (t == OBJ_PLANE)
-		o = (void*)new_plane(v3_(1., 0., 0.), v3_(0., 0., 0.), 0.0);
+		o = (void*)new_plane(v3_(1., 0., 0.), v3_(0., 0., 0.), 0.);
 	else if (t == OBJ_CYLINDER)
-		o = (void*)new_cylinder(v3_(0., 1., 0.), v3_(0., 0., 0.), .3, 1.);
+		o = (void*)new_cylinder(v3_(0., 1., 0.), v3_(0., -0.3, 0.), .3, .6);
 	else if (t == OBJ_CONE)
-		o = (void*)new_cone(v3_(1., 1., 0.), v3_(0., 0., 0.), .2, 1.);
+		o = (void*)new_cone(v3_(0., 1., 0.), v3_(0., -0.2, 0.), .5, .6);
+	else if (t == OBJ_TRIANGLE)
+		o = (void*)new_triangle(v3_(0., -0.5, 0.6), v3_(0., 0.5, 0.6),
+		v3_(0., 0, -0.4));
+	else if (t == OBJ_ELLIPSOID)
+		o = (void*)new_ellipsoid(v3_(0, 0., 60.), v3_(1., 0., 0.), 0.3, 0.5);
+	else if (t == OBJ_PARABOLOID)
+		o = (void*)new_paraboloid(v3_(0, 0., 60.), v3_(1., 0., 0.), 0.3);
 	else
 		o = (void*)new_sphere(v3_(0., 0., 0.), .39);
 	return (o);

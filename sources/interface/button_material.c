@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_material.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:21:54 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 13:26:51 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 15:09:50 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,26 @@ void		button_matalbedo(void *param)
 			&rt->scene->this_obj->p_mat->albedo))
 		{
 			ft_printf("%-40s", "Try a different material albedo:");
+			fgets(value, 255, stdin);
+		}
+		re_render_win(rt);
+	}
+}
+
+void		button_mattexture(void *param)
+{
+	char			value[256];
+	t_rt			*rt;
+
+	rt = (void*)param;
+	if (rt->suspend)
+	{
+		ft_printf("%-40s", "Enter a new material texture:");
+		fgets(value, 255, stdin);
+		while (value[0] == '\n' || !xml_to_texture(strtok(&value[0], "\n"),
+			&rt->scene->this_obj->p_mat->m_text->type_texture))
+		{
+			ft_printf("%-40s", "Try a different material texture:");
 			fgets(value, 255, stdin);
 		}
 		re_render_win(rt);

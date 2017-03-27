@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 14:01:56 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 15:10:21 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void		button_cylindradius(void *param);
 void		button_cylindnormal(void *param);
 void		re_render_win(t_rt *rt);
 void		button_mattype(void *param);
+void		button_mattexture(void *param);
 void		button_matalbedo(void *param);
 void		button_matmetal(void *param);
 void		button_matdielect(void *param);

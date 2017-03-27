@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 22:19:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 19:30:30 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 15:58:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void		default_skybox(t_rt *rt, t_scene *scene)
 	rt->parser.lim_skb = 1;
 	scene->skybox = (t_skybox*)malloc(scene->sizeof_skb * sizeof(t_skybox));
 	scene->skybox[0] = new_skybox(v3_(.6, .5, .4), v3_(.2, .8, 1.),
-	SKYBX_GRADIENT);
+	SKYBX_NONE);
 	scene->this_skb = &scene->skybox[0];
 }

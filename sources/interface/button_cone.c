@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_cone.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:24:09 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 13:24:16 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:21:40 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ void		button_conenormal(void *param)
 	}
 }
 
+static void	button_conetang(t_rt *rt)
+{
+	char			value[256];
+	t_cone			*o;
+
+	o = (t_cone*)rt->scene->this_obj->p_obj;
+	ft_printf("%-40s", "Enter a new cone height:");
+	fgets(value, 255, stdin);
+	while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),
+	&o->height))
+	{
+		ft_printf("%-40s", "Try a different cone height:");
+		fgets(value, 255, stdin);
+	}
+}
+
 void		button_coneheight(void *param)
 {
 	char			value[256];
@@ -66,14 +82,15 @@ void		button_coneheight(void *param)
 	if (rt->suspend)
 	{
 		o = (t_cone*)rt->scene->this_obj->p_obj;
-		ft_printf("%-40s", "Enter a new cone radius:");
+		ft_printf("%-40s", "Enter a new cone tangent:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),
-		&o->height))
+		&o->tang))
 		{
-			ft_printf("%-40s", "Try a different cone radius:");
+			ft_printf("%-40s", "Try a different cone tangent:");
 			fgets(value, 255, stdin);
 		}
+		button_conetang(rt);
 		re_render_win(rt);
 	}
 }

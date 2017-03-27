@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:01:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 12:13:04 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 15:11:01 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static void	material_color_bis(t_rt *rt)
 {
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM5, TRUE);
+	lst_set_button(&rt->panel.lst_button, BTN_PARAM5,
+	actionparam((void*)rt, button_mattexture));
 	if (rt->panel.viewparam.scene.this_obj->p_mat->m_text->type_texture ==
 		TEXT_IMAGE)
-		sprintf(rt->panel.viewparam.str_color, "Texture: %6s" "\"%10s\"",
+		sprintf(rt->panel.viewparam.str_color, "Texture: %6s" "\"%s\"",
 		" ", rt->panel.viewparam.scene.this_obj->p_mat->m_text->filename);
 	else if (rt->panel.viewparam.scene.this_obj->p_mat->m_text->type_texture
 		== TEXT_CHCKBOARD)

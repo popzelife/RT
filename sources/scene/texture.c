@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 12:50:44 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 14:08:30 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 15:08:25 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ t_texture	*new_texture(const UCHAR type_texture, char *filename)
 
 	t = malloc(sizeof(t_texture));
 	t->type_texture = type_texture;
-	t->filename = filename;
-	if (t->filename != NULL && type_texture == TEXT_IMAGE)
+	t->filename = NULL;
+	if (filename != NULL && type_texture == TEXT_IMAGE)
 	{
+		t->filename = ft_strdup(filename);
 		t->data = IMG_Load(filename);
 		if (t->data == NULL)
 			t->type_texture = TEXT_NONE;

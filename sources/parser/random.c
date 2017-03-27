@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:25:15 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 11:44:55 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:47:46 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,19 @@ static void	random_sphere(t_scene *scene, int a, int b, int *i)
 	if (v3_length(v3_sub_vec_(center, v3_(4., .2, 0.))) > .9)
 	{
 		if (choose_mat < .8)
-			scene->obj[*i++] = new_object((void*)new_sphere(center, .2),
+			scene->obj[*i] = new_object((void*)new_sphere(center, .2),
 			OBJ_SPHERE, new_material(v3_(f_rand() * f_rand(), f_rand() *
 			f_rand(), f_rand() * f_rand()), 0., NULL), MAT_LAMBERT);
 		else if (choose_mat < .95)
-			scene->obj[*i++] = new_object((void*)new_sphere(center, .2),
+			scene->obj[*i] = new_object((void*)new_sphere(center, .2),
 			OBJ_SPHERE, new_material(v3_(.5 * (1 + f_rand()), .5 * (1 +
 			f_rand()), .5 * (1 + f_rand())), .5 * f_rand(), NULL),
 			MAT_METAL);
 		else
-			scene->obj[*i++] = new_object((void*)new_sphere(center, .2),
+			scene->obj[*i] = new_object((void*)new_sphere(center, .2),
 			OBJ_SPHERE, new_material(v3_(1., 1., 1.), 1.5, NULL),
 			MAT_DIELECT);
+		*i += 1;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:52:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 12:14:54 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 14:22:36 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ static void	cone_param(t_rt *rt)
 	cone->cp.x, cone->cp.y, cone->cp.z);
 	sprintf(rt->panel.viewparam.str_rotate, "Normal: %6s[%.3g; %.3g; %.3g]",
 	" ", cone->vertex.x, cone->vertex.y, cone->vertex.z);
-	sprintf(rt->panel.viewparam.str_param_o, "Height: %7s %.3g%7s", " ",
-	cone->height, " ");
+	sprintf(rt->panel.viewparam.str_param_o, "Tan-Hght: %3s%.3g | %.3g", " ",
+	cone->tang, cone->height);
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM3, TRUE);
@@ -91,8 +91,8 @@ static void	cylinder_param(t_rt *rt)
 	cylinder->cp.x, cylinder->cp.y, cylinder->cp.z);
 	sprintf(rt->panel.viewparam.str_rotate, "Normal: %6s[%.3g; %.3g; %.3g]",
 	" ", cylinder->vertex.x, cylinder->vertex.y, cylinder->vertex.z);
-	sprintf(rt->panel.viewparam.str_param_o, "Radius: %7s %.3g%7s", " ",
-	cylinder->radius, " ");
+	sprintf(rt->panel.viewparam.str_param_o, "Rad-Hght: %2s %.3g | %.3g", " ",
+	cylinder->radius, cylinder->height);
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM1, TRUE);
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM2, TRUE);
 	lst_active_button(&rt->panel.lst_button, BTN_PARAM3, TRUE);
