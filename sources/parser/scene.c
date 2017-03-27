@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 19:18:42 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 16:23:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:15:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void		check_scene(t_rt *rt, t_scene *scene)
 		if ((scene->cam = (t_cam*)realloc(scene->cam, scene->sizeof_cam
 			* sizeof(t_cam))) == NULL)
 			exit(-1);
-		scene->cam[0] = set_camera(v3_(-5., 1., -10.), v3_(0., 0., 0.), v3_(0., -1.,
-		0.), camparam(60., (double)rt->r_view->w / (double)rt->r_view->h, .0,
-		v3_length_double_(v3_sub_vec_(v3_(13., 2., 3.), v3_(0., 0., 0.)))));
+		scene->cam[0] = set_camera(v3_(-5., 1., -10.), v3_(0., 0., 0.), v3_(0.,
+		-1., 0.), camparam(60., (double)rt->r_view->w / (double)rt->r_view->h,
+		.0, v3_length_double_(v3_sub_vec_(v3_(13., 2., 3.), v3_(0., 0., 0.)))));
 		scene->this_cam = &scene->cam[0];
 	}
 	if (scene->sizeof_skb == 0)

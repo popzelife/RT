@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 15:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 14:31:56 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:50:40 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void		render_load(t_rt *rt)
 void		progress_load(t_rt *rt, int percent)
 {
 	rt->r_progress.w += rt->r_bar.w * percent / 100;
+	esdl_clear_surface(rt->sr_bar, NULL, CBAR, NULL);
+	esdl_clear_surface(rt->sr_progress, NULL, CPROGRESS, NULL);
 	SDL_DestroyTexture(rt->tx_bar);
 	SDL_DestroyTexture(rt->tx_progress);
-	esdl_clear_surface(rt->sr_bar, NULL, CBAR, NULL);
 	rt->tx_bar = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
 	rt->sr_bar);
-	esdl_clear_surface(rt->sr_progress, NULL, CPROGRESS, NULL);
 	rt->tx_progress = SDL_CreateTextureFromSurface(rt->esdl->eng.render,
 	rt->sr_progress);
 }

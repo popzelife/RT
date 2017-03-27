@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 14:02:22 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 16:27:09 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:00:05 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ void		init_rt(t_rt *rt)
 
 void		loading(t_rt *rt)
 {
-	rt->win_temp = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED,
-	SDL_WINDOWPOS_UNDEFINED, WIN_RX, WIN_RY, SDL_WINDOW_HIDDEN |
-	SDL_WINDOW_ALLOW_HIGHDPI);
+	rt->win_temp = SDL_CreateWindow(" ", SDL_WINDOWPOS_UNDEFINED,
+	SDL_WINDOWPOS_UNDEFINED, WIN_RX, WIN_RY, SDL_WINDOW_HIDDEN);
 	draw_view(rt);
 	rt->sizeof_scn = 1;
 	rt->scene = (t_scene*)malloc(rt->sizeof_scn * sizeof(t_scene));
