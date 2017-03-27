@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:21:54 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 22:50:43 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 23:37:11 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void		button_mattype(void *param)
 	if (rt->suspend)
 	{
 		ft_printf("%-40s", "Enter a new material type:");
-		while (fgets(value, 255, stdin) && (value[0] == '\n' || !xml_to_material
-		(strtok(&value[0], "\n"), &rt->this_scene->this_obj->p_mat->type_mat)))
+		while (fgets(value, 255, stdin) && (value[0] == '\n' || !xml_to_material(
+		strtok(&value[0], "\n"), &rt->this_scene->this_obj->p_mat->type_mat)))
 			ft_printf("%-40s", "Try a different material type:");
 		if (value[0] <= 32)
 			exit(-1);

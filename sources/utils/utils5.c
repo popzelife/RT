@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 01:07:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 21:39:41 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 23:35:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		free_matrice(t_matrixf *t)
 	free(t);
 }
 
-void			reset_view(t_rt *rt)
+void		reset_view(t_rt *rt)
 {
 	rt->this_scene->this_obj = rt->this_scene->this_obj;
 	free(rt->panel.viewparam.scene.obj[0].p_obj);
