@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 01:07:19 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 14:04:03 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:39:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,14 @@ void		free_matrice(t_matrixf *t)
 {
 	free(t->matrice);
 	free(t);
+}
+
+void			reset_view(t_rt *rt)
+{
+	rt->this_scene->this_obj = rt->this_scene->this_obj;
+	free(rt->panel.viewparam.scene.obj[0].p_obj);
+	free(rt->panel.viewparam.scene.obj[0].p_mat);
+	rt->panel.viewparam.scene.obj[0] = copy_object(rt->this_scene->this_obj);
+	rt->panel.viewparam.scene.this_obj = rt->this_scene->this_obj;
+	update_menu(rt);
 }

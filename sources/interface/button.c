@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 16:22:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 13:40:00 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:37:43 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void		button_snap(void *param)
 void		re_render_win(t_rt *rt)
 {
 	SDL_RaiseWindow(rt->esdl->eng.win);
-	update_menu(rt);
 	udpate_view(rt);
 	while (rt->iter->s == 0)
 		render_low(rt);
 	esdl_clear_surface(rt->s_process, NULL, 0x00000000, NULL);
 	param_view_high(rt);
+	reset_view(rt);
 	rt->render = TRUE;
 }

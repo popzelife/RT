@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arrow_lmouse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:42:21 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/01 15:47:38 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 20:46:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void		right_lmouse(t_rt *rt)
 {
 	{
-		*rt->scene->this_cam = set_camera(
-				v3_(rt->scene->this_cam->param.look_from.x - 1.,
-					rt->scene->this_cam->param.look_from.y,
-					rt->scene->this_cam->param.look_from.z),
-				v3_(rt->scene->this_cam->param.look_at.x - 1.,
-					rt->scene->this_cam->param.look_at.y,
-					rt->scene->this_cam->param.look_at.z),
-				rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
+		*rt->this_scene->this_cam = set_camera(
+				v3_(rt->this_scene->this_cam->param.look_from.x - 1.,
+					rt->this_scene->this_cam->param.look_from.y,
+					rt->this_scene->this_cam->param.look_from.z),
+				v3_(rt->this_scene->this_cam->param.look_at.x - 1.,
+					rt->this_scene->this_cam->param.look_at.y,
+					rt->this_scene->this_cam->param.look_at.z),
+		rt->this_scene->this_cam->param.v_up, rt->this_scene->this_cam->param);
 		udpate_view(rt);
 		while (rt->iter->s == 0)
 			render_low(rt);
@@ -34,14 +34,14 @@ void		right_lmouse(t_rt *rt)
 
 void		left_lmouse(t_rt *rt)
 {
-	*rt->scene->this_cam = set_camera(
-			v3_(rt->scene->this_cam->param.look_from.x + 1.,
-				rt->scene->this_cam->param.look_from.y,
-				rt->scene->this_cam->param.look_from.z),
-			v3_(rt->scene->this_cam->param.look_at.x + 1.,
-				rt->scene->this_cam->param.look_at.y,
-				rt->scene->this_cam->param.look_at.z),
-			rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
+	*rt->this_scene->this_cam = set_camera(
+			v3_(rt->this_scene->this_cam->param.look_from.x + 1.,
+				rt->this_scene->this_cam->param.look_from.y,
+				rt->this_scene->this_cam->param.look_from.z),
+			v3_(rt->this_scene->this_cam->param.look_at.x + 1.,
+				rt->this_scene->this_cam->param.look_at.y,
+				rt->this_scene->this_cam->param.look_at.z),
+		rt->this_scene->this_cam->param.v_up, rt->this_scene->this_cam->param);
 	udpate_view(rt);
 	while (rt->iter->s == 0)
 		render_low(rt);
@@ -52,14 +52,14 @@ void		left_lmouse(t_rt *rt)
 
 void		up_lmouse(t_rt *rt)
 {
-	*rt->scene->this_cam = set_camera(
-			v3_(rt->scene->this_cam->param.look_from.x,
-				rt->scene->this_cam->param.look_from.y + 1.,
-				rt->scene->this_cam->param.look_from.z),
-			v3_(rt->scene->this_cam->param.look_at.x,
-				rt->scene->this_cam->param.look_at.y + 1.,
-				rt->scene->this_cam->param.look_at.z),
-			rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
+	*rt->this_scene->this_cam = set_camera(
+			v3_(rt->this_scene->this_cam->param.look_from.x,
+				rt->this_scene->this_cam->param.look_from.y + 1.,
+				rt->this_scene->this_cam->param.look_from.z),
+			v3_(rt->this_scene->this_cam->param.look_at.x,
+				rt->this_scene->this_cam->param.look_at.y + 1.,
+				rt->this_scene->this_cam->param.look_at.z),
+		rt->this_scene->this_cam->param.v_up, rt->this_scene->this_cam->param);
 	udpate_view(rt);
 	while (rt->iter->s == 0)
 		render_low(rt);
@@ -70,14 +70,14 @@ void		up_lmouse(t_rt *rt)
 
 void		down_lmouse(t_rt *rt)
 {
-	*rt->scene->this_cam = set_camera(
-			v3_(rt->scene->this_cam->param.look_from.x,
-				rt->scene->this_cam->param.look_from.y - 1.,
-				rt->scene->this_cam->param.look_from.z),
-			v3_(rt->scene->this_cam->param.look_at.x,
-				rt->scene->this_cam->param.look_at.y - 1.,
-				rt->scene->this_cam->param.look_at.z),
-			rt->scene->this_cam->param.v_up, rt->scene->this_cam->param);
+	*rt->this_scene->this_cam = set_camera(
+			v3_(rt->this_scene->this_cam->param.look_from.x,
+				rt->this_scene->this_cam->param.look_from.y - 1.,
+				rt->this_scene->this_cam->param.look_from.z),
+			v3_(rt->this_scene->this_cam->param.look_at.x,
+				rt->this_scene->this_cam->param.look_at.y - 1.,
+				rt->this_scene->this_cam->param.look_at.z),
+		rt->this_scene->this_cam->param.v_up, rt->this_scene->this_cam->param);
 	udpate_view(rt);
 	while (rt->iter->s == 0)
 		render_low(rt);

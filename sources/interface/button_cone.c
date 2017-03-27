@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:24:09 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 14:21:40 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:22:58 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		button_conepos(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_cone*)rt->scene->this_obj->p_obj;
+		o = (t_cone*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new cone position:");
 		fgets(value, 255, stdin);
 		while (!xml_to_vec(strtok(&value[0], "\n"), &o->cp))
@@ -42,7 +42,7 @@ void		button_conenormal(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_cone*)rt->scene->this_obj->p_obj;
+		o = (t_cone*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new cone normal:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_vec(strtok(&value[0], "\n"),
@@ -61,7 +61,7 @@ static void	button_conetang(t_rt *rt)
 	char			value[256];
 	t_cone			*o;
 
-	o = (t_cone*)rt->scene->this_obj->p_obj;
+	o = (t_cone*)rt->this_scene->this_obj->p_obj;
 	ft_printf("%-40s", "Enter a new cone height:");
 	fgets(value, 255, stdin);
 	while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),
@@ -81,7 +81,7 @@ void		button_coneheight(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_cone*)rt->scene->this_obj->p_obj;
+		o = (t_cone*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new cone tangent:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),

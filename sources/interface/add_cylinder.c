@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:35:01 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 18:48:27 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:17:22 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,11 @@ void		button_addcylinder(void *param)
 	if (rt->suspend)
 	{
 		ft_printf("-- Adding a new cylinder --\n");
-		rt->parser.i_obj++;
-		if (rt->parser.i_obj >= rt->parser.lim_obj)
-		{
-			rt->parser.lim_obj += 8;
-			if ((rt->scene->obj = (t_obj*)realloc(rt->scene->obj,
-				rt->parser.lim_obj * sizeof(t_obj))) == NULL)
-				exit(-1);
-		}
-		rt->scene->obj[rt->parser.i_obj] = new_object(new_cylinder(
+		expand_obj_struct(rt);
+		rt->this_scene->obj[rt->parser.i_obj] = new_object(new_cylinder(
 		v3_(0., 0., 0.), v3_(0., 1., 0.), 1., 1.), OBJ_CYLINDER,
 		new_material(v3_(1., 1., 1.), 0., NULL), MAT_LAMBERT);
-		rt->scene->sizeof_obj = rt->parser.i_obj + 1;
-		rt->scene->this_obj = &rt->scene->obj[rt->parser.i_obj];
+		rt->this_scene->this_obj = &rt->this_scene->obj[rt->parser.i_obj];
 		button_cylindpos(param);
 		button_cylindnormal(param);
 		button_cylindradius(param);

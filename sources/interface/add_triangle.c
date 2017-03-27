@@ -6,11 +6,24 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:35:08 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 19:05:31 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:40:53 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void		expand_obj_struct(t_rt *rt)
+{
+	rt->this_scene->sizeof_obj++;
+	rt->parser.i_obj++;
+	if (rt->parser.i_obj >= rt->parser.lim_obj)
+	{
+		rt->parser.lim_obj += 4;
+		if ((rt->this_scene->obj = (t_obj*)realloc(rt->this_scene->obj,
+			rt->parser.lim_obj * sizeof(t_obj))) == NULL)
+			exit(-1);
+	}
+}
 
 void		button_addtriangle(void *param)
 {
@@ -20,19 +33,12 @@ void		button_addtriangle(void *param)
 	if (rt->suspend)
 	{
 		ft_printf("-- Adding a new triangle --\n");
-		rt->parser.i_obj++;
-		if (rt->parser.i_obj >= rt->parser.lim_obj)
-		{
-			rt->parser.lim_obj += 8;
-			if ((rt->scene->obj = (t_obj*)realloc(rt->scene->obj,
-				rt->parser.lim_obj * sizeof(t_obj))) == NULL)
-				exit(-1);
-		}
-		rt->scene->obj[rt->parser.i_obj] = new_object(new_triangle(
+		expand_obj_struct(rt);
+		rt->this_scene->obj[rt->parser.i_obj] = new_object(new_triangle(
 		v3_(0., 0., 0.), v3_(1., 0., 0.), v3_(1., 0., 1.)), OBJ_TRIANGLE,
-		new_material(v3_(1., 1., 1.), 0., NULL), MAT_LAMBERT);
-		rt->scene->sizeof_obj = rt->parser.i_obj + 1;
-		rt->scene->this_obj = &rt->scene->obj[rt->parser.i_obj];
+		new_material(v3_(1., 1., 1.), 0., NULL),
+		MAT_LAMBERT);
+		rt->this_scene->this_obj = &rt->this_scene->obj[rt->parser.i_obj];
 		button_trianglepos1(param);
 		button_trianglepos2(param);
 		button_trianglepos3(param);

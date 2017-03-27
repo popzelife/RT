@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:34:57 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 18:49:00 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:17:16 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,11 @@ void		button_addcone(void *param)
 	if (rt->suspend)
 	{
 		ft_printf("-- Adding a new cone --\n");
-		rt->parser.i_obj++;
-		if (rt->parser.i_obj >= rt->parser.lim_obj)
-		{
-			rt->parser.lim_obj += 8;
-			if ((rt->scene->obj = (t_obj*)realloc(rt->scene->obj,
-				rt->parser.lim_obj * sizeof(t_obj))) == NULL)
-				exit(-1);
-		}
-		rt->scene->obj[rt->parser.i_obj] = new_object(new_cone(v3_(0., 1., 0.),
-		v3_(0., 0., 0.), 1., 1.), OBJ_CONE, new_material(v3_(1., 1., 1.), 0.,
-		NULL), MAT_LAMBERT);
-		rt->scene->sizeof_obj = rt->parser.i_obj + 1;
-		rt->scene->this_obj = &rt->scene->obj[rt->parser.i_obj];
+		expand_obj_struct(rt);
+		rt->this_scene->obj[rt->parser.i_obj] = new_object(new_cone(
+		v3_(0., 1., 0.), v3_(0., 0., 0.), 1., 1.), OBJ_CONE, new_material(
+		v3_(1., 1., 1.), 0., NULL), MAT_LAMBERT);
+		rt->this_scene->this_obj = &rt->this_scene->obj[rt->parser.i_obj];
 		button_conepos(param);
 		button_conenormal(param);
 		button_coneheight(param);

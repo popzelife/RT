@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_plane.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:24:40 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 13:26:32 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:23:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		button_planepos(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_plane*)rt->scene->this_obj->p_obj;
+		o = (t_plane*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new plane position:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_vec(strtok(&value[0], "\n"),
@@ -43,7 +43,7 @@ void		button_planeradius(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_plane*)rt->scene->this_obj->p_obj;
+		o = (t_plane*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new plane radius:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),
@@ -65,7 +65,7 @@ void		button_planenormal(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_plane*)rt->scene->this_obj->p_obj;
+		o = (t_plane*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new plane normal:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_vec(strtok(&value[0], "\n"),

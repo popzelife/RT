@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:23:24 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 14:21:33 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:23:08 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		button_cylindpos(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_cylinder*)rt->scene->this_obj->p_obj;
+		o = (t_cylinder*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new cylinder position:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_vec(strtok(&value[0], "\n"), &o->cp))
@@ -38,7 +38,7 @@ static void	button_cylindheight(t_rt *rt)
 	char			value[256];
 	t_cylinder		*o;
 
-	o = (t_cylinder*)rt->scene->this_obj->p_obj;
+	o = (t_cylinder*)rt->this_scene->this_obj->p_obj;
 	ft_printf("%-40s", "Enter a new cylinder height:");
 	fgets(value, 255, stdin);
 	while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),
@@ -58,7 +58,7 @@ void		button_cylindradius(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_cylinder*)rt->scene->this_obj->p_obj;
+		o = (t_cylinder*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new cylinder radius:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_double(strtok(&value[0], "\n"),
@@ -82,7 +82,7 @@ void		button_cylindnormal(void *param)
 	rt = (void*)param;
 	if (rt->suspend)
 	{
-		o = (t_cylinder*)rt->scene->this_obj->p_obj;
+		o = (t_cylinder*)rt->this_scene->this_obj->p_obj;
 		ft_printf("%-40s", "Enter a new cylinder normal:");
 		fgets(value, 255, stdin);
 		while (value[0] == '\n' || !xml_to_vec(strtok(&value[0], "\n"),

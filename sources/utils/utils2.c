@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:37:29 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 19:03:43 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 20:39:44 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ void			set_viewparam(t_viewparam *p, t_rt *rt, int x, int y)
 	t[1] = FLT_MAX;
 	u = (double)x / (double)rt->r_view->w;
 	v = (double)y / (double)rt->r_view->h;
-	ray = ray_from_cam(rt->scene->this_cam, u, v);
+	ray = ray_from_cam(rt->this_scene->this_cam, u, v);
 	param.pos = v3_(0., 0., 0.);
 	param.normal = v3_(0., 0., 0.);
-	if (hit_list(rt->scene, ray, t, &param))
+	if (hit_list(rt->this_scene, ray, t, &param))
 	{
-		rt->scene->this_obj = &rt->scene->obj[param.i_lst];
+		rt->this_scene->this_obj = &rt->this_scene->obj[param.i_lst];
 		free(p->scene.obj[0].p_obj);
 		free(p->scene.obj[0].p_mat);
-		p->scene.obj[0] = copy_object(&rt->scene->obj[param.i_lst]);
-		p->scene.this_obj = &rt->scene->obj[param.i_lst];
+		p->scene.obj[0] = copy_object(&rt->this_scene->obj[param.i_lst]);
+		p->scene.this_obj = &rt->this_scene->obj[param.i_lst];
 	}
 }
 

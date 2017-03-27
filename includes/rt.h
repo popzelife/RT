@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 18:58:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 21:37:23 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void		paraboloid_param(t_rt *rt);
 */
 
 t_action	actionparam(void *param, void (f)(void*));
+void		reset_view(t_rt *rt);
 
 void		lst_active_button(t_button **button, UINT i_lst, BOOL active);
 void		lst_set_button(t_button **button, UINT i_lst, t_action action);
@@ -198,6 +199,7 @@ void		button_matalbedo(void *param);
 void		button_matmetal(void *param);
 void		button_matdielect(void *param);
 
+void		expand_obj_struct(t_rt *rt);
 void		add_plane(t_rt *rt, t_menu *m, int *i);
 void		add_triangle(t_rt *rt, t_menu *m, int *i);
 void		add_cone(t_rt *rt, t_menu *m, int *i);
