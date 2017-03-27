@@ -50,4 +50,4 @@ t_rgb	wood(t_v3d inter, double coef);
 t_rgb	marbre(t_v3d inter, double mult);
 t_rgb	damier(double l, t_v3d i, t_rgb col);
 void	water(double d, t_v3d *n, t_v3d inter, t_v3d dir);
-t_rgb	 random_noise(double coef, t_v3d vec, t_rgb rgb);
+t_rgb	random_noise(double coef, t_v3d vec, t_rgb rgb);
