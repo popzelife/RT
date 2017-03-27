@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:10:50 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/25 19:20:32 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:41:43 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			xml_to_texture(char *line, UCHAR *i)
 {
 	if (!ft_choose_texture(line))
 	{
-		ft_printf("XML ERROR - This value: %s is not a texture\n", line);
+		ft_printf("Parse ERROR - This value: %s is not a texture\n", line);
 		return (0);
 	}
 	*i = ft_choose_texture(line);
@@ -27,7 +27,7 @@ int			xml_to_path(char *line, char **path)
 {
 	if (!ft_check_filename(line))
 	{
-		ft_printf("XML ERROR - This value: %s is not a valid path\n", line);
+		ft_printf("Parse ERROR - This value: %s is not a valid path\n", line);
 		return (0);
 	}
 	*path = strdup(line);
@@ -51,7 +51,7 @@ int			xml_to_material(char *line, UCHAR *i)
 {
 	if (!choose_material(line))
 	{
-		ft_printf("XML ERROR - This value: %s is not a texture\n", line);
+		ft_printf("Parse ERROR - This value: %s is not a texture\n", line);
 		return (0);
 	}
 	*i = choose_material(line);

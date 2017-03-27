@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:10:29 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 14:09:09 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:41:28 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void		bo_texture(t_scene *s, t_parser *p, char *line)
 	value = NULL;
 	if (!xml_get_value(line, &value))
 	{
-		ft_printf("XML %s ERROR - Value not found at line %d: '%s'\n",
+		ft_printf("Parse %s ERROR - Value not found at line %d: '%s'\n",
 				__FUNCTION__, p->l, line);
 		exit(-1);
 	}
 	if (!xml_to_texture(value, &type))
 	{
-		ft_printf("XML %s ERROR - Something went wrong while assigning value:"
+		ft_printf("Parse %s ERROR - Something went wrong while assigning value:"
 		" '%s' on material[%d].texture.type\n", __FUNCTION__, value, p->i_obj);
 		exit(-1);
 	}
@@ -43,13 +43,13 @@ void		bo_texture_filename(t_scene *s, t_parser *p, char *line)
 	path = NULL;
 	if (!xml_get_value(line, &value))
 	{
-		ft_printf("XML %s ERROR - Value not found at line %d: '%s'\n",
+		ft_printf("Parse %s ERROR - Value not found at line %d: '%s'\n",
 		__FUNCTION__, p->l, line);
 		exit(-1);
 	}
 	if (!xml_to_path(value, &path))
 	{
-		ft_printf("XML %s ERROR - Something went wrong while assigning value:"
+		ft_printf("Parse %s ERROR - Something went wrong while assigning value:"
 		" '%s' on material[%d].texture.path\n", __FUNCTION__, value, p->i_obj);
 		exit(-1);
 	}
