@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 10:26:38 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 18:41:13 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:05:48 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define MAXWIN_RY		1200
 # define WIN_RX			rt->rx
 # define WIN_RY			rt->ry
+# define WIN_M			SDL_WINDOWPOS_CENTERED
 # define LOAD_NAME		"image/Loader.png"
 # define LOAD_RX		900
 # define LOAD_RY		563

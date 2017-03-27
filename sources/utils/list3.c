@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 18:47:27 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/25 18:49:32 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:49:35 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_button	*init_button(t_button *new)
 	if (new == NULL)
 		return (NULL);
 	new->surface = NULL;
+	new->enabled = TRUE;
 	return (new);
 }
 
@@ -37,7 +38,6 @@ t_button	*lst_new_button(t_button **button, t_butnparam param,
 	new->hover = FALSE;
 	new->param = action.param;
 	new->action = action.f;
-	new->enabled = TRUE;
 	new->i_lst = param.i_lst;
 	new->next = NULL;
 	if (*button == NULL)

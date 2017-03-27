@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:00:00 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 21:25:26 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:05:56 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void	button_cursor_list(t_rt *rt, t_input *in)
+{
+	t_button		*button_curs;
+
+	button_curs = rt->panel.lst_button;
+	while (button_curs != NULL)
+	{
+		if (button_curs->enabled && in->m_x > button_curs->rect.x &&
+			in->m_x < (button_curs->rect.x + button_curs->rect.w) &&
+			in->m_y > button_curs->rect.y &&
+			in->m_y < (button_curs->rect.y + button_curs->rect.h))
+		{
+			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
+			break ;
+		}
+		else
+			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
+		button_curs = button_curs->next;
+	}
+	if (in->m_x < rt->r_view->w && in->m_y < rt->r_view->h + TILE_RY
+		&& in->m_y > TILE_RY)
+		SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_CROSSHAIR));
+}
 
 void		button_list(t_rt *rt, t_input *in)
 {
@@ -35,24 +59,7 @@ void		button_list(t_rt *rt, t_input *in)
 			button_curs->hover = FALSE;
 		button_curs = button_curs->next;
 	}
-	button_curs = rt->panel.lst_button;
-	while (button_curs != NULL)
-	{
-		if (button_curs->enabled && in->m_x > button_curs->rect.x &&
-			in->m_x < (button_curs->rect.x + button_curs->rect.w) &&
-			in->m_y > button_curs->rect.y &&
-			in->m_y < (button_curs->rect.y + button_curs->rect.h))
-		{
-			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND));
-			break;
-		}
-		else
-			SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
-		button_curs = button_curs->next;
-	}
-	if (in->m_x < rt->r_view->w && in->m_y < rt->r_view->h + TILE_RY
-		&& in->m_y > TILE_RY)
-		SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_CROSSHAIR));
+	button_cursor_list(rt, in);
 }
 
 void		button_left(t_rt *rt, t_input *in)
@@ -73,7 +80,13 @@ void		button_left(t_rt *rt, t_input *in)
 
 void		rt_events_bis(t_rt *rt, t_input *in)
 {
-	if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
+	if (rt->suspend == TRUE && in->key[SDL_SCANCODE_UP] &&
+			!in->button[SDL_BUTTON_RIGHT])
+		up_lmouse(rt);
+	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
+			!in->button[SDL_BUTTON_RIGHT])
+		down_lmouse(rt);
+	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
 			in->button[SDL_BUTTON_RIGHT])
 		right_rmouse(rt);
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_LEFT] &&
@@ -86,15 +99,19 @@ void		rt_events_bis(t_rt *rt, t_input *in)
 			in->button[SDL_BUTTON_RIGHT])
 		down_rmouse(rt);
 	else if (in->key[SDL_SCANCODE_P])
-		SDL_SetWindowPosition(rt->esdl->eng.win, SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED);
+		SDL_SetWindowPosition(rt->esdl->eng.win, WIN_M, WIN_M);
+	if (!in->button[SDL_BUTTON_LEFT])
+	{
+		SDL_CaptureMouse(SDL_FALSE);
+		rt->grab = 0;
+	}
 }
 
 void		rt_events(t_rt *rt, t_input *in)
 {
 	int		x;
 	int		y;
-	
+
 	x = 0;
 	y = 0;
 	if (rt->grab)
@@ -116,17 +133,5 @@ void		rt_events(t_rt *rt, t_input *in)
 	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_LEFT] &&
 			!in->button[SDL_BUTTON_RIGHT])
 		left_lmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_UP] &&
-			!in->button[SDL_BUTTON_RIGHT])
-		up_lmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
-			!in->button[SDL_BUTTON_RIGHT])
-		down_lmouse(rt);
-	else
-		rt_events_bis(rt, in);
-	if (!in->button[SDL_BUTTON_LEFT])
-	{
-		SDL_CaptureMouse(SDL_FALSE);
-		rt->grab = 0;
-	}
+	rt_events_bis(rt, in);
 }

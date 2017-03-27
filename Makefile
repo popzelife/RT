@@ -80,6 +80,7 @@ SRC =		esdl/color.c\
 			interface/menu.c\
 			interface/surface_bkg.c\
 			interface/surface_text.c\
+			interface/surface_text2.c\
 			interface/surface_button.c\
 			interface/param_object.c\
 			interface/param_material.c\
@@ -126,6 +127,7 @@ SRC =		esdl/color.c\
 			raytracer/random.c\
 			raytracer/ray.c\
 			raytracer/render.c\
+			raytracer/scatter.c\
 			raytracer/thread.c\
 			raytracer/thread_tools.c\
 			raytracer/render_thread_tools.c\

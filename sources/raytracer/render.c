@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 15:38:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 22:44:01 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:26:55 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,7 @@ t_vec3			rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
 	{
 		if ((depth < max_depth))
 		{
-			if (param.material->type_mat == MAT_METAL)
-				scatter_metal(ray, param, &attenuation, &scattered);
-			else if (param.material->type_mat == MAT_LAMBERT)
-				scatter_lambertian(ray, param, &attenuation, &scattered);
-			else if (param.material->type_mat == MAT_DIELECT)
-				scatter_dielectric(ray, param, &attenuation, &scattered);
-			else
+			if (!render_scatter(ray, param, &attenuation, &scattered))
 				return (param.material->emitted);
 			return (v3_add_vec_(param.material->emitted, v3_multiply_vec_(
 			attenuation, rt_color(scattered, scene, depth + 1, max_depth))));

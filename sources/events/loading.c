@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 15:05:44 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/23 00:56:15 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 10:55:54 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void		render_load(t_rt *rt)
 	SDL_RenderClear(rt->esdl->eng.render);
 	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_load, NULL, NULL);
 	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_bar, NULL, &rt->r_bar);
-	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_progress, NULL, &rt->r_progress);
+	SDL_RenderCopy(rt->esdl->eng.render, rt->tx_progress, NULL,
+	&rt->r_progress);
 	SDL_RenderPresent(rt->esdl->eng.render);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 20:15:11 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 12:08:12 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void		buffer_button_param(t_rt *rt, t_menu *m);
 void		draw_bkg_surface(t_rt *rt, t_menu *m);
 void		draw_text_surface(t_rt *rt);
 void		draw_text_list_object(t_rt *rt);
+void		text_list_object(t_rt *rt);
 void		draw_button_surface(t_rt *rt, t_menu *m);
 
 /*
@@ -214,6 +215,8 @@ void		render_lowres(t_tharg *a);
 
 void		init_rt_color(t_vec3 *pos, t_vec3 *normal, double *t0, double *t1);
 t_vec3		rt_color(t_ray ray, t_scene *scene, int depth, int max_depth);
+int			render_scatter(t_ray ray, t_hit param, t_vec3 *attenuation,
+			t_ray *scattered);
 BOOL		hit_list(t_scene *scene, const t_ray ray, const double t[2],
 			t_hit *param);
 void		multisampling(t_tharg *a);
@@ -328,7 +331,7 @@ void		texture_rainbow(t_vec3 pos, t_vec3 *attenuation);
 void		texture_liney(t_vec3 pos, t_vec3 *attenuation);
 void		texture_linex(t_vec3 pos, t_vec3 *attenuation);
 void		texture_checkboard(t_vec3 pos, t_vec3 *attenuation);
-void		texture_it(const t_hit  param, t_vec3 *attenuation);
+void		texture_it(const t_hit param, t_vec3 *attenuation);
 
 void		sphere_uv(const t_vec3 p, double *u, double *v);
 t_vec3		surface_value(SDL_Surface *data, double u, double v);

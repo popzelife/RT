@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:57:18 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/22 21:02:49 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 10:55:07 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ SDL_Texture			*esdl_load_texture(SDL_Renderer *render, \
 	return (tex);
 }
 
-int		esdl_init_img(t_esdl *esdl)
+int					esdl_init_img(t_esdl *esdl)
 {
 	int		ret;
 
-	ret = 1;
-	if (IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG) == -1)
+	ret = 0;
+	if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) == -1)
 	{
 		ret = -1;
-		ft_dprintf(2, "esdl_init_img() failed: %s\n", IMG_GetError());
+		ft_dprintf(2, "Error esdl_init_img() failed: %s\n", IMG_GetError());
 	}
 	esdl->img = 1;
 	return (ret);

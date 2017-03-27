@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:52:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 21:56:22 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 12:14:54 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static void	cone_param(t_rt *rt)
 	actionparam((void*)rt, button_conenormal));
 	lst_set_button(&rt->panel.lst_button, BTN_PARAM3,
 	actionparam((void*)rt, button_coneheight));
-
 }
 
 static void	cylinder_param(t_rt *rt)

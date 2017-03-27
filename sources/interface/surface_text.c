@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   surface_text.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:21:37 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/24 21:37:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 12:04:00 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,6 @@ static void	list_object2(t_rt *rt)
 	lst_set_string(&(rt->panel.lst_string), strparam(
 	rt->panel.viewparam.str_param_m, rt->panel.word1, i, 8),
 	rt->esdl->eng.render, esdl_render_blendedtext);
-	free(i);
-}
-
-void		text_list_object(t_rt *rt)
-{
-	int		*i;
-
-	i = ft_tab2(WIN_RX - MENU_RX + 5, 289 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	rt->panel.viewparam.str_obj, rt->panel.sub_title1, i, 0),
-	rt->esdl->eng.render, esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 5, 289 + 30 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	rt->panel.viewparam.str_pos, rt->panel.word1, i, 0), rt->esdl->eng.render,
-	esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 5, 289 + 60 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	rt->panel.viewparam.str_rotate, rt->panel.word1, i, 0),
-	rt->esdl->eng.render, esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 5, 289 + 90 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	rt->panel.viewparam.str_param_o, rt->panel.word1, i, 0),
-	rt->esdl->eng.render, esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 5, 289 + 120 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	rt->panel.viewparam.str_mat, rt->panel.word1, i, 0), rt->esdl->eng.render,
-	esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 5, 289 + 150 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	rt->panel.viewparam.str_color, rt->panel.word1, i, 0), rt->esdl->eng.render,
-	esdl_render_blendedtext);
 	free(i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 12:35:06 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/25 17:57:36 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 11:54:21 by vafanass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct	s_hit
 	int				i_lst;
 	t_vec3			pos;
 	t_vec3			normal;
-	UCHAR           type_obj;
-	void			*p_obj;	
+	UCHAR			type_obj;
+	void			*p_obj;
 	struct s_mat	*material;
 }				t_hit;
 
@@ -54,7 +54,7 @@ typedef struct	s_dielec
 ** Texture
 */
 
-typedef	struct		s_textvalue
+typedef	struct	s_textvalue
 {
 	int				i;
 	int				j;
@@ -65,16 +65,16 @@ typedef	struct		s_textvalue
 	uint8_t			gi;
 	uint8_t			bi;
 	uint32_t		pixel;
-}					t_textvalue;
+}				t_textvalue;
 
-typedef	struct		s_texture
+typedef	struct	s_texture
 {
 	UCHAR			type_texture;
 	SDL_Surface		*data;
 	char			*filename;
 	double			u;
 	double			v;
-}					t_texture;
+}				t_texture;
 
 /*
 ** Materials
@@ -150,7 +150,7 @@ typedef struct	s_triangle
 	t_vec3	e2;
 }				t_triangle;
 
-typedef struct s_ellipsoid
+typedef struct	s_ellipsoid
 {
 	t_vec3	center;
 	t_vec3	vertex;
@@ -187,7 +187,7 @@ typedef struct	s_discriminant
 ** Filter Structure
 */
 
-typedef	struct		s_filtervalue
+typedef	struct	s_filtervalue
 {
 	int				x;
 	int				y;
@@ -200,9 +200,9 @@ typedef	struct		s_filtervalue
 	float			btmp;
 	uint32_t		pixel;
 	uint32_t		*pixels;
-}					t_filtervalue;
+}				t_filtervalue;
 
-typedef	struct		s_filtermatrice
+typedef	struct	s_filtermatrice
 {
 	int				filterx;
 	int				filtery;
@@ -218,15 +218,15 @@ typedef	struct		s_filtermatrice
 	double			b;
 	double			factor;
 	double			bias;
-}					t_filtermatrice;
+}				t_filtermatrice;
 
-typedef	struct		s_matrixf
+typedef	struct	s_matrixf
 {
 	double			*matrice;
 	double			factor;
 	int				size;
 	int				flag;
-}					t_matrixf;
+}				t_matrixf;
 /*
 ** Scene holder
 */
