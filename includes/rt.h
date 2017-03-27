@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 17:31:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 15:10:21 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:58:15 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,10 @@ void		draw_text_list_object(t_rt *rt);
 void		text_list_object(t_rt *rt);
 void		draw_button_surface(t_rt *rt, t_menu *m);
 
+void		triangle_param(t_rt *rt);
+void		ellipsoid_param(t_rt *rt);
+void		paraboloid_param(t_rt *rt);
+
 /*
 ** Button action
 */
@@ -172,6 +176,9 @@ void		button_filter(void *param);
 void		button_close(void *param);
 void		button_minus(void *param);
 
+void		button_trianglepos1(void *param);
+void		button_trianglepos2(void *param);
+void		button_trianglepos3(void *param);
 void		button_sphereradius(void *param);
 void		button_spherepos(void *param);
 void		button_spherenormal(void *param);
@@ -190,6 +197,12 @@ void		button_mattexture(void *param);
 void		button_matalbedo(void *param);
 void		button_matmetal(void *param);
 void		button_matdielect(void *param);
+
+void		add_plane(t_rt *rt, t_menu *m, int *i);
+void		add_triangle(t_rt *rt, t_menu *m, int *i);
+void		add_cone(t_rt *rt, t_menu *m, int *i);
+void		add_sphere(t_rt *rt, t_menu *m, int *i);
+void		add_cylinder(t_rt *rt, t_menu *m, int *i);
 
 void		draw_button1(t_rt *rt, t_menu *m);
 void		draw_button2(t_rt *rt, t_menu *m);

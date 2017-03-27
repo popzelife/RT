@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   surface_text.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:21:37 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 12:04:00 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:24:34 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ static void	text_add_prim(t_rt *rt)
 	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
 	"Primitives:", rt->panel.title1, i, 0),
 	rt->esdl->eng.render, esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 32, 540 + 64 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	"Cube", rt->panel.word1, i, 0),
-	rt->esdl->eng.render, esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 29 * 2 + 64, 540 + 64 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	"Plane", rt->panel.word1, i, 0), rt->esdl->eng.render,
-	esdl_render_blendedtext);
-	settab2(i, WIN_RX - MENU_RX + 27 * 3 + 64 * 2, 540 + 64 + TILE_RY);
-	rt->panel.lst_string = lst_new_string(&(rt->panel.lst_string), strparam(
-	"Sphere", rt->panel.word1, i, 0), rt->esdl->eng.render,
-	esdl_render_blendedtext);
 	free(i);
 }
 

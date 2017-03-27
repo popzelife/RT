@@ -45,8 +45,9 @@
 
 	<cylinder>
 		<pos>0 0 -3</pos>
-		<radius>-1</radius>
+		<radius>-0.6</radius>
 		<rotate>0 1 0</rotate>
+		<height>1</height>
 		<dielectric>
 			<color>1 0.8 1</color>
 			<param>1.1</param>

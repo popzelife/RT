@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 22:19:12 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 15:58:23 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:21:03 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		default_obj(t_scene *scene)
 	scene->obj[0] = new_object((void*)new_plane(v3_(0., 1., 0.), v3_(0., 0.,
 	0.), 0.0), OBJ_PLANE, new_material(v3_(1., .2, .2), 0., NULL), MAT_LAMBERT);
 	scene->obj[1] = new_object(new_cylinder(v3_(0., 1., 0.), v3_(0., 0., 0.),
-	1., 1.), OBJ_CYLINDER, new_material(v3_(1., 1., 1.), 0., NULL),
+	1., 0.), OBJ_CYLINDER, new_material(v3_(1., 1., 1.), 0., NULL),
 	MAT_DIFF_LIGHT);
 	scene->obj[2] = new_object((void*)new_sphere(v3_(-4., 2., 0.), -1.),
 	OBJ_SPHERE, new_material(v3_(.1, 1., 1.), 1.1, NULL), MAT_DIELECT);
@@ -29,7 +29,7 @@ void		default_obj(t_scene *scene)
 	-2.), .2, 4.), OBJ_CONE, new_material(v3_(.3, .5, .1), 0., NULL),
 	MAT_METAL);
 	scene->obj[6] = new_object(new_cylinder(v3_(0., 1., 0.), v3_(0., 0., 0.),
-	.8, 1.), OBJ_CYLINDER, new_material(v3_(1., 0., 0.), 1.5, NULL), MAT_METAL);
+	.8, 0.), OBJ_CYLINDER, new_material(v3_(1., 0., 0.), 1.5, NULL), MAT_METAL);
 	scene->this_obj = &scene->obj[2];
 }
 

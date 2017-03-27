@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:26:31 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 17:04:14 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:50:30 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,10 @@ void		buffer_button_param(t_rt *rt, t_menu *m)
 	draw_button_param4(rt, m, i);
 	draw_button_param5(rt, m, i);
 	draw_button_param6(rt, m, i);
+	add_plane(rt, m, i);
+	add_cone(rt, m, i);
+	add_cylinder(rt, m, i);
+	add_triangle(rt, m, i);
+	add_sphere(rt, m, i);
 	free(i);
 }

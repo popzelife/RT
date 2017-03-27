@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:52:20 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 14:22:36 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 18:52:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void		get_param_object(t_rt *rt)
 		cone_param(rt);
 	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_CYLINDER)
 		cylinder_param(rt);
+	else if (rt->panel.viewparam.scene.this_obj->type_obj == OBJ_TRIANGLE)
+		triangle_param(rt);
 	else
 	{
 		sprintf(rt->panel.viewparam.str_obj, "Object Param:");

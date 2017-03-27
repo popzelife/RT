@@ -6,7 +6,7 @@
 /*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 13:21:54 by vafanass          #+#    #+#             */
-/*   Updated: 2017/03/27 15:09:50 by qfremeau         ###   ########.fr       */
+/*   Updated: 2017/03/27 19:26:04 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void		button_matalbedo(void *param)
 			ft_printf("%-40s", "Try a different material albedo:");
 			fgets(value, 255, stdin);
 		}
+		if (rt->scene->this_obj->p_mat->type_mat == MAT_DIFF_LIGHT)
+			rt->scene->this_obj->p_mat->emitted =
+			rt->scene->this_obj->p_mat->albedo;
 		re_render_win(rt);
 	}
 }
@@ -73,7 +76,9 @@ void		button_mattype(void *param)
 		if (rt->scene->this_obj->p_mat->type_mat == MAT_DIFF_LIGHT)
 			rt->scene->this_obj->p_mat->emitted =
 			rt->scene->this_obj->p_mat->albedo;
-		else if (rt->scene->this_obj->p_mat->type_mat == MAT_DIELECT)
+		else
+			rt->scene->this_obj->p_mat->emitted = v3_(0., 0., 0.);
+		if (rt->scene->this_obj->p_mat->type_mat == MAT_DIELECT)
 			rt->scene->this_obj->p_mat->t = 1.;
 		else if (rt->scene->this_obj->p_mat->type_mat == MAT_METAL)
 			rt->scene->this_obj->p_mat->t = 0.;

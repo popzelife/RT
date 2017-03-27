@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   surface_bkg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vafanass <vafanass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfremeau <qfremeau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 20:33:05 by qfremeau          #+#    #+#             */
-/*   Updated: 2017/03/27 12:16:48 by vafanass         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:24:41 by qfremeau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 
 static void	prim_surface(t_rt *rt, t_menu *m)
 {
-	m->rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(27, 530, 0, 0));
-	rt->panel.lst_surf = lst_new_image(&(rt->panel.lst_surf),
-	surfparam(&m->rect, 0, &rt->panel.imgparam, 0), rt->esdl->eng.render,
-	esdl_load_texture);
-	m->rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(64 + 27 * 2, 530, 0, 0));
-	set_imgparam(&rt->panel.imgparam, IMG_ADDPLANE);
-	rt->panel.lst_surf = lst_new_image(&(rt->panel.lst_surf), surfparam(
-	&m->rect, 0, &rt->panel.imgparam, 0), rt->esdl->eng.render,
-	esdl_load_texture);
-	m->rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(64 * 2 + 27 * 3, 530, 0,
-	0));
-	set_imgparam(&rt->panel.imgparam, IMG_ADDSPHERE);
-	rt->panel.lst_surf = lst_new_image(&(rt->panel.lst_surf), surfparam(
-	&m->rect, 0, &rt->panel.imgparam, 0), rt->esdl->eng.render,
-	esdl_load_texture);
 	m->rect = esdl_fuse_rect(*(rt->r_menu), esdl_rect(0, 750, MENU_RX, 30));
 	rt->panel.lst_surf = lst_new_surface(&(rt->panel.lst_surf), surfparam(
 	&m->rect, 0xff888888, NULL, 0), rt->esdl->eng.render, esdl_clear_surface);
