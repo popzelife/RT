@@ -43,6 +43,9 @@ else
 					/Users/$(ID_UN)/.brew/Cellar/sdl2/2.0.5/include/SDL2\
 					/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/include/SDL2\
 					/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/include/SDL2\
+					/usr/local/Cellar/sdl2/2.0.5/include/SDL2\
+					/usr/local/Cellar/sdl2_ttf/2.0.14/include/SDL2\
+					/usr/local/Cellar/sdl2_image/2.0.1_2/include/SDL2\
 					-F -framework Cocoa 
 		CFSDL =		
 	endif
@@ -192,8 +195,11 @@ else
 	ifeq ($(UNAME_S),Darwin)
 		OPNCL =		-framework OpenCL
 		LSDL2 =		-L/Users/$(ID_UN)/.brew/Cellar/sdl2/2.0.5/lib -lSDL2\
-					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf\
-					-L/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/lib -lSDL2_image
+							-L/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf\
+							-L/Users/$(ID_UN)/.brew/Cellar/sdl2_image/2.0.1_2/lib -lSDL2_image\
+							-L/usr/local/Cellar/sdl2/2.0.5/lib -lSDL2\
+							-L/usr/local/Cellar/sdl2_ttf/2.0.14/lib -lSDL2_ttf\
+							-L/usr/local/Cellar/sdl2_image/2.0.1_2/lib -lSDL2_image
 		LMATH =		-lm
 		LPTHR =		-lpthread
 	endif
