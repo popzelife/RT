@@ -1,0 +1,6 @@
+[submodule "librairies/libft"]
+	path = librairies/libft
+	url = https://github.com/Kant1-0/libft
+[submodule "librairies/libvec"]
+	path = librairies/libvec
+	url = https://github.com/Kant1-0/libvec
