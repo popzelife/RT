@@ -59,127 +59,133 @@ endif
 PREDIR =	includes
 
 # Sources
-SRC =		esdl/color.c\
-			esdl/events.c\
+SRC = \
+			display/display.c\
+			\
+			esdl/color.c\
+			esdl/inputs.c\
 			esdl/exit.c\
 			esdl/fps.c\
 			esdl/init.c\
-			esdl/image.c\
+			esdl/texture.c\
 			esdl/pixel.c\
 			esdl/rect.c\
 			esdl/surface.c\
 			esdl/ttf.c\
-			kernel/isopencl.c\
-			events/events.c\
-			events/hook.c\
-			events/init.c\
-			events/loading.c\
-			events/quit.c\
-			events/events.c\
-			events/arrow_lmouse.c\
-			events/arrow_rmouse.c\
-			interface/miniview.c\
-			interface/add_plane.c\
-			interface/add_cone.c\
-			interface/add_sphere.c\
-			interface/add_cylinder.c\
-			interface/add_triangle.c\
-			interface/button.c\
-			interface/button_triangle.c\
-			interface/button_cone.c\
-			interface/button_cylinder.c\
-			interface/button_material.c\
-			interface/button_plane.c\
-			interface/button_sphere.c\
-			interface/button_top.c\
-			interface/menu.c\
-			interface/surface_bkg.c\
-			interface/surface_text.c\
-			interface/surface_text2.c\
-			interface/surface_button.c\
-			interface/surface_draw_button.c\
-			interface/surface_draw_button_param.c\
-			interface/surface_draw_button_param2.c\
+			\
+			init/init.c\
+			init/loading.c\
+			init/quit.c\
+			\
+			input/events.c\
+			input/arrow_lmouse.c\
+			input/arrow_rmouse.c\
+			\
+			interface/button/add_plane.c\
+			interface/button/add_cone.c\
+			interface/button/add_sphere.c\
+			interface/button/add_cylinder.c\
+			interface/button/add_triangle.c\
+			interface/button/button_triangle.c\
+			interface/button/button_cone.c\
+			interface/button/button_cylinder.c\
+			interface/button/button_material.c\
+			interface/button/button_plane.c\
+			interface/button/button_sphere.c\
+			interface/button/header_button.c\
+			interface/button/general_button.c\
+			interface/surface_rendering/surface_bkg.c\
+			interface/surface_rendering/surface_text.c\
+			interface/surface_rendering/surface_button.c\
+			interface/surface_rendering/surface_draw_button.c\
+			interface/surface_rendering/surface_draw_button_param.c\
+			interface/view/view.c\
+			interface/view/miniview.c\
 			interface/param_object.c\
-			interface/param_object_bis.c\
 			interface/param_material.c\
-			interface/view.c\
 			interface/filter.c\
+			interface/menu.c\
+			\
+			kernel/isopencl.c\
+			\
+			parser/balise/bc_cam.c\
+			parser/balise/bc_skybox.c\
+			parser/balise/bc_sphere.c\
+			parser/balise/bc_plane.c\
+			parser/balise/bc_cylinder.c\
+			parser/balise/bc_cone.c\
+			parser/balise/bc_ellipsoid.c\
+			parser/balise/bc_lambert.c\
+			parser/balise/bc_metal.c\
+			parser/balise/bc_dielectric.c\
+			parser/balise/bc_difflight.c\
+			parser/balise/bc_paraboloid.c\
+			parser/balise/bc_triangle.c\
+			parser/check/xml_flag_object.c\
+			parser/check/xml_flag_texture.c\
+			parser/check/check_balise.c\
+			parser/check/check_opt.c\
+			parser/material/lambert.c\
+			parser/material/metal.c\
+			parser/material/dielectric.c\
+			parser/material/difflight.c\
+			parser/material/texture.c\
+			parser/primitive/sphere.c\
+			parser/primitive/plane.c\
+			parser/primitive/cylinder.c\
+			parser/primitive/cone.c\
+			parser/primitive/ellipsoid.c\
+			parser/primitive/paraboloid.c\
+			parser/primitive/triangle.c\
+			parser/scene/default.c\
+			parser/scene/camera.c\
+			parser/scene/skybox.c\
 			parser/init.c\
-			parser/default.c\
 			parser/random.c\
-			parser/scene.c\
+			parser/parser.c\
 			parser/read_xml.c\
-			parser/check_xml_flag.c\
-			parser/check_xml_flag2.c\
-			parser/check_xml.c\
-			parser/check_opt.c\
-			parser/get.c\
-			parser/get2.c\
-			parser/camera.c\
-			parser/skybox.c\
-			parser/sphere.c\
-			parser/plane.c\
-			parser/cylinder.c\
-			parser/cone.c\
-			parser/ellipsoid.c\
-			parser/lambert.c\
-			parser/metal.c\
-			parser/dielectric.c\
-			parser/difflight.c\
-			parser/bc_cam.c\
-			parser/bc_skybox.c\
-			parser/bc_sphere.c\
-			parser/bc_plane.c\
-			parser/bc_cylinder.c\
-			parser/bc_cone.c\
-			parser/bc_ellipsoid.c\
-			parser/bc_lambert.c\
-			parser/bc_metal.c\
-			parser/bc_dielectric.c\
-			parser/bc_difflight.c\
-			parser/bc_paraboloid.c\
-			parser/paraboloid.c\
-			parser/triangle.c\
-			parser/bc_triangle.c\
-			parser/texture.c\
-			raytracer/random.c\
+			parser/get_material.c\
+			parser/get_type.c\
+			\
+			raytracer/thread/render_thread.c\
+			raytracer/thread/util_thread.c\
 			raytracer/ray.c\
+			raytracer/raytracer.c\
 			raytracer/render.c\
 			raytracer/scatter.c\
-			raytracer/thread.c\
-			raytracer/thread_tools.c\
-			raytracer/render_thread_tools.c\
-			raytracer/render_tools.c\
-			scene/camera.c\
-			scene/light.c\
+			raytracer/util_random.c\
+			raytracer/util_render.c\
+			\
+			scene/camera/camera.c\
+			scene/material/light.c\
+			scene/material/lambert.c\
+			scene/material/metal.c\
+			scene/material/dielectric.c\
+			scene/primitives/sphere.c\
+			scene/primitives/plane.c\
+			scene/primitives/cylinder.c\
+			scene/primitives/cone.c\
+			scene/primitives/paraboloid.c\
+			scene/primitives/ellipsoid.c\
+			scene/primitives/triangle.c\
+			scene/texture/texture_uv.c\
+			scene/texture/procedural.c\
 			scene/material.c\
-			scene/lambert.c\
-			scene/metal.c\
-			scene/dielectric.c\
 			scene/object.c\
 			scene/skybox.c\
-			scene/sphere.c\
-			scene/plane.c\
-			scene/cylinder.c\
-			scene/cone.c\
 			scene/texture.c\
-			scene/texture_bmp.c\
-			scene/texture_calculator.c\
-			scene/paraboloid.c\
-			scene/ellipsoid.c\
-			scene/triangle.c\
-			utils/list.c\
-			utils/list2.c\
-			utils/list3.c\
-			utils/utils.c\
-			utils/utils2.c\
-			utils/utils3.c\
-			utils/utils4.c\
-			utils/utils5.c\
-			utils/util_texture.c\
+			\
+			utils/list_button.c\
+			utils/list_surface.c\
+			utils/list_thread.c\
+			utils/util_file.c\
 			utils/util_filter.c\
 			utils/util_matrice_filter.c\
+			utils/util_surface.c\
+			utils/util_texture.c\
+			utils/util_view.c\
+			utils/utils.c\
+			\
 			main.c
 
 OBJ =		$(SRC:.c=.o)
