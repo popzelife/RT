@@ -16,7 +16,7 @@
 
 		<dielectric>
 			<color>1 1 1</color>
-			<path>./scenes/milky_way.bmp</path>
+			<path>./scenes/img/milky_way.bmp</path>
 			<param>1.5</param>
 		</dielectric>
 
@@ -28,7 +28,7 @@
 
 		<lambert>
 			<color>1 1 1</color>
-			<path>./scenes/sun.bmp</path>
+			<path>./scenes/img/sun.bmp</path>
 		</lambert>
 
 	</sphere>
@@ -48,7 +48,7 @@
 
 		<lambert>
 			<color>1 1 1</color>
-			<path>./scenes/mars.bmp</path>
+			<path>./scenes/img/mars.bmp</path>
 		</lambert>
 	</sphere>
 
@@ -58,7 +58,7 @@
 
 		<lambert>
 			<color>1 1 1</color>
-			<path>./scenes/jupiter.bmp</path>
+			<path>./scenes/img/jupiter.bmp</path>
 		</lambert>
 	</sphere>
 
@@ -68,7 +68,7 @@
 
 		<lambert>
 			<color>1 1 1</color>
-			<path>./scenes/earth.bmp</path>
+			<path>./scenes/img/earth.bmp</path>
 		</lambert>
 	</sphere>
 
@@ -78,7 +78,7 @@
 
 		<lambert>
 			<color>1 1 1</color>
-			<path>./scenes/Moon.bmp</path>
+			<path>./scenes/img/Moon.bmp</path>
 		</lambert>
 	</sphere>
 </obj>
