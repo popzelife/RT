@@ -48,7 +48,7 @@ void		button_list(t_rt *rt, t_input *in)
 			in->m_y > button_curs->rect.y &&
 			in->m_y < (button_curs->rect.y + button_curs->rect.h))
 		{
-			button_curs->hover = TRUE;
+			button_curs->hover = true;
 			if (in->button[SDL_BUTTON_LEFT])
 			{
 				button_curs->action(button_curs->param);
@@ -56,7 +56,7 @@ void		button_list(t_rt *rt, t_input *in)
 			}
 		}
 		else
-			button_curs->hover = FALSE;
+			button_curs->hover = false;
 		button_curs = button_curs->next;
 	}
 	button_cursor_list(rt, in);
@@ -80,22 +80,22 @@ void		button_left(t_rt *rt, t_input *in)
 
 void		rt_events_bis(t_rt *rt, t_input *in)
 {
-	if (rt->suspend == TRUE && in->key[SDL_SCANCODE_UP] &&
+	if (rt->suspend == true && in->key[SDL_SCANCODE_UP] &&
 			!in->button[SDL_BUTTON_RIGHT])
 		up_lmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_DOWN] &&
 			!in->button[SDL_BUTTON_RIGHT])
 		down_lmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_RIGHT] &&
 			in->button[SDL_BUTTON_RIGHT])
 		right_rmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_LEFT] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_LEFT] &&
 			in->button[SDL_BUTTON_RIGHT])
 		left_rmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_UP] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_UP] &&
 			in->button[SDL_BUTTON_RIGHT])
 		up_rmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_DOWN] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_DOWN] &&
 			in->button[SDL_BUTTON_RIGHT])
 		down_rmouse(rt);
 	else if (in->key[SDL_SCANCODE_P])
@@ -127,10 +127,10 @@ void		rt_events(t_rt *rt, t_input *in)
 	button_list(rt, in);
 	if (in->button[SDL_BUTTON_LEFT])
 		button_left(rt, in);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_RIGHT] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_RIGHT] &&
 			!in->button[SDL_BUTTON_RIGHT])
 		right_lmouse(rt);
-	else if (rt->suspend == TRUE && in->key[SDL_SCANCODE_LEFT] &&
+	else if (rt->suspend == true && in->key[SDL_SCANCODE_LEFT] &&
 			!in->button[SDL_BUTTON_RIGHT])
 		left_lmouse(rt);
 	rt_events_bis(rt, in);
