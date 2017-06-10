@@ -1,3 +1,10 @@
+
 [submodule "librairies/tinyobjloader-c"]
 	path = librairies/tinyobjloader-c
 	url = https://github.com/syoyo/tinyobjloader-c.git
+[submodule "librairies/libft"]
+	path = librairies/libft
+	url = https://github.com/Kant1-0/libft
+[submodule "librairies/libvec"]
+	path = librairies/libvec
+	url = https://github.com/Kant1-0/libvec
