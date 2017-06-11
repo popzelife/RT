@@ -5,6 +5,7 @@
 #include "stdafx.h"
 
 #include "kernel.h"
+#include "tinyloader.h"
 
 #include "struct.h"
 
