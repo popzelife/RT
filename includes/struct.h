@@ -75,8 +75,7 @@ typedef struct s_mat
   t_vec3 albedo;
   t_vec3 emitted;
   double t;
-  bool (*scatter)
-  (const t_ray, const t_hit, t_vec3 *, t_ray *);
+  bool (*scatter)(const t_ray, const t_hit, t_vec3 *, t_ray *);
 } t_mat;
 
 /*
@@ -224,13 +223,22 @@ typedef struct s_obj
 {
   uchar type_obj;
   void *p_obj;
-  bool (*hit)
-  (void *, const t_ray, const double[2], t_hit *);
+  bool (*hit)(void *, const t_ray, const double[2], t_hit *);
   t_mat *p_mat;
   char *name;
   bool active;
   double visible;
 } t_obj;
+
+typedef struct s_multiobj
+{
+  t_obj *objs;
+  int sizeof_multiobj;
+  uchar type_obj;
+  void *p_obj;
+  bool (*hit)(void *, const t_ray, const double[2], t_hit *);
+  t_mat *p_mat;
+} t_multiobj;
 
 typedef struct s_camparam
 {

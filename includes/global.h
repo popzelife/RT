@@ -53,15 +53,14 @@
 
 #define OBJ_PLANE 0x1
 #define OBJ_CONE 0x2
-#define OBJ_PLANE_XZ 0x4
+#define OBJ_MULTI 0x4
 #define OBJ_SPHERE 0x8
 #define OBJ_CUBE 0x10
-#define OBJ_PYRAMID 0x20
+#define OBJ_TRIANGLE 0x20
 #define OBJ_CYLINDER 0x40
 #define OBJ_SKYBOX 0x80
 #define OBJ_PARABOLOID 0x11
 #define OBJ_ELLIPSOID 0x12
-#define OBJ_TRIANGLE 0x92
 
 #define SKYBX_NONE 0x1
 #define SKYBX_GRADIENT 0x2
@@ -154,33 +153,13 @@
 #define BC_TRIANGLE "</triangle>"
 #define BC_NONE "</none>"
 
-#define BYTE_CAM ((UINT)1 << 0)
-#define BYTE_OBJ ((UINT)1 << 1)
-#define BYTE_SKYBOX ((UINT)1 << 2)
-#define BYTE_FOV ((UINT)1 << 3)
-#define BYTE_TARGET ((UINT)1 << 4)
-#define BYTE_APERT ((UINT)1 << 5)
-#define BYTE_SPHERE ((UINT)1 << 6)
-#define BYTE_PLANE ((UINT)1 << 7)
-#define BYTE_CYLINDER ((UINT)1 << 8)
-#define BYTE_CONE ((UINT)1 << 9)
-#define BYTE_ELLIPSOID ((UINT)1 << 10)
-#define BYTE_PARABLOID ((UINT)1 << 11)
-#define BYTE_TRIANGLE ((UINT)1 << 12)
-#define BYTE_RADIUS ((UINT)1 << 13)
-#define BYTE_POS ((UINT)1 << 14)
-#define BYTE_ROTATE ((UINT)1 << 15)
-#define BYTE_HEIGHT ((UINT)1 << 16)
-#define BYTE_LAMBERT ((UINT)1 << 17)
-#define BYTE_METAL ((UINT)1 << 18)
-#define BYTE_DIELECT ((UINT)1 << 19)
-#define BYTE_DIFFLIGHT ((UINT)1 << 20)
-#define BYTE_COLOR ((UINT)1 << 21)
-#define BYTE_PARAM ((UINT)1 << 22)
-#define BYTE_GRADIENT ((UINT)1 << 23)
-#define BYTE_TEXTURE ((UINT)1 << 24)
-#define BYTE_PATH ((UINT)1 << 25)
-#define BYTE_NONE ((UINT)1 << 26)
+#define BYTE_CAM ((UINT)1)
+#include "./tools/byte_parse.h"
+
+/*
+** Defines the byte list in other in order to use __LINE__ as a counter
+** Orders between BYTE_MACROS and enum e_bytetab is very !important!
+*/
 
 enum e_bytetab
 {
@@ -198,6 +177,7 @@ enum e_bytetab
   E_TAB_ELLIPSOID,
   E_TAB_PARABLOID,
   E_TAB_TRIANGLE,
+  E_TAB_MULTI,
   E_TAB_RADIUS,
   E_TAB_POS,
   E_TAB_ROTATE,

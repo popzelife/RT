@@ -5,7 +5,6 @@
 #include "stdafx.h"
 
 #include "kernel.h"
-#include "tinyloader.h"
 
 #include "struct.h"
 
@@ -309,6 +308,11 @@ t_vec3 hit_none_skybox(const t_skybox *box, const t_ray ray);
 t_obj new_object(void *obj, const uchar type_obj, t_mat *mat,
                  const uchar type_mat);
 t_obj copy_object(t_obj *obj);
+
+t_multiobj *new_multiobject(int len, ...);
+bool hit_multiobject(void *obj, const t_ray ray, const double t[2],
+                     t_hit *param);
+bool push_obj_to_multi(t_multiobj *m, t_obj obj);
 
 t_sphere *new_sphere(const t_vec3 center, const double radius);
 bool hit_sphere(void *obj, const t_ray ray, const double t[2],

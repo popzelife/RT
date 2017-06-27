@@ -48,7 +48,7 @@ bool hit_triangle(void *obj, const t_ray ray, const double t[2],
   var.q = v3_cross_vec_(var.ter, tri->e1);
   var.v = v3_dot_double_(ray.dir, var.q) * var.inv_det;
   if (var.v < 0.f || var.u + var.v > 1.f)
-    return (0);
+    return (false);
   var.tbis = v3_dot_double_(tri->e2, var.q) * var.inv_det;
   if (var.tbis > t[0] && var.tbis < t[1])
     return (normal_triangle(tri, ray, param, var.tbis));

@@ -12,7 +12,7 @@
 
 # Compilation
 CC =		clang
-CFLAGS =	-Wall -Wextra -Werror -g
+CFLAGS =	-Wall -Wextra -g
 ADDFLAGS =	
 
 # Precompiled header
@@ -168,6 +168,7 @@ SRC = \
 			scene/primitives/paraboloid.c\
 			scene/primitives/ellipsoid.c\
 			scene/primitives/triangle.c\
+			scene/primitives/multiobject.c\
 			scene/texture/texture_uv.c\
 			scene/texture/procedural.c\
 			scene/material.c\

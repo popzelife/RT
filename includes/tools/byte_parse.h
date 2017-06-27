@@ -1,0 +1,32 @@
+#define BYTE_OBJ ((UINT)1 << __LINE__)
+#define BYTE_SKYBOX ((UINT)1 << __LINE__)
+#define BYTE_FOV ((UINT)1 << __LINE__)
+#define BYTE_TARGET ((UINT)1 << __LINE__)
+#define BYTE_APERT ((UINT)1 << __LINE__)
+#define BYTE_SPHERE ((UINT)1 << __LINE__)
+#define BYTE_PLANE ((UINT)1 << __LINE__)
+#define BYTE_CYLINDER ((UINT)1 << __LINE__)
+#define BYTE_CONE ((UINT)1 << __LINE__)
+#define BYTE_ELLIPSOID ((UINT)1 << __LINE__)
+#define BYTE_PARABLOID ((UINT)1 << __LINE__)
+#define BYTE_TRIANGLE ((UINT)1 << __LINE__)
+#define BYTE_MULTI ((UINT)1 << __LINE__)
+#define BYTE_RADIUS ((UINT)1 << __LINE__)
+#define BYTE_POS ((UINT)1 << __LINE__)
+#define BYTE_ROTATE ((UINT)1 << __LINE__)
+#define BYTE_HEIGHT ((UINT)1 << __LINE__)
+#define BYTE_LAMBERT ((UINT)1 << __LINE__)
+#define BYTE_METAL ((UINT)1 << __LINE__)
+#define BYTE_DIELECT ((UINT)1 << __LINE__)
+#define BYTE_DIFFLIGHT ((UINT)1 << __LINE__)
+#define BYTE_COLOR ((UINT)1 << __LINE__)
+#define BYTE_PARAM ((UINT)1 << __LINE__)
+#define BYTE_GRADIENT ((UINT)1 << __LINE__)
+#define BYTE_TEXTURE ((UINT)1 << __LINE__)
+#define BYTE_PATH ((UINT)1 << __LINE__)
+#define BYTE_NONE ((UINT)1 << __LINE__)
+
+
+
+
+// It's the limit

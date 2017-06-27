@@ -46,8 +46,9 @@ t_vec3 rt_color(t_ray ray, t_scene *scene, int depth, int max_depth)
     {
       if (!render_scatter(ray, param, &attenuation, &scattered))
         return (param.material->emitted);
-      return (v3_add_vec_(param.material->emitted, v3_multiply_vec_(
-                                                       attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
+      return (v3_add_vec_(
+          param.material->emitted, v3_multiply_vec_(
+                                       attenuation, rt_color(scattered, scene, depth + 1, max_depth))));
     }
     else
       return (param.material->emitted);
@@ -96,8 +97,8 @@ void raytracer_lowres(t_tharg *a)
       if ((r.x == *(a->i) && r.y == *(a->j)) ||
           (r.x == *(a->i) && r.y == *(a->j) + RT_SUBXY / 2))
       {
-        r.u = (double)((double)r.x / (double)a->rt->r_view->w / MSAMP);
-        r.v = (double)((double)r.y / (double)a->rt->r_view->h / MSAMP);
+        r.u = r.x / a->rt->r_view->w / MSAMP;
+        r.v = r.y / a->rt->r_view->h / MSAMP;
         r.tmp = rt_color(ray_from_cam(a->scene->this_cam, r.u, r.v),
                          a->scene, 0, 2);
         r.tmp = v3_(sqrt(r.tmp.x), sqrt(r.tmp.y), sqrt(r.tmp.z));
