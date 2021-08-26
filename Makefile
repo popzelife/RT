@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 # Compilation
-CC =		clang
+CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror -g
-ADDFLAGS =	
+ADDFLAGS =
 
 # Precompiled header
 PRECOMP =	stdafx.h
@@ -23,7 +23,7 @@ DEFRULE =	all
 
 # Binary
 NAME =		rt
-DST =		
+DST =
 
 # Directories
 SRCDIR =	sources
@@ -32,7 +32,7 @@ ifeq ($(OS),Windows_NT)
 	INCDIR =	includes\
 				librairies/libft/includes\
 				librairies/libvec/includes\
-	CFSDL =		
+	CFSDL =
 else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Darwin)
@@ -46,8 +46,8 @@ else
 					/usr/local/Cellar/sdl2/2.0.5/include/SDL2\
 					/usr/local/Cellar/sdl2_ttf/2.0.14/include/SDL2\
 					/usr/local/Cellar/sdl2_image/2.0.1_2/include/SDL2\
-					-F -framework Cocoa 
-		CFSDL =		
+					-F -framework Cocoa
+		CFSDL =
 	endif
 	ifeq ($(UNAME_S),Linux)
 		INCDIR =	includes\
@@ -194,8 +194,8 @@ OBJ =		$(SRC:.c=.o)
 ifeq ($(OS),Windows_NT)
 	OPNCL =		-L/lib/ -lOpenCL
 	LSDL2 =		-L/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
-	LMATH =		
-	LPTHR =		
+	LMATH =
+	LPTHR =
 else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Darwin)
